@@ -191,6 +191,10 @@ config.json
 WeatherBot_CODE_*.bundle
 WeatherBot_Data_*.zip
 
+# WeatherBot — repomix snapshots (regenerate locally, don't commit)
+repomix-output.xml
+repomix-output.md
+
 # WeatherBot — IDE
 .idea/
 .vscode/
