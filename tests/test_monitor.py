@@ -249,3 +249,140 @@ class TestCheckStopsAndTp:
         assert did_close
         _, call_exit, call_reason, _ = mock_close.call_args[0]
         assert call_reason == "trailing_stop"
+
+
+# ── NO side tests ──────────────────────────────────────────────────────────────
+
+def _no_mkt(
+    bucket_low: float = 80.0,
+    bucket_high: float = 83.0,
+    entry_price: float = 0.38,   # NO ask = 1 - YES_bid(0.62)
+    shares: float = 50.0,
+    cost: float = 19.0,
+) -> dict:
+    """Market record with an open NO position."""
+    return {
+        "city":             "nyc",
+        "city_name":        "New York City",
+        "date":             "2025-05-01",
+        "unit":             "F",
+        "status":           "open",
+        "event_end_date":   "2099-01-01T00:00:00Z",
+        "all_outcomes":     [],
+        "forecast_snapshots": [],
+        "position": {
+            "market_id":          "mkt-no-001",
+            "question":           "Will NYC be 80-83°F?",
+            "side":               "no",
+            "bucket_low":         bucket_low,
+            "bucket_high":        bucket_high,
+            "entry_price":        entry_price,
+            "bid_at_entry":       round(1.0 - 0.64, 4),
+            "spread":             0.02,
+            "shares":             shares,
+            "cost":               cost,
+            "p":                  1.0,
+            "ev":                 1.63,
+            "kelly":              0.25,
+            "forecast_temp":      72.0,
+            "forecast_source":    "ecmwf",
+            "sigma":              1.0,
+            "stop_price":         round(entry_price * 0.80, 4),
+            "trailing_activated": False,
+            "opened_at":          "2025-05-01T10:00:00+00:00",
+            "status":             "open",
+            "exit_price":         None,
+            "close_reason":       None,
+            "closed_at":          None,
+            "pnl":                None,
+        },
+    }
+
+
+class TestNoSideMonitor:
+
+    # ── check_stops_and_tp with NO ─────────────────────────────────────────────
+
+    def test_no_stop_loss_uses_no_bid(self):
+        """
+        For NO, current effective bid = 1 - YES_ask.
+        Stop triggers when that falls below stop_price.
+        """
+        mkt = _no_mkt(entry_price=0.38)
+        # stop_price = 0.38 * 0.80 = 0.304
+        # YES_ask = 0.70 → NO_bid = 0.30 < stop_price
+        with patch("core.monitor.fetch_live_price", return_value=(0.68, 0.70)):
+            with patch("core.monitor.close_position", side_effect=_fake_close) as mc:
+                _, _, did_close = check_stops_and_tp(mkt, _state())
+        assert did_close
+        _, call_exit, call_reason, _ = mc.call_args[0]
+        assert call_exit == pytest.approx(0.30, abs=0.001)
+        assert call_reason == "stop_loss"
+
+    def test_no_take_profit_uses_no_bid(self):
+        """TP for NO fires when NO_bid (1 - YES_ask) >= 0.75."""
+        mkt = _no_mkt(entry_price=0.38)
+        # YES_ask = 0.22 → NO_bid = 0.78 >= TP=0.75
+        with patch("core.monitor.fetch_live_price", return_value=(0.20, 0.22)):
+            with patch("core.monitor.close_position", side_effect=_fake_close) as mc:
+                _, _, did_close = check_stops_and_tp(mkt, _state())
+        assert did_close
+        _, call_exit, call_reason, _ = mc.call_args[0]
+        assert call_reason == "take_profit"
+
+    def test_no_no_action_when_price_mid_range(self):
+        """NO_bid = 1 - YES_ask = 0.50: above stop, below TP → no action."""
+        mkt = _no_mkt(entry_price=0.38)
+        with patch("core.monitor.fetch_live_price", return_value=(0.48, 0.50)):
+            _, _, did_close = check_stops_and_tp(mkt, _state())
+        assert not did_close
+
+    # ── check_forecast_change with NO ─────────────────────────────────────────
+
+    def test_no_closes_when_forecast_enters_bucket(self):
+        """NO thesis: forecast not in bucket. If it enters, close."""
+        mkt = _no_mkt(bucket_low=80.0, bucket_high=83.0)
+        # Forecast moves to 81 — now inside the bucket
+        with patch("core.monitor.fetch_live_price", return_value=(0.60, 0.62)):
+            with patch("core.monitor.close_position", side_effect=_fake_close):
+                _, _, did_close = check_forecast_change(mkt, _state(), 81.0, "F")
+        assert did_close
+
+    def test_no_stays_when_forecast_outside_bucket(self):
+        """Forecast remains far from bucket → keep the NO position."""
+        mkt = _no_mkt(bucket_low=80.0, bucket_high=83.0)
+        with patch("core.monitor.fetch_live_price", return_value=(0.60, 0.62)):
+            _, _, did_close = check_forecast_change(mkt, _state(), 72.0, "F")
+        assert not did_close
+
+    # ── check_resolution with NO ──────────────────────────────────────────────
+
+    @patch("core.executor.save_state")
+    @patch("core.executor.save_market")
+    def test_no_wins_when_yes_resolves_false(self, mock_sm, mock_ss):
+        """YES resolves NO (price→0) → our NO position wins."""
+        from core.monitor import check_resolution
+        mkt = _no_mkt()
+        with patch("core.monitor.check_resolved", return_value=False), \
+             patch("core.monitor.get_actual_temp", return_value=None), \
+             patch("core.monitor.close_position", side_effect=_fake_close) as mc:
+            _, updated_state, did_resolve = check_resolution(mkt, _state(), "key")
+        assert did_resolve
+        _, call_exit, call_reason, _ = mc.call_args[0]
+        assert call_exit == 1.0
+        assert call_reason == "resolved_win"
+
+    @patch("core.executor.save_state")
+    @patch("core.executor.save_market")
+    def test_no_loses_when_yes_resolves_true(self, mock_ss, mock_sm):
+        """YES resolves YES (price→1) → our NO position loses."""
+        from core.monitor import check_resolution
+        mkt = _no_mkt()
+        with patch("core.monitor.check_resolved", return_value=True), \
+             patch("core.monitor.get_actual_temp", return_value=None), \
+             patch("core.monitor.close_position", side_effect=_fake_close) as mc:
+            _, updated_state, did_resolve = check_resolution(mkt, _state(), "key")
+        assert did_resolve
+        _, call_exit, call_reason, _ = mc.call_args[0]
+        assert call_exit == 0.0
+        assert call_reason == "resolved_loss"

@@ -1,5 +1,5 @@
 """
-Tests for core/executor.py — close_position and try_open_position.
+Tests for core/executor.py — close_position, try_open_position, try_open_no_position.
 
 All external I/O (save_market, save_state, fetch_live_price) is mocked.
 """
@@ -8,7 +8,7 @@ import pytest
 from unittest.mock import patch, MagicMock
 
 from core.config import Config
-from core.executor import close_position, try_open_position
+from core.executor import close_position, try_open_no_position, try_open_position
 from core.scanner import Outcome
 
 
@@ -303,3 +303,106 @@ class TestTryOpenPosition:
             )
         # Falls back to snapshot bid/ask — same values, so should open
         assert opened
+
+    @patch("core.executor.save_state")
+    @patch("core.executor.save_market")
+    def test_yes_position_has_side_field(self, mock_sm, mock_ss):
+        """YES positions must record side='yes' for monitor side-awareness."""
+        outcome = _outcome()
+        mkt = {
+            "city": "nyc", "city_name": "New York City",
+            "date": "2025-05-01", "unit": "F",
+            "status": "open", "current_horizon": "D+1",
+            "all_outcomes": [], "forecast_snapshots": [],
+        }
+        with patch("core.executor.fetch_live_price", return_value=(0.13, 0.15)):
+            updated_mkt, _, opened = try_open_position(
+                mkt, outcome, 72.0, "ecmwf", 1.0, _state(), _cfg()
+            )
+        assert opened
+        assert updated_mkt["position"]["side"] == "yes"
+
+
+# ── try_open_no_position ───────────────────────────────────────────────────────
+
+class TestTryOpenNoPosition:
+    """
+    Baseline NO scenario:
+      Forecast = 72°F, bucket = 80–83°F (far away → p_yes = 0, p_no = 1)
+      YES_bid = 0.62 → NO_ask = 1 - 0.62 = 0.38 < max_price=0.45
+      EV_no = 1.0 * (1/0.38 - 1) - 0 = 1.63 >> min_ev=0.10
+    """
+
+    _NO_OUTCOME = dict(
+        question="Will NYC be 80-83°F?",
+        market_id="mkt-no-001",
+        t_low=80.0,
+        t_high=83.0,
+        bid=0.62,   # YES_bid high → market overpricing this bucket
+        ask=0.64,
+        spread=0.02,
+        volume=1000.0,
+    )
+
+    def _base_mkt(self) -> dict:
+        return {
+            "city": "nyc", "city_name": "New York City",
+            "date": "2025-05-01", "unit": "F",
+            "status": "open", "current_horizon": "D+1",
+            "all_outcomes": [], "forecast_snapshots": [],
+        }
+
+    def _run(self, outcome_kwargs=None, cfg=None, forecast_temp=72.0, sigma=1.0,
+             live_price=(0.62, 0.64)):
+        outcome = Outcome(**(self._NO_OUTCOME | (outcome_kwargs or {})))
+        cfg = cfg or _cfg()
+        with patch("core.executor.fetch_live_price", return_value=live_price), \
+             patch("core.executor.save_market"), \
+             patch("core.executor.save_state"):
+            return try_open_no_position(
+                self._base_mkt(), outcome, forecast_temp, "ecmwf", sigma, _state(), cfg
+            )
+
+    def test_opens_when_overpriced(self):
+        _, _, opened = self._run()
+        assert opened
+
+    def test_side_is_no(self):
+        updated_mkt, _, opened = self._run()
+        assert opened
+        assert updated_mkt["position"]["side"] == "no"
+
+    def test_entry_price_is_one_minus_yes_bid(self):
+        # live YES_bid = 0.62 → NO_ask = 0.38
+        updated_mkt, _, opened = self._run(live_price=(0.62, 0.64))
+        assert opened
+        assert updated_mkt["position"]["entry_price"] == pytest.approx(0.38, abs=0.001)
+
+    def test_balance_debited(self):
+        _, updated_state, opened = self._run()
+        assert opened
+        assert updated_state["balance"] < 10_000.0
+
+    def test_rejects_when_p_yes_above_threshold(self):
+        # Forecast 81°F — squarely in 80-83 bucket → p_yes=1.0 > 0.15
+        _, _, opened = self._run(forecast_temp=81.0)
+        assert not opened
+
+    def test_rejects_when_no_ask_above_max_price(self):
+        # YES_bid = 0.50 → NO_ask = 0.50 >= max_price=0.45
+        _, _, opened = self._run(live_price=(0.50, 0.52))
+        assert not opened
+
+    def test_rejects_below_min_volume(self):
+        _, _, opened = self._run(outcome_kwargs={"volume": 100.0})
+        assert not opened
+
+    def test_rejects_wide_spread(self):
+        _, _, opened = self._run(outcome_kwargs={"bid": 0.55, "ask": 0.65, "spread": 0.10})
+        assert not opened
+
+    def test_no_ev_positive(self):
+        # Sanity: with p_no=1.0 and NO_ask=0.38, EV should be very high
+        updated_mkt, _, opened = self._run()
+        assert opened
+        assert updated_mkt["position"]["ev"] > 0.10

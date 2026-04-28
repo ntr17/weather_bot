@@ -74,8 +74,6 @@ TIMEZONES: dict[str, str] = {
     "wellington":   "Pacific/Auckland",
 }
 
-# Tier 1 — highest Polymarket volume, best data coverage, proven airport offset
-TIER1_CITIES: list[str] = ["nyc", "chicago", "miami"]
-
-# Tier 2 — expand once Tier 1 edge is proven
-TIER2_CITIES: list[str] = ["atlanta", "seattle", "dallas"]
+# All cities in the scanner. The bot skips gracefully if Polymarket has no
+# active temperature market for a city on a given day — zero risk from extras.
+TIER1_CITIES: list[str] = list(LOCATIONS.keys())

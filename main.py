@@ -15,7 +15,7 @@ from datetime import datetime, timedelta, timezone
 
 from core.calibrator import get_sigma, run_calibration
 from core.config import load_config
-from core.executor import try_open_position
+from core.executor import try_open_no_position, try_open_position
 from core.forecaster import take_snapshot
 from core.locations import LOCATIONS, MONTHS, TIER1_CITIES
 from core.monitor import check_forecast_change, check_resolution, check_stops_and_tp
@@ -151,8 +151,9 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
                 and not dry_run
             ):
                 sigma = get_sigma(city_slug, forecast_source or "ecmwf", calibration)
+                src = forecast_source or "ecmwf"
 
-                # Find the one bucket that matches the forecast
+                # 1. Try YES on the bucket that matches the forecast
                 matched = next(
                     (o for o in outcomes
                      if _in_bucket(forecast_temp, o.t_low, o.t_high)),
@@ -160,11 +161,24 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
                 )
                 if matched:
                     mkt, state, did_open = try_open_position(
-                        mkt, matched, forecast_temp, forecast_source or "ecmwf",
-                        sigma, state, cfg,
+                        mkt, matched, forecast_temp, src, sigma, state, cfg,
                     )
                     if did_open:
                         new_pos += 1
+
+                # 2. If no YES opened, try NO on the most overpriced other bucket
+                if not mkt.get("position"):
+                    other_outcomes = [
+                        o for o in outcomes
+                        if not _in_bucket(forecast_temp, o.t_low, o.t_high)
+                    ]
+                    for o in other_outcomes:
+                        mkt, state, did_open = try_open_no_position(
+                            mkt, o, forecast_temp, src, sigma, state, cfg,
+                        )
+                        if did_open:
+                            new_pos += 1
+                            break
 
             # Mark as closed by time
             if hours < 0.5 and mkt["status"] == "open":
