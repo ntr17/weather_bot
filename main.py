@@ -150,7 +150,8 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
                 and hours >= cfg.min_hours
                 and not dry_run
             ):
-                sigma = get_sigma(city_slug, forecast_source or "ecmwf", calibration)
+                sigma = get_sigma(city_slug, forecast_source or "ecmwf",
+                                  calibration, horizon=horizon)
                 src = forecast_source or "ecmwf"
 
                 # 1. Try YES on the bucket that matches the forecast
