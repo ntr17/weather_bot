@@ -9,6 +9,7 @@ Phase 1 — Paper trading. Architecture complete. Needs to run and accumulate ca
 ## Active TODOs
 - [ ] Verify scanner slug format matches current Polymarket event slugs
 - [ ] Run research/airport_offset.py to confirm edge still present
+- [ ] Add PERSONAL_EMAIL + GMAIL_APP_PASSWORD to .env (personal machine)
 - [ ] Run paper trading for 1 week, review data/state.json
 - [ ] (Personal) paste any todos from last session here
 
