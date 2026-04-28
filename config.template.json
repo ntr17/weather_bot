@@ -1,5 +1,6 @@
 {
-  "balance": 10000.0,
+  "_note": "Copy this file to config.json and adjust values. config.json is gitignored — each machine keeps its own.",
+  "balance": 1000.0,
   "max_bet": 20.0,
   "min_ev": 0.1,
   "max_price": 0.45,

@@ -183,6 +183,14 @@ data/calibration.json.bak
 data/markets/*.json
 data/*.tmp
 
+# WeatherBot — machine-specific config (each machine keeps its own)
+config.json
+
+# WeatherBot — transfer bundles (temp files, never commit)
+*.bundle
+WeatherBot_CODE_*.bundle
+WeatherBot_Data_*.zip
+
 # WeatherBot — IDE
 .idea/
 .vscode/
