@@ -11,6 +11,7 @@ from datetime import datetime, timezone
 from typing import Any
 
 from core.config import Config
+from core.notifier import trade_closed, trade_opened
 from core.pricer import bet_size, calc_ev, calc_kelly, bucket_prob
 from core.scanner import Outcome, fetch_live_price
 from core.storage import save_market, save_state
@@ -128,6 +129,8 @@ def try_open_position(
 
     save_market(updated_mkt)
     save_state(updated_state)
+    trade_opened(mkt["city_name"], mkt["date"], bucket_label,
+                 real_ask, real_ev, real_size, forecast_source)
     return updated_mkt, updated_state, True
 
 
@@ -177,6 +180,11 @@ def close_position(
 
     save_market(updated_mkt)
     save_state(updated_state)
+    trade_closed(
+        mkt["city_name"], mkt["date"],
+        _bucket_label(pos["bucket_low"], pos["bucket_high"], mkt.get("unit", "F")),
+        pos["entry_price"], exit_price, pnl, reason,
+    )
     return updated_mkt, updated_state
 
 

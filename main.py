@@ -24,6 +24,7 @@ from core.storage import (
     ensure_dirs,
     load_all_markets,
     load_calibration,
+    load_market,
     load_state,
     new_market,
     save_market,
@@ -65,7 +66,6 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
             hours = hours_to_resolution(end_date)
 
             # Load or create market record
-            from core.storage import load_market
             mkt = load_market(city_slug, date_str)
             if mkt is None:
                 if hours < cfg.min_hours or hours > cfg.max_hours:
