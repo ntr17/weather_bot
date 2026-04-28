@@ -18,8 +18,8 @@ python main.py probe     # one scan, no trades (safe test)
 python main.py status    # balance + open positions
 python main.py           # full trading loop
 pytest tests/            # run tests
-scripts\bundle.ps1       # ship code to personal (work machine only)
-scripts\receive_bundle.ps1  # apply bundle from Downloads (personal machine only)
+scripts\ship.ps1         # commit + push to GitHub (work machine)
+git pull origin master   # get latest code (personal machine)
 ```
 
 ## Rules
