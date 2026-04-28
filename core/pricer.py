@@ -1,0 +1,70 @@
+"""
+Probability, EV, and Kelly sizing math.
+
+All functions are pure — no I/O, no side effects.
+"""
+
+import math
+
+
+def norm_cdf(x: float) -> float:
+    """Standard normal cumulative distribution function."""
+    return 0.5 * (1.0 + math.erf(x / math.sqrt(2.0)))
+
+
+def bucket_prob(forecast: float, t_low: float, t_high: float, sigma: float = 2.0) -> float:
+    """
+    Probability that the actual reading lands in [t_low, t_high].
+
+    - Middle buckets (finite bounds): returns 1.0 if forecast is in range, else 0.0.
+      This is intentionally strict — only enter when the forecast is squarely in the bucket.
+    - Edge buckets (t_low=-999 or t_high=999): uses normal distribution tail.
+    """
+    if t_low == -999.0:
+        # "X or below" bucket
+        return norm_cdf((t_high - forecast) / sigma)
+    if t_high == 999.0:
+        # "X or higher" bucket
+        return 1.0 - norm_cdf((t_low - forecast) / sigma)
+    # Middle bucket — strict membership
+    return 1.0 if in_bucket(forecast, t_low, t_high) else 0.0
+
+
+def calc_ev(p: float, price: float) -> float:
+    """
+    Expected value of a YES position at given ask price.
+
+    EV = p * (1/price - 1) - (1 - p)
+    Positive EV means the bet is profitable in expectation.
+    """
+    if price <= 0.0 or price >= 1.0:
+        return 0.0
+    return round(p * (1.0 / price - 1.0) - (1.0 - p), 4)
+
+
+def calc_kelly(p: float, price: float, kelly_fraction: float = 0.25) -> float:
+    """
+    Fractional Kelly criterion.
+
+    Full Kelly f* = (p*b - (1-p)) / b  where b = (1/price - 1).
+    Returns quarter-Kelly by default, clamped to [0, 1].
+    """
+    if price <= 0.0 or price >= 1.0:
+        return 0.0
+    b = 1.0 / price - 1.0
+    if b <= 0.0:
+        return 0.0
+    f_full = (p * b - (1.0 - p)) / b
+    return round(min(max(0.0, f_full) * kelly_fraction, 1.0), 4)
+
+
+def bet_size(kelly: float, balance: float, max_bet: float) -> float:
+    """Dollar amount to wager, capped at max_bet."""
+    return round(min(kelly * balance, max_bet), 2)
+
+
+def in_bucket(forecast: float, t_low: float, t_high: float) -> bool:
+    """True if forecast falls within the bucket bounds (inclusive)."""
+    if t_low == t_high:
+        return round(forecast) == round(t_low)
+    return t_low <= forecast <= t_high
