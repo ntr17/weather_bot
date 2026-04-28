@@ -24,17 +24,21 @@ def check_stops_and_tp(
 ) -> tuple[dict[str, Any], dict[str, Any], bool]:
     """
     Check stop-loss, trailing stop, and take-profit on a single open position.
+    Handles both YES and NO sides.
 
     Returns (updated_mkt, updated_state, did_close).
     """
     pos = mkt["position"]
     mid = pos["market_id"]
+    side = pos.get("side", "yes")
 
     live = fetch_live_price(mid)
     if live is None:
         return mkt, state, False
 
-    current_bid, _ = live
+    yes_bid, yes_ask = live
+    # For YES: sell at bid. For NO: sell NO = buy YES at ask → NO_bid = 1 - YES_ask
+    current_bid = yes_bid if side == "yes" else round(1.0 - yes_ask, 4)
     entry = pos["entry_price"]
     stop = pos.get("stop_price", round(entry * 0.80, 4))
 
@@ -86,41 +90,53 @@ def check_forecast_change(
     unit: str,
 ) -> tuple[dict[str, Any], dict[str, Any], bool]:
     """
-    Close position if forecast has moved significantly outside the bucket.
+    Close position if forecast has invalidated our thesis.
 
-    Bug fix vs v2: midpoint is now computed from the bucket itself, not from
-    forecast_temp (which caused exits to never trigger on edge buckets).
+    YES side: close if forecast moves far OUTSIDE the bucket.
+    NO side:  close if forecast moves INTO the bucket (we bet it wouldn't).
 
     Buffer: 2°F / 1°C — prevents thrashing on small forecast wiggles.
     """
     pos = mkt["position"]
+    side = pos.get("side", "yes")
     t_low = pos["bucket_low"]
     t_high = pos["bucket_high"]
     buffer = 2.0 if unit == "F" else 1.0
 
+    live = fetch_live_price(pos["market_id"])
+    if live is None:
+        return mkt, state, False
+    yes_bid, yes_ask = live
+
+    if side == "no":
+        # Thesis: forecast is NOT in this bucket. Exit if it moves in.
+        if not in_bucket(new_forecast, t_low, t_high):
+            return mkt, state, False
+        current_no_bid = round(1.0 - yes_ask, 4)
+        return close_position(mkt, current_no_bid, "forecast_changed", state) + (True,)
+
+    # YES side ────────────────────────────────────────────────────────────────
     # Already in bucket — no action
     if in_bucket(new_forecast, t_low, t_high):
         return mkt, state, False
 
-    # Compute bucket midpoint for edge buckets
+    # Determine whether the forecast has moved far enough outside the bucket to warrant exit.
     if t_low == -999.0:
-        midpoint = t_high - buffer
+        # "X°F or below" — close YES if forecast is clearly ABOVE the upper bound
+        forecast_far = new_forecast > t_high + buffer
     elif t_high == 999.0:
-        midpoint = t_low + buffer
+        # "X°F or higher" — close YES if forecast is clearly BELOW the lower bound
+        forecast_far = new_forecast < t_low - buffer
     else:
+        # Middle bucket — close if forecast drifts beyond half-width + buffer from centre
         midpoint = (t_low + t_high) / 2.0
+        half_width = (t_high - t_low) / 2.0
+        forecast_far = abs(new_forecast - midpoint) > half_width + buffer
 
-    # Only close if forecast is beyond midpoint + buffer from the bucket
-    forecast_far = abs(new_forecast - midpoint) > (abs(midpoint - t_low) + buffer)
     if not forecast_far:
         return mkt, state, False
 
-    live = fetch_live_price(pos["market_id"])
-    if live is None:
-        return mkt, state, False
-
-    current_bid, _ = live
-    return close_position(mkt, current_bid, "forecast_changed", state) + (True,)
+    return close_position(mkt, yes_bid, "forecast_changed", state) + (True,)
 
 
 def check_resolution(
@@ -138,10 +154,13 @@ def check_resolution(
     if not pos or pos.get("status") != "open":
         return mkt, state, False
 
-    won = check_resolved(pos["market_id"])
-    if won is None:
+    side = pos.get("side", "yes")
+    yes_won = check_resolved(pos["market_id"])
+    if yes_won is None:
         return mkt, state, False
 
+    # For NO positions, winning = YES resolved at 0 (NO token pays out)
+    won = yes_won if side == "yes" else not yes_won
     exit_price = 1.0 if won else 0.0
     reason = "resolved_win" if won else "resolved_loss"
 

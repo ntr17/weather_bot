@@ -41,11 +41,39 @@ class TestInBucket:
 
 
 class TestBucketProb:
-    def test_middle_bucket_in(self) -> None:
-        assert bucket_prob(45.5, 45.0, 46.0) == 1.0
+    def test_middle_bucket_in_is_not_one(self) -> None:
+        # Forecast exactly in middle of a 1°F bucket, sigma=2°F.
+        # CDF-based: Phi((46-45.5)/2) - Phi((45-45.5)/2) ≈ 0.20 — NOT 1.0
+        p = bucket_prob(45.5, 45.0, 46.0, sigma=2.0)
+        assert 0.10 < p < 0.40   # reasonable range, definitely not 1.0
 
-    def test_middle_bucket_out(self) -> None:
-        assert bucket_prob(47.0, 45.0, 46.0) == 0.0
+    def test_middle_bucket_forecast_centred(self) -> None:
+        # Wide bucket (70-73°F), forecast at centre 71.5°F, sigma=2°F.
+        # Phi((73-71.5)/2) - Phi((70-71.5)/2) = Phi(0.75) - Phi(-0.75) ≈ 0.547
+        p = bucket_prob(71.5, 70.0, 73.0, sigma=2.0)
+        assert p == pytest.approx(0.547, abs=0.01)
+
+    def test_middle_bucket_out_is_low_not_zero(self) -> None:
+        # Forecast far outside bucket — probability low but not exactly 0
+        p = bucket_prob(55.0, 45.0, 46.0, sigma=2.0)
+        assert p < 0.001   # essentially zero
+
+    def test_middle_bucket_adjacent_has_some_probability(self) -> None:
+        # Forecast 72°F; adjacent bucket 73-76°F.
+        # Even though forecast is outside, there's real probability mass there.
+        p = bucket_prob(72.0, 73.0, 76.0, sigma=2.0)
+        assert p > 0.10   # meaningful probability — was wrongly 0.0 before
+
+    def test_higher_sigma_spreads_probability(self) -> None:
+        # With larger sigma, more probability leaks into adjacent buckets
+        p_tight = bucket_prob(72.0, 70.0, 73.0, sigma=1.0)
+        p_wide  = bucket_prob(72.0, 70.0, 73.0, sigma=4.0)
+        assert p_tight > p_wide   # tighter sigma → more concentrated
+
+    def test_sigma_guard_no_division_by_zero(self) -> None:
+        # sigma=0 should not crash
+        p = bucket_prob(72.0, 70.0, 73.0, sigma=0.0)
+        assert 0.0 <= p <= 1.0
 
     def test_lower_edge_bucket(self) -> None:
         # "40°F or below" — forecast well below threshold

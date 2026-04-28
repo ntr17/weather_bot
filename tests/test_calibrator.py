@@ -47,13 +47,14 @@ class TestRunCalibration:
 
     def test_updates_after_minimum_reached(self) -> None:
         """Should calculate and store sigma after 30+ resolved markets."""
-        # 30 markets with consistent 2°F error
+        # 30 markets with consistent 2°F error → MAE=2.0 → sigma=2.0×1.2533=2.507
         markets = [self._make_market("nyc", 50.0, 48.0) for _ in range(30)]
         with patch("core.calibrator.load_calibration", return_value={}), \
              patch("core.calibrator.save_calibration"):
             result = run_calibration(markets, calibration_min=30)
         assert "nyc_ecmwf" in result
-        assert result["nyc_ecmwf"]["sigma"] == pytest.approx(2.0, abs=0.01)
+        assert result["nyc_ecmwf"]["sigma"] == pytest.approx(2.507, abs=0.01)
+        assert result["nyc_ecmwf"]["mae"] == pytest.approx(2.0, abs=0.01)
 
     def test_skips_markets_without_actual_temp(self) -> None:
         markets = [

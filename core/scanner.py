@@ -114,9 +114,23 @@ def parse_outcomes(event: dict) -> list[Outcome]:
         if not rng:
             continue
         try:
+            # outcomePrices = [YES_probability, NO_probability], NOT [bid, ask].
+            # They sum to ~1.0. Use YES_price as the mid-price approximation;
+            # real bid/ask comes from fetch_live_price() before any execution.
             prices = json.loads(market.get("outcomePrices", "[0.5,0.5]"))
-            bid = float(prices[0])
-            ask = float(prices[1]) if len(prices) > 1 else bid
+            yes_price = float(prices[0])
+            # bestBid / bestAsk are available directly on the market object when
+            # the API includes them. Fall back to yes_price ± 1% if absent.
+            best_bid = market.get("bestBid")
+            best_ask = market.get("bestAsk")
+            if best_bid is not None and best_ask is not None:
+                bid = float(best_bid)
+                ask = float(best_ask)
+            else:
+                # Snapshot approximation — spread is unknown at discovery time.
+                # fetch_live_price() will get real bid/ask before execution.
+                bid = round(yes_price - 0.005, 4)
+                ask = round(yes_price + 0.005, 4)
         except Exception:
             continue
 

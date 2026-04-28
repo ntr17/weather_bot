@@ -16,18 +16,22 @@ def bucket_prob(forecast: float, t_low: float, t_high: float, sigma: float = 2.0
     """
     Probability that the actual reading lands in [t_low, t_high].
 
-    - Middle buckets (finite bounds): returns 1.0 if forecast is in range, else 0.0.
-      This is intentionally strict — only enter when the forecast is squarely in the bucket.
-    - Edge buckets (t_low=-999 or t_high=999): uses normal distribution tail.
+    Uses the normal CDF for all buckets — both edge and middle.
+    A forecast of 72°F with sigma=2°F gives ~53% probability for the
+    70–73°F bucket, not 100%. This correctly drives Kelly sizing.
+
+    sigma = standard deviation of forecast error for this city+source+horizon,
+    learned from historical data by calibrator.py / bootstrap_sigma.py.
     """
+    sigma = max(sigma, 0.01)   # guard against zero sigma
     if t_low == -999.0:
-        # "X or below" bucket
+        # "X or below" edge bucket — left tail
         return norm_cdf((t_high - forecast) / sigma)
     if t_high == 999.0:
-        # "X or higher" bucket
+        # "X or higher" edge bucket — right tail
         return 1.0 - norm_cdf((t_low - forecast) / sigma)
-    # Middle bucket — strict membership
-    return 1.0 if in_bucket(forecast, t_low, t_high) else 0.0
+    # Middle bucket — area under the bell curve between the two bounds
+    return norm_cdf((t_high - forecast) / sigma) - norm_cdf((t_low - forecast) / sigma)
 
 
 def calc_ev(p: float, price: float) -> float:
