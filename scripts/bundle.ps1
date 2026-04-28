@@ -1,31 +1,27 @@
 <#
 .SYNOPSIS
-    Create a git bundle and open the folder so you can email it manually.
+    Commit pending changes and push to GitHub.
+    Run this on the work machine when you want to ship code to personal.
 
 .EXAMPLE
-    scripts\bundle.ps1
-    Then attach the .bundle file to an email to your personal Gmail.
+    scripts\ship.ps1
 #>
 
-$repoRoot  = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
-$date      = Get-Date -Format "yyyyMMdd_HHmm"
-$bundleOut = Join-Path $env:USERPROFILE "Desktop\WeatherBot_$date.bundle"
-
+$repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 Push-Location $repoRoot
 
-# Commit anything pending
 $pending = git status --porcelain 2>&1
 if ($pending) {
+    $date = Get-Date -Format "yyyy-MM-dd HH:mm"
     git add -A
     git commit -m "wip: $date"
 }
 
-git bundle create $bundleOut master
-git tag "shipped_$date"
+git push github master
+if ($LASTEXITCODE -ne 0) {
+    Write-Error "Push failed. Check your PAT in the github remote URL (git remote -v)."
+    exit 1
+}
 
+Write-Host "Pushed to GitHub. On personal machine run: git pull origin master"
 Pop-Location
-
-$sizeKB = [math]::Round((Get-Item $bundleOut).Length / 1KB, 1)
-Write-Host "Bundle ready on Desktop: WeatherBot_$date.bundle ($sizeKB KB)"
-Write-Host "Attach it to an email to your personal Gmail."
-Invoke-Item (Split-Path $bundleOut)
