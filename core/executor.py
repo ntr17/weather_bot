@@ -166,7 +166,7 @@ def try_open_no_position(
 
     if ev_no < cfg.min_ev:
         return mkt, state, False
-    if no_ask_snapshot >= cfg.max_price:
+    if no_ask_snapshot >= cfg.max_no_price:   # NO tokens are inherently priced near 1.0
         return mkt, state, False
     if outcome.volume < cfg.min_volume:
         return mkt, state, False
@@ -189,7 +189,7 @@ def try_open_no_position(
     real_no_bid = round(1.0 - real_yes_ask, 4)
     real_spread = round(real_yes_ask - real_yes_bid, 4)
 
-    if real_no_ask >= cfg.max_price or real_spread > cfg.max_slippage:
+    if real_no_ask >= cfg.max_no_price or real_spread > cfg.max_slippage:
         return mkt, state, False
 
     real_ev_no = calc_ev(p_no, real_no_ask)

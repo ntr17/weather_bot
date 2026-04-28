@@ -9,6 +9,7 @@ Usage:
     python main.py probe    # one scan, no positions opened (dry run)
 """
 
+import math
 import sys
 import time
 from datetime import datetime, timedelta, timezone
@@ -19,6 +20,7 @@ from core.executor import try_open_no_position, try_open_position
 from core.forecaster import take_snapshot
 from core.locations import LOCATIONS, MONTHS, TIER1_CITIES
 from core.monitor import check_forecast_change, check_resolution, check_stops_and_tp
+from core.pricer import in_bucket
 from core.scanner import get_event, hours_to_resolution, parse_outcomes
 from core.storage import (
     ensure_dirs,
@@ -110,14 +112,15 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
             # Append forecast snapshot
             if snap:
                 mkt["forecast_snapshots"].append({
-                    "ts":          snap.ts,
-                    "horizon":     horizon,
-                    "hours_left":  round(hours, 1),
-                    "ecmwf":       snap.ecmwf,
-                    "gfs":         snap.gfs,
-                    "metar":       snap.metar,
-                    "best":        snap.best,
-                    "best_source": snap.best_source,
+                    "ts":           snap.ts,
+                    "horizon":      horizon,
+                    "hours_left":   round(hours, 1),
+                    "ecmwf":        snap.ecmwf,
+                    "gfs":          snap.gfs,
+                    "metar":        snap.metar,
+                    "best":         snap.best,
+                    "best_source":  snap.best_source,
+                    "model_spread": snap.model_spread,
                 })
 
             # ── Monitor existing position ────────────────────────────────────
@@ -150,14 +153,18 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
                 and hours >= cfg.min_hours
                 and not dry_run
             ):
-                sigma = get_sigma(city_slug, forecast_source or "ecmwf",
-                                  calibration, horizon=horizon)
+                # When ensemble is used, look up ECMWF sigma (the calibrated base model)
+                # then inflate by model spread: σ_eff = √(σ² + (spread/2)²)
+                sigma_source = "ecmwf" if forecast_source == "ensemble" else (forecast_source or "ecmwf")
+                sigma = get_sigma(city_slug, sigma_source, calibration, horizon=horizon)
+                if snap and snap.model_spread:
+                    sigma = round(math.sqrt(sigma ** 2 + (snap.model_spread / 2.0) ** 2), 3)
                 src = forecast_source or "ecmwf"
 
                 # 1. Try YES on the bucket that matches the forecast
                 matched = next(
                     (o for o in outcomes
-                     if _in_bucket(forecast_temp, o.t_low, o.t_high)),
+                     if in_bucket(forecast_temp, o.t_low, o.t_high)),
                     None,
                 )
                 if matched:
@@ -171,7 +178,7 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
                 if not mkt.get("position"):
                     other_outcomes = [
                         o for o in outcomes
-                        if not _in_bucket(forecast_temp, o.t_low, o.t_high)
+                        if not in_bucket(forecast_temp, o.t_low, o.t_high)
                     ]
                     for o in other_outcomes:
                         mkt, state, did_open = try_open_no_position(
@@ -347,12 +354,6 @@ def print_report() -> None:
         print(f"    {m['city_name']:<16} {m['date']} | {bucket:<14} | {outcome} {pnl_str} {actual}")
 
     print(f"{'='*55}\n")
-
-
-def _in_bucket(forecast: float, t_low: float, t_high: float) -> bool:
-    if t_low == t_high:
-        return round(forecast) == round(t_low)
-    return t_low <= forecast <= t_high
 
 
 if __name__ == "__main__":

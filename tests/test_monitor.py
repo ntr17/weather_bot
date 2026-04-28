@@ -95,14 +95,16 @@ class TestCheckForecastChange:
         _, _, did_close = check_forecast_change(mkt, state, 72.0, "F")
         assert not did_close
 
-    def test_no_close_at_exact_bucket_boundary(self):
+    @patch("core.monitor.fetch_live_price", return_value=(0.30, 0.32))
+    def test_no_close_at_exact_bucket_boundary(self, mock_live):
         mkt = _mkt()
         state = _state()
         # 75.0 is exactly at threshold — not strictly greater, so no close
         _, _, did_close = check_forecast_change(mkt, state, 75.0, "F")
         assert not did_close
 
-    def test_no_close_within_buffer(self):
+    @patch("core.monitor.fetch_live_price", return_value=(0.30, 0.32))
+    def test_no_close_within_buffer(self, mock_live):
         mkt = _mkt()
         state = _state()
         # 74.9 — outside bucket, close to boundary, still within buffer
@@ -145,19 +147,40 @@ class TestCheckForecastChange:
         _, _, did_close = check_forecast_change(mkt, state, 15.0, "C")
         assert did_close
 
-    def test_edge_bucket_low_never_closes(self):
+    def test_edge_bucket_low_closes_when_forecast_clearly_above_ceiling(self):
         """
-        Edge bucket (-999, 40): midpoint = 40 - 2 = 38.
-        abs(midpoint - t_low) = abs(38 - (-999)) ≈ 1037.
-        Even a forecast of 999 doesn't exceed threshold 1039.
-        This is intentional — edge buckets don't get forecast-change exits.
+        Edge bucket (-999, 40): forecast_far = new_forecast > t_high + buffer = 42.
+        A forecast of 43°F is clearly above the "or below 40°F" ceiling → close.
         """
         mkt = _mkt(bucket_low=-999.0, bucket_high=40.0)
         state = _state()
         with patch("core.monitor.fetch_live_price", return_value=(0.10, 0.15)):
             with patch("core.monitor.close_position", side_effect=_fake_close):
-                _, _, did_close = check_forecast_change(mkt, state, 999.0, "F")
+                _, _, did_close = check_forecast_change(mkt, state, 43.0, "F")
+        assert did_close
+
+    def test_edge_bucket_low_no_close_within_buffer(self):
+        """
+        Edge bucket (-999, 40): forecast = 41°F is above ceiling but within 2°F buffer → hold.
+        """
+        mkt = _mkt(bucket_low=-999.0, bucket_high=40.0)
+        state = _state()
+        with patch("core.monitor.fetch_live_price", return_value=(0.10, 0.15)):
+            with patch("core.monitor.close_position", side_effect=_fake_close):
+                _, _, did_close = check_forecast_change(mkt, state, 41.0, "F")
         assert not did_close
+
+    def test_edge_bucket_high_closes_when_forecast_clearly_below_floor(self):
+        """
+        Edge bucket (90, 999): forecast_far = new_forecast < t_low - buffer = 88.
+        A forecast of 87°F is clearly below the "or above 90°F" floor → close.
+        """
+        mkt = _mkt(bucket_low=90.0, bucket_high=999.0)
+        state = _state()
+        with patch("core.monitor.fetch_live_price", return_value=(0.10, 0.15)):
+            with patch("core.monitor.close_position", side_effect=_fake_close):
+                _, _, did_close = check_forecast_change(mkt, state, 87.0, "F")
+        assert did_close
 
 
 # ── check_stops_and_tp ─────────────────────────────────────────────────────────

@@ -4,6 +4,7 @@
   "max_bet": 20.0,
   "min_ev": 0.1,
   "max_price": 0.45,
+  "max_no_price": 0.97,
   "min_volume": 500,
   "min_hours": 2.0,
   "max_hours": 72.0,

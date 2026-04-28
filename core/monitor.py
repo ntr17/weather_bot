@@ -120,16 +120,19 @@ def check_forecast_change(
     if in_bucket(new_forecast, t_low, t_high):
         return mkt, state, False
 
-    # Compute bucket midpoint for edge buckets
+    # Determine whether the forecast has moved far enough outside the bucket to warrant exit.
     if t_low == -999.0:
-        midpoint = t_high - buffer
+        # "X°F or below" — close YES if forecast is clearly ABOVE the upper bound
+        forecast_far = new_forecast > t_high + buffer
     elif t_high == 999.0:
-        midpoint = t_low + buffer
+        # "X°F or higher" — close YES if forecast is clearly BELOW the lower bound
+        forecast_far = new_forecast < t_low - buffer
     else:
+        # Middle bucket — close if forecast drifts beyond half-width + buffer from centre
         midpoint = (t_low + t_high) / 2.0
+        half_width = (t_high - t_low) / 2.0
+        forecast_far = abs(new_forecast - midpoint) > half_width + buffer
 
-    # Only close if forecast is beyond midpoint + buffer from the bucket
-    forecast_far = abs(new_forecast - midpoint) > (abs(midpoint - t_low) + buffer)
     if not forecast_far:
         return mkt, state, False
 

@@ -209,17 +209,20 @@ def bootstrap(cities: list[str] | None = None) -> None:
                     continue
 
                 mae = round(sum(errors) / len(errors), 3)
+                # Convert MAE to std dev: for a normal distribution, σ = MAE × √(π/2) ≈ 1.2533
+                sigma = round(mae * 1.2533, 3)
                 existing = cal.get(key, {})
                 old_sigma = existing.get("sigma", 0)
 
                 cal[key] = {
-                    "sigma":        mae,
+                    "sigma":        sigma,
+                    "mae":          mae,
                     "n":            len(errors),
                     "source":       "bootstrap",
                     "updated_at":   datetime.now(timezone.utc).isoformat(),
                 }
                 change = f" (was {old_sigma:.2f})" if old_sigma else " (new)"
-                print(f"MAE={mae:.2f}°{loc.unit}{change}")
+                print(f"MAE={mae:.2f}°{loc.unit} → σ={sigma:.2f}{change}")
 
         # Also write the flat (non-horizon) key so get_sigma() fallback works
         # Use the D+1 ECMWF value as the generic sigma for this city

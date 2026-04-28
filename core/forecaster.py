@@ -29,6 +29,7 @@ class ForecastSnapshot:
     metar: float | None
     best: float | None
     best_source: str | None
+    model_spread: float | None = None  # abs(ecmwf - gfs) when both models available; used for sigma inflation
 
 
 def _get_json(url: str, retries: int = 3, backoff: float = 3.0) -> dict:
@@ -87,10 +88,11 @@ def get_gfs(city_slug: str, dates: list[str]) -> dict[str, float]:
     if loc.region != "us":
         return {}
 
+    temp_unit = "fahrenheit" if loc.unit == "F" else "celsius"
     url = (
         f"https://api.open-meteo.com/v1/forecast"
         f"?latitude={loc.lat}&longitude={loc.lon}"
-        f"&daily=temperature_2m_max&temperature_unit=fahrenheit"
+        f"&daily=temperature_2m_max&temperature_unit={temp_unit}"
         f"&forecast_days=3&timezone={TIMEZONES.get(city_slug, 'UTC')}"
         f"&models=gfs_seamless"
     )
@@ -159,10 +161,10 @@ def take_snapshot(city_slug: str, dates: list[str]) -> dict[str, ForecastSnapsho
     Fetch all sources and build a ForecastSnapshot per date.
 
     Source priority:
-      - D+0/D+1 US: GFS (updated hourly, most accurate short-range)
-      - D+2+ US:    ECMWF (more stable at medium range)
-      - Non-US:     ECMWF only
-      - D+0 anchor: METAR overlays when available (real observation)
+      - US D+0/D+1, both models: ensemble mean (ECMWF+GFS)/2; model_spread stored
+      - US D+0/D+1, GFS only:   GFS
+      - All others:             ECMWF
+      - D+0 override:           METAR only if it EXCEEDS the model max (daily high achieved)
     """
     now_utc = datetime.now(timezone.utc)
     now_str = now_utc.isoformat()
@@ -180,17 +182,29 @@ def take_snapshot(city_slug: str, dates: list[str]) -> dict[str, ForecastSnapsho
         gfs_val = gfs.get(date) if date in (today, d1) else None
         metar_val = get_metar(city_slug) if date == today else None
 
-        # Pick best forecast source
-        if loc.region == "us" and gfs_val is not None:
+        # Pick best forecast source / ensemble mean
+        model_spread = None
+        if loc.region == "us" and gfs_val is not None and ecmwf_val is not None:
+            # Both models available — use ensemble mean and record their disagreement.
+            # The spread is passed to the trading loop to inflate sigma proportionally.
+            best = round((ecmwf_val + gfs_val) / 2.0)
+            best_source = "ensemble"
+            model_spread = round(abs(ecmwf_val - gfs_val), 1)
+        elif loc.region == "us" and gfs_val is not None:
             best, best_source = gfs_val, "gfs"
         elif ecmwf_val is not None:
             best, best_source = ecmwf_val, "ecmwf"
         else:
             best, best_source = None, None
 
-        # METAR overrides best for D+0 if available (it's the actual reading)
+        # METAR overrides best for D+0 ONLY if it exceeds the model forecast.
+        # METAR is the current observed temperature — NOT the daily maximum.
+        # Overriding with METAR is valid only once the daily high has already occurred
+        # (i.e., the observed temp beats the model's predicted max).
         if date == today and metar_val is not None:
-            best, best_source = metar_val, "metar"
+            if best is None or metar_val > best:
+                best, best_source = metar_val, "metar"
+                model_spread = None  # direct observation; model disagreement irrelevant
 
         snapshots[date] = ForecastSnapshot(
             ts=now_str,
@@ -199,6 +213,7 @@ def take_snapshot(city_slug: str, dates: list[str]) -> dict[str, ForecastSnapsho
             metar=metar_val,
             best=best,
             best_source=best_source,
+            model_spread=model_spread,
         )
 
     return snapshots

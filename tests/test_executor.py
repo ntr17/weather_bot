@@ -75,6 +75,7 @@ def _cfg(**overrides) -> Config:
         max_bet=20.0,
         min_ev=0.10,
         max_price=0.45,
+        max_no_price=0.97,
         min_volume=500.0,
         min_hours=2.0,
         max_hours=72.0,
@@ -388,9 +389,9 @@ class TestTryOpenNoPosition:
         _, _, opened = self._run(forecast_temp=81.0)
         assert not opened
 
-    def test_rejects_when_no_ask_above_max_price(self):
-        # YES_bid = 0.50 → NO_ask = 0.50 >= max_price=0.45
-        _, _, opened = self._run(live_price=(0.50, 0.52))
+    def test_rejects_when_no_ask_above_max_no_price(self):
+        # YES_bid = 0.02 → NO_ask = 1 - 0.02 = 0.98 >= max_no_price=0.97
+        _, _, opened = self._run(live_price=(0.02, 0.04))
         assert not opened
 
     def test_rejects_below_min_volume(self):

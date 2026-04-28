@@ -21,7 +21,8 @@ class Config:
     balance: float
     max_bet: float
     min_ev: float
-    max_price: float
+    max_price: float        # max YES token price (don't buy expensive YES)
+    max_no_price: float     # max NO token price — must be high (NO tokens are ~0.85-0.97)
     min_volume: float
     min_hours: float
     max_hours: float
@@ -54,6 +55,7 @@ def load_config() -> Config:
         max_bet=float(raw.get("max_bet", 20.0)),
         min_ev=float(raw.get("min_ev", 0.10)),
         max_price=float(raw.get("max_price", 0.45)),
+        max_no_price=float(raw.get("max_no_price", 0.97)),
         min_volume=float(raw.get("min_volume", 500)),
         min_hours=float(raw.get("min_hours", 2.0)),
         max_hours=float(raw.get("max_hours", 72.0)),

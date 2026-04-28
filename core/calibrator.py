@@ -96,15 +96,18 @@ def run_calibration(
                 if len(errors) < calibration_min:
                     return
                 mae = round(sum(errors) / len(errors), 3)
+                # Convert MAE to std dev: for a normal distribution, σ = MAE × √(π/2) ≈ 1.2533
+                sigma = round(mae * 1.2533, 3)
                 old_sigma = cal.get(key, {}).get("sigma", old_default)
                 cal[key] = {
-                    "sigma":      mae,
+                    "sigma":      sigma,
+                    "mae":        mae,
                     "n":          len(errors),
                     "source":     "live",
                     "updated_at": datetime.now(timezone.utc).isoformat(),
                 }
-                if abs(mae - old_sigma) > 0.05:
-                    updated.append(f"{city_name}/{source} {key.split('_')[-1]}: {old_sigma:.2f}→{mae:.2f}")
+                if abs(sigma - old_sigma) > 0.05:
+                    updated.append(f"{city_name}/{source} {key.split('_')[-1]}: {old_sigma:.2f}→{sigma:.2f}")
 
             _maybe_update(f"{city}_{source}", flat_errors)
             for horizon, h_errors in horizon_errors.items():
