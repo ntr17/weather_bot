@@ -23,6 +23,19 @@ WORK MACHINE (Windows / VS Code)         PERSONAL MACHINE (Windows / GitHub)
 
 ## One-Time Setup
 
+### Both Machines — Allow PowerShell Scripts (Run Once)
+
+By default Windows blocks PowerShell scripts. Run this once in an Administrator terminal:
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+Or, if you can't change policy, run scripts with:
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\ship_to_personal.ps1
+```
+
+---
+
 ### Work Machine
 
 **1. Confirm Python is installed**
