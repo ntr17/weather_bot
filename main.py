@@ -4,6 +4,7 @@ WeatherBot — Polymarket Weather Trading Bot
 ============================================
 Usage:
     python main.py          # start trading loop
+    python main.py once     # single scan+monitor cycle, then exit
     python main.py status   # balance + open positions
     python main.py report   # full resolved-trade breakdown
     python main.py probe    # one scan, no positions opened (dry run)
@@ -228,6 +229,23 @@ def monitor_loop(cfg, calibration: dict) -> None:
     save_state(state)
 
 
+def run_once() -> None:
+    """Single scan + monitor cycle, then exit. For cron / GitHub Actions."""
+    cfg = load_config()
+    ensure_dirs()
+    calibration = load_calibration()
+
+    print(f"\n[once] WEATHERBOT — single cycle ({'PAPER' if cfg.paper_trading else 'LIVE'})")
+    new_pos, closed, res = scan_once(cfg, calibration)
+    monitor_loop(cfg, calibration)
+
+    state = load_state(cfg.balance)
+    print(
+        f"[once] done — balance: ${state['balance']:,.2f} | "
+        f"new: {new_pos} | closed: {closed} | resolved: {res}"
+    )
+
+
 def run_loop() -> None:
     cfg = load_config()
     ensure_dirs()
@@ -363,6 +381,8 @@ if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "run"
     if cmd == "run":
         run_loop()
+    elif cmd == "once":
+        run_once()
     elif cmd == "status":
         print_status()
     elif cmd == "report":
@@ -374,4 +394,4 @@ if __name__ == "__main__":
         print("Dry-run scan (no positions will be opened)...")
         scan_once(_cfg, _cal, dry_run=True)
     else:
-        print("Usage: python main.py [run|status|report|probe]")
+        print("Usage: python main.py [run|once|status|report|probe]")

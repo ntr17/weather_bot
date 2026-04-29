@@ -1,0 +1,46 @@
+name: WeatherBot
+
+on:
+  schedule:
+    # Every 30 minutes
+    - cron: "*/30 * * * *"
+  workflow_dispatch:  # manual trigger from GitHub UI
+
+permissions:
+  contents: write  # needed to push DB back
+
+jobs:
+  trade:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Prepare config
+        run: cp config.template.json config.json
+
+      - name: Run bot (single cycle)
+        env:
+          VC_KEY: ${{ secrets.VC_KEY }}
+          PAPER_TRADING: "true"
+        run: python main.py once
+
+      - name: Commit updated state
+        run: |
+          git config user.name "weatherbot[bot]"
+          git config user.email "weatherbot[bot]@users.noreply.github.com"
+          git add -f data/weatherbot.db
+          # Only commit if there are changes
+          git diff --cached --quiet || git commit -m "bot: update state $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          # Rebase on top of any concurrent pushes (code changes)
+          git pull --rebase origin master
+          git push
