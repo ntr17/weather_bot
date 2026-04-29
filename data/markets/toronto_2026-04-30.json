@@ -1,0 +1,175 @@
+{
+  "city": "toronto",
+  "city_name": "Toronto",
+  "date": "2026-04-30",
+  "unit": "C",
+  "station": "CYYZ",
+  "event_end_date": "2026-04-30T12:00:00Z",
+  "hours_at_discovery": 39.9,
+  "status": "open",
+  "position": null,
+  "actual_temp": null,
+  "resolved_outcome": null,
+  "pnl": null,
+  "forecast_snapshots": [
+    {
+      "ts": "2026-04-28T20:06:43.929786+00:00",
+      "horizon": "D+2",
+      "hours_left": 39.9,
+      "ecmwf": 10.1,
+      "gfs": null,
+      "metar": null,
+      "best": 10.1,
+      "best_source": "ecmwf",
+      "model_spread": null
+    },
+    {
+      "ts": "2026-04-29T08:23:07.037693+00:00",
+      "horizon": "D+1",
+      "hours_left": 27.6,
+      "ecmwf": 10.6,
+      "gfs": null,
+      "metar": null,
+      "best": 10.6,
+      "best_source": "ecmwf",
+      "model_spread": null
+    }
+  ],
+  "market_snapshots": [],
+  "all_outcomes": [
+    {
+      "question": "Will the highest temperature in Toronto be 6°C or below on April 30?",
+      "market_id": "2102137",
+      "range": [
+        -999.0,
+        6.0
+      ],
+      "bid": 0.003,
+      "ask": 0.008,
+      "spread": 0.005,
+      "volume": 1203.7352000000003
+    },
+    {
+      "question": "Will the highest temperature in Toronto be 7°C on April 30?",
+      "market_id": "2102138",
+      "range": [
+        7.0,
+        7.0
+      ],
+      "bid": 0.007,
+      "ask": 0.01,
+      "spread": 0.003,
+      "volume": 471.1565
+    },
+    {
+      "question": "Will the highest temperature in Toronto be 8°C on April 30?",
+      "market_id": "2102139",
+      "range": [
+        8.0,
+        8.0
+      ],
+      "bid": 0.011,
+      "ask": 0.016,
+      "spread": 0.005,
+      "volume": 879.7288119999997
+    },
+    {
+      "question": "Will the highest temperature in Toronto be 9°C on April 30?",
+      "market_id": "2102140",
+      "range": [
+        9.0,
+        9.0
+      ],
+      "bid": 0.12,
+      "ask": 0.13,
+      "spread": 0.01,
+      "volume": 499.9619690000003
+    },
+    {
+      "question": "Will the highest temperature in Toronto be 10°C on April 30?",
+      "market_id": "2102141",
+      "range": [
+        10.0,
+        10.0
+      ],
+      "bid": 0.3,
+      "ask": 0.31,
+      "spread": 0.01,
+      "volume": 383.48584200000005
+    },
+    {
+      "question": "Will the highest temperature in Toronto be 11°C on April 30?",
+      "market_id": "2102142",
+      "range": [
+        11.0,
+        11.0
+      ],
+      "bid": 0.36,
+      "ask": 0.37,
+      "spread": 0.01,
+      "volume": 322.28115700000006
+    },
+    {
+      "question": "Will the highest temperature in Toronto be 12°C on April 30?",
+      "market_id": "2102143",
+      "range": [
+        12.0,
+        12.0
+      ],
+      "bid": 0.12,
+      "ask": 0.13,
+      "spread": 0.01,
+      "volume": 347.220344
+    },
+    {
+      "question": "Will the highest temperature in Toronto be 13°C on April 30?",
+      "market_id": "2102144",
+      "range": [
+        13.0,
+        13.0
+      ],
+      "bid": 0.08,
+      "ask": 0.09,
+      "spread": 0.01,
+      "volume": 288.800696
+    },
+    {
+      "question": "Will the highest temperature in Toronto be 14°C on April 30?",
+      "market_id": "2102145",
+      "range": [
+        14.0,
+        14.0
+      ],
+      "bid": 0.008,
+      "ask": 0.01,
+      "spread": 0.002,
+      "volume": 509.10880000000003
+    },
+    {
+      "question": "Will the highest temperature in Toronto be 15°C on April 30?",
+      "market_id": "2102146",
+      "range": [
+        15.0,
+        15.0
+      ],
+      "bid": 0.003,
+      "ask": 0.005,
+      "spread": 0.002,
+      "volume": 132.98
+    },
+    {
+      "question": "Will the highest temperature in Toronto be 16°C or higher on April 30?",
+      "market_id": "2102147",
+      "range": [
+        16.0,
+        999.0
+      ],
+      "bid": 0.003,
+      "ask": 0.004,
+      "spread": 0.001,
+      "volume": 2913.66975
+    }
+  ],
+  "created_at": "2026-04-28T20:06:50.912983+00:00",
+  "current_horizon": "D+1"
+}

@@ -1,0 +1,200 @@
+{
+  "city": "paris",
+  "city_name": "Paris",
+  "date": "2026-04-30",
+  "unit": "C",
+  "station": "LFPG",
+  "event_end_date": "2026-04-30T12:00:00Z",
+  "hours_at_discovery": 39.9,
+  "status": "open",
+  "position": {
+    "market_id": "2102102",
+    "question": "Will the highest temperature in Paris be 23°C on April 30?",
+    "side": "no",
+    "bucket_low": 23.0,
+    "bucket_high": 23.0,
+    "entry_price": 0.59,
+    "bid_at_entry": 0.57,
+    "spread": 0.02,
+    "shares": 33.8983,
+    "cost": 20.0,
+    "p": 1.0,
+    "ev": 0.6949,
+    "kelly": 0.25,
+    "forecast_temp": 22.1,
+    "forecast_source": "ecmwf",
+    "sigma": 1.2,
+    "stop_price": 0.472,
+    "trailing_activated": false,
+    "opened_at": "2026-04-29T08:21:52.225905+00:00",
+    "status": "open",
+    "exit_price": null,
+    "close_reason": null,
+    "closed_at": null,
+    "pnl": null
+  },
+  "actual_temp": null,
+  "resolved_outcome": null,
+  "pnl": null,
+  "forecast_snapshots": [
+    {
+      "ts": "2026-04-28T20:05:24.036968+00:00",
+      "horizon": "D+2",
+      "hours_left": 39.9,
+      "ecmwf": 22.4,
+      "gfs": null,
+      "metar": null,
+      "best": 22.4,
+      "best_source": "ecmwf",
+      "model_spread": null
+    },
+    {
+      "ts": "2026-04-29T08:21:43.205323+00:00",
+      "horizon": "D+1",
+      "hours_left": 27.6,
+      "ecmwf": 22.1,
+      "gfs": null,
+      "metar": null,
+      "best": 22.1,
+      "best_source": "ecmwf",
+      "model_spread": null
+    }
+  ],
+  "market_snapshots": [],
+  "all_outcomes": [
+    {
+      "question": "Will the highest temperature in Paris be 14°C or below on April 30?",
+      "market_id": "2102093",
+      "range": [
+        -999.0,
+        14.0
+      ],
+      "bid": -0.003,
+      "ask": 0.007,
+      "spread": 0.01,
+      "volume": 351.208857
+    },
+    {
+      "question": "Will the highest temperature in Paris be 15°C on April 30?",
+      "market_id": "2102094",
+      "range": [
+        15.0,
+        15.0
+      ],
+      "bid": -0.0045,
+      "ask": 0.0055,
+      "spread": 0.01,
+      "volume": 0.0
+    },
+    {
+      "question": "Will the highest temperature in Paris be 16°C on April 30?",
+      "market_id": "2102095",
+      "range": [
+        16.0,
+        16.0
+      ],
+      "bid": -0.0045,
+      "ask": 0.0055,
+      "spread": 0.01,
+      "volume": 0.0
+    },
+    {
+      "question": "Will the highest temperature in Paris be 17°C on April 30?",
+      "market_id": "2102096",
+      "range": [
+        17.0,
+        17.0
+      ],
+      "bid": -0.002,
+      "ask": 0.008,
+      "spread": 0.01,
+      "volume": 360.449
+    },
+    {
+      "question": "Will the highest temperature in Paris be 18°C on April 30?",
+      "market_id": "2102097",
+      "range": [
+        18.0,
+        18.0
+      ],
+      "bid": 0.001,
+      "ask": 0.003,
+      "spread": 0.002,
+      "volume": 937.0970889999999
+    },
+    {
+      "question": "Will the highest temperature in Paris be 19°C on April 30?",
+      "market_id": "2102098",
+      "range": [
+        19.0,
+        19.0
+      ],
+      "bid": 0.001,
+      "ask": 0.003,
+      "spread": 0.002,
+      "volume": 2273.4254819999996
+    },
+    {
+      "question": "Will the highest temperature in Paris be 20°C on April 30?",
+      "market_id": "2102099",
+      "range": [
+        20.0,
+        20.0
+      ],
+      "bid": 0.002,
+      "ask": 0.003,
+      "spread": 0.001,
+      "volume": 1291.682607
+    },
+    {
+      "question": "Will the highest temperature in Paris be 21°C on April 30?",
+      "market_id": "2102100",
+      "range": [
+        21.0,
+        21.0
+      ],
+      "bid": 0.034,
+      "ask": 0.042,
+      "spread": 0.008,
+      "volume": 1262.7630150000007
+    },
+    {
+      "question": "Will the highest temperature in Paris be 22°C on April 30?",
+      "market_id": "2102101",
+      "range": [
+        22.0,
+        22.0
+      ],
+      "bid": 0.15,
+      "ask": 0.16,
+      "spread": 0.01,
+      "volume": 1229.0517369999998
+    },
+    {
+      "question": "Will the highest temperature in Paris be 23°C on April 30?",
+      "market_id": "2102102",
+      "range": [
+        23.0,
+        23.0
+      ],
+      "bid": 0.4,
+      "ask": 0.43,
+      "spread": 0.03,
+      "volume": 673.4111
+    },
+    {
+      "question": "Will the highest temperature in Paris be 24°C or higher on April 30?",
+      "market_id": "2102103",
+      "range": [
+        24.0,
+        999.0
+      ],
+      "bid": 0.42,
+      "ask": 0.46,
+      "spread": 0.04,
+      "volume": 1847.314938
+    }
+  ],
+  "created_at": "2026-04-28T20:05:30.203923+00:00",
+  "current_horizon": "D+1"
+}

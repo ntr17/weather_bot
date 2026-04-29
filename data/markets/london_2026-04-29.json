@@ -1,0 +1,233 @@
+{
+  "city": "london",
+  "city_name": "London",
+  "date": "2026-04-29",
+  "unit": "C",
+  "station": "EGLC",
+  "event_end_date": "2026-04-29T12:00:00Z",
+  "hours_at_discovery": 20.2,
+  "status": "open",
+  "position": {
+    "market_id": "2091489",
+    "question": "Will the highest temperature in London be 17°C on April 29?",
+    "side": "no",
+    "bucket_low": 17.0,
+    "bucket_high": 17.0,
+    "entry_price": 0.47,
+    "bid_at_entry": 0.44,
+    "spread": 0.03,
+    "shares": 42.5532,
+    "cost": 20.0,
+    "p": 1.0,
+    "ev": 1.1277,
+    "kelly": 0.25,
+    "forecast_temp": 16.5,
+    "forecast_source": "ecmwf",
+    "sigma": 1.2,
+    "stop_price": 0.376,
+    "trailing_activated": false,
+    "opened_at": "2026-04-28T15:55:20.279487+00:00",
+    "status": "closed",
+    "exit_price": 0.38,
+    "close_reason": "forecast_changed",
+    "closed_at": "2026-04-29T08:21:36.530607+00:00",
+    "pnl": -3.83
+  },
+  "actual_temp": null,
+  "resolved_outcome": null,
+  "pnl": null,
+  "forecast_snapshots": [
+    {
+      "ts": "2026-04-28T15:50:43.284333+00:00",
+      "horizon": "D+1",
+      "hours_left": 20.2,
+      "ecmwf": 16.5,
+      "gfs": null,
+      "metar": null,
+      "best": 16.5,
+      "best_source": "ecmwf",
+      "model_spread": null
+    },
+    {
+      "ts": "2026-04-28T15:52:42.271085+00:00",
+      "horizon": "D+1",
+      "hours_left": 20.1,
+      "ecmwf": 16.5,
+      "gfs": null,
+      "metar": null,
+      "best": 16.5,
+      "best_source": "ecmwf",
+      "model_spread": null
+    },
+    {
+      "ts": "2026-04-28T15:55:16.287648+00:00",
+      "horizon": "D+1",
+      "hours_left": 20.1,
+      "ecmwf": 16.5,
+      "gfs": null,
+      "metar": null,
+      "best": 16.5,
+      "best_source": "ecmwf",
+      "model_spread": null
+    },
+    {
+      "ts": "2026-04-28T20:05:15.127973+00:00",
+      "horizon": "D+1",
+      "hours_left": 15.9,
+      "ecmwf": 16.5,
+      "gfs": null,
+      "metar": null,
+      "best": 16.5,
+      "best_source": "ecmwf",
+      "model_spread": null
+    },
+    {
+      "ts": "2026-04-29T08:21:28.274528+00:00",
+      "horizon": "D+0",
+      "hours_left": 3.6,
+      "ecmwf": 16.6,
+      "gfs": null,
+      "metar": 13.0,
+      "best": 16.6,
+      "best_source": "ecmwf",
+      "model_spread": null
+    }
+  ],
+  "market_snapshots": [],
+  "all_outcomes": [
+    {
+      "question": "Will the highest temperature in London be 11°C or below on April 29?",
+      "market_id": "2091483",
+      "range": [
+        -999.0,
+        11.0
+      ],
+      "bid": -0.0045,
+      "ask": 0.0055,
+      "spread": 0.01,
+      "volume": 6112.4457999999995
+    },
+    {
+      "question": "Will the highest temperature in London be 12°C on April 29?",
+      "market_id": "2091484",
+      "range": [
+        12.0,
+        12.0
+      ],
+      "bid": -0.0045,
+      "ask": 0.0055,
+      "spread": 0.01,
+      "volume": 1700.2366149999998
+    },
+    {
+      "question": "Will the highest temperature in London be 13°C on April 29?",
+      "market_id": "2091485",
+      "range": [
+        13.0,
+        13.0
+      ],
+      "bid": -0.0045,
+      "ask": 0.0055,
+      "spread": 0.01,
+      "volume": 5799.945019000002
+    },
+    {
+      "question": "Will the highest temperature in London be 14°C on April 29?",
+      "market_id": "2091486",
+      "range": [
+        14.0,
+        14.0
+      ],
+      "bid": -0.0035,
+      "ask": 0.0065,
+      "spread": 0.01,
+      "volume": 6889.840051000005
+    },
+    {
+      "question": "Will the highest temperature in London be 15°C on April 29?",
+      "market_id": "2091487",
+      "range": [
+        15.0,
+        15.0
+      ],
+      "bid": 0.009,
+      "ask": 0.01,
+      "spread": 0.001,
+      "volume": 10365.123444999997
+    },
+    {
+      "question": "Will the highest temperature in London be 16°C on April 29?",
+      "market_id": "2091488",
+      "range": [
+        16.0,
+        16.0
+      ],
+      "bid": 0.26,
+      "ask": 0.29,
+      "spread": 0.03,
+      "volume": 8741.584818000003
+    },
+    {
+      "question": "Will the highest temperature in London be 17°C on April 29?",
+      "market_id": "2091489",
+      "range": [
+        17.0,
+        17.0
+      ],
+      "bid": 0.61,
+      "ask": 0.62,
+      "spread": 0.01,
+      "volume": 8372.959585000004
+    },
+    {
+      "question": "Will the highest temperature in London be 18°C on April 29?",
+      "market_id": "2091490",
+      "range": [
+        18.0,
+        18.0
+      ],
+      "bid": 0.11,
+      "ask": 0.12,
+      "spread": 0.01,
+      "volume": 7744.358374999999
+    },
+    {
+      "question": "Will the highest temperature in London be 19°C on April 29?",
+      "market_id": "2091491",
+      "range": [
+        19.0,
+        19.0
+      ],
+      "bid": 0.011,
+      "ask": 0.014,
+      "spread": 0.003,
+      "volume": 6015.923115999999
+    },
+    {
+      "question": "Will the highest temperature in London be 20°C on April 29?",
+      "market_id": "2091492",
+      "range": [
+        20.0,
+        20.0
+      ],
+      "bid": 0.002,
+      "ask": 0.005,
+      "spread": 0.003,
+      "volume": 6412.608835000002
+    },
+    {
+      "question": "Will the highest temperature in London be 21°C or higher on April 29?",
+      "market_id": "2091493",
+      "range": [
+        21.0,
+        999.0
+      ],
+      "bid": 0.002,
+      "ask": 0.006,
+      "spread": 0.004,
+      "volume": 8399.764774000003
+    }
+  ],
+  "created_at": "2026-04-28T15:50:46.651241+00:00",
+  "current_horizon": "D+0"
+}

@@ -1,0 +1,189 @@
+{
+  "city": "shanghai",
+  "city_name": "Shanghai",
+  "date": "2026-04-30",
+  "unit": "C",
+  "station": "ZSPD",
+  "event_end_date": "2026-04-30T12:00:00Z",
+  "hours_at_discovery": 27.6,
+  "status": "open",
+  "position": {
+    "market_id": "2102297",
+    "question": "Will the highest temperature in Shanghai be 19°C on April 30?",
+    "side": "no",
+    "bucket_low": 19.0,
+    "bucket_high": 19.0,
+    "entry_price": 0.63,
+    "bid_at_entry": 0.6,
+    "spread": 0.03,
+    "shares": 31.746,
+    "cost": 20.0,
+    "p": 1.0,
+    "ev": 0.5873,
+    "kelly": 0.25,
+    "forecast_temp": 18.0,
+    "forecast_source": "ecmwf",
+    "sigma": 1.2,
+    "stop_price": 0.504,
+    "trailing_activated": false,
+    "opened_at": "2026-04-29T08:22:38.917931+00:00",
+    "status": "open",
+    "exit_price": null,
+    "close_reason": null,
+    "closed_at": null,
+    "pnl": null
+  },
+  "actual_temp": null,
+  "resolved_outcome": null,
+  "pnl": null,
+  "forecast_snapshots": [
+    {
+      "ts": "2026-04-29T08:22:31.864921+00:00",
+      "horizon": "D+1",
+      "hours_left": 27.6,
+      "ecmwf": 18.0,
+      "gfs": null,
+      "metar": null,
+      "best": 18.0,
+      "best_source": "ecmwf",
+      "model_spread": null
+    }
+  ],
+  "market_snapshots": [],
+  "all_outcomes": [
+    {
+      "question": "Will the highest temperature in Shanghai be 13°C or below on April 30?",
+      "market_id": "2102291",
+      "range": [
+        -999.0,
+        13.0
+      ],
+      "bid": 0.002,
+      "ask": 0.003,
+      "spread": 0.001,
+      "volume": 3671.2476210000004
+    },
+    {
+      "question": "Will the highest temperature in Shanghai be 14°C on April 30?",
+      "market_id": "2102292",
+      "range": [
+        14.0,
+        14.0
+      ],
+      "bid": 0.001,
+      "ask": 0.002,
+      "spread": 0.001,
+      "volume": 1289.642356
+    },
+    {
+      "question": "Will the highest temperature in Shanghai be 15°C on April 30?",
+      "market_id": "2102293",
+      "range": [
+        15.0,
+        15.0
+      ],
+      "bid": 0.003,
+      "ask": 0.004,
+      "spread": 0.001,
+      "volume": 1389.7851659999997
+    },
+    {
+      "question": "Will the highest temperature in Shanghai be 16°C on April 30?",
+      "market_id": "2102294",
+      "range": [
+        16.0,
+        16.0
+      ],
+      "bid": 0.005,
+      "ask": 0.006,
+      "spread": 0.001,
+      "volume": 1247.9321699999998
+    },
+    {
+      "question": "Will the highest temperature in Shanghai be 17°C on April 30?",
+      "market_id": "2102295",
+      "range": [
+        17.0,
+        17.0
+      ],
+      "bid": 0.06,
+      "ask": 0.09,
+      "spread": 0.03,
+      "volume": 1807.2700770000006
+    },
+    {
+      "question": "Will the highest temperature in Shanghai be 18°C on April 30?",
+      "market_id": "2102296",
+      "range": [
+        18.0,
+        18.0
+      ],
+      "bid": 0.35,
+      "ask": 0.37,
+      "spread": 0.02,
+      "volume": 849.5957080000003
+    },
+    {
+      "question": "Will the highest temperature in Shanghai be 19°C on April 30?",
+      "market_id": "2102297",
+      "range": [
+        19.0,
+        19.0
+      ],
+      "bid": 0.37,
+      "ask": 0.4,
+      "spread": 0.03,
+      "volume": 1142.9009359999995
+    },
+    {
+      "question": "Will the highest temperature in Shanghai be 20°C on April 30?",
+      "market_id": "2102298",
+      "range": [
+        20.0,
+        20.0
+      ],
+      "bid": 0.16,
+      "ask": 0.17,
+      "spread": 0.01,
+      "volume": 1168.696435
+    },
+    {
+      "question": "Will the highest temperature in Shanghai be 21°C on April 30?",
+      "market_id": "2102299",
+      "range": [
+        21.0,
+        21.0
+      ],
+      "bid": 0.041,
+      "ask": 0.048,
+      "spread": 0.007,
+      "volume": 1712.7353800000003
+    },
+    {
+      "question": "Will the highest temperature in Shanghai be 22°C on April 30?",
+      "market_id": "2102300",
+      "range": [
+        22.0,
+        22.0
+      ],
+      "bid": 0.009,
+      "ask": 0.01,
+      "spread": 0.001,
+      "volume": 916.8141629999999
+    },
+    {
+      "question": "Will the highest temperature in Shanghai be 23°C or higher on April 30?",
+      "market_id": "2102301",
+      "range": [
+        23.0,
+        999.0
+      ],
+      "bid": 0.003,
+      "ask": 0.005,
+      "spread": 0.002,
+      "volume": 1420.9117739999995
+    }
+  ],
+  "created_at": "2026-04-29T08:22:38.095439+00:00",
+  "current_horizon": "D+1"
+}

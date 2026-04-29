@@ -1,0 +1,208 @@
+{
+  "city": "chicago",
+  "city_name": "Chicago",
+  "date": "2026-04-29",
+  "unit": "F",
+  "station": "KORD",
+  "event_end_date": "2026-04-29T12:00:00Z",
+  "hours_at_discovery": 20.2,
+  "status": "open",
+  "position": null,
+  "actual_temp": null,
+  "resolved_outcome": null,
+  "pnl": null,
+  "forecast_snapshots": [
+    {
+      "ts": "2026-04-28T15:50:11.469471+00:00",
+      "horizon": "D+1",
+      "hours_left": 20.2,
+      "ecmwf": 54,
+      "gfs": 54,
+      "metar": null,
+      "best": 54,
+      "best_source": "ensemble",
+      "model_spread": 0
+    },
+    {
+      "ts": "2026-04-28T15:52:11.736685+00:00",
+      "horizon": "D+1",
+      "hours_left": 20.1,
+      "ecmwf": 54,
+      "gfs": 54,
+      "metar": null,
+      "best": 54,
+      "best_source": "ensemble",
+      "model_spread": 0
+    },
+    {
+      "ts": "2026-04-28T15:54:43.063068+00:00",
+      "horizon": "D+1",
+      "hours_left": 20.1,
+      "ecmwf": 54,
+      "gfs": 54,
+      "metar": null,
+      "best": 54,
+      "best_source": "ensemble",
+      "model_spread": 0
+    },
+    {
+      "ts": "2026-04-28T20:04:39.694020+00:00",
+      "horizon": "D+1",
+      "hours_left": 15.9,
+      "ecmwf": 54,
+      "gfs": 53,
+      "metar": null,
+      "best": 54,
+      "best_source": "ensemble",
+      "model_spread": 1
+    },
+    {
+      "ts": "2026-04-29T08:20:35.743462+00:00",
+      "horizon": "D+0",
+      "hours_left": 3.7,
+      "ecmwf": 56,
+      "gfs": 60,
+      "metar": 55,
+      "best": 58,
+      "best_source": "ensemble",
+      "model_spread": 4
+    }
+  ],
+  "market_snapshots": [],
+  "all_outcomes": [
+    {
+      "question": "Will the highest temperature in Chicago be 37°F or below on April 29?",
+      "market_id": "2091604",
+      "range": [
+        -999.0,
+        37.0
+      ],
+      "bid": -0.0045,
+      "ask": 0.0055,
+      "spread": 0.01,
+      "volume": 21054.649514
+    },
+    {
+      "question": "Will the highest temperature in Chicago be between 38-39°F on April 29?",
+      "market_id": "2091605",
+      "range": [
+        38.0,
+        39.0
+      ],
+      "bid": -0.0045,
+      "ask": 0.0055,
+      "spread": 0.01,
+      "volume": 2156.194765
+    },
+    {
+      "question": "Will the highest temperature in Chicago be between 40-41°F on April 29?",
+      "market_id": "2091606",
+      "range": [
+        40.0,
+        41.0
+      ],
+      "bid": -0.0045,
+      "ask": 0.0055,
+      "spread": 0.01,
+      "volume": 1546.8504610000005
+    },
+    {
+      "question": "Will the highest temperature in Chicago be between 42-43°F on April 29?",
+      "market_id": "2091607",
+      "range": [
+        42.0,
+        43.0
+      ],
+      "bid": -0.0045,
+      "ask": 0.0055,
+      "spread": 0.01,
+      "volume": 2059.2162630000003
+    },
+    {
+      "question": "Will the highest temperature in Chicago be between 44-45°F on April 29?",
+      "market_id": "2091608",
+      "range": [
+        44.0,
+        45.0
+      ],
+      "bid": -0.0045,
+      "ask": 0.0055,
+      "spread": 0.01,
+      "volume": 1317.1539000000005
+    },
+    {
+      "question": "Will the highest temperature in Chicago be between 46-47°F on April 29?",
+      "market_id": "2091609",
+      "range": [
+        46.0,
+        47.0
+      ],
+      "bid": -0.0045,
+      "ask": 0.0055,
+      "spread": 0.01,
+      "volume": 7271.046487
+    },
+    {
+      "question": "Will the highest temperature in Chicago be between 48-49°F on April 29?",
+      "market_id": "2091610",
+      "range": [
+        48.0,
+        49.0
+      ],
+      "bid": -0.0045,
+      "ask": 0.0055,
+      "spread": 0.01,
+      "volume": 6571.333792999999
+    },
+    {
+      "question": "Will the highest temperature in Chicago be between 50-51°F on April 29?",
+      "market_id": "2091611",
+      "range": [
+        50.0,
+        51.0
+      ],
+      "bid": -0.0045,
+      "ask": 0.0055,
+      "spread": 0.01,
+      "volume": 11669.366421999997
+    },
+    {
+      "question": "Will the highest temperature in Chicago be between 52-53°F on April 29?",
+      "market_id": "2091612",
+      "range": [
+        52.0,
+        53.0
+      ],
+      "bid": -0.0045,
+      "ask": 0.0055,
+      "spread": 0.01,
+      "volume": 8206.619586
+    },
+    {
+      "question": "Will the highest temperature in Chicago be between 54-55°F on April 29?",
+      "market_id": "2091613",
+      "range": [
+        54.0,
+        55.0
+      ],
+      "bid": -0.0045,
+      "ask": 0.0055,
+      "spread": 0.01,
+      "volume": 7928.686407999999
+    },
+    {
+      "question": "Will the highest temperature in Chicago be 56°F or higher on April 29?",
+      "market_id": "2091614",
+      "range": [
+        56.0,
+        999.0
+      ],
+      "bid": 0.999,
+      "ask": 1.0,
+      "spread": 0.001,
+      "volume": 7320.354679999996
+    }
+  ],
+  "created_at": "2026-04-28T15:50:16.235325+00:00",
+  "current_horizon": "D+0"
+}

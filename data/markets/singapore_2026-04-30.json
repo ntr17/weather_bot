@@ -1,0 +1,189 @@
+{
+  "city": "singapore",
+  "city_name": "Singapore",
+  "date": "2026-04-30",
+  "unit": "C",
+  "station": "WSSS",
+  "event_end_date": "2026-04-30T12:00:00Z",
+  "hours_at_discovery": 27.6,
+  "status": "open",
+  "position": {
+    "market_id": "2102308",
+    "question": "Will the highest temperature in Singapore be 31°C on April 30?",
+    "side": "no",
+    "bucket_low": 31.0,
+    "bucket_high": 31.0,
+    "entry_price": 0.85,
+    "bid_at_entry": 0.82,
+    "spread": 0.03,
+    "shares": 23.5294,
+    "cost": 20.0,
+    "p": 1.0,
+    "ev": 0.1765,
+    "kelly": 0.25,
+    "forecast_temp": 29.5,
+    "forecast_source": "ecmwf",
+    "sigma": 1.2,
+    "stop_price": 0.68,
+    "trailing_activated": false,
+    "opened_at": "2026-04-29T08:22:47.225870+00:00",
+    "status": "open",
+    "exit_price": null,
+    "close_reason": null,
+    "closed_at": null,
+    "pnl": null
+  },
+  "actual_temp": null,
+  "resolved_outcome": null,
+  "pnl": null,
+  "forecast_snapshots": [
+    {
+      "ts": "2026-04-29T08:22:40.793767+00:00",
+      "horizon": "D+1",
+      "hours_left": 27.6,
+      "ecmwf": 29.5,
+      "gfs": null,
+      "metar": null,
+      "best": 29.5,
+      "best_source": "ecmwf",
+      "model_spread": null
+    }
+  ],
+  "market_snapshots": [],
+  "all_outcomes": [
+    {
+      "question": "Will the highest temperature in Singapore be 25°C or below on April 30?",
+      "market_id": "2102302",
+      "range": [
+        -999.0,
+        25.0
+      ],
+      "bid": 0.001,
+      "ask": 0.005,
+      "spread": 0.004,
+      "volume": 1694.2648060000001
+    },
+    {
+      "question": "Will the highest temperature in Singapore be 26°C on April 30?",
+      "market_id": "2102303",
+      "range": [
+        26.0,
+        26.0
+      ],
+      "bid": -0.004,
+      "ask": 0.006,
+      "spread": 0.01,
+      "volume": 524.941785
+    },
+    {
+      "question": "Will the highest temperature in Singapore be 27°C on April 30?",
+      "market_id": "2102304",
+      "range": [
+        27.0,
+        27.0
+      ],
+      "bid": 0.001,
+      "ask": 0.003,
+      "spread": 0.002,
+      "volume": 162.552
+    },
+    {
+      "question": "Will the highest temperature in Singapore be 28°C on April 30?",
+      "market_id": "2102305",
+      "range": [
+        28.0,
+        28.0
+      ],
+      "bid": 0.002,
+      "ask": 0.004,
+      "spread": 0.002,
+      "volume": 326.891
+    },
+    {
+      "question": "Will the highest temperature in Singapore be 29°C on April 30?",
+      "market_id": "2102306",
+      "range": [
+        29.0,
+        29.0
+      ],
+      "bid": 0.006,
+      "ask": 0.009,
+      "spread": 0.003,
+      "volume": 1621.7087800000002
+    },
+    {
+      "question": "Will the highest temperature in Singapore be 30°C on April 30?",
+      "market_id": "2102307",
+      "range": [
+        30.0,
+        30.0
+      ],
+      "bid": 0.025,
+      "ask": 0.04,
+      "spread": 0.015,
+      "volume": 1571.058431
+    },
+    {
+      "question": "Will the highest temperature in Singapore be 31°C on April 30?",
+      "market_id": "2102308",
+      "range": [
+        31.0,
+        31.0
+      ],
+      "bid": 0.15,
+      "ask": 0.18,
+      "spread": 0.03,
+      "volume": 671.8706399999999
+    },
+    {
+      "question": "Will the highest temperature in Singapore be 32°C on April 30?",
+      "market_id": "2102309",
+      "range": [
+        32.0,
+        32.0
+      ],
+      "bid": 0.3,
+      "ask": 0.33,
+      "spread": 0.03,
+      "volume": 1140.739775
+    },
+    {
+      "question": "Will the highest temperature in Singapore be 33°C on April 30?",
+      "market_id": "2102310",
+      "range": [
+        33.0,
+        33.0
+      ],
+      "bid": 0.35,
+      "ask": 0.36,
+      "spread": 0.01,
+      "volume": 1050.5282140000002
+    },
+    {
+      "question": "Will the highest temperature in Singapore be 34°C on April 30?",
+      "market_id": "2102311",
+      "range": [
+        34.0,
+        34.0
+      ],
+      "bid": 0.117,
+      "ask": 0.147,
+      "spread": 0.03,
+      "volume": 945.1697409999998
+    },
+    {
+      "question": "Will the highest temperature in Singapore be 35°C or higher on April 30?",
+      "market_id": "2102312",
+      "range": [
+        35.0,
+        999.0
+      ],
+      "bid": 0.02,
+      "ask": 0.021,
+      "spread": 0.001,
+      "volume": 578.5696919999998
+    }
+  ],
+  "created_at": "2026-04-29T08:22:46.386702+00:00",
+  "current_horizon": "D+1"
+}

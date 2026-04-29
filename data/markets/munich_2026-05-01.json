@@ -1,0 +1,164 @@
+{
+  "city": "munich",
+  "city_name": "Munich",
+  "date": "2026-05-01",
+  "unit": "C",
+  "station": "EDDM",
+  "event_end_date": "2026-05-01T12:00:00Z",
+  "hours_at_discovery": 51.6,
+  "status": "open",
+  "position": null,
+  "actual_temp": null,
+  "resolved_outcome": null,
+  "pnl": null,
+  "forecast_snapshots": [
+    {
+      "ts": "2026-04-29T08:21:54.497270+00:00",
+      "horizon": "D+2",
+      "hours_left": 51.6,
+      "ecmwf": 17.7,
+      "gfs": null,
+      "metar": null,
+      "best": 17.7,
+      "best_source": "ecmwf",
+      "model_spread": null
+    }
+  ],
+  "market_snapshots": [],
+  "all_outcomes": [
+    {
+      "question": "Will the highest temperature in Munich be 13°C or below on May 1?",
+      "market_id": "2112350",
+      "range": [
+        -999.0,
+        13.0
+      ],
+      "bid": 0.002,
+      "ask": 0.008,
+      "spread": 0.006,
+      "volume": 381.7610000000001
+    },
+    {
+      "question": "Will the highest temperature in Munich be 14°C on May 1?",
+      "market_id": "2112351",
+      "range": [
+        14.0,
+        14.0
+      ],
+      "bid": 0.002,
+      "ask": 0.007,
+      "spread": 0.005,
+      "volume": 260.56
+    },
+    {
+      "question": "Will the highest temperature in Munich be 15°C on May 1?",
+      "market_id": "2112352",
+      "range": [
+        15.0,
+        15.0
+      ],
+      "bid": 0.002,
+      "ask": 0.008,
+      "spread": 0.006,
+      "volume": 260.56
+    },
+    {
+      "question": "Will the highest temperature in Munich be 16°C on May 1?",
+      "market_id": "2112353",
+      "range": [
+        16.0,
+        16.0
+      ],
+      "bid": 0.01,
+      "ask": 0.03,
+      "spread": 0.02,
+      "volume": 781.56
+    },
+    {
+      "question": "Will the highest temperature in Munich be 17°C on May 1?",
+      "market_id": "2112354",
+      "range": [
+        17.0,
+        17.0
+      ],
+      "bid": 0.044,
+      "ask": 0.07,
+      "spread": 0.026,
+      "volume": 294.946697
+    },
+    {
+      "question": "Will the highest temperature in Munich be 18°C on May 1?",
+      "market_id": "2112355",
+      "range": [
+        18.0,
+        18.0
+      ],
+      "bid": 0.1,
+      "ask": 0.17,
+      "spread": 0.07,
+      "volume": 149.082774
+    },
+    {
+      "question": "Will the highest temperature in Munich be 19°C on May 1?",
+      "market_id": "2112356",
+      "range": [
+        19.0,
+        19.0
+      ],
+      "bid": 0.31,
+      "ask": 0.32,
+      "spread": 0.01,
+      "volume": 93.76
+    },
+    {
+      "question": "Will the highest temperature in Munich be 20°C on May 1?",
+      "market_id": "2112357",
+      "range": [
+        20.0,
+        20.0
+      ],
+      "bid": 0.27,
+      "ask": 0.32,
+      "spread": 0.05,
+      "volume": 36.35375
+    },
+    {
+      "question": "Will the highest temperature in Munich be 21°C on May 1?",
+      "market_id": "2112358",
+      "range": [
+        21.0,
+        21.0
+      ],
+      "bid": 0.15,
+      "ask": 0.25,
+      "spread": 0.1,
+      "volume": 31.648637000000004
+    },
+    {
+      "question": "Will the highest temperature in Munich be 22°C on May 1?",
+      "market_id": "2112359",
+      "range": [
+        22.0,
+        22.0
+      ],
+      "bid": 0.04,
+      "ask": 0.07,
+      "spread": 0.03,
+      "volume": 55.41
+    },
+    {
+      "question": "Will the highest temperature in Munich be 23°C or higher on May 1?",
+      "market_id": "2112360",
+      "range": [
+        23.0,
+        999.0
+      ],
+      "bid": 0.01,
+      "ask": 0.019,
+      "spread": 0.009,
+      "volume": 265.56
+    }
+  ],
+  "created_at": "2026-04-29T08:22:02.786261+00:00",
+  "current_horizon": "D+2"
+}

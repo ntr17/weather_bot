@@ -1,0 +1,175 @@
+{
+  "city": "buenos-aires",
+  "city_name": "Buenos Aires",
+  "date": "2026-04-30",
+  "unit": "C",
+  "station": "SAEZ",
+  "event_end_date": "2026-04-30T12:00:00Z",
+  "hours_at_discovery": 39.9,
+  "status": "open",
+  "position": null,
+  "actual_temp": null,
+  "resolved_outcome": null,
+  "pnl": null,
+  "forecast_snapshots": [
+    {
+      "ts": "2026-04-28T20:07:00.473697+00:00",
+      "horizon": "D+2",
+      "hours_left": 39.9,
+      "ecmwf": 21.5,
+      "gfs": null,
+      "metar": null,
+      "best": 21.5,
+      "best_source": "ecmwf",
+      "model_spread": null
+    },
+    {
+      "ts": "2026-04-29T08:23:22.246135+00:00",
+      "horizon": "D+1",
+      "hours_left": 27.6,
+      "ecmwf": 21.9,
+      "gfs": null,
+      "metar": null,
+      "best": 21.9,
+      "best_source": "ecmwf",
+      "model_spread": null
+    }
+  ],
+  "market_snapshots": [],
+  "all_outcomes": [
+    {
+      "question": "Will the highest temperature in Buenos Aires be 17°C or below on April 30?",
+      "market_id": "2102115",
+      "range": [
+        -999.0,
+        17.0
+      ],
+      "bid": 0.001,
+      "ask": 0.004,
+      "spread": 0.003,
+      "volume": 622.4604429999998
+    },
+    {
+      "question": "Will the highest temperature in Buenos Aires be 18°C on April 30?",
+      "market_id": "2102116",
+      "range": [
+        18.0,
+        18.0
+      ],
+      "bid": 0.001,
+      "ask": 0.003,
+      "spread": 0.002,
+      "volume": 311.39554999999996
+    },
+    {
+      "question": "Will the highest temperature in Buenos Aires be 19°C on April 30?",
+      "market_id": "2102117",
+      "range": [
+        19.0,
+        19.0
+      ],
+      "bid": 0.003,
+      "ask": 0.009,
+      "spread": 0.006,
+      "volume": 1766.647889
+    },
+    {
+      "question": "Will the highest temperature in Buenos Aires be 20°C on April 30?",
+      "market_id": "2102118",
+      "range": [
+        20.0,
+        20.0
+      ],
+      "bid": 0.011,
+      "ask": 0.015,
+      "spread": 0.004,
+      "volume": 558.7598969999998
+    },
+    {
+      "question": "Will the highest temperature in Buenos Aires be 21°C on April 30?",
+      "market_id": "2102119",
+      "range": [
+        21.0,
+        21.0
+      ],
+      "bid": 0.05,
+      "ask": 0.07,
+      "spread": 0.02,
+      "volume": 750.870673
+    },
+    {
+      "question": "Will the highest temperature in Buenos Aires be 22°C on April 30?",
+      "market_id": "2102120",
+      "range": [
+        22.0,
+        22.0
+      ],
+      "bid": 0.19,
+      "ask": 0.21,
+      "spread": 0.02,
+      "volume": 600.631251
+    },
+    {
+      "question": "Will the highest temperature in Buenos Aires be 23°C on April 30?",
+      "market_id": "2102121",
+      "range": [
+        23.0,
+        23.0
+      ],
+      "bid": 0.25,
+      "ask": 0.28,
+      "spread": 0.03,
+      "volume": 245.38391200000004
+    },
+    {
+      "question": "Will the highest temperature in Buenos Aires be 24°C on April 30?",
+      "market_id": "2102122",
+      "range": [
+        24.0,
+        24.0
+      ],
+      "bid": 0.37,
+      "ask": 0.4,
+      "spread": 0.03,
+      "volume": 359.80402899999996
+    },
+    {
+      "question": "Will the highest temperature in Buenos Aires be 25°C on April 30?",
+      "market_id": "2102123",
+      "range": [
+        25.0,
+        25.0
+      ],
+      "bid": 0.09,
+      "ask": 0.1,
+      "spread": 0.01,
+      "volume": 358.870969
+    },
+    {
+      "question": "Will the highest temperature in Buenos Aires be 26°C on April 30?",
+      "market_id": "2102124",
+      "range": [
+        26.0,
+        26.0
+      ],
+      "bid": 0.037,
+      "ask": 0.062,
+      "spread": 0.025,
+      "volume": 453.0989799999999
+    },
+    {
+      "question": "Will the highest temperature in Buenos Aires be 27°C or higher on April 30?",
+      "market_id": "2102125",
+      "range": [
+        27.0,
+        999.0
+      ],
+      "bid": 0.023,
+      "ask": 0.027,
+      "spread": 0.004,
+      "volume": 265.39673999999997
+    }
+  ],
+  "created_at": "2026-04-28T20:07:07.360181+00:00",
+  "current_horizon": "D+1"
+}

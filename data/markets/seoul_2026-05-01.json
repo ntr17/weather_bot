@@ -1,0 +1,164 @@
+{
+  "city": "seoul",
+  "city_name": "Seoul",
+  "date": "2026-05-01",
+  "unit": "C",
+  "station": "RKSI",
+  "event_end_date": "2026-05-01T12:00:00Z",
+  "hours_at_discovery": 51.6,
+  "status": "open",
+  "position": null,
+  "actual_temp": null,
+  "resolved_outcome": null,
+  "pnl": null,
+  "forecast_snapshots": [
+    {
+      "ts": "2026-04-29T08:22:14.581018+00:00",
+      "horizon": "D+2",
+      "hours_left": 51.6,
+      "ecmwf": 19.1,
+      "gfs": null,
+      "metar": null,
+      "best": 19.1,
+      "best_source": "ecmwf",
+      "model_spread": null
+    }
+  ],
+  "market_snapshots": [],
+  "all_outcomes": [
+    {
+      "question": "Will the highest temperature in Seoul be 10°C or below on May 1?",
+      "market_id": "2112228",
+      "range": [
+        -999.0,
+        10.0
+      ],
+      "bid": 0.002,
+      "ask": 0.004,
+      "spread": 0.002,
+      "volume": 389.14633299999997
+    },
+    {
+      "question": "Will the highest temperature in Seoul be 11°C on May 1?",
+      "market_id": "2112229",
+      "range": [
+        11.0,
+        11.0
+      ],
+      "bid": 0.001,
+      "ask": 0.005,
+      "spread": 0.004,
+      "volume": 244.05716999999999
+    },
+    {
+      "question": "Will the highest temperature in Seoul be 12°C on May 1?",
+      "market_id": "2112230",
+      "range": [
+        12.0,
+        12.0
+      ],
+      "bid": 0.003,
+      "ask": 0.009,
+      "spread": 0.006,
+      "volume": 340.045134
+    },
+    {
+      "question": "Will the highest temperature in Seoul be 13°C on May 1?",
+      "market_id": "2112231",
+      "range": [
+        13.0,
+        13.0
+      ],
+      "bid": 0.003,
+      "ask": 0.01,
+      "spread": 0.007,
+      "volume": 224.9952
+    },
+    {
+      "question": "Will the highest temperature in Seoul be 14°C on May 1?",
+      "market_id": "2112232",
+      "range": [
+        14.0,
+        14.0
+      ],
+      "bid": 0.006,
+      "ask": 0.009,
+      "spread": 0.003,
+      "volume": 165.6699329999999
+    },
+    {
+      "question": "Will the highest temperature in Seoul be 15°C on May 1?",
+      "market_id": "2112233",
+      "range": [
+        15.0,
+        15.0
+      ],
+      "bid": 0.008,
+      "ask": 0.038,
+      "spread": 0.03,
+      "volume": 83.515666
+    },
+    {
+      "question": "Will the highest temperature in Seoul be 16°C on May 1?",
+      "market_id": "2112234",
+      "range": [
+        16.0,
+        16.0
+      ],
+      "bid": 0.05,
+      "ask": 0.07,
+      "spread": 0.02,
+      "volume": 518.627591
+    },
+    {
+      "question": "Will the highest temperature in Seoul be 17°C on May 1?",
+      "market_id": "2112235",
+      "range": [
+        17.0,
+        17.0
+      ],
+      "bid": 0.05,
+      "ask": 0.1,
+      "spread": 0.05,
+      "volume": 451.5892
+    },
+    {
+      "question": "Will the highest temperature in Seoul be 18°C on May 1?",
+      "market_id": "2112236",
+      "range": [
+        18.0,
+        18.0
+      ],
+      "bid": 0.23,
+      "ask": 0.25,
+      "spread": 0.02,
+      "volume": 102.65280499999999
+    },
+    {
+      "question": "Will the highest temperature in Seoul be 19°C on May 1?",
+      "market_id": "2112237",
+      "range": [
+        19.0,
+        19.0
+      ],
+      "bid": 0.28,
+      "ask": 0.3,
+      "spread": 0.02,
+      "volume": 150.530822
+    },
+    {
+      "question": "Will the highest temperature in Seoul be 20°C or higher on May 1?",
+      "market_id": "2112238",
+      "range": [
+        20.0,
+        999.0
+      ],
+      "bid": 0.32,
+      "ask": 0.41,
+      "spread": 0.09,
+      "volume": 172.174671
+    }
+  ],
+  "created_at": "2026-04-29T08:22:22.550085+00:00",
+  "current_horizon": "D+2"
+}

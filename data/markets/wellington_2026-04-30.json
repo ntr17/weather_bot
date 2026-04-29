@@ -1,0 +1,189 @@
+{
+  "city": "wellington",
+  "city_name": "Wellington",
+  "date": "2026-04-30",
+  "unit": "C",
+  "station": "NZWN",
+  "event_end_date": "2026-04-30T12:00:00Z",
+  "hours_at_discovery": 27.6,
+  "status": "open",
+  "position": {
+    "market_id": "2102233",
+    "question": "Will the highest temperature in Wellington be 16°C on April 30?",
+    "side": "no",
+    "bucket_low": 16.0,
+    "bucket_high": 16.0,
+    "entry_price": 0.657,
+    "bid_at_entry": 0.651,
+    "spread": 0.006,
+    "shares": 30.4414,
+    "cost": 20.0,
+    "p": 1.0,
+    "ev": 0.5221,
+    "kelly": 0.25,
+    "forecast_temp": 14.7,
+    "forecast_source": "ecmwf",
+    "sigma": 1.2,
+    "stop_price": 0.5256,
+    "trailing_activated": false,
+    "opened_at": "2026-04-29T08:23:36.893044+00:00",
+    "status": "open",
+    "exit_price": null,
+    "close_reason": null,
+    "closed_at": null,
+    "pnl": null
+  },
+  "actual_temp": null,
+  "resolved_outcome": null,
+  "pnl": null,
+  "forecast_snapshots": [
+    {
+      "ts": "2026-04-29T08:23:29.823084+00:00",
+      "horizon": "D+1",
+      "hours_left": 27.6,
+      "ecmwf": 14.7,
+      "gfs": null,
+      "metar": null,
+      "best": 14.7,
+      "best_source": "ecmwf",
+      "model_spread": null
+    }
+  ],
+  "market_snapshots": [],
+  "all_outcomes": [
+    {
+      "question": "Will the highest temperature in Wellington be 8°C or below on April 30?",
+      "market_id": "2102225",
+      "range": [
+        -999.0,
+        8.0
+      ],
+      "bid": -0.0045,
+      "ask": 0.0055,
+      "spread": 0.01,
+      "volume": 1765.657229
+    },
+    {
+      "question": "Will the highest temperature in Wellington be 9°C on April 30?",
+      "market_id": "2102226",
+      "range": [
+        9.0,
+        9.0
+      ],
+      "bid": -0.004,
+      "ask": 0.006,
+      "spread": 0.01,
+      "volume": 979.9470650000001
+    },
+    {
+      "question": "Will the highest temperature in Wellington be 10°C on April 30?",
+      "market_id": "2102227",
+      "range": [
+        10.0,
+        10.0
+      ],
+      "bid": -0.0045,
+      "ask": 0.0055,
+      "spread": 0.01,
+      "volume": 1302.121
+    },
+    {
+      "question": "Will the highest temperature in Wellington be 11°C on April 30?",
+      "market_id": "2102228",
+      "range": [
+        11.0,
+        11.0
+      ],
+      "bid": 0.002,
+      "ask": 0.007,
+      "spread": 0.005,
+      "volume": 568.553516
+    },
+    {
+      "question": "Will the highest temperature in Wellington be 12°C on April 30?",
+      "market_id": "2102229",
+      "range": [
+        12.0,
+        12.0
+      ],
+      "bid": 0.003,
+      "ask": 0.009,
+      "spread": 0.006,
+      "volume": 950.217294
+    },
+    {
+      "question": "Will the highest temperature in Wellington be 13°C on April 30?",
+      "market_id": "2102230",
+      "range": [
+        13.0,
+        13.0
+      ],
+      "bid": 0.017,
+      "ask": 0.029,
+      "spread": 0.012,
+      "volume": 3217.794747
+    },
+    {
+      "question": "Will the highest temperature in Wellington be 14°C on April 30?",
+      "market_id": "2102231",
+      "range": [
+        14.0,
+        14.0
+      ],
+      "bid": 0.08,
+      "ask": 0.1,
+      "spread": 0.02,
+      "volume": 1806.299397999998
+    },
+    {
+      "question": "Will the highest temperature in Wellington be 15°C on April 30?",
+      "market_id": "2102232",
+      "range": [
+        15.0,
+        15.0
+      ],
+      "bid": 0.43,
+      "ask": 0.44,
+      "spread": 0.01,
+      "volume": 722.466592
+    },
+    {
+      "question": "Will the highest temperature in Wellington be 16°C on April 30?",
+      "market_id": "2102233",
+      "range": [
+        16.0,
+        16.0
+      ],
+      "bid": 0.343,
+      "ask": 0.349,
+      "spread": 0.006,
+      "volume": 773.7770300000001
+    },
+    {
+      "question": "Will the highest temperature in Wellington be 17°C on April 30?",
+      "market_id": "2102234",
+      "range": [
+        17.0,
+        17.0
+      ],
+      "bid": 0.092,
+      "ask": 0.098,
+      "spread": 0.006,
+      "volume": 839.6333989999999
+    },
+    {
+      "question": "Will the highest temperature in Wellington be 18°C or higher on April 30?",
+      "market_id": "2102235",
+      "range": [
+        18.0,
+        999.0
+      ],
+      "bid": 0.012,
+      "ask": 0.014,
+      "spread": 0.002,
+      "volume": 2347.6082420000002
+    }
+  ],
+  "created_at": "2026-04-29T08:23:36.093185+00:00",
+  "current_horizon": "D+1"
+}

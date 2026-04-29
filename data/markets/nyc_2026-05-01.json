@@ -1,0 +1,164 @@
+{
+  "city": "nyc",
+  "city_name": "New York City",
+  "date": "2026-05-01",
+  "unit": "F",
+  "station": "KLGA",
+  "event_end_date": "2026-05-01T12:00:00Z",
+  "hours_at_discovery": 51.7,
+  "status": "open",
+  "position": null,
+  "actual_temp": null,
+  "resolved_outcome": null,
+  "pnl": null,
+  "forecast_snapshots": [
+    {
+      "ts": "2026-04-29T08:20:24.635191+00:00",
+      "horizon": "D+2",
+      "hours_left": 51.7,
+      "ecmwf": 58,
+      "gfs": null,
+      "metar": null,
+      "best": 58,
+      "best_source": "ecmwf",
+      "model_spread": null
+    }
+  ],
+  "market_snapshots": [],
+  "all_outcomes": [
+    {
+      "question": "Will the highest temperature in New York City be 53°F or below on May 1?",
+      "market_id": "2112262",
+      "range": [
+        -999.0,
+        53.0
+      ],
+      "bid": 0.007,
+      "ask": 0.008,
+      "spread": 0.001,
+      "volume": 78.0
+    },
+    {
+      "question": "Will the highest temperature in New York City be between 54-55°F on May 1?",
+      "market_id": "2112263",
+      "range": [
+        54.0,
+        55.0
+      ],
+      "bid": 0.018,
+      "ask": 0.05,
+      "spread": 0.032,
+      "volume": 126.018
+    },
+    {
+      "question": "Will the highest temperature in New York City be between 56-57°F on May 1?",
+      "market_id": "2112264",
+      "range": [
+        56.0,
+        57.0
+      ],
+      "bid": 0.055,
+      "ask": 0.127,
+      "spread": 0.072,
+      "volume": 118.82165
+    },
+    {
+      "question": "Will the highest temperature in New York City be between 58-59°F on May 1?",
+      "market_id": "2112265",
+      "range": [
+        58.0,
+        59.0
+      ],
+      "bid": 0.2,
+      "ask": 0.23,
+      "spread": 0.03,
+      "volume": 33.0
+    },
+    {
+      "question": "Will the highest temperature in New York City be between 60-61°F on May 1?",
+      "market_id": "2112266",
+      "range": [
+        60.0,
+        61.0
+      ],
+      "bid": 0.31,
+      "ask": 0.38,
+      "spread": 0.07,
+      "volume": 13.080851
+    },
+    {
+      "question": "Will the highest temperature in New York City be between 62-63°F on May 1?",
+      "market_id": "2112267",
+      "range": [
+        62.0,
+        63.0
+      ],
+      "bid": 0.28,
+      "ask": 0.35,
+      "spread": 0.07,
+      "volume": 5.0
+    },
+    {
+      "question": "Will the highest temperature in New York City be between 64-65°F on May 1?",
+      "market_id": "2112268",
+      "range": [
+        64.0,
+        65.0
+      ],
+      "bid": 0.066,
+      "ask": 0.12,
+      "spread": 0.054,
+      "volume": 54.22
+    },
+    {
+      "question": "Will the highest temperature in New York City be between 66-67°F on May 1?",
+      "market_id": "2112269",
+      "range": [
+        66.0,
+        67.0
+      ],
+      "bid": 0.034,
+      "ask": 0.06,
+      "spread": 0.026,
+      "volume": 36.0204
+    },
+    {
+      "question": "Will the highest temperature in New York City be between 68-69°F on May 1?",
+      "market_id": "2112270",
+      "range": [
+        68.0,
+        69.0
+      ],
+      "bid": 0.009,
+      "ask": 0.01,
+      "spread": 0.001,
+      "volume": 10.0
+    },
+    {
+      "question": "Will the highest temperature in New York City be between 70-71°F on May 1?",
+      "market_id": "2112271",
+      "range": [
+        70.0,
+        71.0
+      ],
+      "bid": 0.005,
+      "ask": 0.01,
+      "spread": 0.005,
+      "volume": 90.0
+    },
+    {
+      "question": "Will the highest temperature in New York City be 72°F or higher on May 1?",
+      "market_id": "2112272",
+      "range": [
+        72.0,
+        999.0
+      ],
+      "bid": 0.005,
+      "ask": 0.008,
+      "spread": 0.003,
+      "volume": 723.8216719999999
+    }
+  ],
+  "created_at": "2026-04-29T08:20:34.841981+00:00",
+  "current_horizon": "D+2"
+}

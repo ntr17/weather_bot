@@ -1,0 +1,164 @@
+{
+  "city": "tel-aviv",
+  "city_name": "Tel Aviv",
+  "date": "2026-05-01",
+  "unit": "C",
+  "station": "LLBG",
+  "event_end_date": "2026-05-01T12:00:00Z",
+  "hours_at_discovery": 51.6,
+  "status": "open",
+  "position": null,
+  "actual_temp": null,
+  "resolved_outcome": null,
+  "pnl": null,
+  "forecast_snapshots": [
+    {
+      "ts": "2026-04-29T08:22:58.286346+00:00",
+      "horizon": "D+2",
+      "hours_left": 51.6,
+      "ecmwf": 25.3,
+      "gfs": null,
+      "metar": null,
+      "best": 25.3,
+      "best_source": "ecmwf",
+      "model_spread": null
+    }
+  ],
+  "market_snapshots": [],
+  "all_outcomes": [
+    {
+      "question": "Will the highest temperature in Tel Aviv be 18°C or below on May 1?",
+      "market_id": "2112361",
+      "range": [
+        -999.0,
+        18.0
+      ],
+      "bid": 0.002,
+      "ask": 0.009,
+      "spread": 0.007,
+      "volume": 44.989666
+    },
+    {
+      "question": "Will the highest temperature in Tel Aviv be 19°C on May 1?",
+      "market_id": "2112362",
+      "range": [
+        19.0,
+        19.0
+      ],
+      "bid": 0.003,
+      "ask": 0.01,
+      "spread": 0.007,
+      "volume": 39.989666
+    },
+    {
+      "question": "Will the highest temperature in Tel Aviv be 20°C on May 1?",
+      "market_id": "2112363",
+      "range": [
+        20.0,
+        20.0
+      ],
+      "bid": 0.002,
+      "ask": 0.016,
+      "spread": 0.014,
+      "volume": 297.964366
+    },
+    {
+      "question": "Will the highest temperature in Tel Aviv be 21°C on May 1?",
+      "market_id": "2112364",
+      "range": [
+        21.0,
+        21.0
+      ],
+      "bid": 0.01,
+      "ask": 0.03,
+      "spread": 0.02,
+      "volume": 297.18566400000003
+    },
+    {
+      "question": "Will the highest temperature in Tel Aviv be 22°C on May 1?",
+      "market_id": "2112365",
+      "range": [
+        22.0,
+        22.0
+      ],
+      "bid": 0.04,
+      "ask": 0.12,
+      "spread": 0.08,
+      "volume": 119.2283
+    },
+    {
+      "question": "Will the highest temperature in Tel Aviv be 23°C on May 1?",
+      "market_id": "2112366",
+      "range": [
+        23.0,
+        23.0
+      ],
+      "bid": 0.11,
+      "ask": 0.36,
+      "spread": 0.25,
+      "volume": 49.632193
+    },
+    {
+      "question": "Will the highest temperature in Tel Aviv be 24°C on May 1?",
+      "market_id": "2112367",
+      "range": [
+        24.0,
+        24.0
+      ],
+      "bid": 0.16,
+      "ask": 0.24,
+      "spread": 0.08,
+      "volume": 91.958332
+    },
+    {
+      "question": "Will the highest temperature in Tel Aviv be 25°C on May 1?",
+      "market_id": "2112368",
+      "range": [
+        25.0,
+        25.0
+      ],
+      "bid": 0.23,
+      "ask": 0.24,
+      "spread": 0.01,
+      "volume": 200.22715300000002
+    },
+    {
+      "question": "Will the highest temperature in Tel Aviv be 26°C on May 1?",
+      "market_id": "2112369",
+      "range": [
+        26.0,
+        26.0
+      ],
+      "bid": 0.1,
+      "ask": 0.17,
+      "spread": 0.07,
+      "volume": 49.596715
+    },
+    {
+      "question": "Will the highest temperature in Tel Aviv be 27°C on May 1?",
+      "market_id": "2112370",
+      "range": [
+        27.0,
+        27.0
+      ],
+      "bid": 0.02,
+      "ask": 0.169,
+      "spread": 0.149,
+      "volume": 40.970587
+    },
+    {
+      "question": "Will the highest temperature in Tel Aviv be 28°C or higher on May 1?",
+      "market_id": "2112371",
+      "range": [
+        28.0,
+        999.0
+      ],
+      "bid": 0.01,
+      "ask": 0.028,
+      "spread": 0.018,
+      "volume": 40.714284
+    }
+  ],
+  "created_at": "2026-04-29T08:23:06.159485+00:00",
+  "current_horizon": "D+2"
+}
