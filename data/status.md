@@ -1,30 +1,32 @@
 # WeatherBot Status
-_Auto-generated 2026-04-29 21:42 UTC_
+_Auto-generated 2026-04-29 22:57 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $731.15 |
+| Balance | $657.29 |
 | Starting | $1,000.00 |
-| Return | -26.9% |
-| Total trades | 189 |
-| Win rate | 1/189 (1%) |
-| Open positions | 7 |
+| Return | -34.3% |
+| Total trades | 241 |
+| Win rate | 1/241 (0%) |
+| Open positions | 8 |
 | Markets tracked | 41 |
 | Calibration keys | 112 |
 
-## Open Positions (8)
+## Open Positions (10)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
+| Paris | 2026-04-30 | 22–22°C | YES | $0.090 | ECMWF | D+1 |
 | Munich | 2026-04-30 | 14–14°C | YES | $0.180 | ECMWF | D+1 |
+| Munich | 2026-04-30 | 13–13°C | YES | $0.012 | ECMWF | D+1 |
 | Shanghai | 2026-04-30 | 17–17°C | YES | $0.059 | ECMWF | D+1 |
 | Singapore | 2026-04-30 | 34–34°C | NO | $0.899 | ECMWF | D+1 |
 | Buenos Aires | 2026-04-30 | 22–22°C | YES | $0.180 | ECMWF | D+1 |
 | Buenos Aires | 2026-04-30 | 25–25°C | NO | $0.870 | ECMWF | D+1 |
-| Lucknow | 2026-05-01 | 36–36°C | YES | $0.090 | ECMWF | D+2 |
+| Paris | 2026-05-01 | 24–24°C | YES | $0.140 | ECMWF | D+2 |
 | Tokyo | 2026-05-01 | 21–999°C | YES | $0.350 | ECMWF | D+2 |
-| Shanghai | 2026-05-01 | 23–23°C | YES | $0.170 | ECMWF | D+2 |
+| Lucknow | 2026-05-01 | 36–36°C | YES | $0.090 | ECMWF | D+2 |
 
 ## Recent Trades (last 6)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
@@ -44,26 +46,26 @@ _Auto-generated 2026-04-29 21:42 UTC_
 ## City Health (last 20 runs)
 | City | OK | Fails | Rate | Streak | Status | Last Error |
 |------|----|-------|------|--------|--------|------------|
-| Ankara | 4 | 0 | 0% | 0 | ok |  |
-| Atlanta | 4 | 0 | 0% | 0 | ok |  |
-| Buenos Aires | 4 | 0 | 0% | 0 | ok |  |
-| Chicago | 4 | 0 | 0% | 0 | ok |  |
-| Dallas | 4 | 0 | 0% | 0 | ok |  |
-| London | 4 | 0 | 0% | 0 | ok |  |
-| Lucknow | 4 | 0 | 0% | 0 | ok |  |
-| Miami | 4 | 0 | 0% | 0 | ok |  |
-| Munich | 4 | 0 | 0% | 0 | ok |  |
-| New York City | 4 | 0 | 0% | 0 | ok |  |
-| Paris | 4 | 0 | 0% | 0 | ok |  |
-| Sao Paulo | 4 | 0 | 0% | 0 | ok |  |
-| Seattle | 4 | 0 | 0% | 0 | ok |  |
-| Seoul | 4 | 0 | 0% | 0 | ok |  |
-| Shanghai | 4 | 0 | 0% | 0 | ok |  |
-| Singapore | 4 | 0 | 0% | 0 | ok |  |
-| Tel Aviv | 4 | 0 | 0% | 0 | ok |  |
-| Tokyo | 4 | 0 | 0% | 0 | ok |  |
-| Toronto | 4 | 0 | 0% | 0 | ok |  |
-| Wellington | 4 | 0 | 0% | 0 | ok |  |
+| Ankara | 5 | 0 | 0% | 0 | ok |  |
+| Atlanta | 5 | 0 | 0% | 0 | ok |  |
+| Buenos Aires | 5 | 0 | 0% | 0 | ok |  |
+| Chicago | 5 | 0 | 0% | 0 | ok |  |
+| Dallas | 5 | 0 | 0% | 0 | ok |  |
+| London | 5 | 0 | 0% | 0 | ok |  |
+| Lucknow | 5 | 0 | 0% | 0 | ok |  |
+| Miami | 5 | 0 | 0% | 0 | ok |  |
+| Munich | 5 | 0 | 0% | 0 | ok |  |
+| New York City | 5 | 0 | 0% | 0 | ok |  |
+| Paris | 5 | 0 | 0% | 0 | ok |  |
+| Sao Paulo | 5 | 0 | 0% | 0 | ok |  |
+| Seattle | 5 | 0 | 0% | 0 | ok |  |
+| Seoul | 5 | 0 | 0% | 0 | ok |  |
+| Shanghai | 5 | 0 | 0% | 0 | ok |  |
+| Singapore | 5 | 0 | 0% | 0 | ok |  |
+| Tel Aviv | 5 | 0 | 0% | 0 | ok |  |
+| Tokyo | 5 | 0 | 0% | 0 | ok |  |
+| Toronto | 5 | 0 | 0% | 0 | ok |  |
+| Wellington | 5 | 0 | 0% | 0 | ok |  |
 
 ## Calibration (112 keys)
 | City | ECMWF D+1 σ | GFS D+1 σ | Source | Samples |
