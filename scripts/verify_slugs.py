@@ -14,6 +14,9 @@ confirm the slug format manually.
 
 import sys
 import time
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
