@@ -25,18 +25,19 @@ def bucket_prob(forecast: float, t_low: float, t_high: float, sigma: float = 2.0
     """
     sigma = max(sigma, 0.01)   # guard against zero sigma
     if t_low == -999.0:
-        # "X or below" edge bucket — left tail
-        return norm_cdf((t_high - forecast) / sigma)
+        # "X or below" edge bucket — left tail.
+        # Polymarket resolves on whole degrees, so "53°F or below" covers up to 53.5
+        return norm_cdf((t_high + 0.5 - forecast) / sigma)
     if t_high == 999.0:
-        # "X or higher" edge bucket — right tail
-        return 1.0 - norm_cdf((t_low - forecast) / sigma)
-    # Single-degree bucket (e.g. "Will it be 20°C?"): t_low == t_high.
-    # Expand to [t - 0.5, t + 0.5] so the continuous model gives non-zero probability.
-    if t_low == t_high:
-        t_low = t_low - 0.5
-        t_high = t_high + 0.5
-    # Middle bucket — area under the bell curve between the two bounds
-    return norm_cdf((t_high - forecast) / sigma) - norm_cdf((t_low - forecast) / sigma)
+        # "X or higher" edge bucket — right tail.
+        # "72°F or higher" starts at 71.5 in continuous space
+        return 1.0 - norm_cdf((t_low - 0.5 - forecast) / sigma)
+    # Middle / single-degree bucket: expand by ±0.5 to account for integer resolution.
+    # "54-55°F" really covers readings that round to 54 or 55 → [53.5, 55.5].
+    # "20°C" really covers readings that round to 20 → [19.5, 20.5].
+    lo = t_low - 0.5
+    hi = t_high + 0.5
+    return norm_cdf((hi - forecast) / sigma) - norm_cdf((lo - forecast) / sigma)
 
 
 def calc_ev(p: float, price: float) -> float:
