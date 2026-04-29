@@ -1,29 +1,26 @@
 """
-Bootstrap sigma calibration from 90 days of historical data.
+Bootstrap sigma calibration from 90 days of ERA5 historical data.
 
-For each city and forecast source (ECMWF, GFS), fetches what the model
-predicted at D+1, D+2, and D+3 lag vs what actually happened at the airport.
-Computes MAE (mean absolute error) per (city, source, horizon) triplet and
-writes it to data/calibration.json in the same format the live calibrator uses.
+Uses a PERSISTENCE forecast as a proxy for NWP forecast error:
+  - D+1 "forecast" = today's actual temperature
+  - D+2 "forecast" = today's actual temperature
+  - etc.
+  - Error = |actual(day + H) - actual(day)|
 
-This lets the bot trade with real sigma values from day 1, instead of the
-hardcoded 2.0°F / 1.2°C fallback.
+Persistence consistently OVERESTIMATES NWP model error (ECMWF beats persistence
+by a wide margin), so the resulting sigma values are conservative:
+  → smaller Kelly bets → safer trading until real calibration kicks in.
+
+Uses ONLY the free Open-Meteo ERA5 archive API. No paid endpoints.
 
 Run ONCE on the personal machine before starting the bot:
     python research/bootstrap_sigma.py
 
-No API keys needed — Open-Meteo historical is free.
+No API keys needed — ERA5 archive (archive-api.open-meteo.com) is free.
 Requires: requests, python >= 3.10
 
-HOW THE LAG SIMULATION WORKS:
-  Open-Meteo's historical-forecast API lets you specify a `forecast_days`
-  parameter with a past `start_date`. For example, requesting 3-day forecasts
-  starting on 2025-01-01 gives you what the model *would have predicted* on
-  that day for Jan 1, Jan 2, and Jan 3. Comparing that to the actual (from the
-  reanalysis API) gives genuine forecast error at each horizon.
-
-  We iterate over 90 past days, treating each as the "issue date" and collecting
-  errors for the D+1, D+2, D+3 predictions issued on that day.
+Once 30+ trades resolve, the live calibrator (core/calibrator.py) will
+automatically replace these bootstrap values with real forecast errors.
 """
 
 import json
@@ -48,7 +45,6 @@ from core.storage import load_calibration, save_calibration
 LOOKBACK_DAYS = 90       # How many past days to analyze
 MIN_SAMPLES   = 20       # Minimum samples before writing a sigma value
 BACKOFF       = 0.5      # Seconds between API calls (Open-Meteo is free but polite)
-PROBE_DATES   = 5        # Consecutive None results before skipping a model/horizon combo
 
 # Horizons to calibrate.  D+0 is omitted — METAR handles D+0 live.
 HORIZONS = [1, 2, 3]
@@ -97,48 +93,24 @@ def fetch_actual(lat: float, lon: float, start: str, end: str,
     return result
 
 
-def fetch_historical_forecast(
-    lat: float, lon: float,
-    issue_date: str,
-    horizon: int,
-    unit: str,
-    tz: str,
-    model: str,
-) -> float | None:
+def compute_persistence_errors(actuals: dict[str, float], horizon: int) -> list[float]:
     """
-    What did `model` predict on `issue_date` for `issue_date + horizon days`?
-    Uses Open-Meteo's historical forecast API.
+    Compute forecast errors using persistence as a proxy for NWP.
 
-    The API accepts past start_date + forecast_days to reconstruct what was
-    predicted at that issue time.
-    Returns the predicted daily max temp or None.
+    Persistence forecast: "tomorrow will be the same as today."
+    Error at horizon H = |actual(day + H) - actual(day)|
+
+    This overestimates NWP error (ECMWF beats persistence), making sigma values
+    conservative. Bets will be smaller than optimal until the live calibrator
+    accumulates 30+ resolved trades and replaces these values.
     """
-    temp_unit = "fahrenheit" if unit == "F" else "celsius"
-    target_date = (date.fromisoformat(issue_date) + timedelta(days=horizon)).isoformat()
-    forecast_days = horizon + 1   # need enough days to reach target
-
-    try:
-        data = _get("https://historical-forecast-api.open-meteo.com/v1/forecast", {
-            "latitude":         lat,
-            "longitude":        lon,
-            "start_date":       issue_date,
-            "end_date":         issue_date,
-            "daily":            "temperature_2m_max",
-            "temperature_unit": temp_unit,
-            "timezone":         tz,
-            "models":           model,
-            "forecast_days":    forecast_days,
-        })
-    except Exception:
-        return None
-
-    for d, t in zip(
-        data.get("daily", {}).get("time", []),
-        data.get("daily", {}).get("temperature_2m_max", []),
-    ):
-        if d == target_date and t is not None:
-            return round(float(t), 1) if unit == "C" else round(float(t))
-    return None
+    errors: list[float] = []
+    for day_str, today_temp in sorted(actuals.items()):
+        target_str = (date.fromisoformat(day_str) + timedelta(days=horizon)).isoformat()
+        actual_target = actuals.get(target_str)
+        if actual_target is not None:
+            errors.append(abs(actual_target - today_temp))
+    return errors
 
 
 # ── Main calibration loop ─────────────────────────────────────────────────────
@@ -151,12 +123,6 @@ def bootstrap(cities: list[str] | None = None) -> None:
 
     target_cities = cities or list(LOCATIONS.keys())
     cal = load_calibration()
-
-    # model slug → calibration source name
-    model_map = {
-        "ecmwf_ifs025": "ecmwf",
-        "gfs_seamless":  "gfs",
-    }
 
     total_cities = len(target_cities)
     for ci, city_slug in enumerate(target_cities, 1):
@@ -180,67 +146,39 @@ def bootstrap(cities: list[str] | None = None) -> None:
             continue
         print(f"{len(actuals)} days")
 
-        for model_slug, source_name in model_map.items():
-            # GFS is US-only in reality, but we try it for all and skip if empty
-            for horizon in HORIZONS:
+        for horizon in HORIZONS:
+            errors = compute_persistence_errors(actuals, horizon)
+            print(f"  persistence D+{horizon}:", end=" ", flush=True)
+
+            if len(errors) < MIN_SAMPLES:
+                print(f"only {len(errors)} samples — skip")
+                continue
+
+            mae = round(sum(errors) / len(errors), 3)
+            # Convert MAE to std dev: for a normal distribution, σ = MAE × √(π/2) ≈ 1.2533
+            sigma = round(mae * 1.2533, 3)
+
+            # Write for both ecmwf and gfs (persistence is model-agnostic;
+            # live calibrator will refine these after 30+ real resolved trades)
+            for source_name in ("ecmwf", "gfs"):
                 key = f"{city_slug}_{source_name}_D+{horizon}"
-                errors: list[float] = []
-
-                print(f"  {source_name} D+{horizon}:", end=" ", flush=True)
-
-                # Iterate issue dates: for each past day, get the D+horizon forecast
-                issue = start_date
-                consecutive_none = 0
-                while issue <= end_date - timedelta(days=horizon):
-                    issue_str  = issue.isoformat()
-                    target_str = (issue + timedelta(days=horizon)).isoformat()
-                    actual     = actuals.get(target_str)
-                    if actual is None:
-                        issue += timedelta(days=1)
-                        continue
-
-                    pred = fetch_historical_forecast(
-                        loc.lat, loc.lon, issue_str, horizon,
-                        loc.unit, tz, model_slug,
-                    )
-                    if pred is not None:
-                        errors.append(abs(pred - actual))
-                        consecutive_none = 0
-                    else:
-                        consecutive_none += 1
-                        if consecutive_none >= PROBE_DATES and len(errors) == 0:
-                            print(f"no data after {PROBE_DATES} tries — skip")
-                            break
-
-                    time.sleep(0.2)   # polite to API
-                    issue += timedelta(days=1)
-
-                if len(errors) < MIN_SAMPLES:
-                    print(f"only {len(errors)} samples — skip")
-                    continue
-
-                mae = round(sum(errors) / len(errors), 3)
-                # Convert MAE to std dev: for a normal distribution, σ = MAE × √(π/2) ≈ 1.2533
-                sigma = round(mae * 1.2533, 3)
                 existing = cal.get(key, {})
                 old_sigma = existing.get("sigma", 0)
-
-                cal[key] = {
-                    "sigma":        sigma,
-                    "mae":          mae,
-                    "n":            len(errors),
-                    "source":       "bootstrap",
-                    "updated_at":   datetime.now(timezone.utc).isoformat(),
-                }
                 change = f" (was {old_sigma:.2f})" if old_sigma else " (new)"
-                print(f"MAE={mae:.2f}°{loc.unit} → σ={sigma:.2f}{change}")
+                cal[key] = {
+                    "sigma":      sigma,
+                    "mae":        mae,
+                    "n":          len(errors),
+                    "source":     "bootstrap_persistence",
+                    "updated_at": datetime.now(timezone.utc).isoformat(),
+                }
+            print(f"MAE={mae:.2f}°{loc.unit} → σ={sigma:.2f}{change}")
 
-        # Also write the flat (non-horizon) key so get_sigma() fallback works
-        # Use the D+1 ECMWF value as the generic sigma for this city
+        # Write flat ecmwf key (D+1 proxy) for get_sigma() fallback
         d1_key = f"{city_slug}_ecmwf_D+1"
         if d1_key in cal:
             flat_key = f"{city_slug}_ecmwf"
-            if flat_key not in cal or cal[flat_key].get("source") == "bootstrap":
+            if flat_key not in cal or cal[flat_key].get("source", "").startswith("bootstrap"):
                 cal[flat_key] = {**cal[d1_key], "horizon": "D+1_proxy"}
 
         save_calibration(cal)  # save after each city — safe to interrupt

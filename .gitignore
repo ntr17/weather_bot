@@ -178,13 +178,10 @@ cython_debug/
 # WeatherBot — transfer artifacts
 *.bundle
 
-# WeatherBot — runtime data (gitignore; keep .gitkeep placeholders)
-data/state.json
-data/state.json.bak
-data/calibration.json
-data/calibration.json.bak
-data/markets/*.json
+# WeatherBot — runtime data
+# state, calibration, markets, and trade log are tracked (no secrets in them)
 data/*.tmp
+data/*.bak
 
 # WeatherBot — machine-specific config (each machine keeps its own)
 config.json

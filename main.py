@@ -46,7 +46,7 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
     state = load_state(cfg.balance)
     new_pos = closed = resolved = 0
 
-    active_cities = TIER1_CITIES   # expand to all LOCATIONS keys in Phase 3
+    active_cities = TIER1_CITIES   # all 20 cities; add/remove in core/locations.py
 
     for city_slug in active_cities:
         loc = LOCATIONS[city_slug]

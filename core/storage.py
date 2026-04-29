@@ -9,7 +9,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-DATA_DIR = Path("data")
+DATA_DIR = Path(__file__).parent.parent / "data"
 MARKETS_DIR = DATA_DIR / "markets"
 STATE_FILE = DATA_DIR / "state.json"
 CALIBRATION_FILE = DATA_DIR / "calibration.json"

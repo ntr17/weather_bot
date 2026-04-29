@@ -74,6 +74,6 @@ TIMEZONES: dict[str, str] = {
     "wellington":   "Pacific/Auckland",
 }
 
-# All cities in the scanner. The bot skips gracefully if Polymarket has no
-# active temperature market for a city on a given day — zero risk from extras.
+# All cities scanned by the bot. Skips gracefully if Polymarket has no active
+# temperature market for a city on a given day — zero risk from extras.
 TIER1_CITIES: list[str] = list(LOCATIONS.keys())
