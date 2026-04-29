@@ -33,6 +33,7 @@ class Config:
     no_stop_loss_floor: float    # NO stop: close when NO bid drops below this absolute level
     trailing_activation: float   # trailing stop activates when price >= entry * this
     no_pyes_threshold: float     # only sell NO when p_yes < this
+    max_no_positions: int         # max simultaneous NO positions per market/event
     # Operational
     scan_interval: int
     monitor_interval: int
@@ -70,6 +71,7 @@ def load_config() -> Config:
         no_stop_loss_floor=float(raw.get("no_stop_loss_floor", 0.85)),
         trailing_activation=float(raw.get("trailing_activation", 1.20)),
         no_pyes_threshold=float(raw.get("no_pyes_threshold", 0.15)),
+        max_no_positions=int(raw.get("max_no_positions", 4)),
         scan_interval=int(raw.get("scan_interval", 3600)),
         monitor_interval=int(raw.get("monitor_interval", 600)),
         calibration_min=int(raw.get("calibration_min", 30)),

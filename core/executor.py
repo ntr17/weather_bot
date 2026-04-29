@@ -14,7 +14,7 @@ from core.config import Config
 from core.notifier import trade_closed, trade_opened
 from core.pricer import bet_size, calc_ev, calc_kelly, bucket_prob
 from core.scanner import Outcome, fetch_live_price
-from core.storage import save_market, save_state
+from core.storage import get_open_positions, save_market, save_state
 
 
 def try_open_position(
@@ -118,7 +118,8 @@ def try_open_position(
         "pnl":                None,
     }
 
-    updated_mkt = {**mkt, "position": position}
+    new_positions = {**mkt.get("positions", {}), outcome.market_id: position}
+    updated_mkt = {**mkt, "positions": new_positions}
     updated_state = {
         **state,
         "balance":      round(state["balance"] - real_size, 2),
@@ -237,7 +238,8 @@ def try_open_no_position(
         "pnl":                None,
     }
 
-    updated_mkt = {**mkt, "position": position}
+    new_positions = {**mkt.get("positions", {}), outcome.market_id: position}
+    updated_mkt = {**mkt, "positions": new_positions}
     updated_state = {
         **state,
         "balance":      round(state["balance"] - real_size, 2),
@@ -259,12 +261,25 @@ def close_position(
     exit_price: float,
     reason: str,
     state: dict[str, Any],
+    position_id: str | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """
     Close an open position and update balance + market record.
+    If position_id is given, close that specific position from positions dict.
     Returns (updated_market, updated_state).
     """
-    pos = mkt["position"]
+    positions = mkt.get("positions", {})
+    if position_id and position_id in positions:
+        pos = positions[position_id]
+    elif position_id is None and positions:
+        # Close first open position (backward compat)
+        open_pos = {k: v for k, v in positions.items() if v.get("status") == "open"}
+        if not open_pos:
+            return mkt, state
+        position_id, pos = next(iter(open_pos.items()))
+    else:
+        return mkt, state
+
     pnl = round((exit_price - pos["entry_price"]) * pos["shares"], 2)
     now = datetime.now(timezone.utc).isoformat()
 
@@ -291,7 +306,8 @@ def close_position(
         "closed_at":    now,
         "status":       "closed",
     }
-    updated_mkt = {**mkt, "position": updated_pos}
+    updated_positions = {**positions, position_id: updated_pos}
+    updated_mkt = {**mkt, "positions": updated_positions}
     updated_state = {
         **state,
         "balance": round(state["balance"] + pos["cost"] + pnl, 2),

@@ -31,6 +31,8 @@ from core.storage import (
     append_run_log,
     ensure_dirs,
     get_city_health,
+    get_open_positions,
+    has_any_open,
     load_all_markets,
     load_calibration,
     load_market,
@@ -137,17 +139,20 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
                     "model_spread": snap.model_spread,
                 })
 
-            # ── Monitor existing position ────────────────────────────────────
-            if mkt.get("position") and mkt["position"].get("status") == "open":
+            # ── Monitor existing positions ───────────────────────────────────
+            open_positions = get_open_positions(mkt)
+            for pos_id, pos in list(open_positions.items()):
                 # 1. Resolution check
-                mkt, state, did_resolve = check_resolution(mkt, state, cfg.vc_key)
+                mkt, state, did_resolve = check_resolution(mkt, state, cfg.vc_key, pos_id)
                 if did_resolve:
                     resolved += 1
                     city_resolved += 1
                     continue
 
                 # 2. Stop / take-profit
-                mkt, state, did_close = check_stops_and_tp(mkt, state, cfg.trailing_activation)
+                mkt, state, did_close = check_stops_and_tp(
+                    mkt, state, cfg.trailing_activation, pos_id
+                )
                 if did_close:
                     closed += 1
                     city_closed += 1
@@ -156,26 +161,26 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
                 # 3. Forecast change exit
                 if forecast_temp is not None:
                     mkt, state, did_close = check_forecast_change(
-                        mkt, state, forecast_temp, loc.unit
+                        mkt, state, forecast_temp, loc.unit, pos_id
                     )
                     if did_close:
                         closed += 1
                         city_closed += 1
                         continue
 
-            # ── Open new position ────────────────────────────────────────────
-            has_open_pos = (
-                mkt.get("position") and mkt["position"].get("status") == "open"
-            )
+            # ── Open new positions ────────────────────────────────────────────
             if (
-                not has_open_pos
-                and forecast_temp is not None
+                forecast_temp is not None
                 and hours >= cfg.min_hours
                 and not dry_run
             ):
-                # Clear closed/resolved position to allow re-entry
-                if mkt.get("position") and mkt["position"].get("status") != "open":
-                    mkt = {**mkt, "position": None}
+                # Clear closed/resolved positions to allow re-entry
+                positions = mkt.get("positions", {})
+                positions = {
+                    k: v for k, v in positions.items()
+                    if v.get("status") == "open"
+                }
+                mkt = {**mkt, "positions": positions}
 
                 # When ensemble is used, look up ECMWF sigma (the calibrated base model)
                 # then inflate by model spread: σ_eff = √(σ² + (spread/2)²)
@@ -185,37 +190,46 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
                     sigma = round(math.sqrt(sigma ** 2 + (snap.model_spread / 2.0) ** 2), 3)
                 src = forecast_source or "ecmwf"
 
+                # Already-open bucket IDs — don't double-bet same bucket
+                open_bucket_ids = set(get_open_positions(mkt).keys())
+
                 # 1. Try YES on the bucket that matches the forecast
                 matched = next(
                     (o for o in outcomes
                      if in_bucket(forecast_temp, o.t_low, o.t_high)),
                     None,
                 )
-                if matched:
+                if matched and matched.market_id not in open_bucket_ids:
                     mkt, state, did_open = try_open_position(
                         mkt, matched, forecast_temp, src, sigma, state, cfg,
                     )
                     if did_open:
                         new_pos += 1
                         city_new += 1
+                        open_bucket_ids.add(matched.market_id)
 
-                # 2. If no YES opened, try NO on the most overpriced other bucket
-                has_open_now = (
-                    mkt.get("position") and mkt["position"].get("status") == "open"
+                # 2. Try NO on ALL tail buckets (multi-NO strategy)
+                # Cap to max_no_positions per event
+                current_no_count = sum(
+                    1 for p in get_open_positions(mkt).values()
+                    if p.get("side") == "no"
                 )
-                if not has_open_now:
-                    other_outcomes = [
-                        o for o in outcomes
-                        if not in_bucket(forecast_temp, o.t_low, o.t_high)
-                    ]
-                    for o in other_outcomes:
-                        mkt, state, did_open = try_open_no_position(
-                            mkt, o, forecast_temp, src, sigma, state, cfg,
-                        )
-                        if did_open:
-                            new_pos += 1
-                            city_new += 1
-                            break
+                other_outcomes = [
+                    o for o in outcomes
+                    if not in_bucket(forecast_temp, o.t_low, o.t_high)
+                    and o.market_id not in open_bucket_ids
+                ]
+                for o in other_outcomes:
+                    if current_no_count >= cfg.max_no_positions:
+                        break
+                    mkt, state, did_open = try_open_no_position(
+                        mkt, o, forecast_temp, src, sigma, state, cfg,
+                    )
+                    if did_open:
+                        new_pos += 1
+                        city_new += 1
+                        open_bucket_ids.add(o.market_id)
+                        current_no_count += 1
 
             # Mark as closed by time
             if hours < 0.5 and mkt["status"] == "open":
@@ -242,17 +256,15 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
 def monitor_loop(cfg, calibration: dict) -> None:
     """Quick stop/TP check between full scans (runs every 10 min)."""
     all_mkts = load_all_markets()
-    open_mkts = [
-        m for m in all_mkts
-        if m.get("position") and m["position"].get("status") == "open"
-    ]
+    open_mkts = [m for m in all_mkts if has_any_open(m)]
     if not open_mkts:
         return
 
     state = load_state(cfg.balance)
     for mkt in open_mkts:
-        mkt, state, _ = check_stops_and_tp(mkt, state, cfg.trailing_activation)
-        mkt, state, _ = check_resolution(mkt, state, cfg.vc_key)
+        for pos_id in list(get_open_positions(mkt).keys()):
+            mkt, state, _ = check_stops_and_tp(mkt, state, cfg.trailing_activation, pos_id)
+            mkt, state, _ = check_resolution(mkt, state, cfg.vc_key, pos_id)
     save_state(state)
 
 
@@ -346,7 +358,7 @@ def print_status() -> None:
     state = load_state(cfg.balance)
     all_mkts = load_all_markets()
 
-    open_pos = [m for m in all_mkts if m.get("position") and m["position"].get("status") == "open"]
+    open_pos = [m for m in all_mkts if has_any_open(m)]
     resolved = [m for m in all_mkts if m.get("status") == "resolved"]
 
     bal = state["balance"]
@@ -369,12 +381,13 @@ def print_status() -> None:
     if open_pos:
         print(f"\n  Open positions:")
         for m in open_pos:
-            pos = m["position"]
-            unit = m.get("unit", "F")
-            label = f"{pos['bucket_low']:.0f}–{pos['bucket_high']:.0f}°{unit}"
-            src = pos.get("forecast_source", "?").upper()
-            print(f"    {m['city_name']:<16} {m['date']} | {label:<14} | "
-                  f"entry ${pos['entry_price']:.3f} | {src}")
+            for pos in get_open_positions(m).values():
+                unit = m.get("unit", "F")
+                label = f"{pos['bucket_low']:.0f}–{pos['bucket_high']:.0f}°{unit}"
+                src = pos.get("forecast_source", "?").upper()
+                side = pos.get("side", "yes").upper()
+                print(f"    {m['city_name']:<16} {m['date']} | {side} {label:<14} | "
+                      f"entry ${pos['entry_price']:.3f} | {src}")
     print(f"{'='*55}\n")
 
 
@@ -407,7 +420,9 @@ def print_report() -> None:
 
     print(f"\n  Trades:")
     for m in sorted(resolved, key=lambda x: x["date"]):
-        pos = m.get("position", {}) or {}
+        # Get first position from positions dict (legacy compat)
+        positions = m.get("positions", {})
+        pos = next(iter(positions.values()), {}) if positions else {}
         snaps = m.get("forecast_snapshots", [])
         fc = snaps[-1].get("best") if snaps else None
         unit = m.get("unit", "F")

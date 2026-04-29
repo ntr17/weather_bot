@@ -209,13 +209,39 @@ def save_state(state: dict[str, Any]) -> None:
 
 # ── Per-market records ────────────────────────────────────────────────────────
 
+def _migrate_positions(mkt: dict[str, Any]) -> dict[str, Any]:
+    """Convert legacy single-position market to multi-positions dict."""
+    if "positions" in mkt:
+        return mkt
+    old_pos = mkt.pop("position", None)
+    mkt["positions"] = {}
+    if old_pos and old_pos.get("market_id"):
+        mkt["positions"][old_pos["market_id"]] = old_pos
+    return mkt
+
+
+def get_open_positions(mkt: dict[str, Any]) -> dict[str, dict]:
+    """Return {market_id: pos} for all open positions in this market."""
+    return {
+        mid: pos for mid, pos in mkt.get("positions", {}).items()
+        if pos.get("status") == "open"
+    }
+
+
+def has_any_open(mkt: dict[str, Any]) -> bool:
+    """True if the market has at least one open position."""
+    return bool(get_open_positions(mkt))
+
+
 def load_market(city_slug: str, date_str: str) -> dict[str, Any] | None:
     conn = _get_conn()
     row = conn.execute(
         "SELECT json_data FROM markets WHERE city = ? AND date = ?",
         (city_slug, date_str),
     ).fetchone()
-    return json.loads(row["json_data"]) if row else None
+    if not row:
+        return None
+    return _migrate_positions(json.loads(row["json_data"]))
 
 
 def save_market(market: dict[str, Any]) -> None:
@@ -231,7 +257,7 @@ def save_market(market: dict[str, Any]) -> None:
 def load_all_markets() -> list[dict[str, Any]]:
     conn = _get_conn()
     rows = conn.execute("SELECT json_data FROM markets").fetchall()
-    return [json.loads(r["json_data"]) for r in rows]
+    return [_migrate_positions(json.loads(r["json_data"])) for r in rows]
 
 
 def load_markets_by_status(status: str) -> list[dict[str, Any]]:
@@ -240,7 +266,7 @@ def load_markets_by_status(status: str) -> list[dict[str, Any]]:
     rows = conn.execute(
         "SELECT json_data FROM markets WHERE status = ?", (status,)
     ).fetchall()
-    return [json.loads(r["json_data"]) for r in rows]
+    return [_migrate_positions(json.loads(r["json_data"])) for r in rows]
 
 
 def new_market(
@@ -261,7 +287,7 @@ def new_market(
         "event_end_date":     end_date,
         "hours_at_discovery": round(hours_at_discovery, 1),
         "status":             "open",
-        "position":           None,
+        "positions":          {},
         "actual_temp":        None,
         "resolved_outcome":   None,
         "pnl":                None,
@@ -295,9 +321,11 @@ def save_calibration(cal: dict[str, Any]) -> None:
 
 # ── Trade log (replaces trade_log.py / paper_trades.jsonl) ────────────────────
 
-def append_trade(mkt: dict[str, Any]) -> None:
-    """Append one resolved market to the trades table."""
-    pos = mkt.get("position")
+def append_trade(mkt: dict[str, Any], pos: dict[str, Any] | None = None) -> None:
+    """Append one resolved trade to the trades table."""
+    if pos is None:
+        # Legacy: try single position key
+        pos = mkt.get("position")
     if not pos:
         return
 

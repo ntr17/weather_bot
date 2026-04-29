@@ -11,6 +11,8 @@ from pathlib import Path
 from core.locations import LOCATIONS, TIER1_CITIES
 from core.storage import (
     get_city_health,
+    get_open_positions,
+    has_any_open,
     load_all_markets,
     load_calibration,
     load_state,
@@ -29,7 +31,7 @@ def generate_status(cfg) -> str:
     cal = load_calibration()
     health = get_city_health(lookback=20)
 
-    open_pos = [m for m in all_mkts if m.get("position") and m["position"].get("status") == "open"]
+    open_pos = [m for m in all_mkts if has_any_open(m)]
     resolved = [m for m in all_mkts if m.get("status") == "resolved"]
 
     bal = state["balance"]
@@ -61,18 +63,20 @@ def generate_status(cfg) -> str:
 
     # ── Open Positions ───────────────────────────────────────────────────────
     if open_pos:
-        lines.append(f"## Open Positions ({len(open_pos)})")
+        # Count total open positions across all markets
+        total_open = sum(len(get_open_positions(m)) for m in open_pos)
+        lines.append(f"## Open Positions ({total_open})")
         lines.append(f"| City | Date | Bucket | Side | Entry | Source | Horizon |")
         lines.append(f"|------|------|--------|------|-------|--------|---------|")
         for m in sorted(open_pos, key=lambda x: x["date"]):
-            pos = m["position"]
-            unit = m.get("unit", "F")
-            bucket = f"{pos['bucket_low']:.0f}–{pos['bucket_high']:.0f}°{unit}"
-            side = pos.get("side", "yes").upper()
-            src = pos.get("forecast_source", "?").upper()
-            hz = m.get("current_horizon", "?")
-            lines.append(f"| {m['city_name']} | {m['date']} | {bucket} | {side} | "
-                         f"${pos['entry_price']:.3f} | {src} | {hz} |")
+            for pos in get_open_positions(m).values():
+                unit = m.get("unit", "F")
+                bucket = f"{pos['bucket_low']:.0f}–{pos['bucket_high']:.0f}°{unit}"
+                side = pos.get("side", "yes").upper()
+                src = pos.get("forecast_source", "?").upper()
+                hz = m.get("current_horizon", "?")
+                lines.append(f"| {m['city_name']} | {m['date']} | {bucket} | {side} | "
+                             f"${pos['entry_price']:.3f} | {src} | {hz} |")
         lines.append("")
 
     # ── Recent Trades ────────────────────────────────────────────────────────

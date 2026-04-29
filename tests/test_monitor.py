@@ -1,4 +1,4 @@
-"""
+﻿"""
 Tests for core/monitor.py — check_forecast_change and check_stops_and_tp.
 
 All external I/O (fetch_live_price, close_position, save_market) is mocked.
@@ -35,6 +35,31 @@ def _mkt(
 ) -> dict:
     if stop_price is None:
         stop_price = round(entry_price * 0.80, 4)
+    pos = {
+        "market_id":          "mkt-001",
+        "question":           "Will NYC be 70-73°F?",
+        "bucket_low":         bucket_low,
+        "bucket_high":        bucket_high,
+        "entry_price":        entry_price,
+        "bid_at_entry":       round(entry_price - 0.02, 4),
+        "spread":             0.02,
+        "shares":             shares,
+        "cost":               cost,
+        "p":                  0.50,
+        "ev":                 0.20,
+        "kelly":              0.25,
+        "forecast_temp":      71.5,
+        "forecast_source":    "ecmwf",
+        "sigma":              1.0,
+        "stop_price":         stop_price,
+        "trailing_activated": trailing_activated,
+        "opened_at":          "2025-05-01T10:00:00+00:00",
+        "status":             "open",
+        "exit_price":         None,
+        "close_reason":       None,
+        "closed_at":          None,
+        "pnl":                None,
+    }
     return {
         "city":             "nyc",
         "city_name":        "New York City",
@@ -44,39 +69,18 @@ def _mkt(
         "event_end_date":   event_end_date,
         "all_outcomes":     [],
         "forecast_snapshots": [],
-        "position": {
-            "market_id":          "mkt-001",
-            "question":           "Will NYC be 70-73°F?",
-            "bucket_low":         bucket_low,
-            "bucket_high":        bucket_high,
-            "entry_price":        entry_price,
-            "bid_at_entry":       round(entry_price - 0.02, 4),
-            "spread":             0.02,
-            "shares":             shares,
-            "cost":               cost,
-            "p":                  0.50,
-            "ev":                 0.20,
-            "kelly":              0.25,
-            "forecast_temp":      71.5,
-            "forecast_source":    "ecmwf",
-            "sigma":              1.0,
-            "stop_price":         stop_price,
-            "trailing_activated": trailing_activated,
-            "opened_at":          "2025-05-01T10:00:00+00:00",
-            "status":             "open",
-            "exit_price":         None,
-            "close_reason":       None,
-            "closed_at":          None,
-            "pnl":                None,
-        },
+        "positions": {"mkt-001": pos},
     }
 
 
-def _fake_close(mkt, exit_price, reason, state):
+def _fake_close(mkt, exit_price, reason, state, position_id=None):
     """Minimal close_position stand-in used by monitor tests."""
-    updated_pos = {**mkt["position"], "status": "closed",
+    pos_id = position_id or "mkt-001"
+    pos = mkt["positions"][pos_id]
+    updated_pos = {**pos, "status": "closed",
                    "exit_price": exit_price, "close_reason": reason, "pnl": 0.0}
-    return {**mkt, "position": updated_pos}, state
+    updated_positions = {**mkt["positions"], pos_id: updated_pos}
+    return {**mkt, "positions": updated_positions}, state
 
 
 # ── check_forecast_change ──────────────────────────────────────────────────────
@@ -207,7 +211,7 @@ class TestCheckStopsAndTp:
         with patch("core.monitor.fetch_live_price", return_value=(0.20, 0.22)):
             _, _, did_close = check_stops_and_tp(mkt, _state())
         assert did_close
-        _, call_exit, call_reason, _ = mock_close.call_args[0]
+        _, call_exit, call_reason, _, _ = mock_close.call_args[0]
         assert call_exit == 0.20
         assert call_reason == "stop_loss"
 
@@ -222,8 +226,8 @@ class TestCheckStopsAndTp:
         # Trailing activates but price is above new stop (entry=0.30) → no close
         assert not did_close
         mock_sm.assert_called_once()
-        assert updated_mkt["position"]["trailing_activated"] is True
-        assert updated_mkt["position"]["stop_price"] == pytest.approx(entry, abs=0.0001)
+        assert updated_mkt["positions"]["mkt-001"]["trailing_activated"] is True
+        assert updated_mkt["positions"]["mkt-001"]["stop_price"] == pytest.approx(entry, abs=0.0001)
 
     @patch("core.monitor.close_position", side_effect=_fake_close)
     def test_take_profit_triggered_far_from_resolution(self, mock_close):
@@ -232,7 +236,7 @@ class TestCheckStopsAndTp:
         with patch("core.monitor.fetch_live_price", return_value=(0.76, 0.78)):
             _, _, did_close = check_stops_and_tp(mkt, _state())
         assert did_close
-        _, call_exit, call_reason, _ = mock_close.call_args[0]
+        _, call_exit, call_reason, _, _ = mock_close.call_args[0]
         assert call_reason == "take_profit"
 
     @patch("core.monitor.close_position", side_effect=_fake_close)
@@ -270,7 +274,7 @@ class TestCheckStopsAndTp:
         with patch("core.monitor.fetch_live_price", return_value=(entry, entry + 0.01)):
             _, _, did_close = check_stops_and_tp(mkt, _state())
         assert did_close
-        _, call_exit, call_reason, _ = mock_close.call_args[0]
+        _, call_exit, call_reason, _, _ = mock_close.call_args[0]
         assert call_reason == "trailing_stop"
 
 
@@ -284,6 +288,32 @@ def _no_mkt(
     cost: float = 19.0,
 ) -> dict:
     """Market record with an open NO position."""
+    pos = {
+        "market_id":          "mkt-no-001",
+        "question":           "Will NYC be 80-83°F?",
+        "side":               "no",
+        "bucket_low":         bucket_low,
+        "bucket_high":        bucket_high,
+        "entry_price":        entry_price,
+        "bid_at_entry":       round(1.0 - 0.64, 4),
+        "spread":             0.02,
+        "shares":             shares,
+        "cost":               cost,
+        "p":                  1.0,
+        "ev":                 1.63,
+        "kelly":              0.25,
+        "forecast_temp":      72.0,
+        "forecast_source":    "ecmwf",
+        "sigma":              1.0,
+        "stop_price":         round(entry_price * 0.80, 4),
+        "trailing_activated": False,
+        "opened_at":          "2025-05-01T10:00:00+00:00",
+        "status":             "open",
+        "exit_price":         None,
+        "close_reason":       None,
+        "closed_at":          None,
+        "pnl":                None,
+    }
     return {
         "city":             "nyc",
         "city_name":        "New York City",
@@ -293,32 +323,7 @@ def _no_mkt(
         "event_end_date":   "2099-01-01T00:00:00Z",
         "all_outcomes":     [],
         "forecast_snapshots": [],
-        "position": {
-            "market_id":          "mkt-no-001",
-            "question":           "Will NYC be 80-83°F?",
-            "side":               "no",
-            "bucket_low":         bucket_low,
-            "bucket_high":        bucket_high,
-            "entry_price":        entry_price,
-            "bid_at_entry":       round(1.0 - 0.64, 4),
-            "spread":             0.02,
-            "shares":             shares,
-            "cost":               cost,
-            "p":                  1.0,
-            "ev":                 1.63,
-            "kelly":              0.25,
-            "forecast_temp":      72.0,
-            "forecast_source":    "ecmwf",
-            "sigma":              1.0,
-            "stop_price":         round(entry_price * 0.80, 4),
-            "trailing_activated": False,
-            "opened_at":          "2025-05-01T10:00:00+00:00",
-            "status":             "open",
-            "exit_price":         None,
-            "close_reason":       None,
-            "closed_at":          None,
-            "pnl":                None,
-        },
+        "positions": {"mkt-no-001": pos},
     }
 
 
@@ -338,7 +343,7 @@ class TestNoSideMonitor:
             with patch("core.monitor.close_position", side_effect=_fake_close) as mc:
                 _, _, did_close = check_stops_and_tp(mkt, _state())
         assert did_close
-        _, call_exit, call_reason, _ = mc.call_args[0]
+        _, call_exit, call_reason, _, _ = mc.call_args[0]
         assert call_exit == pytest.approx(0.30, abs=0.001)
         assert call_reason == "stop_loss"
 
@@ -350,7 +355,7 @@ class TestNoSideMonitor:
             with patch("core.monitor.close_position", side_effect=_fake_close) as mc:
                 _, _, did_close = check_stops_and_tp(mkt, _state())
         assert did_close
-        _, call_exit, call_reason, _ = mc.call_args[0]
+        _, call_exit, call_reason, _, _ = mc.call_args[0]
         assert call_reason == "take_profit"
 
     def test_no_no_action_when_price_mid_range(self):
@@ -391,7 +396,7 @@ class TestNoSideMonitor:
              patch("core.monitor.close_position", side_effect=_fake_close) as mc:
             _, updated_state, did_resolve = check_resolution(mkt, _state(), "key")
         assert did_resolve
-        _, call_exit, call_reason, _ = mc.call_args[0]
+        _, call_exit, call_reason, _, _ = mc.call_args[0]
         assert call_exit == 1.0
         assert call_reason == "resolved_win"
 
@@ -406,6 +411,6 @@ class TestNoSideMonitor:
              patch("core.monitor.close_position", side_effect=_fake_close) as mc:
             _, updated_state, did_resolve = check_resolution(mkt, _state(), "key")
         assert did_resolve
-        _, call_exit, call_reason, _ = mc.call_args[0]
+        _, call_exit, call_reason, _, _ = mc.call_args[0]
         assert call_exit == 0.0
         assert call_reason == "resolved_loss"

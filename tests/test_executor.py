@@ -1,5 +1,5 @@
-"""
-Tests for core/executor.py — close_position, try_open_position, try_open_no_position.
+﻿"""
+Tests for core/executor.py â€” close_position, try_open_position, try_open_no_position.
 
 All external I/O (save_market, save_state, fetch_live_price) is mocked.
 """
@@ -12,7 +12,7 @@ from core.executor import close_position, try_open_no_position, try_open_positio
 from core.scanner import Outcome
 
 
-# ── Helpers ───────────────────────────────────────────────────────────────────
+# â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def _state(balance: float = 10_000.0, total_trades: int = 0) -> dict:
     return {
@@ -31,6 +31,31 @@ def _mkt(
     cost: float = 20.0,
     stop_price: float = 0.24,
 ) -> dict:
+    pos = {
+        "market_id":          "mkt-001",
+        "question":           "Will NYC be 70-71Â°F?",
+        "bucket_low":         70.0,
+        "bucket_high":        71.0,
+        "entry_price":        entry_price,
+        "bid_at_entry":       round(entry_price - 0.02, 4),
+        "spread":             0.02,
+        "shares":             shares,
+        "cost":               cost,
+        "p":                  0.45,
+        "ev":                 0.15,
+        "kelly":              0.25,
+        "forecast_temp":      70.5,
+        "forecast_source":    "ecmwf",
+        "sigma":              3.0,
+        "stop_price":         stop_price,
+        "trailing_activated": False,
+        "opened_at":          "2025-05-01T10:00:00+00:00",
+        "status":             "open",
+        "exit_price":         None,
+        "close_reason":       None,
+        "closed_at":          None,
+        "pnl":                None,
+    }
     return {
         "city":             "nyc",
         "city_name":        "New York City",
@@ -41,31 +66,7 @@ def _mkt(
         "event_end_date":   "2025-05-02T00:00:00Z",
         "all_outcomes":     [],
         "forecast_snapshots": [],
-        "position": {
-            "market_id":          "mkt-001",
-            "question":           "Will NYC be 70-71°F?",
-            "bucket_low":         70.0,
-            "bucket_high":        71.0,
-            "entry_price":        entry_price,
-            "bid_at_entry":       round(entry_price - 0.02, 4),
-            "spread":             0.02,
-            "shares":             shares,
-            "cost":               cost,
-            "p":                  0.45,
-            "ev":                 0.15,
-            "kelly":              0.25,
-            "forecast_temp":      70.5,
-            "forecast_source":    "ecmwf",
-            "sigma":              3.0,
-            "stop_price":         stop_price,
-            "trailing_activated": False,
-            "opened_at":          "2025-05-01T10:00:00+00:00",
-            "status":             "open",
-            "exit_price":         None,
-            "close_reason":       None,
-            "closed_at":          None,
-            "pnl":                None,
-        },
+        "positions": {"mkt-001": pos},
     }
 
 
@@ -85,6 +86,7 @@ def _cfg(**overrides) -> Config:
         no_stop_loss_floor=0.85,
         trailing_activation=1.20,
         no_pyes_threshold=0.15,
+        max_no_positions=4,
         scan_interval=3600,
         monitor_interval=600,
         calibration_min=20,
@@ -99,13 +101,13 @@ def _cfg(**overrides) -> Config:
 
 def _outcome(**overrides) -> Outcome:
     """
-    Baseline outcome: EV positive (p≈0.38 from sigma=1.0, ask=0.15).
+    Baseline outcome: EV positive (pâ‰ˆ0.38 from sigma=1.0, ask=0.15).
     bucket (70, 73), forecast 72, sigma 1.0:
-      bucket_prob ≈ Phi((73-72)/1) - Phi((70-72)/1) ≈ 0.841 - 0.023 = 0.818
+      bucket_prob â‰ˆ Phi((73-72)/1) - Phi((70-72)/1) â‰ˆ 0.841 - 0.023 = 0.818
       EV = 0.818 - 0.15 = 0.668 >> 0.10
     """
     defaults = dict(
-        question="Will NYC be 70-73°F?",
+        question="Will NYC be 70-73Â°F?",
         market_id="mkt-002",
         t_low=70.0,
         t_high=73.0,
@@ -118,7 +120,7 @@ def _outcome(**overrides) -> Outcome:
     return Outcome(**defaults)
 
 
-# ── close_position ─────────────────────────────────────────────────────────────
+# â”€â”€ close_position â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class TestClosePosition:
 
@@ -130,7 +132,7 @@ class TestClosePosition:
 
         updated_mkt, _ = close_position(mkt, 1.0, "resolved_win", state)
 
-        pos = updated_mkt["position"]
+        pos = updated_mkt["positions"]["mkt-001"]
         # (1.0 - 0.30) * 66.6667 = 46.67
         assert pos["pnl"] == pytest.approx(46.67, abs=0.01)
         assert pos["exit_price"] == 1.0
@@ -146,7 +148,7 @@ class TestClosePosition:
         updated_mkt, _ = close_position(mkt, 0.0, "resolved_loss", state)
 
         # (0.0 - 0.30) * 66.6667 = -20.0
-        assert updated_mkt["position"]["pnl"] == pytest.approx(-20.0, abs=0.01)
+        assert updated_mkt["positions"]["mkt-001"]["pnl"] == pytest.approx(-20.0, abs=0.01)
 
     @patch("core.executor.save_state")
     @patch("core.executor.save_market")
@@ -179,7 +181,7 @@ class TestClosePosition:
         updated_mkt, updated_state = close_position(mkt, 0.75, "take_profit", state)
 
         # (0.75 - 0.30) * 100 = 45.0
-        assert updated_mkt["position"]["pnl"] == pytest.approx(45.0, abs=0.01)
+        assert updated_mkt["positions"]["mkt-001"]["pnl"] == pytest.approx(45.0, abs=0.01)
         # balance + cost + pnl = 9970 + 30 + 45 = 10045
         assert updated_state["balance"] == pytest.approx(10_045.0, abs=0.01)
 
@@ -199,11 +201,11 @@ class TestClosePosition:
 
         _, updated_state = close_position(mkt, 1.0, "resolved_win", state)
 
-        # balance after win = 9970 + 30 + 70 = 10070 — above old peak
+        # balance after win = 9970 + 30 + 70 = 10070 â€” above old peak
         assert updated_state["peak_balance"] >= 10_070.0
 
 
-# ── try_open_position ──────────────────────────────────────────────────────────
+# â”€â”€ try_open_position â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class TestTryOpenPosition:
 
@@ -231,7 +233,7 @@ class TestTryOpenPosition:
             )
 
     def test_rejects_below_min_ev(self):
-        # ask=0.80 with p≈0.82 → EV = 0.02 < 0.10
+        # ask=0.80 with pâ‰ˆ0.82 â†’ EV = 0.02 < 0.10
         outcome = _outcome(ask=0.80, bid=0.78, spread=0.02)
         _, _, opened = self._run(outcome=outcome)
         assert not opened
@@ -281,7 +283,7 @@ class TestTryOpenPosition:
     def test_position_fields_recorded(self):
         updated_mkt, _, opened = self._run(forecast_temp=72.0, sigma=1.0)
         assert opened
-        pos = updated_mkt["position"]
+        pos = updated_mkt["positions"]["mkt-002"]
         assert pos["bucket_low"] == 70.0
         assert pos["bucket_high"] == 73.0
         assert pos["status"] == "open"
@@ -291,7 +293,7 @@ class TestTryOpenPosition:
         assert pos["stop_price"] == pytest.approx(0.15 * 0.80, abs=0.001)
 
     def test_no_live_price_falls_back_to_snapshot(self):
-        """When fetch_live_price returns None, uses snapshot ask — still may open."""
+        """When fetch_live_price returns None, uses snapshot ask â€” still may open."""
         outcome = _outcome()
         state = _state()
         mkt = {
@@ -306,7 +308,7 @@ class TestTryOpenPosition:
             _, _, opened = try_open_position(
                 mkt, outcome, 72.0, "ecmwf", 1.0, state, _cfg()
             )
-        # Falls back to snapshot bid/ask — same values, so should open
+        # Falls back to snapshot bid/ask â€” same values, so should open
         assert opened
 
     @patch("core.executor.save_state")
@@ -325,25 +327,25 @@ class TestTryOpenPosition:
                 mkt, outcome, 72.0, "ecmwf", 1.0, _state(), _cfg()
             )
         assert opened
-        assert updated_mkt["position"]["side"] == "yes"
+        assert updated_mkt["positions"]["mkt-002"]["side"] == "yes"
 
 
-# ── try_open_no_position ───────────────────────────────────────────────────────
+# â”€â”€ try_open_no_position â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class TestTryOpenNoPosition:
     """
     Baseline NO scenario:
-      Forecast = 72°F, bucket = 80–83°F (far away → p_yes = 0, p_no = 1)
-      YES_bid = 0.62 → NO_ask = 1 - 0.62 = 0.38 < max_price=0.45
+      Forecast = 72Â°F, bucket = 80â€“83Â°F (far away â†’ p_yes = 0, p_no = 1)
+      YES_bid = 0.62 â†’ NO_ask = 1 - 0.62 = 0.38 < max_price=0.45
       EV_no = 1.0 * (1/0.38 - 1) - 0 = 1.63 >> min_ev=0.10
     """
 
     _NO_OUTCOME = dict(
-        question="Will NYC be 80-83°F?",
+        question="Will NYC be 80-83Â°F?",
         market_id="mkt-no-001",
         t_low=80.0,
         t_high=83.0,
-        bid=0.62,   # YES_bid high → market overpricing this bucket
+        bid=0.62,   # YES_bid high â†’ market overpricing this bucket
         ask=0.64,
         spread=0.02,
         volume=1000.0,
@@ -375,13 +377,13 @@ class TestTryOpenNoPosition:
     def test_side_is_no(self):
         updated_mkt, _, opened = self._run()
         assert opened
-        assert updated_mkt["position"]["side"] == "no"
+        assert updated_mkt["positions"]["mkt-no-001"]["side"] == "no"
 
     def test_entry_price_is_one_minus_yes_bid(self):
-        # live YES_bid = 0.62 → NO_ask = 0.38
+        # live YES_bid = 0.62 â†’ NO_ask = 0.38
         updated_mkt, _, opened = self._run(live_price=(0.62, 0.64))
         assert opened
-        assert updated_mkt["position"]["entry_price"] == pytest.approx(0.38, abs=0.001)
+        assert updated_mkt["positions"]["mkt-no-001"]["entry_price"] == pytest.approx(0.38, abs=0.001)
 
     def test_balance_debited(self):
         _, updated_state, opened = self._run()
@@ -389,12 +391,12 @@ class TestTryOpenNoPosition:
         assert updated_state["balance"] < 10_000.0
 
     def test_rejects_when_p_yes_above_threshold(self):
-        # Forecast 81°F — squarely in 80-83 bucket → p_yes=1.0 > 0.15
+        # Forecast 81Â°F â€” squarely in 80-83 bucket â†’ p_yes=1.0 > 0.15
         _, _, opened = self._run(forecast_temp=81.0)
         assert not opened
 
     def test_rejects_when_no_ask_above_max_no_price(self):
-        # YES_bid = 0.02 → NO_ask = 1 - 0.02 = 0.98 >= max_no_price=0.97
+        # YES_bid = 0.02 â†’ NO_ask = 1 - 0.02 = 0.98 >= max_no_price=0.97
         _, _, opened = self._run(live_price=(0.02, 0.04))
         assert not opened
 
@@ -410,10 +412,10 @@ class TestTryOpenNoPosition:
         # Sanity: with p_no=1.0 and NO_ask=0.38, EV should be very high
         updated_mkt, _, opened = self._run()
         assert opened
-        assert updated_mkt["position"]["ev"] > 0.10
+        assert updated_mkt["positions"]["mkt-no-001"]["ev"] > 0.10
 
     def test_no_stop_uses_absolute_floor(self):
         """NO stop_price should use no_stop_loss_floor, not entry * pct."""
         updated_mkt, _, opened = self._run()
         assert opened
-        assert updated_mkt["position"]["stop_price"] == 0.85
+        assert updated_mkt["positions"]["mkt-no-001"]["stop_price"] == 0.85
