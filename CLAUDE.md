@@ -170,12 +170,22 @@ Key fields to know:
 
 ---
 
+## Git rules (strict)
+
+- **Single branch: `master` only.** Never create `main`, `dev`, feature branches, or any other branch.
+- **One remote that matters: `github`** (work machine) / **`origin`** (personal machine). Both point to `https://github.com/ntr17/weather_bot`.
+- Work machine pushes: `scripts\ship.ps1` → commits + `git push github master`
+- Personal machine pulls: `git pull origin master`
+- Never `git merge` from remote into a feature branch — there is no feature branch.
+- If a stray branch appears: change GitHub default to `master`, then `git push github --delete <branch>`.
+- Commit the WIP marker `wip:` for uncommitted local changes before any merge.
+
 ## Workflow for code changes
 
 **Work machine:**
 1. Edit code
-2. `pytest tests/` — must be 106 passed before shipping
-3. `scripts\ship.ps1` — commits and pushes to GitHub
+2. `pytest tests/` — must pass before shipping
+3. `scripts\ship.ps1` — commits and pushes to GitHub (`master`)
 
 **Personal machine:**
 ```bash
