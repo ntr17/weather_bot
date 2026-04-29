@@ -167,12 +167,6 @@ def check_resolution(
 
     updated_mkt, updated_state = close_position(mkt, exit_price, reason, state)
 
-    # Update win/loss counter
-    if won:
-        updated_state = {**updated_state, "wins": updated_state.get("wins", 0) + 1}
-    else:
-        updated_state = {**updated_state, "losses": updated_state.get("losses", 0) + 1}
-
     # Fetch actual temperature for calibration (non-blocking)
     actual_temp = get_actual_temp(mkt["city"], mkt["date"], vc_key)
     resolved_mkt = {

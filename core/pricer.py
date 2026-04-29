@@ -30,6 +30,11 @@ def bucket_prob(forecast: float, t_low: float, t_high: float, sigma: float = 2.0
     if t_high == 999.0:
         # "X or higher" edge bucket — right tail
         return 1.0 - norm_cdf((t_low - forecast) / sigma)
+    # Single-degree bucket (e.g. "Will it be 20°C?"): t_low == t_high.
+    # Expand to [t - 0.5, t + 0.5] so the continuous model gives non-zero probability.
+    if t_low == t_high:
+        t_low = t_low - 0.5
+        t_high = t_high + 0.5
     # Middle bucket — area under the bell curve between the two bounds
     return norm_cdf((t_high - forecast) / sigma) - norm_cdf((t_low - forecast) / sigma)
 

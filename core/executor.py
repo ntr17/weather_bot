@@ -298,6 +298,12 @@ def close_position(
         "peak_balance": max(state.get("peak_balance", 0), state["balance"] + pos["cost"] + pnl),
     }
 
+    # Update win/loss counters for ALL close reasons (not just resolution)
+    if pnl >= 0:
+        updated_state = {**updated_state, "wins": updated_state.get("wins", 0) + 1}
+    else:
+        updated_state = {**updated_state, "losses": updated_state.get("losses", 0) + 1}
+
     save_market(updated_mkt)
     save_state(updated_state)
     trade_closed(
