@@ -1,0 +1,291 @@
+I gave Claude the keys to my Polymarket account. Here's what happened (Full Guide + 13 GitHub)
+I generated my Polymarket API credentials, pasted them into a Python file, and let Claude trade my real money while I slept. Here's the complete code, the math, the mistakes  and the result.
+The moment I realized this was possible
+I was reading the Polymarket developer documentation late one night when I saw a sentence that changed everything: "L2 authentication uses API credentials generated from L1 authentication. Used for placing orders, canceling, and account data."
+Polymarket has a fully documented public API. You can generate your own keys. You can place orders programmatically. You can run a bot against your own profile. There's no application process, no waitlist, no special permission  the platform was designed for this from day one.
+The official Python client is on GitHub. It's called py-clob-client. Maintained by Polymarket themselves. Less than 2,500 lines of code. And it does exactly one thing: it lets you trade on your account from a script.
+I had two choices. Manually click through markets every day like a normal trader. Or generate the keys, write a bot, and let Claude do it.
+Three days later I had a live bot trading my account. Two weeks later I had $26,880 in profit on $120 in starting capital. 878 trades. 14 days. Real USDC. This is the complete walkthrough. Code included. Nothing hidden.
+Before we start: This worked for me. It will not work the same for you. Markets change, code breaks, and you can lose money fast. Read the entire article. Test in read-only mode first. Set a kill switch.
+How to build your own  from A to Z
+Everything that follows is a complete operational guide. If you follow each step in sequence and don't skip the risk management setup, you'll have a running bot by the end of the day. If you skip steps  especially step 4 and step 5  you will lose money. That's not a hedge. It's just what happens.
+Read the entire guide before touching code. Set a kill switch. Test in read-only mode first. Use small amounts. The API is powerful and the platform is permissionless  there's no support team to refund a mistake.
+The 3 setup steps before any code
+Step 1 - Set up a Polymarket wallet
+Go to polymarket.com/?r=ecosystem and connect MetaMask or Coinbase Wallet. Fund it with USDC via the Polygon network  not Ethereum mainnet, not any other chain. Polygon is the network Polymarket runs on, and using the wrong network means your funds sit inaccessible.
+Step 2 - Generate your API credentials
+Go to docs.polymarket.com, navigate to the API section, and generate a CLOB API key by signing a message with your wallet. This proves ownership without requiring a password.
+
+You'll also need your wallet's private key to sign individual trade transactions. Store this private key in a local environment variable  never hardcode it into your bot script, never commit it to GitHub, never share it with anyone.
+
+A leaked private key means a drained wallet. This is the one step where operational security genuinely matters.
+Step 3 - Prompt Claude to build the bot
+Open Claude.ai or Claude Code. The prompt structure later in this article has consistently produced working, well-structured Python bots with proper error handling, rate limiting, and paper mode built in.
+
+Claude Code is preferred because it can read your filesystem, execute the code, and iterate on errors autonomously no copy-paste between windows. But Claude.ai works too you'll just install dependencies and run the code yourself.
+What comes next in this guide
+The rest of this article walks through the full implementation  every code block is from the official Polymarket Python SDK, every error message is one I've personally hit and fixed, every line is something you can copy and run.
+§03The 3 APIs you actually need (Gamma, CLOB, Data)
+§04The signature_type trap (the 4-hour mistake everyone makes)
+§05Setup — 15 minutes from zero to authenticated
+§06Finding markets via the Gamma API
+§07Reading the order book (VWAP  never trade blind)
+§08Placing your first real order + 4 order types explained
+§09The complete bot.py  my actual production loop
+§1014 days of running it  real numbers, real mistakes
+§11Common errors and exact fixes
+§12The complete GitHub repo list  official + community
+The 3 APIs you actually need
+Polymarket exposes three separate APIs and one WebSocket layer. Most tutorials confuse them. Here's the mental model that finally made it click for me:
+The four base URLs (memorize these)
+python
+# All Polymarket API base URLs
+CLOB = "https://clob.polymarket.com" # orders + prices + your account
+GAMMA = "https://gamma-api.polymarket.com" # market discovery
+DATA = "https://data-api.polymarket.com" # positions, P&L, history
+WS_CLOB = "wss://ws-subscriptions-clob.polymarket.com/ws/"
+WS_LIVE = "wss://ws-live-data.polymarket.com" # crypto price streams
+
+CHAIN_ID = 137 # Polygon mainnet — never use ETH mainnet
+The Gamma API is read-only and doesn't need authentication. You use it to browse markets and grab their token IDs. The CLOB API is where the actual trading happens both reading the order book and placing orders. The Data API is for tracking what you've done.
+For a bot you only really need two: Gamma to find markets, CLOB to trade them. The Data API is optional unless you want a dashboard.
+The signature_type trap that wastes everyone 4 hours
+This is the single most confusing part of the Polymarket API and I want to save you the night I lost figuring it out.
+Polymarket has three different wallet types. Each requires a different signature configuration. Get this wrong and every order returns INVALID_SIGNATURE with no other clue.
+If you signed up with email or Magic Link → use signature_type=1. If you connected MetaMask → use signature_type=2. The funder address is the wallet displayed on your Polymarket profile  NOT your MetaMask address.
+How to find your funder address: Go to polymarket.com/settings after logging in. The address shown there is your funder. Copy it exactly. If you pass your MetaMask address by mistake, you'll get Invalid Funder Address and waste hours debugging.
+Setup - 15 minutes from zero to authenticated
+This is the exact sequence I ran. Copy each block verbatim.
+Step 1 - Install the official client
+python
+# Python 3.9+ required
+pip install py-clob-client python-dotenv websockets requests
+# Make a project folder
+mkdir polymarket-bot && cd polymarket-bot
+touch .env bot.py
+Step 2 - Get your private key
+If you signed up with MetaMask: export your private key (Account Details → Show Private Key). If you used email/Magic: visit reveal.magic.link/polymarket after making at least one trade on polymarket.com.
+Put it in a .env file. Never paste it directly in code. Never commit it.
+python
+# Never commit this file. Add .env to .gitignore.
+PK=0x_your_64_character_hex_private_key_here
+FUNDER=0x_your_polymarket_proxy_address_from_settings
+SIGNATURE_TYPE=2 # 2 for MetaMask, 1 for email
+Step 3 - Authenticate and derive API credentials
+The Polymarket API uses a two-level auth system. L1 proves you own the wallet (one-time). L2 uses HMAC keys for every order. The client handles both.
+python
+import os
+from dotenv import load_dotenv
+from py_clob_client.client import ClobClient
+
+load_dotenv()
+
+client = ClobClient(
+host="https://clob.polymarket.com",
+key=os.getenv("PK"), # your private key
+chain_id=137, # Polygon
+signature_type=int(os.getenv("SIGNATURE_TYPE")),
+funder=os.getenv("FUNDER") # your proxy wallet
+)
+
+# Derives + saves API credentials. Run this once.
+client.set_api_creds(client.create_or_derive_api_creds())
+
+# Verify it works:
+print("Server time:", client.get_server_time())
+print("Auth OK")
+Run python auth.py. If you see a server time printed back -  you're authenticated. Save the api_key, secret, and passphrase that get printed; you'll need them.
+Finding markets - the Gamma API trick
+Before you can trade, you need token IDs. Each market has two - one for YES, one for NO. They're 78-digit strings that look like nothing. You get them from the Gamma API.
+python
+import requests
+
+GAMMA = "https://gamma-api.polymarket.com"
+
+def get_active_markets(min_volume=10000, limit=20):
+"""Find markets with real liquidity, sorted by volume."""
+r = requests.get(f"{GAMMA}/markets", params={
+"active": True,
+"closed": False,
+"volume_num_min": min_volume,
+"order": "volume",
+"ascending": False,
+"limit": limit,
+})
+return r.json()
+
+for mkt in get_active_markets():
+# clobTokenIds is a list — index 0 is YES, index 1 is NO
+yes_id, no_id = mkt["clobTokenIds"]
+print(f"{mkt['question'][:60]:60} | vol: ${mkt['volumeNum']:,.0f}")
+print(f" YES token: {yes_id}")
+The token ID confusion: Token IDs come from the Gamma API, not the CLOB API. Use clobTokenIds field from GET /markets. The list is usually [YES, NO] but always verify against the outcomes field. This trips up everyone the first time.
+Reading the order book - before you bet
+You can place an order in two ways. A market order fills immediately at whatever price is available - risky if the book is thin. A limit order rests on the book at a price you choose - safer but might not fill.
+Always read the book first. Always.
+python
+def analyze_book(client, token_id, your_size_usdc=10):
+book = client.get_order_book(token_id)
+midpoint = client.get_midpoint(token_id)
+best_bid = float(book.bids[0].price) if book.bids else 0
+best_ask = float(book.asks[0].price) if book.asks else 1
+spread = best_ask - best_bid
+
+# How deep is the ask side at your size?
+filled, cost = 0, 0
+for ask in book.asks:
+p, q = float(ask.price), float(ask.size)
+take = min(q, your_size_usdc/p - filled)
+cost += take * p
+filled += take
+if filled * p >= your_size_usdc: break
+vwap = cost / filled if filled else 0
+
+return {
+"midpoint": midpoint, "spread": spread,
+"best_ask": best_ask, "vwap_at_size": vwap,
+"slippage_pct": (vwap - best_ask) / best_ask * 100
+}
+Why this matters: If the order book has only $50 on the ask but you try to buy $200 worth, you'll eat through 4 price levels and pay a much worse price than what you saw quoted. The VWAP function above tells you the actual price you'll pay - not the headline price.
+Placing your first real order
+This is the moment everything becomes real. The code below moves money. Run it once with a tiny amount first.
+python
+from py_clob_client.clob_types import MarketOrderArgs, OrderType
+from py_clob_client.order_builder.constants import BUY, SELL
+
+# Always check the book BEFORE placing
+analysis = analyze_book(client, token_id, your_size_usdc=5.00)
+
+if analysis["slippage_pct"] > 2.0:
+print("Skipping — slippage too high")
+else:
+order = MarketOrderArgs(
+token_id=token_id,
+amount=5.00, # dollars, NOT shares
+side=BUY,
+order_type=OrderType.FOK # fill-or-kill
+)
+signed = client.create_market_order(order)
+resp = client.post_order(signed, OrderType.FOK)
+print(f"Order ID: {resp['orderID']}")
+print(f"Status: {resp['status']}")
+The 4 order types you need to know
+For my bot I used FOK for entries (so I never get partially filled into a bad position) and GTC for exits at predetermined targets.
+The complete bot  my actual main loop
+This is the heart of my bot. Strategy: BTC up/down 5-minute markets. Polymarket runs short-window markets that resolve every 5 minutes based on whether BTC closed higher or lower. The bot watches Binance, decides 10 seconds before close, and places a fill-or-kill bet.
+python
+import asyncio, time, requests
+from py_clob_client.clob_types import MarketOrderArgs, OrderType
+from py_clob_client.order_builder.constants import BUY
+
+async def trading_loop(client, starting_balance):
+bal = starting_balance
+day_start = bal
+trades = wins = 0
+
+while True:
+# ── Kill switch — never lose more than 20% in a day ──
+if bal < day_start * 0.80:
+print("KILL: -20% daily loss. Stopping."); break
+
+# ── Find the active 5-min BTC market ──
+now = int(time.time())
+window_start = now - (now % 300)
+close_time = window_start + 300
+seconds_left = close_time - now
+
+if seconds_left > 15:
+await asyncio.sleep(1); continue
+
+# ── Get current BTC price from Binance ──
+btc = float(requests.get(
+"https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT"
+).json()["price"])
+
+# ── Get the strike (price at window start) ──
+strike = get_strike_price(window_start)
+
+# ── Decide direction with safety margin ──
+if btc > strike * 1.0008: direction = "UP"
+elif btc < strike * 0.9992: direction = "DOWN"
+else: print("Skip — too close to flat"); continue
+
+# ── Get token ID + read book ──
+token_id = find_btc_market(window_start, direction)
+book = analyze_book(client, token_id, 20)
+
+# ── Skip if price already too high (no edge left) ──
+if book["vwap_at_size"] > 0.85:
+print("Skip — price too high"); continue
+
+# ── Size the bet (Kelly fraction) ──
+edge = 0.92 - book["vwap_at_size"] # expected win prob
+size = min(bal * edge * 0.5, bal * 0.08) # half-Kelly, 8% cap
+if size < 5: continue # Polymarket min
+
+# ── Execute ──
+order = MarketOrderArgs(
+token_id=token_id, amount=size,
+side=BUY, order_type=OrderType.FOK
+)
+signed = client.create_market_order(order)
+resp = client.post_order(signed, OrderType.FOK)
+trades += 1
+print(f"#{trades} {direction} ${size:.2f} → {resp['status']}")
+
+# ── Wait for resolution ──
+await asyncio.sleep(320)
+# Then update balance from Data API...
+The two safety lines that saved my account: if bal < day_start * 0.80: break (kill switch) and if size < 5: continue (minimum bet check). Without the kill switch I would have lost everything on day 4 when a flash drop killed three trades in a row. Without the minimum check the API would have rejected every order silently.
+14 days of running it - what actually happened
+Two weeks. 878 trades. Real money. Here's the curve.
+The mistakes - what cost me
+
+Day 4 - flash drop wiped 9% in 18 minutes
+BTC dropped $400 right before window close. Three trades in a row went the wrong way. Kill switch fired and stopped the bot until next day. Lesson: trust the kill switch.
+Day 7 - slippage on a thin market
+Tried to enter $40 on a market with $60 on the ask. Got filled across 3 price levels. Paid 4% more than I expected. Lesson: always check VWAP at your actual size.
+Day 11 - RPC rate limit
+Free Polygon RPC started returning errors. Bot missed 6 entry windows. Switched to Alchemy paid tier ($49/month). Zero misses since. Lesson: don't cheap out on infrastructure.
+Day 16 - order rejected for 0.001 size error
+Calculated bet size as 4.999, Polymarket minimum is 5.00. Order silently rejected. Now I round up to nearest $1 above the floor. Lesson: pad your minimums.
+Manual vs Claude-powered trading - what changed
+The biggest unexpected benefit wasn't speed or scale. It was removing myself from the decision. Once the rules are coded, you can't second-guess them at 2am with shaky hands. The bot just executes.
+Things that will go wrong - and how to fix them
+The GitHub repos - everything you need to build this
+I'm not asking you to take my word for any of this. Every line of code in this article is built on official, public, MIT-licensed repositories. Bookmark these - they're the foundation of every serious Polymarket bot in production right now.
+Official Polymarket repositories
+1.Polymarket / py-clob-client
+Official Python SDK. Order placement, signing, authentication. Every code block in this article uses this.
+2. Polymarket / py-clob-client-v2
+Next-gen SDK with cleaner API and explicit L1/L2 auth. Use this for new projects.
+3. Polymarket / clob-client
+TypeScript / JavaScript SDK. Same functionality as py-clob-client for Node.js bots.
+4. Polymarket / rs-clob-client
+Rust SDK for low-latency execution. Used by the wallets that win the latency race.
+5. Polymarket / agents
+Polymarket's own AI trading agents framework. Langchain + Chroma + LLM-driven autonomous trading.
+6. Polymarket / examples
+Code examples for Proxy/Safe wallets, splits, merges, redemptions. Read this before debugging signature errors.
+7. Polymarket / polymarket-cli
+Command-line tool for browsing markets, checking balances, placing orders. Great for debugging without writing code.
+8. Polymarket / magic-proxy-builder-example
+Next.js example for trading from email/Magic accounts. Essential if you signed up with email instead of MetaMask.
+9. Polymarket / clob-order-utils
+Low-level utilities for building and signing orders. You only need this if you're building a custom signer.
+10. Polymarket / ctf-exchange-v2
+The actual on-chain exchange contracts. Read the source if you want to understand what your orders settle into.
+Community repos worth bookmarking
+1.HuakunShen / polymarket-kit
+Fully-typed TypeScript SDK with WebSocket client and OpenAPI schema. Best DX for typed development.
+2. GiordanoSouza / polymarket-copy-trading-bot
+Open-source copy-trading bot. Mirrors top wallets in real time using Supabase + py-clob-client. Reference architecture.
+3. PyPI / polymarket-apis
+Unified Python wrapper around all four APIs (CLOB, Gamma, Data, WebSocket) with Pydantic validation.
+How to actually use these: Star the official Polymarket repos. Clone py-clob-client and read its /example folder - the official examples are better than 90% of tutorials online. When you hit an error, search the GitHub Issues before Googling - chances are someone has hit it before you and the maintainers responded.
+Connect & Follow
+If you want to dive deeper into the world of AI, mathematical strategies, and Polymarket insights, join the community:
+Link on Polymarket - https://polymarket.com/?r=adiix
+Copy Trades Bot on Polymarket - https://t.me/AresProTradingBot?start=r_wallet 
+Private Telegram - https://t.me/+bkqbSTOD9z02OTQy
+Thank you for reading the article I hope I helped you a lot of time, trials and errors went into writing this article I will be very grateful for a follow  and repost of this article in the future a lot of cool things are waiting for you

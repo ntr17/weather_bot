@@ -86,7 +86,7 @@ def new_market(
         "event_end_date":     end_date,
         "hours_at_discovery": round(hours_at_discovery, 1),
         "status":             "open",       # open | closed | resolved
-        "position":           None,
+        "positions":          [],           # list of open/closed bucket positions
         "actual_temp":        None,
         "resolved_outcome":   None,         # win | loss | no_position
         "pnl":                None,
