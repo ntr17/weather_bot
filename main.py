@@ -59,7 +59,7 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
         city_new = city_closed = city_resolved = 0
 
         # Fetch all forecast sources once per city
-        dates = [(now + timedelta(days=i)).strftime("%Y-%m-%d") for i in range(4)]
+        dates = [(now + timedelta(days=i)).strftime("%Y-%m-%d") for i in range(7)]
         try:
             snapshots = take_snapshot(city_slug, dates)
             time.sleep(0.3)
@@ -164,12 +164,19 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
                         continue
 
             # ── Open new position ────────────────────────────────────────────
+            has_open_pos = (
+                mkt.get("position") and mkt["position"].get("status") == "open"
+            )
             if (
-                not mkt.get("position")
+                not has_open_pos
                 and forecast_temp is not None
                 and hours >= cfg.min_hours
                 and not dry_run
             ):
+                # Clear closed/resolved position to allow re-entry
+                if mkt.get("position") and mkt["position"].get("status") != "open":
+                    mkt = {**mkt, "position": None}
+
                 # When ensemble is used, look up ECMWF sigma (the calibrated base model)
                 # then inflate by model spread: σ_eff = √(σ² + (spread/2)²)
                 sigma_source = "ecmwf" if forecast_source == "ensemble" else (forecast_source or "ecmwf")
@@ -193,7 +200,10 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
                         city_new += 1
 
                 # 2. If no YES opened, try NO on the most overpriced other bucket
-                if not mkt.get("position"):
+                has_open_now = (
+                    mkt.get("position") and mkt["position"].get("status") == "open"
+                )
+                if not has_open_now:
                     other_outcomes = [
                         o for o in outcomes
                         if not in_bucket(forecast_temp, o.t_low, o.t_high)

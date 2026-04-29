@@ -27,9 +27,9 @@ def get_sigma(
       2. city_source           (e.g. "nyc_ecmwf")      — flat calibrated
       3. unit default          (2.0°F / 1.2°C)
 
-    Horizon-aware sigma significantly improves probability estimates:
-      - D+1 ECMWF is much tighter than D+3 ECMWF
-      - Bootstrap script pre-populates these from 90 days of history
+    For horizons D+3 and beyond without calibration data, sigma is scaled
+    by √(days/2) to reflect increasing forecast uncertainty at longer range.
+    This creates asymmetric sizing: bigger bets on short-range, smaller on long-range.
     """
     if horizon:
         key_horizon = f"{city_slug}_{source}_{horizon}"
@@ -38,10 +38,22 @@ def get_sigma(
 
     key_flat = f"{city_slug}_{source}"
     if key_flat in calibration:
-        return calibration[key_flat]["sigma"]
+        base_sigma = calibration[key_flat]["sigma"]
+    else:
+        loc = LOCATIONS.get(city_slug)
+        base_sigma = DEFAULT_SIGMA_F if (loc and loc.unit == "F") else DEFAULT_SIGMA_C
 
-    loc = LOCATIONS.get(city_slug)
-    return DEFAULT_SIGMA_F if (loc and loc.unit == "F") else DEFAULT_SIGMA_C
+    # Scale sigma for longer horizons when no horizon-specific calibration exists
+    if horizon:
+        try:
+            days = int(horizon.replace("D+", ""))
+            if days >= 3:
+                import math
+                base_sigma = round(base_sigma * math.sqrt(days / 2.0), 3)
+        except (ValueError, AttributeError):
+            pass
+
+    return base_sigma
 
 
 def run_calibration(

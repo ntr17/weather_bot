@@ -172,6 +172,9 @@ def check_resolved(market_id: str) -> bool | None:
     """
     Check if a market has resolved.
     Returns True (YES won), False (NO won), None (still open / undetermined).
+
+    Uses the `closed` flag first, then checks outcomePrices.
+    Relaxed threshold (0.90/0.10) to avoid missing resolved markets.
     """
     try:
         data = _get_json(f"https://gamma-api.polymarket.com/markets/{market_id}", retries=2)
@@ -179,9 +182,9 @@ def check_resolved(market_id: str) -> bool | None:
             return None
         prices = json.loads(data.get("outcomePrices", "[0.5,0.5]"))
         yes_price = float(prices[0])
-        if yes_price >= 0.95:
+        if yes_price >= 0.90:
             return True
-        if yes_price <= 0.05:
+        if yes_price <= 0.10:
             return False
     except Exception:
         pass
