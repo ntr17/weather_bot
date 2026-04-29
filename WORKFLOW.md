@@ -283,6 +283,51 @@ git stash pop      # reapply local changes if any
 
 ---
 
+## Current State (as of 2026-04-29)
+
+### Paper trading — ACTIVE
+- 20 positions open for 2026-04-29 markets
+- All 20 cities verified live on Polymarket (D+0 and D+1 only; D+2/D+3 open ~48h out)
+- Bot started 2026-04-28 ~17:50 UTC; running continuously
+- Starting balance $1,000; ~$400 deployed across open positions
+- Using default sigma (2.0°F / 1.2°C) — bootstrap calibration not yet complete
+
+### Trade log — ACTIVE
+- Every resolved trade appends to `logs/paper_trades.jsonl` (tracked in git)
+- Query: `python scripts/query_trades.py`
+- Filter by city: `python scripts/query_trades.py --city nyc`
+
+### Bootstrap sigma — BROKEN / NEEDS FIX
+`research/bootstrap_sigma.py` runs for 10+ hours and never finishes.
+
+Root cause: `historical-forecast-api.open-meteo.com` with `models=ecmwf_ifs025` either
+has no data for most cities or hangs (timeout loop). The fix attempted (early exit after
+5 consecutive Nones) is insufficient — if requests time out at 15s each across 90 issue
+dates, each combo still takes ~22 min.
+
+**A new agent working on this should:**
+1. Test manually: does the API actually return ECMWF data for any city?
+   ```python
+   import requests
+   r = requests.get("https://historical-forecast-api.open-meteo.com/v1/forecast", params={
+       "latitude": 40.77, "longitude": -73.9, "start_date": "2025-12-01",
+       "end_date": "2025-12-01", "daily": "temperature_2m_max",
+       "temperature_unit": "fahrenheit", "timezone": "America/New_York",
+       "models": "ecmwf_ifs025", "forecast_days": 2,
+   }, timeout=(3, 8))
+   print(r.status_code, r.json())
+   ```
+2. Try `models=gfs_seamless` (global coverage, more reliable) and
+   `models=best_match` (Open-Meteo auto-selects best available).
+3. If API is fundamentally broken for historical ECMWF, rewrite bootstrap to use
+   only GFS + best_match, or drop the per-model breakdown and just compute
+   composite sigma from ERA5 actuals vs Open-Meteo best-match forecasts.
+4. Lower timeout to `(3, 8)` in `_get()` and remove retries for forecast calls.
+5. Parallelize with `concurrent.futures.ThreadPoolExecutor` — 90 sequential API
+   calls at 0.2s each is 18s minimum per combo; parallel cuts to ~5s.
+
+---
+
 ## File Reference
 
 | Script | Machine | What it does |

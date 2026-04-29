@@ -29,6 +29,9 @@ HOW THE LAG SIMULATION WORKS:
 import json
 import sys
 import time
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
@@ -44,7 +47,8 @@ from core.storage import load_calibration, save_calibration
 # ── Config ────────────────────────────────────────────────────────────────────
 LOOKBACK_DAYS = 90       # How many past days to analyze
 MIN_SAMPLES   = 20       # Minimum samples before writing a sigma value
-BACKOFF       = 2.0      # Seconds between API calls (Open-Meteo is free but polite)
+BACKOFF       = 0.5      # Seconds between API calls (Open-Meteo is free but polite)
+PROBE_DATES   = 5        # Consecutive None results before skipping a model/horizon combo
 
 # Horizons to calibrate.  D+0 is omitted — METAR handles D+0 live.
 HORIZONS = [1, 2, 3]
@@ -186,6 +190,7 @@ def bootstrap(cities: list[str] | None = None) -> None:
 
                 # Iterate issue dates: for each past day, get the D+horizon forecast
                 issue = start_date
+                consecutive_none = 0
                 while issue <= end_date - timedelta(days=horizon):
                     issue_str  = issue.isoformat()
                     target_str = (issue + timedelta(days=horizon)).isoformat()
@@ -200,8 +205,14 @@ def bootstrap(cities: list[str] | None = None) -> None:
                     )
                     if pred is not None:
                         errors.append(abs(pred - actual))
+                        consecutive_none = 0
+                    else:
+                        consecutive_none += 1
+                        if consecutive_none >= PROBE_DATES and len(errors) == 0:
+                            print(f"no data after {PROBE_DATES} tries — skip")
+                            break
 
-                    time.sleep(0.5)   # polite to API
+                    time.sleep(0.2)   # polite to API
                     issue += timedelta(days=1)
 
                 if len(errors) < MIN_SAMPLES:

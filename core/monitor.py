@@ -13,6 +13,7 @@ from typing import Any
 
 from core.executor import close_position
 from core.forecaster import get_actual_temp
+from core.trade_log import append_trade
 from core.pricer import in_bucket
 from core.scanner import check_resolved, fetch_live_price
 from core.storage import load_all_markets, save_market
@@ -183,6 +184,7 @@ def check_resolution(
     }
 
     save_market(resolved_mkt)
+    append_trade(resolved_mkt)
     return resolved_mkt, updated_state, True
 
 
