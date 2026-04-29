@@ -74,13 +74,17 @@ def _cfg(**overrides) -> Config:
         balance=10_000.0,
         max_bet=20.0,
         min_ev=0.10,
-        max_price=0.45,
+        max_price=0.60,
         max_no_price=0.97,
         min_volume=500.0,
         min_hours=2.0,
         max_hours=72.0,
         kelly_fraction=0.25,
         max_slippage=0.05,
+        stop_loss_pct=0.80,
+        no_stop_loss_floor=0.85,
+        trailing_activation=1.20,
+        no_pyes_threshold=0.15,
         scan_interval=3600,
         monitor_interval=600,
         calibration_min=20,
@@ -233,9 +237,9 @@ class TestTryOpenPosition:
         assert not opened
 
     def test_rejects_above_max_price(self):
-        # ask above max_price=0.45
-        outcome = _outcome(ask=0.50, bid=0.48, spread=0.02)
-        _, _, opened = self._run(outcome=outcome, live_price=(0.48, 0.50))
+        # ask above max_price=0.60
+        outcome = _outcome(ask=0.65, bid=0.63, spread=0.02)
+        _, _, opened = self._run(outcome=outcome, live_price=(0.63, 0.65))
         assert not opened
 
     def test_rejects_below_min_volume(self):
@@ -249,9 +253,9 @@ class TestTryOpenPosition:
         assert not opened
 
     def test_rejects_live_price_too_high(self):
-        # snapshot ok, but live ask is too high
+        # snapshot ok, but live ask is above max_price=0.60
         outcome = _outcome()
-        _, _, opened = self._run(outcome=outcome, live_price=(0.43, 0.46))
+        _, _, opened = self._run(outcome=outcome, live_price=(0.58, 0.62))
         assert not opened
 
     def test_rejects_live_spread_too_wide(self):
@@ -407,3 +411,9 @@ class TestTryOpenNoPosition:
         updated_mkt, _, opened = self._run()
         assert opened
         assert updated_mkt["position"]["ev"] > 0.10
+
+    def test_no_stop_uses_absolute_floor(self):
+        """NO stop_price should use no_stop_loss_floor, not entry * pct."""
+        updated_mkt, _, opened = self._run()
+        assert opened
+        assert updated_mkt["position"]["stop_price"] == 0.85

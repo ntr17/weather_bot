@@ -22,6 +22,7 @@ from core.storage import load_all_markets, save_market
 def check_stops_and_tp(
     mkt: dict[str, Any],
     state: dict[str, Any],
+    trailing_activation: float = 1.20,
 ) -> tuple[dict[str, Any], dict[str, Any], bool]:
     """
     Check stop-loss, trailing stop, and take-profit on a single open position.
@@ -43,8 +44,8 @@ def check_stops_and_tp(
     entry = pos["entry_price"]
     stop = pos.get("stop_price", round(entry * 0.80, 4))
 
-    # Trailing stop: move to breakeven when up 20%
-    if current_bid >= entry * 1.20 and not pos.get("trailing_activated", False):
+    # Trailing stop: move to breakeven when up sufficiently
+    if current_bid >= entry * trailing_activation and not pos.get("trailing_activated", False):
         updated_pos = {**pos, "stop_price": entry, "trailing_activated": True}
         updated_mkt = {**mkt, "position": updated_pos}
         save_market(updated_mkt)

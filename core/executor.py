@@ -108,7 +108,7 @@ def try_open_position(
         "forecast_temp":      forecast_temp,
         "forecast_source":    forecast_source,
         "sigma":              sigma,
-        "stop_price":         round(real_ask * 0.80, 4),
+        "stop_price":         round(real_ask * cfg.stop_loss_pct, 4),
         "trailing_activated": False,
         "opened_at":          datetime.now(timezone.utc).isoformat(),
         "status":             "open",
@@ -157,7 +157,7 @@ def try_open_no_position(
     p_no = round(1.0 - p_yes, 4)
 
     # Only bet NO when we're very confident YES is wrong
-    if p_yes > 0.15:
+    if p_yes > cfg.no_pyes_threshold:
         return mkt, state, False
 
     # NO ask = 1 - YES_bid (cost to acquire the NO token)
@@ -227,7 +227,7 @@ def try_open_no_position(
         "forecast_temp":      forecast_temp,
         "forecast_source":    forecast_source,
         "sigma":              sigma,
-        "stop_price":         round(real_no_ask * 0.80, 4),
+        "stop_price":         cfg.no_stop_loss_floor,
         "trailing_activated": False,
         "opened_at":          datetime.now(timezone.utc).isoformat(),
         "status":             "open",

@@ -135,7 +135,7 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
                     continue
 
                 # 2. Stop / take-profit
-                mkt, state, did_close = check_stops_and_tp(mkt, state)
+                mkt, state, did_close = check_stops_and_tp(mkt, state, cfg.trailing_activation)
                 if did_close:
                     closed += 1
                     continue
@@ -223,7 +223,7 @@ def monitor_loop(cfg, calibration: dict) -> None:
 
     state = load_state(cfg.balance)
     for mkt in open_mkts:
-        mkt, state, _ = check_stops_and_tp(mkt, state)
+        mkt, state, _ = check_stops_and_tp(mkt, state, cfg.trailing_activation)
         mkt, state, _ = check_resolution(mkt, state, cfg.vc_key)
     save_state(state)
 

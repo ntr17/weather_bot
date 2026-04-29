@@ -182,9 +182,17 @@ cython_debug/
 # state, calibration, markets, and trade log are tracked (no secrets in them)
 # Legacy JSON files are migrated to weatherbot.db automatically
 data/*.tmp
-data/*.bak
+# WeatherBot — runtime data (machine-specific, lives in SQLite)
+data/state.json
+data/calibration.json
+data/markets/*.json
+data/weatherbot.db
 data/weatherbot.db-wal
 data/weatherbot.db-shm
+data/*.bak
+
+# WeatherBot — trade logs (machine-specific)
+logs/
 
 # WeatherBot — machine-specific config (each machine keeps its own)
 config.json

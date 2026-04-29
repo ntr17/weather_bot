@@ -28,6 +28,11 @@ class Config:
     max_hours: float
     kelly_fraction: float
     max_slippage: float
+    # Position management
+    stop_loss_pct: float         # YES stop: close when price drops to entry * this
+    no_stop_loss_floor: float    # NO stop: close when NO bid drops below this absolute level
+    trailing_activation: float   # trailing stop activates when price >= entry * this
+    no_pyes_threshold: float     # only sell NO when p_yes < this
     # Operational
     scan_interval: int
     monitor_interval: int
@@ -61,6 +66,10 @@ def load_config() -> Config:
         max_hours=float(raw.get("max_hours", 72.0)),
         kelly_fraction=float(raw.get("kelly_fraction", 0.25)),
         max_slippage=float(raw.get("max_slippage", 0.03)),
+        stop_loss_pct=float(raw.get("stop_loss_pct", 0.80)),
+        no_stop_loss_floor=float(raw.get("no_stop_loss_floor", 0.85)),
+        trailing_activation=float(raw.get("trailing_activation", 1.20)),
+        no_pyes_threshold=float(raw.get("no_pyes_threshold", 0.15)),
         scan_interval=int(raw.get("scan_interval", 3600)),
         monitor_interval=int(raw.get("monitor_interval", 600)),
         calibration_min=int(raw.get("calibration_min", 30)),
@@ -71,6 +80,8 @@ def load_config() -> Config:
     )
 
 
-# Default sigma before calibration kicks in (requires 30+ resolved trades)
+# Default sigma before calibration kicks in (requires 30+ resolved trades).
+# Temporary prior — replaced by bootstrap_sigma.py measurements and then
+# refined by the live calibrator as resolved trades accumulate.
 DEFAULT_SIGMA_F: float = 2.0   # Fahrenheit markets
 DEFAULT_SIGMA_C: float = 1.2   # Celsius markets
