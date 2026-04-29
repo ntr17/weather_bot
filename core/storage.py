@@ -99,6 +99,20 @@ def _init_schema(conn: sqlite3.Connection) -> None:
         );
         CREATE INDEX IF NOT EXISTS idx_trades_city ON trades(city);
         CREATE INDEX IF NOT EXISTS idx_trades_date ON trades(date);
+
+        CREATE TABLE IF NOT EXISTS run_log (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            ts          TEXT NOT NULL,
+            city        TEXT NOT NULL,
+            status      TEXT NOT NULL,   -- ok, timeout, error, skip
+            error       TEXT,
+            duration_s  REAL,
+            new_pos     INTEGER DEFAULT 0,
+            closed      INTEGER DEFAULT 0,
+            resolved    INTEGER DEFAULT 0
+        );
+        CREATE INDEX IF NOT EXISTS idx_run_log_city ON run_log(city);
+        CREATE INDEX IF NOT EXISTS idx_run_log_ts ON run_log(ts);
     """)
     conn.commit()
 
@@ -340,3 +354,68 @@ def load_trades() -> list[dict[str, Any]]:
     conn = _get_conn()
     rows = conn.execute("SELECT json_data FROM trades ORDER BY ts").fetchall()
     return [json.loads(r["json_data"]) for r in rows]
+
+
+# ── Run log (per-city per-scan outcome tracking) ─────────────────────────────
+
+def append_run_log(city: str, status: str, error: str | None = None,
+                   duration_s: float = 0.0, new_pos: int = 0,
+                   closed: int = 0, resolved: int = 0) -> None:
+    """Log one city's outcome from a scan cycle."""
+    conn = _get_conn()
+    conn.execute(
+        """INSERT INTO run_log (ts, city, status, error, duration_s, new_pos, closed, resolved)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+        (datetime.now(timezone.utc).isoformat(), city, status, error,
+         round(duration_s, 2), new_pos, closed, resolved),
+    )
+    conn.commit()
+
+
+def get_city_health(lookback: int = 20) -> dict[str, dict[str, Any]]:
+    """
+    Analyze last N runs per city. Returns dict of city -> health info.
+    Flags cities with high failure rates or consecutive failures.
+    """
+    conn = _get_conn()
+    rows = conn.execute(
+        """SELECT city, status, error, ts
+           FROM run_log
+           WHERE id IN (
+               SELECT id FROM run_log r2
+               WHERE r2.city = run_log.city
+               ORDER BY r2.id DESC
+               LIMIT ?
+           )
+           ORDER BY city, id DESC""",
+        (lookback,),
+    ).fetchall()
+
+    # Group by city
+    from collections import defaultdict
+    by_city: dict[str, list[dict]] = defaultdict(list)
+    for r in rows:
+        by_city[r["city"]].append({"status": r["status"], "error": r["error"], "ts": r["ts"]})
+
+    health: dict[str, dict[str, Any]] = {}
+    for city, runs in by_city.items():
+        total = len(runs)
+        fails = sum(1 for r in runs if r["status"] != "ok")
+        # Count consecutive failures from most recent
+        consec_fails = 0
+        for r in runs:
+            if r["status"] != "ok":
+                consec_fails += 1
+            else:
+                break
+        last_error = next((r["error"] for r in runs if r["error"]), None)
+        fail_rate = fails / total if total else 0
+        health[city] = {
+            "total_runs":    total,
+            "fails":         fails,
+            "fail_rate":     round(fail_rate, 2),
+            "consec_fails":  consec_fails,
+            "last_error":    last_error,
+            "flagged":       consec_fails >= 3 or fail_rate >= 0.5,
+        }
+    return health

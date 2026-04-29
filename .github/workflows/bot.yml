@@ -7,7 +7,7 @@ on:
   workflow_dispatch:  # manual trigger from GitHub UI
 
 permissions:
-  contents: write  # needed to push DB back
+  contents: write  # needed to push DB + status back
 
 jobs:
   trade:
@@ -28,6 +28,20 @@ jobs:
       - name: Prepare config
         run: cp config.template.json config.json
 
+      - name: Bootstrap sigma (first run only)
+        run: |
+          # Skip if calibration already exists in the DB
+          python -c "
+          from core.storage import load_calibration
+          cal = load_calibration()
+          if cal:
+              print(f'Calibration already has {len(cal)} keys — skipping bootstrap')
+          else:
+              print('No calibration found — running bootstrap...')
+              import subprocess, sys
+              sys.exit(subprocess.call([sys.executable, 'research/bootstrap_sigma.py']))
+          "
+
       - name: Run bot (single cycle)
         env:
           VC_KEY: ${{ secrets.VC_KEY }}
@@ -38,7 +52,7 @@ jobs:
         run: |
           git config user.name "weatherbot[bot]"
           git config user.email "weatherbot[bot]@users.noreply.github.com"
-          git add -f data/weatherbot.db
+          git add -f data/weatherbot.db data/status.md
           # Only commit if there are changes
           git diff --cached --quiet || git commit -m "bot: update state $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           # Rebase on top of any concurrent pushes (code changes)

@@ -25,9 +25,12 @@ from core.forecaster import take_snapshot
 from core.locations import LOCATIONS, MONTHS, TIER1_CITIES
 from core.monitor import check_forecast_change, check_resolution, check_stops_and_tp
 from core.pricer import in_bucket
+from core.reporter import generate_status
 from core.scanner import get_event, hours_to_resolution, parse_outcomes
 from core.storage import (
+    append_run_log,
     ensure_dirs,
+    get_city_health,
     load_all_markets,
     load_calibration,
     load_market,
@@ -52,6 +55,8 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
     for city_slug in active_cities:
         loc = LOCATIONS[city_slug]
         print(f"  → {loc.name}...", end=" ", flush=True)
+        city_t0 = time.time()
+        city_new = city_closed = city_resolved = 0
 
         # Fetch all forecast sources once per city
         dates = [(now + timedelta(days=i)).strftime("%Y-%m-%d") for i in range(4)]
@@ -59,7 +64,12 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
             snapshots = take_snapshot(city_slug, dates)
             time.sleep(0.3)
         except Exception as exc:
-            print(f"skip ({exc})")
+            err_msg = str(exc)[:200]
+            is_timeout = "timeout" in err_msg.lower() or "timed out" in err_msg.lower()
+            status = "timeout" if is_timeout else "error"
+            print(f"{status} ({exc})")
+            append_run_log(city_slug, status, error=err_msg,
+                           duration_s=time.time() - city_t0)
             continue
 
         for i, date_str in enumerate(dates):
@@ -133,12 +143,14 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
                 mkt, state, did_resolve = check_resolution(mkt, state, cfg.vc_key)
                 if did_resolve:
                     resolved += 1
+                    city_resolved += 1
                     continue
 
                 # 2. Stop / take-profit
                 mkt, state, did_close = check_stops_and_tp(mkt, state, cfg.trailing_activation)
                 if did_close:
                     closed += 1
+                    city_closed += 1
                     continue
 
                 # 3. Forecast change exit
@@ -148,6 +160,7 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
                     )
                     if did_close:
                         closed += 1
+                        city_closed += 1
                         continue
 
             # ── Open new position ────────────────────────────────────────────
@@ -177,6 +190,7 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
                     )
                     if did_open:
                         new_pos += 1
+                        city_new += 1
 
                 # 2. If no YES opened, try NO on the most overpriced other bucket
                 if not mkt.get("position"):
@@ -190,6 +204,7 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
                         )
                         if did_open:
                             new_pos += 1
+                            city_new += 1
                             break
 
             # Mark as closed by time
@@ -200,6 +215,8 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
             time.sleep(0.1)
 
         print("ok")
+        append_run_log(city_slug, "ok", duration_s=time.time() - city_t0,
+                       new_pos=city_new, closed=city_closed, resolved=city_resolved)
 
     save_state(state)
 
@@ -244,6 +261,22 @@ def run_once() -> None:
         f"[once] done — balance: ${state['balance']:,.2f} | "
         f"new: {new_pos} | closed: {closed} | resolved: {res}"
     )
+
+    # Health report — flag problem cities
+    health = get_city_health(lookback=20)
+    flagged = {c: h for c, h in health.items() if h["flagged"]}
+    if flagged:
+        print(f"\n⚠ FLAGGED CITIES ({len(flagged)}):")
+        for city, h in sorted(flagged.items()):
+            name = LOCATIONS[city].name if city in LOCATIONS else city
+            print(f"  {name:<18} fails: {h['fails']}/{h['total_runs']} "
+                  f"({h['fail_rate']:.0%}) | streak: {h['consec_fails']} | "
+                  f"last: {h['last_error']}")
+        print()
+
+    # Write status report (committed by Actions for visibility)
+    generate_status(cfg)
+    print("[once] status.md written")
 
 
 def run_loop() -> None:
@@ -387,6 +420,21 @@ if __name__ == "__main__":
         print_status()
     elif cmd == "report":
         print_report()
+    elif cmd == "health":
+        ensure_dirs()
+        health = get_city_health(lookback=20)
+        print(f"\n{'='*60}")
+        print(f"  WEATHERBOT — CITY HEALTH (last 20 runs)")
+        print(f"{'='*60}")
+        for city in sorted(health):
+            h = health[city]
+            name = LOCATIONS[city].name if city in LOCATIONS else city
+            flag = " ⚠ FLAGGED" if h["flagged"] else ""
+            print(f"  {name:<18} ok: {h['total_runs']-h['fails']}/{h['total_runs']} "
+                  f"({1-h['fail_rate']:.0%}) | streak_fail: {h['consec_fails']}{flag}")
+            if h["last_error"]:
+                print(f"    └─ last error: {h['last_error'][:80]}")
+        print(f"{'='*60}\n")
     elif cmd == "probe":
         _cfg = load_config()
         ensure_dirs()
@@ -394,4 +442,4 @@ if __name__ == "__main__":
         print("Dry-run scan (no positions will be opened)...")
         scan_once(_cfg, _cal, dry_run=True)
     else:
-        print("Usage: python main.py [run|once|status|report|probe]")
+        print("Usage: python main.py [run|once|status|report|health|probe]")
