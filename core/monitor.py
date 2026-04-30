@@ -74,12 +74,19 @@ def check_stops_and_tp(
     end_date = mkt.get("event_end_date", "")
     hours_left = _hours_left(end_date)
 
-    if hours_left < 24:
-        take_profit = None          # hold to resolution
-    elif hours_left < 48:
-        take_profit = 0.85
+    if side == "no":
+        # NO tokens resolve to $1.00; take profit relative to entry
+        if hours_left < 24:
+            take_profit = None      # hold to resolution
+        else:
+            take_profit = round(entry * 1.10, 4)   # 10% gain on NO cost
     else:
-        take_profit = 0.75
+        if hours_left < 24:
+            take_profit = None          # hold to resolution
+        elif hours_left < 48:
+            take_profit = 0.85
+        else:
+            take_profit = 0.75
 
     take_triggered = take_profit is not None and current_bid >= take_profit
     stop_triggered = current_bid <= stop

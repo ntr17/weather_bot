@@ -414,8 +414,10 @@ class TestTryOpenNoPosition:
         assert opened
         assert updated_mkt["positions"]["mkt-no-001"]["ev"] > 0.10
 
-    def test_no_stop_uses_absolute_floor(self):
-        """NO stop_price should use no_stop_loss_floor, not entry * pct."""
+    def test_no_stop_uses_entry_pct(self):
+        """NO stop_price should use entry * stop_loss_pct."""
         updated_mkt, _, opened = self._run()
         assert opened
-        assert updated_mkt["positions"]["mkt-no-001"]["stop_price"] == 0.85
+        entry = updated_mkt["positions"]["mkt-no-001"]["entry_price"]
+        expected = round(entry * 0.80, 4)
+        assert updated_mkt["positions"]["mkt-no-001"]["stop_price"] == expected

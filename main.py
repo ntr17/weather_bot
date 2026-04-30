@@ -174,14 +174,6 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
                 and hours >= cfg.min_hours
                 and not dry_run
             ):
-                # Clear closed/resolved positions to allow re-entry
-                positions = mkt.get("positions", {})
-                positions = {
-                    k: v for k, v in positions.items()
-                    if v.get("status") == "open"
-                }
-                mkt = {**mkt, "positions": positions}
-
                 # When ensemble is used, look up ECMWF sigma (the calibrated base model)
                 # then inflate by model spread: σ_eff = √(σ² + (spread/2)²)
                 sigma_source = "ecmwf" if forecast_source == "ensemble" else (forecast_source or "ecmwf")
@@ -190,8 +182,8 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
                     sigma = round(math.sqrt(sigma ** 2 + (snap.model_spread / 2.0) ** 2), 3)
                 src = forecast_source or "ecmwf"
 
-                # Already-open bucket IDs — don't double-bet same bucket
-                open_bucket_ids = set(get_open_positions(mkt).keys())
+                # ALL bucket IDs with ANY position (open or closed) — prevent re-entry
+                all_bucket_ids = set(mkt.get("positions", {}).keys())
 
                 # 1. Try YES on the bucket that matches the forecast
                 matched = next(
@@ -199,14 +191,14 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
                      if in_bucket(forecast_temp, o.t_low, o.t_high)),
                     None,
                 )
-                if matched and matched.market_id not in open_bucket_ids:
+                if matched and matched.market_id not in all_bucket_ids:
                     mkt, state, did_open = try_open_position(
                         mkt, matched, forecast_temp, src, sigma, state, cfg,
                     )
                     if did_open:
                         new_pos += 1
                         city_new += 1
-                        open_bucket_ids.add(matched.market_id)
+                        all_bucket_ids.add(matched.market_id)
 
                 # 2. Try NO on ALL tail buckets (multi-NO strategy)
                 # Cap to max_no_positions per event
@@ -217,7 +209,7 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
                 other_outcomes = [
                     o for o in outcomes
                     if not in_bucket(forecast_temp, o.t_low, o.t_high)
-                    and o.market_id not in open_bucket_ids
+                    and o.market_id not in all_bucket_ids
                 ]
                 for o in other_outcomes:
                     if current_no_count >= cfg.max_no_positions:
@@ -228,7 +220,7 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
                     if did_open:
                         new_pos += 1
                         city_new += 1
-                        open_bucket_ids.add(o.market_id)
+                        all_bucket_ids.add(o.market_id)
                         current_no_count += 1
 
             # Mark as closed by time

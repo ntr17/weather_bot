@@ -359,9 +359,10 @@ class TestNoSideMonitor:
         assert call_reason == "take_profit"
 
     def test_no_no_action_when_price_mid_range(self):
-        """NO_bid = 1 - YES_ask = 0.50: above stop, below TP → no action."""
+        """NO_bid in mid-range: above stop (entry*0.80), below TP (entry*1.10) → no action."""
         mkt = _no_mkt(entry_price=0.38)
-        with patch("core.monitor.fetch_live_price", return_value=(0.48, 0.50)):
+        # NO_bid = 1 - YES_ask = 1 - 0.65 = 0.35; stop=0.304, TP=0.418
+        with patch("core.monitor.fetch_live_price", return_value=(0.33, 0.65)):
             _, _, did_close = check_stops_and_tp(mkt, _state())
         assert not did_close
 
