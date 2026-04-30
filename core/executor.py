@@ -66,7 +66,7 @@ def try_open_position(
     real_bid, real_ask = live
     real_spread = round(real_ask - real_bid, 4)
 
-    if real_ask >= cfg.max_price or real_spread > cfg.max_slippage:
+    if real_ask >= cfg.max_price or real_ask < cfg.min_yes_price or real_spread > cfg.max_slippage:
         unit_sym = mkt.get("unit", "F")
         print(
             f"  [SKIP] {mkt['city_name']} {mkt['date']} — "
@@ -280,6 +280,9 @@ def close_position(
             return mkt, state
         position_id, pos = next(iter(open_pos.items()))
     else:
+        return mkt, state
+
+    if pos.get("status") != "open":
         return mkt, state
 
     pnl = round((exit_price - pos["entry_price"]) * pos["shares"], 2)

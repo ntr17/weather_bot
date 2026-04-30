@@ -305,7 +305,7 @@ def _no_mkt(
         "forecast_temp":      72.0,
         "forecast_source":    "ecmwf",
         "sigma":              1.0,
-        "stop_price":         round(entry_price * 0.80, 4),
+        "stop_price":         round(entry_price * 0.30, 4),
         "trailing_activated": False,
         "opened_at":          "2025-05-01T10:00:00+00:00",
         "status":             "open",
@@ -337,14 +337,14 @@ class TestNoSideMonitor:
         Stop triggers when that falls below stop_price.
         """
         mkt = _no_mkt(entry_price=0.38)
-        # stop_price = 0.38 * 0.80 = 0.304
-        # YES_ask = 0.70 → NO_bid = 0.30 < stop_price
-        with patch("core.monitor.fetch_live_price", return_value=(0.68, 0.70)):
+        # stop_price = 0.38 * 0.30 = 0.114
+        # YES_ask = 0.90 → NO_bid = 0.10 < stop_price
+        with patch("core.monitor.fetch_live_price", return_value=(0.88, 0.90)):
             with patch("core.monitor.close_position", side_effect=_fake_close) as mc:
                 _, _, did_close = check_stops_and_tp(mkt, _state())
         assert did_close
         _, call_exit, call_reason, _, _ = mc.call_args[0]
-        assert call_exit == pytest.approx(0.30, abs=0.001)
+        assert call_exit == pytest.approx(0.10, abs=0.001)
         assert call_reason == "stop_loss"
 
     def test_no_take_profit_uses_no_bid(self):
@@ -359,9 +359,9 @@ class TestNoSideMonitor:
         assert call_reason == "take_profit"
 
     def test_no_no_action_when_price_mid_range(self):
-        """NO_bid in mid-range: above stop (entry*0.80), below TP (entry*1.10) → no action."""
+        """NO_bid in mid-range: above stop (entry*0.30), below TP (entry*1.10) → no action."""
         mkt = _no_mkt(entry_price=0.38)
-        # NO_bid = 1 - YES_ask = 1 - 0.65 = 0.35; stop=0.304, TP=0.418
+        # NO_bid = 1 - YES_ask = 1 - 0.65 = 0.35; stop=0.114, TP=0.418
         with patch("core.monitor.fetch_live_price", return_value=(0.33, 0.65)):
             _, _, did_close = check_stops_and_tp(mkt, _state())
         assert not did_close
@@ -415,3 +415,41 @@ class TestNoSideMonitor:
         _, call_exit, call_reason, _, _ = mc.call_args[0]
         assert call_exit == 0.0
         assert call_reason == "resolved_loss"
+
+
+class TestAuditBugFixes:
+    """Regression tests for bugs found by audit (2026-04-30)."""
+
+    def test_no_tp_capped_at_099(self):
+        """C1: NO TP should be capped at 0.99 when entry * 1.10 > 1.0."""
+        # entry=0.95 → raw TP = 1.045, should cap to 0.99
+        mkt = _no_mkt(entry_price=0.95)
+        mkt["positions"]["mkt-no-001"]["stop_price"] = round(0.95 * 0.30, 4)
+        # NO_bid = 1 - YES_ask = 1 - 0.02 = 0.98 < 0.99 → no trigger
+        with patch("core.monitor.fetch_live_price", return_value=(0.01, 0.02)):
+            _, _, did_close = check_stops_and_tp(mkt, _state())
+        assert not did_close  # 0.98 < 0.99
+
+    def test_no_tp_fires_at_099(self):
+        """C1: NO TP at 0.99 should fire when NO_bid >= 0.99."""
+        mkt = _no_mkt(entry_price=0.95)
+        mkt["positions"]["mkt-no-001"]["stop_price"] = round(0.95 * 0.30, 4)
+        # NO_bid = 1 - YES_ask = 1 - 0.005 = 0.995 >= 0.99 → trigger
+        with patch("core.monitor.fetch_live_price", return_value=(0.003, 0.005)):
+            with patch("core.monitor.close_position", side_effect=_fake_close) as mc:
+                _, _, did_close = check_stops_and_tp(mkt, _state())
+        assert did_close
+        _, _, call_reason, _, _ = mc.call_args[0]
+        assert call_reason == "take_profit"
+
+    def test_double_close_prevented(self):
+        """M2: Closing an already-closed position should be a no-op."""
+        mkt = _no_mkt()
+        # Manually close the position
+        mkt["positions"]["mkt-no-001"]["status"] = "closed"
+        mkt["positions"]["mkt-no-001"]["pnl"] = 5.0
+        mkt["positions"]["mkt-no-001"]["exit_price"] = 1.0
+        # Try to close again via stops — should be skipped
+        with patch("core.monitor.fetch_live_price", return_value=(0.95, 0.97)):
+            _, _, did_close = check_stops_and_tp(mkt, _state(), position_id="mkt-no-001")
+        assert not did_close

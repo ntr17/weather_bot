@@ -41,6 +41,9 @@ def check_stops_and_tp(
     else:
         return mkt, state, False
 
+    if pos.get("status") != "open":
+        return mkt, state, False
+
     mid = pos["market_id"]
     side = pos.get("side", "yes")
 
@@ -78,7 +81,7 @@ def check_stops_and_tp(
         if hours_left < 24:
             take_profit = None      # hold to resolution
         else:
-            take_profit = round(entry * 1.10, 4)   # 10% gain on NO cost
+            take_profit = min(round(entry * 1.10, 4), 0.99)   # 10% gain, capped at $0.99
     else:
         if hours_left < 24:
             take_profit = None          # hold to resolution
