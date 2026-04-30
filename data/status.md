@@ -1,35 +1,37 @@
 # WeatherBot Status
-_Auto-generated 2026-04-30 02:45 UTC_
+_Auto-generated 2026-04-30 06:00 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $645.62 |
+| Balance | $559.11 |
 | Starting | $1,000.00 |
-| Return | -35.4% |
-| Total trades | 325 |
-| Win rate | 5/325 (2%) |
-| Open positions | 9 |
-| Markets tracked | 41 |
+| Return | -44.1% |
+| Total trades | 371 |
+| Win rate | 6/371 (2%) |
+| Open positions | 8 |
+| Markets tracked | 61 |
 | Calibration keys | 112 |
 
 ## Open Positions (9)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
+| Shanghai | 2026-04-30 | 17–17°C | YES | $0.044 | ECMWF | D+0 |
 | Paris | 2026-04-30 | 22–22°C | YES | $0.090 | ECMWF | D+0 |
 | Munich | 2026-04-30 | -999–8°C | YES | $0.006 | METAR | D+0 |
-| Ankara | 2026-04-30 | 19–19°C | YES | $0.050 | ECMWF | D+0 |
-| Shanghai | 2026-04-30 | 17–17°C | YES | $0.044 | ECMWF | D+0 |
-| Singapore | 2026-04-30 | 32–32°C | YES | $0.120 | METAR | D+0 |
+| Munich | 2026-04-30 | 14–14°C | NO | $0.900 | METAR | D+0 |
 | Buenos Aires | 2026-04-30 | 23–23°C | YES | $0.270 | ECMWF | D+0 |
 | Paris | 2026-05-01 | 24–24°C | YES | $0.140 | ECMWF | D+1 |
-| Ankara | 2026-05-01 | 14–14°C | YES | $0.069 | ECMWF | D+1 |
 | Tokyo | 2026-05-01 | 21–999°C | YES | $0.350 | ECMWF | D+1 |
+| Paris | 2026-05-02 | 25–25°C | YES | $0.150 | ECMWF | D+2 |
+| London | 2026-05-02 | 23–23°C | YES | $0.085 | ECMWF | D+2 |
 
-## Recent Trades (last 6)
+## Recent Trades (last 8)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
 |------|------|--------|------|-------|-----|---------|--------|
+| Singapore | 2026-04-30 | 32–32°C | YES | $0.005 | -14.96 | loss | ECMWF |
+| Singapore | 2026-04-30 | 32–32°C | YES | $0.120 | -6.33 | loss | METAR |
 | New York City | 2025-05-01 | 80–83°F | NO | $0.380 | +0.00 | loss | ECMWF |
 | New York City | 2025-05-01 | 80–83°F | NO | $0.380 | +0.00 | win | ECMWF |
 | New York City | 2025-05-01 | 80–83°F | NO | $0.380 | +0.00 | loss | ECMWF |
@@ -41,30 +43,31 @@ _Auto-generated 2026-04-30 02:45 UTC_
 | City | Trades | Wins | WR | PnL | Avg PnL |
 |------|--------|------|-----|-----|---------|
 | New York City | 6 | 3 | 50% | +0.00 | +0.00 |
+| Singapore | 2 | 0 | 0% | -21.29 | -10.64 |
 
 ## City Health (last 20 runs)
 | City | OK | Fails | Rate | Streak | Status | Last Error |
 |------|----|-------|------|--------|--------|------------|
-| Ankara | 7 | 0 | 0% | 0 | ok |  |
-| Atlanta | 7 | 0 | 0% | 0 | ok |  |
-| Buenos Aires | 7 | 0 | 0% | 0 | ok |  |
-| Chicago | 7 | 0 | 0% | 0 | ok |  |
-| Dallas | 7 | 0 | 0% | 0 | ok |  |
-| London | 7 | 0 | 0% | 0 | ok |  |
-| Lucknow | 7 | 0 | 0% | 0 | ok |  |
-| Miami | 7 | 0 | 0% | 0 | ok |  |
-| Munich | 7 | 0 | 0% | 0 | ok |  |
-| New York City | 7 | 0 | 0% | 0 | ok |  |
-| Paris | 7 | 0 | 0% | 0 | ok |  |
-| Sao Paulo | 7 | 0 | 0% | 0 | ok |  |
-| Seattle | 7 | 0 | 0% | 0 | ok |  |
-| Seoul | 7 | 0 | 0% | 0 | ok |  |
-| Shanghai | 7 | 0 | 0% | 0 | ok |  |
-| Singapore | 7 | 0 | 0% | 0 | ok |  |
-| Tel Aviv | 7 | 0 | 0% | 0 | ok |  |
-| Tokyo | 7 | 0 | 0% | 0 | ok |  |
-| Toronto | 7 | 0 | 0% | 0 | ok |  |
-| Wellington | 7 | 0 | 0% | 0 | ok |  |
+| Ankara | 8 | 0 | 0% | 0 | ok |  |
+| Atlanta | 8 | 0 | 0% | 0 | ok |  |
+| Buenos Aires | 8 | 0 | 0% | 0 | ok |  |
+| Chicago | 8 | 0 | 0% | 0 | ok |  |
+| Dallas | 8 | 0 | 0% | 0 | ok |  |
+| London | 8 | 0 | 0% | 0 | ok |  |
+| Lucknow | 8 | 0 | 0% | 0 | ok |  |
+| Miami | 8 | 0 | 0% | 0 | ok |  |
+| Munich | 8 | 0 | 0% | 0 | ok |  |
+| New York City | 8 | 0 | 0% | 0 | ok |  |
+| Paris | 8 | 0 | 0% | 0 | ok |  |
+| Sao Paulo | 8 | 0 | 0% | 0 | ok |  |
+| Seattle | 8 | 0 | 0% | 0 | ok |  |
+| Seoul | 8 | 0 | 0% | 0 | ok |  |
+| Shanghai | 8 | 0 | 0% | 0 | ok |  |
+| Singapore | 8 | 0 | 0% | 0 | ok |  |
+| Tel Aviv | 8 | 0 | 0% | 0 | ok |  |
+| Tokyo | 8 | 0 | 0% | 0 | ok |  |
+| Toronto | 8 | 0 | 0% | 0 | ok |  |
+| Wellington | 8 | 0 | 0% | 0 | ok |  |
 
 ## Calibration (112 keys)
 | City | ECMWF D+1 σ | GFS D+1 σ | Source | Samples |
