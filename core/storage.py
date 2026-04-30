@@ -187,7 +187,16 @@ def load_state(starting_balance: float = 10_000.0) -> dict[str, Any]:
     conn = _get_conn()
     row = conn.execute("SELECT json_data FROM state WHERE id = 1").fetchone()
     if row:
-        return json.loads(row["json_data"])
+        state = json.loads(row["json_data"])
+        # Auto top-up: if config balance was raised, inject the difference
+        old_starting = state.get("starting_balance", starting_balance)
+        if starting_balance > old_starting:
+            top_up = starting_balance - old_starting
+            state["balance"] = round(state["balance"] + top_up, 2)
+            state["starting_balance"] = starting_balance
+            state["peak_balance"] = max(state.get("peak_balance", 0), state["balance"])
+            save_state(state)
+        return state
     return {
         "balance":          starting_balance,
         "starting_balance": starting_balance,

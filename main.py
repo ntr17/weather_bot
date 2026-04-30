@@ -169,8 +169,8 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
                         continue
 
             # ── Open new positions ────────────────────────────────────────────
-            # Guard: don't open if balance is too low (reserve 10% of starting capital)
-            min_reserve = cfg.balance * 0.10
+            # Guard: don't open if balance is critically low (2% reserve)
+            min_reserve = cfg.balance * 0.02
             if (
                 forecast_temp is not None
                 and hours >= cfg.min_hours
