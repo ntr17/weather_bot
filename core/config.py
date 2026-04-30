@@ -30,10 +30,12 @@ class Config:
     max_slippage: float
     # Position management
     stop_loss_pct: float         # YES stop: close when price drops to entry * this
-    no_stop_loss_floor: float    # NO stop: close when NO bid drops below this absolute level
+    no_stop_loss_pct: float      # NO stop: close when NO bid drops to entry * this (wider than YES)
+    no_stop_loss_floor: float    # DEPRECATED — kept for back-compat
     trailing_activation: float   # trailing stop activates when price >= entry * this
     no_pyes_threshold: float     # only sell NO when p_yes < this
     max_no_positions: int         # max simultaneous NO positions per market/event
+    min_yes_price: float         # min YES token price (skip extreme longshots)
     # Operational
     scan_interval: int
     monitor_interval: int
@@ -68,10 +70,12 @@ def load_config() -> Config:
         kelly_fraction=float(raw.get("kelly_fraction", 0.25)),
         max_slippage=float(raw.get("max_slippage", 0.03)),
         stop_loss_pct=float(raw.get("stop_loss_pct", 0.80)),
+        no_stop_loss_pct=float(raw.get("no_stop_loss_pct", 0.30)),
         no_stop_loss_floor=float(raw.get("no_stop_loss_floor", 0.85)),
         trailing_activation=float(raw.get("trailing_activation", 1.20)),
         no_pyes_threshold=float(raw.get("no_pyes_threshold", 0.15)),
         max_no_positions=int(raw.get("max_no_positions", 4)),
+        min_yes_price=float(raw.get("min_yes_price", 0.05)),
         scan_interval=int(raw.get("scan_interval", 3600)),
         monitor_interval=int(raw.get("monitor_interval", 600)),
         calibration_min=int(raw.get("calibration_min", 30)),

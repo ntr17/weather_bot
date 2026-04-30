@@ -45,6 +45,8 @@ def try_open_position(
         return mkt, state, False
     if outcome.ask >= cfg.max_price:
         return mkt, state, False
+    if outcome.ask < cfg.min_yes_price:
+        return mkt, state, False
     if outcome.volume < cfg.min_volume:
         return mkt, state, False
     if outcome.spread > cfg.max_slippage:
@@ -228,7 +230,7 @@ def try_open_no_position(
         "forecast_temp":      forecast_temp,
         "forecast_source":    forecast_source,
         "sigma":              sigma,
-        "stop_price":         round(real_no_ask * cfg.stop_loss_pct, 4),
+        "stop_price":         round(real_no_ask * cfg.no_stop_loss_pct, 4),
         "trailing_activated": False,
         "opened_at":          datetime.now(timezone.utc).isoformat(),
         "status":             "open",

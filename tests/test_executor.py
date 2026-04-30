@@ -83,10 +83,12 @@ def _cfg(**overrides) -> Config:
         kelly_fraction=0.25,
         max_slippage=0.05,
         stop_loss_pct=0.80,
+        no_stop_loss_pct=0.30,
         no_stop_loss_floor=0.85,
         trailing_activation=1.20,
         no_pyes_threshold=0.15,
         max_no_positions=4,
+        min_yes_price=0.05,
         scan_interval=3600,
         monitor_interval=600,
         calibration_min=20,
@@ -415,9 +417,9 @@ class TestTryOpenNoPosition:
         assert updated_mkt["positions"]["mkt-no-001"]["ev"] > 0.10
 
     def test_no_stop_uses_entry_pct(self):
-        """NO stop_price should use entry * stop_loss_pct."""
+        """NO stop_price should use entry * no_stop_loss_pct (wider than YES)."""
         updated_mkt, _, opened = self._run()
         assert opened
         entry = updated_mkt["positions"]["mkt-no-001"]["entry_price"]
-        expected = round(entry * 0.80, 4)
+        expected = round(entry * 0.30, 4)
         assert updated_mkt["positions"]["mkt-no-001"]["stop_price"] == expected

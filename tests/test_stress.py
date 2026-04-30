@@ -58,10 +58,12 @@ CFG = Config(
     min_volume=50,
     kelly_fraction=0.25,
     stop_loss_pct=0.80,
+    no_stop_loss_pct=0.30,
     no_stop_loss_floor=0.85,
     trailing_activation=1.20,
     no_pyes_threshold=0.25,
     max_no_positions=4,
+    min_yes_price=0.05,
     max_hours=168.0,
     min_hours=2.0,
     paper_trading=True,
@@ -261,13 +263,13 @@ def test_no_reentry():
     print(f"  Positions in DB: {len(positions)} ({open_c1} open)")
     print(f"  Bucket IDs: {c1_bucket_ids}")
 
-    # Simulate stop-loss: drop all NO prices by 25%
+    # Simulate stop-loss: drop all NO prices by 80% (below the 0.30 stop)
     stopped_prices = {}
     for o in outcomes:
         pos = positions.get(o.market_id)
         if pos and pos["side"] == "no":
             entry = pos["entry_price"]
-            target_no_bid = entry * 0.70  # well below stop
+            target_no_bid = entry * 0.20  # well below 0.30 stop
             yes_ask_needed = 1.0 - target_no_bid
             stopped_prices[o.market_id] = (o.bid, min(0.99, yes_ask_needed))
         else:
@@ -327,7 +329,7 @@ def test_no_reentry():
 # TEST 2: NO stop_price correctness
 # ════════════════════════════════════════════════════════════════════════════
 def test_no_stop_price():
-    """NO stop_price = entry * stop_loss_pct, never the absolute floor."""
+    """NO stop_price = entry * no_stop_loss_pct, not the broken absolute floor."""
     print("\n" + "="*70)
     print("TEST 2: NO stop_price correctness")
     print("="*70)
@@ -343,14 +345,14 @@ def test_no_stop_price():
     for mid, pos in mkt.get("positions", {}).items():
         if pos["side"] == "no":
             entry = pos["entry_price"]
-            expected_stop = round(entry * CFG.stop_loss_pct, 4)
+            expected_stop = round(entry * CFG.no_stop_loss_pct, 4)
             actual_stop = pos["stop_price"]
             ok = actual_stop == expected_stop
             status = "✓" if ok else "✗"
             print(f"  {status} {mid}: entry=${entry:.3f} stop=${actual_stop:.4f} "
                   f"(expected {expected_stop:.4f})")
             assert ok, (
-                f"FAIL: {mid} stop_price={actual_stop} != entry*0.80={expected_stop}. "
+                f"FAIL: {mid} stop_price={actual_stop} != entry*0.30={expected_stop}. "
                 f"Got absolute floor bug?"
             )
             # Also verify stop < entry (the old bug had stop > entry)
