@@ -169,10 +169,13 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
                         continue
 
             # ── Open new positions ────────────────────────────────────────────
+            # Guard: don't open if balance is too low (reserve 10% of starting capital)
+            min_reserve = cfg.balance * 0.10
             if (
                 forecast_temp is not None
                 and hours >= cfg.min_hours
                 and not dry_run
+                and state["balance"] >= min_reserve
             ):
                 # When ensemble is used, look up ECMWF sigma (the calibrated base model)
                 # then inflate by model spread: σ_eff = √(σ² + (spread/2)²)
