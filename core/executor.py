@@ -13,8 +13,8 @@ from typing import Any
 from core.config import Config
 from core.notifier import trade_closed, trade_opened
 from core.pricer import bet_size, calc_ev, calc_kelly, bucket_prob
+from core.storage import save_market, save_state, append_trade
 from core.scanner import Outcome, fetch_live_price
-from core.storage import get_open_positions, save_market, save_state
 
 
 def try_open_position(
@@ -322,6 +322,7 @@ def close_position(
 
     save_market(updated_mkt)
     save_state(updated_state)
+    append_trade(updated_mkt, pos=updated_positions[position_id])
     trade_closed(
         mkt["city_name"], mkt["date"],
         _bucket_label(pos["bucket_low"], pos["bucket_high"], mkt.get("unit", "F")),
