@@ -1,20 +1,20 @@
 # WeatherBot Status
-_Auto-generated 2026-04-30 14:14 UTC_
+_Auto-generated 2026-04-30 16:03 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $95.34 |
+| Balance | $96.27 |
 | Starting | $10,000.00 |
 | Return | -99.0% |
-| Total trades | 62 |
-| Win rate | 5/62 (8%) |
-| Open positions | 29 |
+| Total trades | 64 |
+| Win rate | 5/64 (8%) |
+| Open positions | 28 |
 | Markets tracked | 61 |
 | Calibration keys | 112 |
 
-## Open Positions (44)
+## Open Positions (43)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
 | Chicago | 2026-04-30 | 56–57°F | NO | $0.770 | ENSEMBLE | D+0 |
@@ -27,15 +27,13 @@ _Auto-generated 2026-04-30 14:14 UTC_
 | Tokyo | 2026-05-01 | 21–999°C | YES | $0.350 | ECMWF | D+1 |
 | Shanghai | 2026-05-01 | 25–25°C | NO | $0.695 | ECMWF | D+1 |
 | Shanghai | 2026-05-01 | 26–26°C | NO | $0.816 | ECMWF | D+1 |
-| Singapore | 2026-05-01 | 31–31°C | YES | $0.130 | ECMWF | D+1 |
 | Lucknow | 2026-05-01 | 36–36°C | YES | $0.200 | ECMWF | D+1 |
-| Lucknow | 2026-05-01 | -999–34°C | NO | $0.770 | ECMWF | D+1 |
 | Tel Aviv | 2026-05-01 | 24–24°C | NO | $0.510 | ECMWF | D+1 |
 | Toronto | 2026-05-01 | 10–10°C | NO | $0.700 | ECMWF | D+1 |
-| Buenos Aires | 2026-05-01 | 23–23°C | NO | $0.850 | ECMWF | D+1 |
-| Buenos Aires | 2026-05-01 | 24–24°C | NO | $0.610 | ECMWF | D+1 |
 | Sao Paulo | 2026-05-01 | 26–26°C | YES | $0.098 | ECMWF | D+1 |
 | Sao Paulo | 2026-05-01 | 27–27°C | NO | $0.670 | ECMWF | D+1 |
+| Buenos Aires | 2026-05-01 | 23–23°C | NO | $0.850 | ECMWF | D+1 |
+| Buenos Aires | 2026-05-01 | 24–24°C | NO | $0.610 | ECMWF | D+1 |
 | New York City | 2026-05-02 | 56–57°F | NO | $0.810 | ECMWF | D+2 |
 | New York City | 2026-05-02 | 58–59°F | NO | $0.730 | ECMWF | D+2 |
 | Chicago | 2026-05-02 | 52–53°F | NO | $0.770 | ECMWF | D+2 |
@@ -57,6 +55,7 @@ _Auto-generated 2026-04-30 14:14 UTC_
 | Singapore | 2026-05-02 | 33–33°C | NO | $0.730 | ECMWF | D+2 |
 | Singapore | 2026-05-02 | 34–34°C | NO | $0.920 | ECMWF | D+2 |
 | Lucknow | 2026-05-02 | 38–38°C | YES | $0.060 | ECMWF | D+2 |
+| Lucknow | 2026-05-02 | -999–36°C | NO | $0.350 | ECMWF | D+2 |
 | Tel Aviv | 2026-05-02 | 29–29°C | NO | $0.770 | ECMWF | D+2 |
 | Sao Paulo | 2026-05-02 | 29–29°C | NO | $0.660 | ECMWF | D+2 |
 | Sao Paulo | 2026-05-02 | 30–30°C | NO | $0.760 | ECMWF | D+2 |
@@ -65,6 +64,8 @@ _Auto-generated 2026-04-30 14:14 UTC_
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
 |------|------|--------|------|-------|-----|---------|--------|
+| Lucknow | 2026-05-01 | -999–34°C | NO | $0.770 | -5.71 | None | ECMWF |
+| Singapore | 2026-05-01 | 31–31°C | YES | $0.130 | -3.83 | None | ECMWF |
 | Sao Paulo | 2026-05-01 | 25–25°C | YES | $0.017 | -3.97 | None | ECMWF |
 | Sao Paulo | 2026-04-30 | 26–26°C | YES | $0.210 | -4.80 | None | ECMWF |
 | Toronto | 2026-04-30 | 10–10°C | NO | $0.740 | +2.97 | None | ECMWF |
@@ -83,47 +84,45 @@ _Auto-generated 2026-04-30 14:14 UTC_
 | Paris | 2026-04-30 | 22–22°C | YES | $0.090 | -13.33 | None | ECMWF |
 | New York City | 2025-05-01 | 80–83°F | NO | $0.380 | +0.00 | loss | ECMWF |
 | New York City | 2025-05-01 | 80–83°F | NO | $0.380 | +0.00 | win | ECMWF |
-| New York City | 2025-05-01 | 80–83°F | NO | $0.380 | +0.00 | loss | ECMWF |
-| New York City | 2025-05-01 | 80–83°F | NO | $0.380 | +0.00 | win | ECMWF |
 
 ## City Performance
 | City | Trades | Wins | WR | PnL | Avg PnL |
 |------|--------|------|-----|-----|---------|
 | Ankara | 1 | 0 | 0% | -5.73 | -5.73 |
 | Buenos Aires | 2 | 0 | 0% | -5.67 | -2.83 |
-| Lucknow | 1 | 0 | 0% | +2.50 | +2.50 |
+| Lucknow | 2 | 0 | 0% | -3.21 | -1.60 |
 | Munich | 2 | 0 | 0% | -22.00 | -11.00 |
 | New York City | 12 | 5 | 42% | -3.16 | -0.26 |
 | Paris | 2 | 0 | 0% | -0.71 | -0.36 |
 | Sao Paulo | 2 | 0 | 0% | -8.77 | -4.38 |
 | Seoul | 1 | 0 | 0% | -2.56 | -2.56 |
 | Shanghai | 1 | 0 | 0% | -3.93 | -3.93 |
-| Singapore | 3 | 0 | 0% | -27.96 | -9.32 |
+| Singapore | 4 | 0 | 0% | -31.79 | -7.95 |
 | Toronto | 1 | 0 | 0% | +2.97 | +2.97 |
 
 ## City Health (last 20 runs)
 | City | OK | Fails | Rate | Streak | Status | Last Error |
 |------|----|-------|------|--------|--------|------------|
-| Ankara | 12 | 0 | 0% | 0 | ok |  |
-| Atlanta | 12 | 0 | 0% | 0 | ok |  |
-| Buenos Aires | 12 | 0 | 0% | 0 | ok |  |
-| Chicago | 12 | 0 | 0% | 0 | ok |  |
-| Dallas | 12 | 0 | 0% | 0 | ok |  |
-| London | 12 | 0 | 0% | 0 | ok |  |
-| Lucknow | 12 | 0 | 0% | 0 | ok |  |
-| Miami | 12 | 0 | 0% | 0 | ok |  |
-| Munich | 12 | 0 | 0% | 0 | ok |  |
-| New York City | 12 | 0 | 0% | 0 | ok |  |
-| Paris | 12 | 0 | 0% | 0 | ok |  |
-| Sao Paulo | 12 | 0 | 0% | 0 | ok |  |
-| Seattle | 12 | 0 | 0% | 0 | ok |  |
-| Seoul | 12 | 0 | 0% | 0 | ok |  |
-| Shanghai | 12 | 0 | 0% | 0 | ok |  |
-| Singapore | 12 | 0 | 0% | 0 | ok |  |
-| Tel Aviv | 12 | 0 | 0% | 0 | ok |  |
-| Tokyo | 12 | 0 | 0% | 0 | ok |  |
-| Toronto | 12 | 0 | 0% | 0 | ok |  |
-| Wellington | 12 | 0 | 0% | 0 | ok |  |
+| Ankara | 13 | 0 | 0% | 0 | ok |  |
+| Atlanta | 13 | 0 | 0% | 0 | ok |  |
+| Buenos Aires | 13 | 0 | 0% | 0 | ok |  |
+| Chicago | 13 | 0 | 0% | 0 | ok |  |
+| Dallas | 13 | 0 | 0% | 0 | ok |  |
+| London | 13 | 0 | 0% | 0 | ok |  |
+| Lucknow | 13 | 0 | 0% | 0 | ok |  |
+| Miami | 13 | 0 | 0% | 0 | ok |  |
+| Munich | 13 | 0 | 0% | 0 | ok |  |
+| New York City | 13 | 0 | 0% | 0 | ok |  |
+| Paris | 13 | 0 | 0% | 0 | ok |  |
+| Sao Paulo | 13 | 0 | 0% | 0 | ok |  |
+| Seattle | 13 | 0 | 0% | 0 | ok |  |
+| Seoul | 13 | 0 | 0% | 0 | ok |  |
+| Shanghai | 13 | 0 | 0% | 0 | ok |  |
+| Singapore | 13 | 0 | 0% | 0 | ok |  |
+| Tel Aviv | 13 | 0 | 0% | 0 | ok |  |
+| Tokyo | 13 | 0 | 0% | 0 | ok |  |
+| Toronto | 13 | 0 | 0% | 0 | ok |  |
+| Wellington | 13 | 0 | 0% | 0 | ok |  |
 
 ## Calibration (112 keys)
 | City | ECMWF D+1 σ | GFS D+1 σ | Source | Samples |
