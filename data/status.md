@@ -1,33 +1,31 @@
 # WeatherBot Status
-_Auto-generated 2026-04-29 23:56 UTC_
+_Auto-generated 2026-04-30 02:45 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $611.05 |
+| Balance | $645.62 |
 | Starting | $1,000.00 |
-| Return | -38.9% |
-| Total trades | 273 |
-| Win rate | 1/273 (0%) |
+| Return | -35.4% |
+| Total trades | 325 |
+| Win rate | 5/325 (2%) |
 | Open positions | 9 |
 | Markets tracked | 41 |
 | Calibration keys | 112 |
 
-## Open Positions (11)
+## Open Positions (9)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| Shanghai | 2026-04-30 | 17–17°C | YES | $0.059 | ECMWF | D+1 |
-| Paris | 2026-04-30 | 22–22°C | YES | $0.090 | ECMWF | D+1 |
-| Munich | 2026-04-30 | 14–14°C | YES | $0.180 | ECMWF | D+1 |
-| Munich | 2026-04-30 | 13–13°C | YES | $0.012 | ECMWF | D+1 |
-| Singapore | 2026-04-30 | 34–34°C | NO | $0.899 | ECMWF | D+1 |
-| Buenos Aires | 2026-04-30 | 22–22°C | YES | $0.180 | ECMWF | D+1 |
-| Buenos Aires | 2026-04-30 | 25–25°C | NO | $0.870 | ECMWF | D+1 |
-| Paris | 2026-05-01 | 24–24°C | YES | $0.140 | ECMWF | D+2 |
-| Munich | 2026-05-01 | 18–18°C | YES | $0.080 | ECMWF | D+2 |
-| Tokyo | 2026-05-01 | 21–999°C | YES | $0.350 | ECMWF | D+2 |
-| Lucknow | 2026-05-01 | 36–36°C | YES | $0.090 | ECMWF | D+2 |
+| Paris | 2026-04-30 | 22–22°C | YES | $0.090 | ECMWF | D+0 |
+| Munich | 2026-04-30 | -999–8°C | YES | $0.006 | METAR | D+0 |
+| Ankara | 2026-04-30 | 19–19°C | YES | $0.050 | ECMWF | D+0 |
+| Shanghai | 2026-04-30 | 17–17°C | YES | $0.044 | ECMWF | D+0 |
+| Singapore | 2026-04-30 | 32–32°C | YES | $0.120 | METAR | D+0 |
+| Buenos Aires | 2026-04-30 | 23–23°C | YES | $0.270 | ECMWF | D+0 |
+| Paris | 2026-05-01 | 24–24°C | YES | $0.140 | ECMWF | D+1 |
+| Ankara | 2026-05-01 | 14–14°C | YES | $0.069 | ECMWF | D+1 |
+| Tokyo | 2026-05-01 | 21–999°C | YES | $0.350 | ECMWF | D+1 |
 
 ## Recent Trades (last 6)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
@@ -47,26 +45,26 @@ _Auto-generated 2026-04-29 23:56 UTC_
 ## City Health (last 20 runs)
 | City | OK | Fails | Rate | Streak | Status | Last Error |
 |------|----|-------|------|--------|--------|------------|
-| Ankara | 6 | 0 | 0% | 0 | ok |  |
-| Atlanta | 6 | 0 | 0% | 0 | ok |  |
-| Buenos Aires | 6 | 0 | 0% | 0 | ok |  |
-| Chicago | 6 | 0 | 0% | 0 | ok |  |
-| Dallas | 6 | 0 | 0% | 0 | ok |  |
-| London | 6 | 0 | 0% | 0 | ok |  |
-| Lucknow | 6 | 0 | 0% | 0 | ok |  |
-| Miami | 6 | 0 | 0% | 0 | ok |  |
-| Munich | 6 | 0 | 0% | 0 | ok |  |
-| New York City | 6 | 0 | 0% | 0 | ok |  |
-| Paris | 6 | 0 | 0% | 0 | ok |  |
-| Sao Paulo | 6 | 0 | 0% | 0 | ok |  |
-| Seattle | 6 | 0 | 0% | 0 | ok |  |
-| Seoul | 6 | 0 | 0% | 0 | ok |  |
-| Shanghai | 6 | 0 | 0% | 0 | ok |  |
-| Singapore | 6 | 0 | 0% | 0 | ok |  |
-| Tel Aviv | 6 | 0 | 0% | 0 | ok |  |
-| Tokyo | 6 | 0 | 0% | 0 | ok |  |
-| Toronto | 6 | 0 | 0% | 0 | ok |  |
-| Wellington | 6 | 0 | 0% | 0 | ok |  |
+| Ankara | 7 | 0 | 0% | 0 | ok |  |
+| Atlanta | 7 | 0 | 0% | 0 | ok |  |
+| Buenos Aires | 7 | 0 | 0% | 0 | ok |  |
+| Chicago | 7 | 0 | 0% | 0 | ok |  |
+| Dallas | 7 | 0 | 0% | 0 | ok |  |
+| London | 7 | 0 | 0% | 0 | ok |  |
+| Lucknow | 7 | 0 | 0% | 0 | ok |  |
+| Miami | 7 | 0 | 0% | 0 | ok |  |
+| Munich | 7 | 0 | 0% | 0 | ok |  |
+| New York City | 7 | 0 | 0% | 0 | ok |  |
+| Paris | 7 | 0 | 0% | 0 | ok |  |
+| Sao Paulo | 7 | 0 | 0% | 0 | ok |  |
+| Seattle | 7 | 0 | 0% | 0 | ok |  |
+| Seoul | 7 | 0 | 0% | 0 | ok |  |
+| Shanghai | 7 | 0 | 0% | 0 | ok |  |
+| Singapore | 7 | 0 | 0% | 0 | ok |  |
+| Tel Aviv | 7 | 0 | 0% | 0 | ok |  |
+| Tokyo | 7 | 0 | 0% | 0 | ok |  |
+| Toronto | 7 | 0 | 0% | 0 | ok |  |
+| Wellington | 7 | 0 | 0% | 0 | ok |  |
 
 ## Calibration (112 keys)
 | City | ECMWF D+1 σ | GFS D+1 σ | Source | Samples |
