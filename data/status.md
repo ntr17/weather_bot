@@ -1,25 +1,23 @@
 # WeatherBot Status
-_Auto-generated 2026-05-02 17:16 UTC_
+_Auto-generated 2026-05-02 18:12 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $3,101.13 |
+| Balance | $3,186.89 |
 | Starting | $5,000.00 |
-| Return | -38.0% |
-| Total trades | 189 |
-| Win rate | 57/189 (30%) |
-| Open positions | 35 |
+| Return | -36.3% |
+| Total trades | 192 |
+| Win rate | 60/192 (31%) |
+| Open positions | 33 |
 | Markets tracked | 101 |
 | Calibration keys | 112 |
 
-## Open Positions (63)
+## Open Positions (61)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
 | Munich | 2026-05-02 | 26–999°C | NO | $0.798 | ECMWF | D+0 |
-| Seoul | 2026-05-02 | 19–19°C | NO | $0.730 | ECMWF | D+0 |
-| Seoul | 2026-05-02 | 20–20°C | NO | $0.774 | ECMWF | D+0 |
 | Shanghai | 2026-05-02 | 25–25°C | NO | $0.840 | ECMWF | D+0 |
 | Singapore | 2026-05-02 | 34–34°C | NO | $0.920 | ECMWF | D+0 |
 | Toronto | 2026-05-02 | 10–10°C | NO | $0.770 | ECMWF | D+0 |
@@ -57,7 +55,6 @@ _Auto-generated 2026-05-02 17:16 UTC_
 | Miami | 2026-05-04 | 82–83°F | NO | $0.800 | ECMWF | D+2 |
 | Atlanta | 2026-05-04 | 80–81°F | NO | $0.860 | ECMWF | D+2 |
 | Atlanta | 2026-05-04 | 78–79°F | NO | $0.690 | ECMWF | D+2 |
-| London | 2026-05-04 | 15–15°C | NO | $0.790 | ECMWF | D+2 |
 | Munich | 2026-05-04 | 24–24°C | NO | $0.710 | ECMWF | D+2 |
 | Munich | 2026-05-04 | 25–25°C | NO | $0.890 | ECMWF | D+2 |
 | Munich | 2026-05-04 | 26–999°C | NO | $0.780 | ECMWF | D+2 |
@@ -68,6 +65,7 @@ _Auto-generated 2026-05-02 17:16 UTC_
 | Tokyo | 2026-05-04 | 26–26°C | NO | $0.790 | ECMWF | D+2 |
 | Shanghai | 2026-05-04 | 25–25°C | NO | $0.800 | ECMWF | D+2 |
 | Shanghai | 2026-05-04 | 24–24°C | NO | $0.660 | ECMWF | D+2 |
+| Shanghai | 2026-05-04 | 22–22°C | YES | $0.080 | ECMWF | D+2 |
 | Singapore | 2026-05-04 | 32–32°C | NO | $0.640 | ECMWF | D+2 |
 | Singapore | 2026-05-04 | 33–33°C | NO | $0.710 | ECMWF | D+2 |
 | Singapore | 2026-05-04 | 34–34°C | NO | $0.910 | ECMWF | D+2 |
@@ -84,6 +82,9 @@ _Auto-generated 2026-05-02 17:16 UTC_
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
 |------|------|--------|------|-------|-----|---------|--------|
+| Seoul | 2026-05-02 | 20–20°C | NO | $0.774 | +7.30 | None | ECMWF |
+| Seoul | 2026-05-02 | 19–19°C | NO | $0.730 | +9.25 | None | ECMWF |
+| London | 2026-05-04 | 15–15°C | NO | $0.790 | +3.48 | None | ECMWF |
 | Sao Paulo | 2026-05-02 | 29–29°C | NO | $0.660 | -6.36 | None | ECMWF |
 | Miami | 2026-05-04 | 78–79°F | NO | $0.780 | -0.96 | None | ECMWF |
 | Wellington | 2026-05-02 | 17–17°C | NO | $0.710 | +8.17 | None | ECMWF |
@@ -101,9 +102,6 @@ _Auto-generated 2026-05-02 17:16 UTC_
 | Tel Aviv | 2026-05-02 | 28–28°C | NO | $0.840 | +4.76 | None | ECMWF |
 | London | 2026-05-04 | 16–16°C | NO | $0.700 | -1.07 | None | ECMWF |
 | Singapore | 2026-05-03 | 31–31°C | NO | $0.790 | -0.95 | None | ECMWF |
-| Seoul | 2026-05-04 | 17–17°C | NO | $0.770 | -0.32 | None | ECMWF |
-| Ankara | 2026-05-03 | 8–8°C | NO | $0.680 | -5.51 | None | ECMWF |
-| Paris | 2026-05-03 | 18–18°C | YES | $0.270 | -0.93 | None | ECMWF |
 
 ## City Performance
 | City | Trades | Wins | WR | PnL | Avg PnL |
@@ -113,7 +111,7 @@ _Auto-generated 2026-05-02 17:16 UTC_
 | Buenos Aires | 8 | 0 | 0% | -50.75 | -6.34 |
 | Chicago | 4 | 0 | 0% | -2.00 | -0.50 |
 | Dallas | 1 | 0 | 0% | +4.44 | +4.44 |
-| London | 9 | 0 | 0% | +10.15 | +1.13 |
+| London | 10 | 0 | 0% | +13.63 | +1.36 |
 | Lucknow | 8 | 0 | 0% | -11.00 | -1.38 |
 | Miami | 8 | 0 | 0% | +38.09 | +4.76 |
 | Munich | 12 | 0 | 0% | -82.52 | -6.88 |
@@ -121,7 +119,7 @@ _Auto-generated 2026-05-02 17:16 UTC_
 | Paris | 10 | 0 | 0% | -28.70 | -2.87 |
 | Sao Paulo | 9 | 0 | 0% | -58.84 | -6.54 |
 | Seattle | 3 | 0 | 0% | -15.77 | -5.26 |
-| Seoul | 7 | 0 | 0% | +1.41 | +0.20 |
+| Seoul | 9 | 0 | 0% | +17.96 | +2.00 |
 | Shanghai | 9 | 0 | 0% | -17.91 | -1.99 |
 | Singapore | 10 | 0 | 0% | -56.11 | -5.61 |
 | Tel Aviv | 5 | 0 | 0% | -18.61 | -3.72 |
