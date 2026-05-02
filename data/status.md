@@ -1,20 +1,20 @@
 # WeatherBot Status
-_Auto-generated 2026-05-02 16:12 UTC_
+_Auto-generated 2026-05-02 17:16 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $3,176.13 |
+| Balance | $3,101.13 |
 | Starting | $5,000.00 |
-| Return | -36.5% |
+| Return | -38.0% |
 | Total trades | 189 |
 | Win rate | 57/189 (30%) |
 | Open positions | 35 |
 | Markets tracked | 101 |
 | Calibration keys | 112 |
 
-## Open Positions (60)
+## Open Positions (63)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
 | Munich | 2026-05-02 | 26–999°C | NO | $0.798 | ECMWF | D+0 |
@@ -60,6 +60,7 @@ _Auto-generated 2026-05-02 16:12 UTC_
 | London | 2026-05-04 | 15–15°C | NO | $0.790 | ECMWF | D+2 |
 | Munich | 2026-05-04 | 24–24°C | NO | $0.710 | ECMWF | D+2 |
 | Munich | 2026-05-04 | 25–25°C | NO | $0.890 | ECMWF | D+2 |
+| Munich | 2026-05-04 | 26–999°C | NO | $0.780 | ECMWF | D+2 |
 | Ankara | 2026-05-04 | 7–7°C | NO | $0.700 | ECMWF | D+2 |
 | Seoul | 2026-05-04 | 18–18°C | NO | $0.760 | ECMWF | D+2 |
 | Seoul | 2026-05-04 | 19–19°C | NO | $0.820 | ECMWF | D+2 |
@@ -75,6 +76,8 @@ _Auto-generated 2026-05-02 16:12 UTC_
 | Toronto | 2026-05-04 | 18–18°C | NO | $0.870 | ECMWF | D+2 |
 | Toronto | 2026-05-04 | 20–20°C | NO | $0.790 | ECMWF | D+2 |
 | Buenos Aires | 2026-05-04 | 23–23°C | NO | $0.770 | ECMWF | D+2 |
+| Buenos Aires | 2026-05-04 | 21–21°C | YES | $0.250 | ECMWF | D+2 |
+| Buenos Aires | 2026-05-04 | 22–22°C | NO | $0.730 | ECMWF | D+2 |
 | Wellington | 2026-05-04 | 17–17°C | NO | $0.720 | ECMWF | D+2 |
 | Wellington | 2026-05-04 | 16–16°C | NO | $0.530 | ECMWF | D+2 |
 
