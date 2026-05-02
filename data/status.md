@@ -1,20 +1,20 @@
 # WeatherBot Status
-_Auto-generated 2026-05-02 21:41 UTC_
+_Auto-generated 2026-05-02 22:41 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $3,084.67 |
+| Balance | $3,059.67 |
 | Starting | $5,000.00 |
-| Return | -38.3% |
+| Return | -38.8% |
 | Total trades | 198 |
 | Win rate | 62/198 (31%) |
-| Open positions | 33 |
+| Open positions | 34 |
 | Markets tracked | 101 |
 | Calibration keys | 112 |
 
-## Open Positions (64)
+## Open Positions (65)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
 | Munich | 2026-05-02 | 26–999°C | NO | $0.798 | ECMWF | D+0 |
@@ -36,6 +36,7 @@ _Auto-generated 2026-05-02 21:41 UTC_
 | Singapore | 2026-05-03 | 32–32°C | NO | $0.650 | ECMWF | D+1 |
 | Singapore | 2026-05-03 | 34–34°C | NO | $0.910 | ECMWF | D+1 |
 | Singapore | 2026-05-03 | 33–33°C | NO | $0.740 | ECMWF | D+1 |
+| Lucknow | 2026-05-03 | 36–36°C | YES | $0.190 | ECMWF | D+1 |
 | Tel Aviv | 2026-05-03 | 25–25°C | NO | $0.770 | ECMWF | D+1 |
 | Tel Aviv | 2026-05-03 | 27–27°C | NO | $0.810 | ECMWF | D+1 |
 | Toronto | 2026-05-03 | 14–14°C | NO | $0.760 | ECMWF | D+1 |
