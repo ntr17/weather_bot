@@ -1,25 +1,23 @@
 # WeatherBot Status
-_Auto-generated 2026-05-03 21:43 UTC_
+_Auto-generated 2026-05-03 22:41 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $3,050.10 |
+| Balance | $3,083.70 |
 | Starting | $5,000.00 |
-| Return | -39.0% |
-| Total trades | 267 |
-| Win rate | 89/267 (33%) |
-| Open positions | 28 |
+| Return | -38.3% |
+| Total trades | 269 |
+| Win rate | 90/269 (33%) |
+| Open positions | 27 |
 | Markets tracked | 121 |
 | Calibration keys | 112 |
 
-## Open Positions (57)
+## Open Positions (55)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| New York City | 2026-05-03 | 60–61°F | NO | $0.700 | ECMWF | D+0 |
 | New York City | 2026-05-03 | 62–63°F | NO | $0.870 | ECMWF | D+0 |
-| Toronto | 2026-05-03 | 14–14°C | NO | $0.760 | ECMWF | D+0 |
 | Buenos Aires | 2026-05-03 | 18–18°C | NO | $0.680 | ECMWF | D+0 |
 | Buenos Aires | 2026-05-03 | 19–19°C | NO | $0.780 | ECMWF | D+0 |
 | Paris | 2026-05-04 | 19–19°C | NO | $0.690 | ECMWF | D+1 |
@@ -78,6 +76,8 @@ _Auto-generated 2026-05-03 21:43 UTC_
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
 |------|------|--------|------|-------|-----|---------|--------|
+| Toronto | 2026-05-03 | 14–14°C | NO | $0.760 | +7.89 | None | ECMWF |
+| New York City | 2026-05-03 | 60–61°F | NO | $0.700 | -24.29 | None | ECMWF |
 | Wellington | 2026-05-04 | 15–15°C | YES | $0.150 | -10.00 | None | ECMWF |
 | Seoul | 2026-05-05 | 17–17°C | NO | $0.790 | -1.58 | None | ECMWF |
 | Atlanta | 2026-05-04 | 76–77°F | NO | $0.830 | -4.22 | None | ENSEMBLE |
@@ -96,8 +96,6 @@ _Auto-generated 2026-05-03 21:43 UTC_
 | Paris | 2026-05-03 | 21–21°C | NO | $0.890 | -24.16 | None | ECMWF |
 | Sao Paulo | 2026-05-03 | 19–19°C | NO | $0.900 | -19.72 | None | ECMWF |
 | Munich | 2026-05-05 | 21–21°C | YES | $0.270 | -7.41 | None | ECMWF |
-| Shanghai | 2026-05-05 | 24–24°C | NO | $0.750 | +0.67 | None | ECMWF |
-| Paris | 2026-05-05 | 15–15°C | NO | $0.670 | -2.24 | None | ECMWF |
 
 ## City Performance
 | City | Trades | Wins | WR | PnL | Avg PnL |
@@ -111,7 +109,7 @@ _Auto-generated 2026-05-03 21:43 UTC_
 | Lucknow | 9 | 0 | 0% | -18.89 | -2.10 |
 | Miami | 14 | 0 | 0% | +25.56 | +1.83 |
 | Munich | 15 | 0 | 0% | -83.46 | -5.56 |
-| New York City | 22 | 5 | 23% | -7.26 | -0.33 |
+| New York City | 23 | 5 | 22% | -31.55 | -1.37 |
 | Paris | 17 | 0 | 0% | -84.21 | -4.95 |
 | Sao Paulo | 16 | 0 | 0% | -75.29 | -4.71 |
 | Seattle | 4 | 0 | 0% | -34.33 | -8.58 |
@@ -120,7 +118,7 @@ _Auto-generated 2026-05-03 21:43 UTC_
 | Singapore | 17 | 0 | 0% | -77.12 | -4.54 |
 | Tel Aviv | 10 | 0 | 0% | -30.06 | -3.01 |
 | Tokyo | 10 | 0 | 0% | +7.74 | +0.77 |
-| Toronto | 11 | 0 | 0% | +15.43 | +1.40 |
+| Toronto | 12 | 0 | 0% | +23.32 | +1.94 |
 | Wellington | 8 | 0 | 0% | -22.90 | -2.86 |
 
 ## City Health (last 20 runs)
