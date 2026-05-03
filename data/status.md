@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-05-03 17:27 UTC_
+_Auto-generated 2026-05-03 18:14 UTC_
 
 ## Summary
 | Metric | Value |
@@ -66,6 +66,8 @@ _Auto-generated 2026-05-03 17:27 UTC_
 | Seoul | 2026-05-05 | 18–18°C | NO | $0.800 | ECMWF | D+2 |
 | Seoul | 2026-05-05 | 19–19°C | NO | $0.830 | ECMWF | D+2 |
 | Seoul | 2026-05-05 | 17–17°C | NO | $0.790 | ECMWF | D+2 |
+| Tokyo | 2026-05-05 | 21–21°C | NO | $0.690 | ECMWF | D+2 |
+| Tokyo | 2026-05-05 | 22–22°C | NO | $0.620 | ECMWF | D+2 |
 | Shanghai | 2026-05-05 | 25–25°C | NO | $0.670 | ECMWF | D+2 |
 | Shanghai | 2026-05-05 | 26–26°C | NO | $0.780 | ECMWF | D+2 |
 | Singapore | 2026-05-05 | 33–33°C | NO | $0.650 | ECMWF | D+2 |
@@ -81,8 +83,6 @@ _Auto-generated 2026-05-03 17:27 UTC_
 | Buenos Aires | 2026-05-05 | 23–23°C | NO | $0.780 | ECMWF | D+2 |
 | Wellington | 2026-05-05 | 16–16°C | NO | $0.640 | ECMWF | D+2 |
 | Wellington | 2026-05-05 | 17–17°C | NO | $0.750 | ECMWF | D+2 |
-| Tokyo | 2026-05-05 | 21–21°C | NO | $0.690 | ECMWF | D+2 |
-| Tokyo | 2026-05-05 | 22–22°C | NO | $0.620 | ECMWF | D+2 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
