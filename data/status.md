@@ -1,31 +1,34 @@
 # WeatherBot Status
-_Auto-generated 2026-05-05 22:12 UTC_
+_Auto-generated 2026-05-05 23:29 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $4,311.91 |
+| Balance | $4,236.91 |
 | Starting | $5,000.00 |
-| Return | -13.8% |
+| Return | -15.3% |
 | Total trades | 5 |
 | Win rate | 0/5 (0%) |
-| Open positions | 18 |
+| Open positions | 21 |
 | Markets tracked | 161 |
 | Calibration keys | 112 |
 
-## Open Positions (26)
+## Open Positions (29)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
 | New York City | 2026-05-06 | 64–65°F | NO | $0.860 | ENSEMBLE | D+1 |
 | London | 2026-05-06 | 15–15°C | NO | $0.800 | ECMWF | D+1 |
+| Paris | 2026-05-06 | 16–16°C | NO | $0.780 | ECMWF | D+1 |
 | Shanghai | 2026-05-06 | 27–27°C | NO | $0.840 | ECMWF | D+1 |
+| Singapore | 2026-05-06 | 30–30°C | YES | $0.120 | ECMWF | D+1 |
 | Toronto | 2026-05-06 | 10–10°C | NO | $0.820 | ECMWF | D+1 |
 | New York City | 2026-05-07 | 64–65°F | NO | $0.710 | ECMWF | D+2 |
 | Chicago | 2026-05-07 | 62–63°F | NO | $0.840 | ECMWF | D+2 |
 | Chicago | 2026-05-07 | 56–57°F | NO | $0.870 | ECMWF | D+2 |
 | Dallas | 2026-05-07 | 70–71°F | NO | $0.820 | ECMWF | D+2 |
 | Seattle | 2026-05-07 | 68–69°F | NO | $0.820 | ECMWF | D+2 |
+| Atlanta | 2026-05-07 | 76–77°F | NO | $0.770 | ECMWF | D+2 |
 | London | 2026-05-07 | 15–15°C | NO | $0.760 | ECMWF | D+2 |
 | Paris | 2026-05-07 | 16–16°C | NO | $0.680 | ECMWF | D+2 |
 | Paris | 2026-05-07 | 17–17°C | NO | $0.660 | ECMWF | D+2 |
