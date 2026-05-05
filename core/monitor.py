@@ -23,6 +23,7 @@ def check_stops_and_tp(
     state: dict[str, Any],
     trailing_activation: float = 1.20,
     position_id: str | None = None,
+    no_stop_enabled: bool = True,
 ) -> tuple[dict[str, Any], dict[str, Any], bool]:
     """
     Check stop-loss, trailing stop, and take-profit on a single open position.
@@ -91,7 +92,11 @@ def check_stops_and_tp(
             take_profit = 0.75
 
     take_triggered = take_profit is not None and current_bid >= take_profit
-    stop_triggered = current_bid <= stop
+    # NO stop-loss is disabled when no_stop_enabled=False (hold to resolution)
+    if side == "no" and not no_stop_enabled:
+        stop_triggered = False
+    else:
+        stop_triggered = current_bid <= stop
 
     if not (take_triggered or stop_triggered):
         return mkt, state, False

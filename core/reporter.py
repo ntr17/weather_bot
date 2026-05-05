@@ -24,6 +24,14 @@ STATUS_PATH = Path(__file__).parent.parent / "data" / "status.md"
 
 def generate_status(cfg) -> str:
     """Build full status report and write to data/status.md."""
+    import json as _json
+    _cfg_path = Path(__file__).parent.parent / "config.json"
+    try:
+        with open(_cfg_path, encoding="utf-8") as _f:
+            cfg_dict = _json.load(_f)
+    except Exception:
+        cfg_dict = {}
+
     now = datetime.now(timezone.utc)
     state = load_state(cfg.balance)
     all_mkts = load_all_markets()
@@ -164,11 +172,72 @@ def generate_status(cfg) -> str:
     lines.append(f"| Param | Value |")
     lines.append(f"|-------|-------|")
     for field in ("max_bet", "min_ev", "max_price", "max_no_price", "kelly_fraction",
-                  "stop_loss_pct", "no_stop_loss_floor", "trailing_activation",
-                  "no_pyes_threshold", "min_hours", "max_hours"):
+                  "stop_loss_pct", "no_stop_loss_pct", "trailing_activation",
+                  "no_pyes_threshold", "min_hours", "max_hours",
+                  "enable_yes_trading", "min_no_entry", "max_no_entry",
+                  "no_stop_enabled", "no_forecast_exit", "max_horizon_days",
+                  "max_no_positions"):
         val = getattr(cfg, field, "?")
         lines.append(f"| {field} | {val} |")
     lines.append("")
+
+    # ── Edge Tracker (v2 strategy) ───────────────────────────────────────────
+    # Track only NO trades opened after the v2 strategy cutover
+    v2_cutover = cfg_dict.get("v2_cutover", "2026-05-06T00:00:00")
+    v2_trades = [t for t in trades
+                 if t.get("side") == "no"
+                 and (t.get("opened_at") or t.get("ts", "")) >= v2_cutover]
+    if v2_trades:
+        v2_n = len(v2_trades)
+        v2_wins = sum(1 for t in v2_trades if (t.get("pnl") or 0) > 0)
+        v2_losses = sum(1 for t in v2_trades if (t.get("pnl") or 0) < 0)
+        v2_pnl = sum(t.get("pnl", 0) for t in v2_trades)
+        v2_cost = sum(t.get("cost", 0) for t in v2_trades)
+        v2_roi = (v2_pnl / v2_cost * 100) if v2_cost else 0
+        v2_wr = v2_wins / v2_n * 100 if v2_n else 0
+
+        # by close reason
+        from collections import Counter
+        v2_reasons = Counter(t.get("reason", "open") for t in v2_trades)
+
+        # resolved-only subset
+        v2_resolved = [t for t in v2_trades
+                       if t.get("reason") in ("resolved_win", "resolved_loss")]
+        v2_res_n = len(v2_resolved)
+        v2_res_wins = sum(1 for t in v2_resolved if (t.get("pnl") or 0) > 0)
+        v2_res_pnl = sum(t.get("pnl", 0) for t in v2_resolved)
+
+        lines.append("## Edge Tracker (v2 NO-HOLD strategy)")
+        lines.append(f"_Tracking NO trades opened after {v2_cutover[:10]}_\n")
+        lines.append("| Metric | Value |")
+        lines.append("|--------|-------|")
+        lines.append(f"| Closed trades | {v2_n} |")
+        lines.append(f"| Wins / Losses | {v2_wins} / {v2_losses} |")
+        lines.append(f"| Win rate | {v2_wr:.1f}% |")
+        lines.append(f"| Total PnL | ${v2_pnl:+.2f} |")
+        lines.append(f"| ROI | {v2_roi:+.1f}% |")
+        lines.append(f"| Resolved | {v2_res_n} ({v2_res_wins}W/{v2_res_n - v2_res_wins}L) |")
+        if v2_res_n:
+            lines.append(f"| Resolved WR | {v2_res_wins/v2_res_n*100:.1f}% |")
+            lines.append(f"| Resolved PnL | ${v2_res_pnl:+.2f} |")
+        lines.append(f"| Avg PnL/trade | ${v2_pnl/v2_n:+.2f} |")
+        lines.append("")
+
+        # close reason breakdown
+        lines.append("### Close Reasons (v2)")
+        lines.append("| Reason | Count | PnL |")
+        lines.append("|--------|-------|-----|")
+        for reason in ("resolved_win", "take_profit", "trailing_stop",
+                       "forecast_changed", "stop_loss", "resolved_loss"):
+            count = v2_reasons.get(reason, 0)
+            if count == 0:
+                continue
+            rpnl = sum(t.get("pnl", 0) for t in v2_trades if t.get("reason") == reason)
+            lines.append(f"| {reason} | {count} | ${rpnl:+.2f} |")
+        lines.append("")
+    else:
+        lines.append("## Edge Tracker (v2 NO-HOLD strategy)")
+        lines.append(f"_No v2 trades yet (cutover: {v2_cutover[:10]})_\n")
 
     report = "\n".join(lines)
     STATUS_PATH.parent.mkdir(exist_ok=True)

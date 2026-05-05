@@ -151,22 +151,26 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
 
                 # 2. Stop / take-profit
                 mkt, state, did_close = check_stops_and_tp(
-                    mkt, state, cfg.trailing_activation, pos_id
+                    mkt, state, cfg.trailing_activation, pos_id,
+                    no_stop_enabled=cfg.no_stop_enabled,
                 )
                 if did_close:
                     closed += 1
                     city_closed += 1
                     continue
 
-                # 3. Forecast change exit
+                # 3. Forecast change exit (only if enabled for this side)
                 if forecast_temp is not None:
-                    mkt, state, did_close = check_forecast_change(
-                        mkt, state, forecast_temp, loc.unit, pos_id
-                    )
-                    if did_close:
-                        closed += 1
-                        city_closed += 1
-                        continue
+                    side = pos.get("side", "yes")
+                    skip_fc = (side == "no" and not cfg.no_forecast_exit)
+                    if not skip_fc:
+                        mkt, state, did_close = check_forecast_change(
+                            mkt, state, forecast_temp, loc.unit, pos_id
+                        )
+                        if did_close:
+                            closed += 1
+                            city_closed += 1
+                            continue
 
             # ── Open new positions ────────────────────────────────────────────
             # Guard: don't open if balance is critically low (2% reserve)
@@ -188,23 +192,28 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
                 # ALL bucket IDs with ANY position (open or closed) — prevent re-entry
                 all_bucket_ids = set(mkt.get("positions", {}).keys())
 
-                # 1. Try YES on the bucket that matches the forecast
-                matched = next(
-                    (o for o in outcomes
-                     if in_bucket(forecast_temp, o.t_low, o.t_high)),
-                    None,
-                )
-                if matched and matched.market_id not in all_bucket_ids:
-                    mkt, state, did_open = try_open_position(
-                        mkt, matched, forecast_temp, src, sigma, state, cfg,
+                # 1. Try YES on the bucket that matches the forecast (if enabled)
+                if cfg.enable_yes_trading:
+                    matched = next(
+                        (o for o in outcomes
+                         if in_bucket(forecast_temp, o.t_low, o.t_high)),
+                        None,
                     )
-                    if did_open:
-                        new_pos += 1
-                        city_new += 1
-                        all_bucket_ids.add(matched.market_id)
+                    if matched and matched.market_id not in all_bucket_ids:
+                        mkt, state, did_open = try_open_position(
+                            mkt, matched, forecast_temp, src, sigma, state, cfg,
+                        )
+                        if did_open:
+                            new_pos += 1
+                            city_new += 1
+                            all_bucket_ids.add(matched.market_id)
 
                 # 2. Try NO on ALL tail buckets (multi-NO strategy)
-                # Cap to max_no_positions per event
+                # Cap to max_no_positions per event; respect horizon limit
+                if i > cfg.max_horizon_days:
+                    save_market(mkt)
+                    time.sleep(0.1)
+                    continue
                 current_no_count = sum(
                     1 for p in get_open_positions(mkt).values()
                     if p.get("side") == "no"
@@ -258,7 +267,10 @@ def monitor_loop(cfg, calibration: dict) -> None:
     state = load_state(cfg.balance)
     for mkt in open_mkts:
         for pos_id in list(get_open_positions(mkt).keys()):
-            mkt, state, _ = check_stops_and_tp(mkt, state, cfg.trailing_activation, pos_id)
+            mkt, state, _ = check_stops_and_tp(
+                mkt, state, cfg.trailing_activation, pos_id,
+                no_stop_enabled=cfg.no_stop_enabled,
+            )
             mkt, state, _ = check_resolution(mkt, state, cfg.vc_key, pos_id)
     save_state(state)
 

@@ -36,6 +36,13 @@ class Config:
     no_pyes_threshold: float     # only sell NO when p_yes < this
     max_no_positions: int         # max simultaneous NO positions per market/event
     min_yes_price: float         # min YES token price (skip extreme longshots)
+    # Strategy v2 — NO-HOLD
+    enable_yes_trading: bool     # False = NO-only mode (data shows no YES edge)
+    min_no_entry: float          # min NO entry price (avoid cheap volatile NOs)
+    max_no_entry: float          # max NO entry price
+    no_stop_enabled: bool        # False = hold to resolution, no stop-loss on NOs
+    no_forecast_exit: bool       # False = never exit NO on forecast change
+    max_horizon_days: int        # max D+N horizon to trade (2 = D+0, D+1, D+2)
     # Operational
     scan_interval: int
     monitor_interval: int
@@ -76,6 +83,12 @@ def load_config() -> Config:
         no_pyes_threshold=float(raw.get("no_pyes_threshold", 0.15)),
         max_no_positions=int(raw.get("max_no_positions", 4)),
         min_yes_price=float(raw.get("min_yes_price", 0.05)),
+        enable_yes_trading=raw.get("enable_yes_trading", False),
+        min_no_entry=float(raw.get("min_no_entry", 0.65)),
+        max_no_entry=float(raw.get("max_no_entry", 0.90)),
+        no_stop_enabled=raw.get("no_stop_enabled", False),
+        no_forecast_exit=raw.get("no_forecast_exit", False),
+        max_horizon_days=int(raw.get("max_horizon_days", 2)),
         scan_interval=int(raw.get("scan_interval", 3600)),
         monitor_interval=int(raw.get("monitor_interval", 600)),
         calibration_min=int(raw.get("calibration_min", 30)),

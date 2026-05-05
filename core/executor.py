@@ -195,6 +195,10 @@ def try_open_no_position(
     if real_no_ask >= cfg.max_no_price or real_spread > cfg.max_slippage:
         return mkt, state, False
 
+    # Entry band filter — only trade NOs in the profitable range
+    if real_no_ask < cfg.min_no_entry or real_no_ask > cfg.max_no_entry:
+        return mkt, state, False
+
     real_ev_no = calc_ev(p_no, real_no_ask)
     if real_ev_no < cfg.min_ev:
         return mkt, state, False

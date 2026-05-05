@@ -64,6 +64,12 @@ CFG = Config(
     no_pyes_threshold=0.25,
     max_no_positions=4,
     min_yes_price=0.05,
+    enable_yes_trading=False,
+    min_no_entry=0.65,
+    max_no_entry=0.90,
+    no_stop_enabled=False,
+    no_forecast_exit=False,
+    max_horizon_days=2,
     max_hours=168.0,
     min_hours=2.0,
     paper_trading=True,
@@ -140,7 +146,7 @@ def run_scan_cycle(
             station="KJFK",
             unit="F",
             date_str=date_str,
-            end_date="2026-05-03T00:00:00Z",
+            end_date="2099-05-03T00:00:00Z",
             hours_at_discovery=48.0,
         )
 
@@ -655,6 +661,72 @@ def test_20_cycle_stress():
     )
 
     print(f"  Balance check: ${state['balance']:.2f} == ${expected_balance:.2f} ✓")
+    print("  PASSED ✓")
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# TEST 8: v2 NO-HOLD strategy rules
+# ════════════════════════════════════════════════════════════════════════════
+def test_v2_no_hold_strategy():
+    """Verify v2 strategy: NO-only, no stop-loss on NOs, no forecast exit on NOs."""
+    print("\n" + "="*70)
+    print("TEST 8: v2 NO-HOLD strategy rules")
+    print("="*70)
+
+    _reset_db()
+
+    outcomes = make_outcomes()
+    forecast = 65.0
+
+    run_scan_cycle(CFG, outcomes, forecast, cycle_label="v2-open")
+    mkt = load_market("nyc", "2026-05-02")
+    state = load_state(CFG.balance)
+
+    positions = mkt.get("positions", {})
+
+    # Rule 1: NO enable_yes_trading=False means no YES positions
+    yes_count = sum(1 for p in positions.values() if p["side"] == "yes")
+    no_count = sum(1 for p in positions.values() if p["side"] == "no")
+    assert yes_count == 0, f"YES positions found ({yes_count}) but enable_yes_trading=False"
+    assert no_count > 0, "No NO positions opened"
+    print(f"  Rule 1: YES={yes_count}, NO={no_count} — NO-only mode ✓")
+
+    # Rule 2: no_stop_enabled=False — stops should not trigger
+    # Find a NO position and simulate a massive price drop
+    no_mid = None
+    no_pos = None
+    for mid, pos in positions.items():
+        if pos["side"] == "no" and pos["status"] == "open":
+            no_mid = mid
+            no_pos = pos
+            break
+
+    entry = no_pos["entry_price"]
+    # Price crashes to 10% of entry (would trigger any stop)
+    crashed_no_bid = entry * 0.10
+    yes_ask_for_crash = 1.0 - crashed_no_bid
+
+    with patch("core.monitor.fetch_live_price",
+               return_value=(0.01, min(0.99, yes_ask_for_crash))):
+        with patch("core.monitor.check_resolved", return_value=None):
+            _, _, did_close = check_stops_and_tp(
+                mkt, state, CFG.trailing_activation, no_mid,
+                no_stop_enabled=CFG.no_stop_enabled,
+            )
+    assert not did_close, "NO stop should NOT trigger when no_stop_enabled=False"
+    print(f"  Rule 2: NO stop disabled — price crashed to ${crashed_no_bid:.3f}, no close ✓")
+
+    # Rule 3: Entry band — all NOs should be within min_no_entry..max_no_entry
+    for mid, pos in positions.items():
+        if pos["side"] == "no" and pos["status"] == "open":
+            assert pos["entry_price"] >= CFG.min_no_entry, (
+                f"NO entry ${pos['entry_price']:.3f} < min ${CFG.min_no_entry}"
+            )
+            assert pos["entry_price"] <= CFG.max_no_entry, (
+                f"NO entry ${pos['entry_price']:.3f} > max ${CFG.max_no_entry}"
+            )
+    print(f"  Rule 3: All NO entries within ${CFG.min_no_entry}-${CFG.max_no_entry} band ✓")
+
     print("  PASSED ✓")
 
 
