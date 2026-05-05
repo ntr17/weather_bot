@@ -1,22 +1,23 @@
 # WeatherBot Status
-_Auto-generated 2026-05-05 19:47 UTC_
+_Auto-generated 2026-05-05 21:03 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $4,395.24 |
+| Balance | $4,370.24 |
 | Starting | $5,000.00 |
-| Return | -12.1% |
+| Return | -12.6% |
 | Total trades | 4 |
 | Win rate | 0/4 (0%) |
-| Open positions | 15 |
+| Open positions | 16 |
 | Markets tracked | 161 |
 | Calibration keys | 112 |
 
-## Open Positions (23)
+## Open Positions (24)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
+| New York City | 2026-05-06 | 64–65°F | NO | $0.860 | ENSEMBLE | D+1 |
 | London | 2026-05-06 | 15–15°C | NO | $0.800 | ECMWF | D+1 |
 | Toronto | 2026-05-06 | 10–10°C | NO | $0.820 | ECMWF | D+1 |
 | New York City | 2026-05-07 | 64–65°F | NO | $0.710 | ECMWF | D+2 |
