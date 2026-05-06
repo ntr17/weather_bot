@@ -1,20 +1,20 @@
 # WeatherBot Status
-_Auto-generated 2026-05-06 19:58 UTC_
+_Auto-generated 2026-05-06 21:12 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $3,469.74 |
+| Balance | $3,419.74 |
 | Starting | $5,000.00 |
-| Return | -30.6% |
+| Return | -31.6% |
 | Total trades | 29 |
 | Win rate | 7/29 (24%) |
-| Open positions | 36 |
+| Open positions | 37 |
 | Markets tracked | 181 |
 | Calibration keys | 112 |
 
-## Open Positions (55)
+## Open Positions (57)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
 | London | 2026-05-06 | 15–15°C | NO | $0.800 | ECMWF | D+0 |
@@ -70,8 +70,10 @@ _Auto-generated 2026-05-06 19:58 UTC_
 | Singapore | 2026-05-08 | 31–31°C | NO | $0.650 | ECMWF | D+2 |
 | Singapore | 2026-05-08 | 32–32°C | NO | $0.810 | ECMWF | D+2 |
 | Tel Aviv | 2026-05-08 | 26–26°C | NO | $0.770 | ECMWF | D+2 |
+| Tel Aviv | 2026-05-08 | 27–27°C | NO | $0.680 | ECMWF | D+2 |
 | Toronto | 2026-05-08 | 15–15°C | NO | $0.800 | ECMWF | D+2 |
 | Sao Paulo | 2026-05-08 | 27–27°C | NO | $0.880 | ECMWF | D+2 |
+| Buenos Aires | 2026-05-08 | 13–13°C | NO | $0.690 | ECMWF | D+2 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
