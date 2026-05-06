@@ -1,20 +1,20 @@
 # WeatherBot Status
-_Auto-generated 2026-05-06 22:17 UTC_
+_Auto-generated 2026-05-06 23:17 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $3,397.83 |
+| Balance | $3,421.04 |
 | Starting | $5,000.00 |
-| Return | -32.0% |
-| Total trades | 30 |
-| Win rate | 8/30 (27%) |
+| Return | -31.6% |
+| Total trades | 31 |
+| Win rate | 8/31 (26%) |
 | Open positions | 38 |
 | Markets tracked | 181 |
 | Calibration keys | 112 |
 
-## Open Positions (58)
+## Open Positions (57)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
 | London | 2026-05-06 | 15–15°C | NO | $0.800 | ECMWF | D+0 |
@@ -51,7 +51,6 @@ _Auto-generated 2026-05-06 22:17 UTC_
 | Buenos Aires | 2026-05-07 | 20–20°C | NO | $0.780 | ECMWF | D+1 |
 | Buenos Aires | 2026-05-07 | 22–22°C | NO | $0.877 | ECMWF | D+1 |
 | Buenos Aires | 2026-05-07 | 23–999°C | NO | $0.890 | ECMWF | D+1 |
-| Buenos Aires | 2026-05-07 | 19–19°C | YES | $0.140 | ECMWF | D+1 |
 | Wellington | 2026-05-07 | 19–19°C | NO | $0.800 | ECMWF | D+1 |
 | New York City | 2026-05-08 | 64–65°F | NO | $0.670 | ECMWF | D+2 |
 | Chicago | 2026-05-08 | 62–63°F | NO | $0.750 | ECMWF | D+2 |
@@ -79,6 +78,7 @@ _Auto-generated 2026-05-06 22:17 UTC_
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
 |------|------|--------|------|-------|-----|---------|--------|
+| Buenos Aires | 2026-05-07 | 19–19°C | YES | $0.140 | -1.79 | None | ECMWF |
 | Singapore | 2026-05-08 | 32–32°C | NO | $0.810 | +3.09 | None | ECMWF |
 | Atlanta | 2026-05-06 | 84–85°F | YES | $0.064 | -12.50 | None | ENSEMBLE |
 | Wellington | 2026-05-07 | 17–17°C | YES | $0.170 | -3.59 | None | ECMWF |
@@ -98,14 +98,13 @@ _Auto-generated 2026-05-06 22:17 UTC_
 | Shanghai | 2026-05-07 | 27–27°C | NO | $0.760 | +2.96 | None | ECMWF |
 | Seoul | 2026-05-07 | 16–16°C | NO | $0.830 | +2.71 | None | ECMWF |
 | Atlanta | 2026-05-07 | 70–71°F | YES | $0.080 | -5.71 | None | GFS |
-| Shanghai | 2026-05-07 | 26–26°C | YES | $0.059 | -8.05 | None | ECMWF |
 
 ## City Performance
 | City | Trades | Wins | WR | PnL | Avg PnL |
 |------|--------|------|-----|-----|---------|
 | Ankara | 17 | 0 | 0% | -33.33 | -1.96 |
 | Atlanta | 16 | 0 | 0% | -72.24 | -4.51 |
-| Buenos Aires | 20 | 0 | 0% | -65.68 | -3.28 |
+| Buenos Aires | 21 | 0 | 0% | -67.47 | -3.21 |
 | Chicago | 6 | 0 | 0% | -6.60 | -1.10 |
 | Dallas | 6 | 0 | 0% | -17.62 | -2.94 |
 | London | 19 | 0 | 0% | +0.44 | +0.02 |
