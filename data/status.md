@@ -1,20 +1,20 @@
 # WeatherBot Status
-_Auto-generated 2026-05-08 02:47 UTC_
+_Auto-generated 2026-05-08 05:32 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $2,936.96 |
+| Balance | $2,996.24 |
 | Starting | $5,000.00 |
-| Return | -41.3% |
-| Total trades | 76 |
-| Win rate | 38/76 (50%) |
+| Return | -40.1% |
+| Total trades | 79 |
+| Win rate | 41/79 (52%) |
 | Open positions | 38 |
-| Markets tracked | 201 |
+| Markets tracked | 221 |
 | Calibration keys | 112 |
 
-## Open Positions (80)
+## Open Positions (78)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
 | New York City | 2026-05-07 | 64–65°F | NO | $0.710 | ECMWF | D+0 |
@@ -23,8 +23,6 @@ _Auto-generated 2026-05-08 02:47 UTC_
 | Dallas | 2026-05-07 | 74–75°F | NO | $0.720 | GFS | D+0 |
 | Atlanta | 2026-05-07 | 76–77°F | NO | $0.770 | ECMWF | D+0 |
 | Toronto | 2026-05-07 | 12–12°C | NO | $0.730 | ECMWF | D+0 |
-| Buenos Aires | 2026-05-07 | 22–22°C | NO | $0.877 | ECMWF | D+0 |
-| Buenos Aires | 2026-05-07 | 23–999°C | NO | $0.890 | ECMWF | D+0 |
 | Seattle | 2026-05-07 | 68–69°F | NO | $0.820 | ECMWF | D+0 |
 | Seattle | 2026-05-07 | 64–65°F | NO | $0.730 | ENSEMBLE | D+0 |
 | New York City | 2026-05-08 | 64–65°F | NO | $0.670 | ECMWF | D+0 |
@@ -71,8 +69,8 @@ _Auto-generated 2026-05-08 02:47 UTC_
 | New York City | 2026-05-09 | 60–61°F | NO | $0.670 | ECMWF | D+1 |
 | New York City | 2026-05-09 | 62–63°F | NO | $0.670 | ECMWF | D+1 |
 | New York City | 2026-05-09 | 64–65°F | NO | $0.847 | ENSEMBLE | D+1 |
+| Miami | 2026-05-09 | 92–93°F | NO | $0.760 | GFS | D+1 |
 | Atlanta | 2026-05-09 | 76–77°F | NO | $0.800 | ECMWF | D+1 |
-| Atlanta | 2026-05-09 | 72–73°F | NO | $0.849 | ECMWF | D+1 |
 | Atlanta | 2026-05-09 | 78–79°F | NO | $0.780 | ENSEMBLE | D+1 |
 | London | 2026-05-09 | 19–19°C | NO | $0.760 | ECMWF | D+1 |
 | Paris | 2026-05-09 | 25–25°C | NO | $0.740 | ECMWF | D+1 |
@@ -101,6 +99,9 @@ _Auto-generated 2026-05-08 02:47 UTC_
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
 |------|------|--------|------|-------|-----|---------|--------|
+| Buenos Aires | 2026-05-07 | 23–999°C | NO | $0.890 | +3.09 | None | ECMWF |
+| Buenos Aires | 2026-05-07 | 22–22°C | NO | $0.877 | +3.51 | None | ECMWF |
+| Atlanta | 2026-05-09 | 72–73°F | NO | $0.849 | +2.68 | None | ECMWF |
 | London | 2026-05-07 | 16–16°C | NO | $0.710 | +10.21 | None | ECMWF |
 | London | 2026-05-07 | 15–15°C | NO | $0.760 | +7.89 | None | ECMWF |
 | Tel Aviv | 2026-05-09 | 30–30°C | YES | $0.064 | -10.64 | None | ECMWF |
@@ -118,16 +119,13 @@ _Auto-generated 2026-05-08 02:47 UTC_
 | Dallas | 2026-05-07 | 72–73°F | NO | $0.680 | +11.76 | None | ENSEMBLE |
 | New York City | 2026-05-07 | 62–63°F | NO | $0.690 | +11.23 | None | ENSEMBLE |
 | Atlanta | 2026-05-09 | 70–71°F | NO | $0.860 | +2.94 | None | ECMWF |
-| Dallas | 2026-05-07 | 70–71°F | NO | $0.820 | +5.49 | None | ECMWF |
-| Chicago | 2026-05-07 | 56–57°F | NO | $0.870 | +3.74 | None | ECMWF |
-| Wellington | 2026-05-09 | 16–16°C | NO | $0.800 | +3.75 | None | ECMWF |
 
 ## City Performance
 | City | Trades | Wins | WR | PnL | Avg PnL |
 |------|--------|------|-----|-----|---------|
 | Ankara | 18 | 0 | 0% | -58.33 | -3.24 |
-| Atlanta | 17 | 0 | 0% | -69.30 | -4.08 |
-| Buenos Aires | 23 | 0 | 0% | -71.36 | -3.10 |
+| Atlanta | 18 | 0 | 0% | -66.62 | -3.70 |
+| Buenos Aires | 25 | 0 | 0% | -64.76 | -2.59 |
 | Chicago | 8 | 0 | 0% | -0.19 | -0.02 |
 | Dallas | 9 | 0 | 0% | -9.26 | -1.03 |
 | London | 23 | 0 | 0% | +28.51 | +1.24 |
@@ -217,19 +215,19 @@ _Tracking NO trades opened after 2026-05-06_
 
 | Metric | Value |
 |--------|-------|
-| Closed trades | 19 |
-| Wins / Losses | 16 / 3 |
-| Win rate | 84.2% |
-| Total PnL | $+25.84 |
-| ROI | +5.4% |
-| Resolved | 11 (8W/3L) |
-| Resolved WR | 72.7% |
-| Resolved PnL | $+0.13 |
-| Avg PnL/trade | $+1.36 |
+| Closed trades | 21 |
+| Wins / Losses | 18 / 3 |
+| Win rate | 85.7% |
+| Total PnL | $+31.61 |
+| ROI | +6.0% |
+| Resolved | 12 (9W/3L) |
+| Resolved WR | 75.0% |
+| Resolved PnL | $+3.22 |
+| Avg PnL/trade | $+1.51 |
 
 ### Close Reasons (v2)
 | Reason | Count | PnL |
 |--------|-------|-----|
-| resolved_win | 8 | $+75.13 |
-| take_profit | 8 | $+25.71 |
+| resolved_win | 9 | $+78.22 |
+| take_profit | 9 | $+28.39 |
 | resolved_loss | 3 | $-75.00 |
