@@ -54,7 +54,7 @@ def try_open_position(
 
     kelly = calc_kelly(p, outcome.ask, cfg.kelly_fraction)
     size = bet_size(kelly, state["balance"], cfg.max_bet)
-    if size < 0.50:
+    if size < 5.00:  # Polymarket minimum order size is $5
         return mkt, state, False
 
     # Fetch live price — re-check with real market data
@@ -178,7 +178,7 @@ def try_open_no_position(
 
     kelly = calc_kelly(p_no, no_ask_snapshot, cfg.kelly_fraction)
     size = bet_size(kelly, state["balance"], cfg.max_bet)
-    if size < 0.50:
+    if size < 5.00:  # Polymarket minimum order size is $5
         return mkt, state, False
 
     # Fetch live price — re-check with real market data

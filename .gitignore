@@ -190,9 +190,13 @@ data/weatherbot.db
 data/weatherbot.db-wal
 data/weatherbot.db-shm
 data/*.bak
+data/_remote_weatherbot.db
 
 # WeatherBot — trade logs (machine-specific)
 logs/
+
+# WeatherBot — research articles (local reading material, not tracked)
+articles/
 
 # WeatherBot — machine-specific config (each machine keeps its own)
 config.json
