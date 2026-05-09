@@ -1,20 +1,20 @@
 # WeatherBot Status
-_Auto-generated 2026-05-09 11:28 UTC_
+_Auto-generated 2026-05-09 12:12 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $2,951.46 |
+| Balance | $2,986.67 |
 | Starting | $5,000.00 |
-| Return | -41.0% |
-| Total trades | 160 |
-| Win rate | 91/160 (57%) |
+| Return | -40.3% |
+| Total trades | 161 |
+| Win rate | 92/161 (57%) |
 | Open positions | 39 |
-| Markets tracked | 231 |
+| Markets tracked | 232 |
 | Calibration keys | 112 |
 
-## Open Positions (77)
+## Open Positions (76)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
 | New York City | 2026-05-09 | 60–61°F | NO | $0.670 | ECMWF | D+0 |
@@ -28,7 +28,6 @@ _Auto-generated 2026-05-09 11:28 UTC_
 | Paris | 2026-05-09 | 24–24°C | NO | $0.660 | ECMWF | D+0 |
 | Paris | 2026-05-09 | 23–23°C | NO | $0.730 | ECMWF | D+0 |
 | Munich | 2026-05-09 | 22–22°C | NO | $0.750 | ECMWF | D+0 |
-| Ankara | 2026-05-09 | 20–20°C | NO | $0.710 | ECMWF | D+0 |
 | Ankara | 2026-05-09 | 21–21°C | NO | $0.790 | ECMWF | D+0 |
 | Seoul | 2026-05-09 | 20–20°C | NO | $0.700 | ECMWF | D+0 |
 | Seoul | 2026-05-09 | 21–21°C | NO | $0.830 | ECMWF | D+0 |
@@ -98,6 +97,7 @@ _Auto-generated 2026-05-09 11:28 UTC_
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
 |------|------|--------|------|-------|-----|---------|--------|
+| Ankara | 2026-05-09 | 20–20°C | NO | $0.710 | +10.21 | None | ECMWF |
 | Ankara | 2026-05-10 | 20–20°C | YES | $0.060 | +0.00 | None | ECMWF |
 | Ankara | 2026-05-09 | 19–19°C | NO | $0.660 | +12.88 | None | ECMWF |
 | Seattle | 2026-05-08 | 64–65°F | NO | $0.650 | +13.46 | None | ECMWF |
@@ -117,12 +117,11 @@ _Auto-generated 2026-05-09 11:28 UTC_
 | New York City | 2026-05-08 | 64–65°F | NO | $0.670 | +12.31 | None | ECMWF |
 | Buenos Aires | 2026-05-09 | 12–12°C | YES | $0.260 | +3.85 | None | ECMWF |
 | Ankara | 2026-05-10 | 21–21°C | NO | $0.680 | +3.68 | None | ECMWF |
-| Shanghai | 2026-05-09 | 22–22°C | NO | $0.740 | +8.78 | None | ECMWF |
 
 ## City Performance
 | City | Trades | Wins | WR | PnL | Avg PnL |
 |------|--------|------|-----|-----|---------|
-| Ankara | 23 | 0 | 0% | -53.31 | -2.32 |
+| Ankara | 24 | 0 | 0% | -43.10 | -1.80 |
 | Atlanta | 23 | 0 | 0% | -68.90 | -3.00 |
 | Buenos Aires | 30 | 0 | 0% | -81.89 | -2.73 |
 | Chicago | 9 | 0 | 0% | +4.57 | +0.51 |
@@ -214,19 +213,19 @@ _Tracking NO trades opened after 2026-05-06_
 
 | Metric | Value |
 |--------|-------|
-| Closed trades | 76 |
-| Wins / Losses | 61 / 15 |
-| Win rate | 80.3% |
-| Total PnL | $+92.76 |
-| ROI | +4.9% |
-| Resolved | 58 (43W/15L) |
-| Resolved WR | 74.1% |
-| Resolved PnL | $+35.20 |
-| Avg PnL/trade | $+1.22 |
+| Closed trades | 77 |
+| Wins / Losses | 62 / 15 |
+| Win rate | 80.5% |
+| Total PnL | $+102.97 |
+| ROI | +5.3% |
+| Resolved | 59 (44W/15L) |
+| Resolved WR | 74.6% |
+| Resolved PnL | $+45.41 |
+| Avg PnL/trade | $+1.34 |
 
 ### Close Reasons (v2)
 | Reason | Count | PnL |
 |--------|-------|-----|
-| resolved_win | 43 | $+410.20 |
+| resolved_win | 44 | $+420.41 |
 | take_profit | 18 | $+57.56 |
 | resolved_loss | 15 | $-375.00 |
