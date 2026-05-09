@@ -1,20 +1,20 @@
 # WeatherBot Status
-_Auto-generated 2026-05-09 15:55 UTC_
+_Auto-generated 2026-05-09 16:57 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $2,741.64 |
+| Balance | $2,678.41 |
 | Starting | $5,000.00 |
-| Return | -45.2% |
-| Total trades | 167 |
-| Win rate | 96/167 (57%) |
+| Return | -46.4% |
+| Total trades | 169 |
+| Win rate | 96/169 (57%) |
 | Open positions | 45 |
 | Markets tracked | 239 |
 | Calibration keys | 112 |
 
-## Open Positions (86)
+## Open Positions (88)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
 | New York City | 2026-05-09 | 60–61°F | NO | $0.670 | ECMWF | D+0 |
@@ -64,7 +64,6 @@ _Auto-generated 2026-05-09 15:55 UTC_
 | Munich | 2026-05-10 | 25–999°C | NO | $0.900 | ECMWF | D+1 |
 | Munich | 2026-05-10 | 24–24°C | NO | $0.660 | ECMWF | D+1 |
 | Ankara | 2026-05-10 | 23–23°C | NO | $0.850 | ECMWF | D+1 |
-| Seoul | 2026-05-10 | 21–21°C | NO | $0.730 | ECMWF | D+1 |
 | Tokyo | 2026-05-10 | 24–24°C | NO | $0.690 | ECMWF | D+1 |
 | Tokyo | 2026-05-10 | 22–22°C | NO | $0.830 | ECMWF | D+1 |
 | Shanghai | 2026-05-10 | 24–24°C | NO | $0.750 | ECMWF | D+1 |
@@ -84,6 +83,7 @@ _Auto-generated 2026-05-09 15:55 UTC_
 | Buenos Aires | 2026-05-10 | 15–15°C | NO | $0.780 | ECMWF | D+1 |
 | Buenos Aires | 2026-05-10 | 14–14°C | YES | $0.230 | ECMWF | D+1 |
 | Wellington | 2026-05-10 | 17–17°C | NO | $0.660 | ECMWF | D+1 |
+| Seoul | 2026-05-10 | 21–21°C | NO | $0.730 | ECMWF | D+1 |
 | New York City | 2026-05-11 | 62–63°F | NO | $0.810 | ECMWF | D+2 |
 | Chicago | 2026-05-11 | 60–61°F | NO | $0.880 | ECMWF | D+2 |
 | Chicago | 2026-05-11 | 58–59°F | NO | $0.740 | ECMWF | D+2 |
@@ -95,6 +95,8 @@ _Auto-generated 2026-05-09 15:55 UTC_
 | Munich | 2026-05-11 | 19–999°C | NO | $0.810 | ECMWF | D+2 |
 | Ankara | 2026-05-11 | 22–22°C | NO | $0.670 | ECMWF | D+2 |
 | Seoul | 2026-05-11 | 20–20°C | NO | $0.710 | ECMWF | D+2 |
+| Seoul | 2026-05-11 | 19–19°C | NO | $0.750 | ECMWF | D+2 |
+| Seoul | 2026-05-11 | 21–21°C | NO | $0.800 | ECMWF | D+2 |
 | Tokyo | 2026-05-11 | 24–24°C | NO | $0.680 | ECMWF | D+2 |
 | Singapore | 2026-05-11 | 33–33°C | NO | $0.870 | ECMWF | D+2 |
 | Singapore | 2026-05-11 | 32–32°C | NO | $0.650 | ECMWF | D+2 |
@@ -107,6 +109,8 @@ _Auto-generated 2026-05-09 15:55 UTC_
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
 |------|------|--------|------|-------|-----|---------|--------|
+| Buenos Aires | 2026-05-11 | 16–16°C | YES | $0.140 | -7.14 | None | ECMWF |
+| Seoul | 2026-05-10 | 20–20°C | YES | $0.100 | -6.09 | None | ECMWF |
 | London | 2026-05-09 | 19–19°C | NO | $0.760 | +7.89 | None | ECMWF |
 | Wellington | 2026-05-09 | 18–18°C | NO | $0.680 | +11.76 | None | ECMWF |
 | Wellington | 2026-05-09 | 17–17°C | NO | $0.650 | -25.00 | None | ECMWF |
@@ -125,15 +129,13 @@ _Auto-generated 2026-05-09 15:55 UTC_
 | Buenos Aires | 2026-05-08 | 14–14°C | NO | $0.740 | +8.78 | None | ECMWF |
 | Toronto | 2026-05-08 | 13–13°C | NO | $0.760 | +7.89 | None | ECMWF |
 | Toronto | 2026-05-08 | 14–14°C | NO | $0.700 | +10.71 | None | ECMWF |
-| Toronto | 2026-05-08 | 15–15°C | NO | $0.800 | +6.25 | None | ECMWF |
-| Atlanta | 2026-05-08 | 72–73°F | NO | $0.660 | -25.00 | None | ECMWF |
 
 ## City Performance
 | City | Trades | Wins | WR | PnL | Avg PnL |
 |------|--------|------|-----|-----|---------|
 | Ankara | 24 | 0 | 0% | -43.10 | -1.80 |
 | Atlanta | 23 | 0 | 0% | -68.90 | -3.00 |
-| Buenos Aires | 30 | 0 | 0% | -81.89 | -2.73 |
+| Buenos Aires | 31 | 0 | 0% | -89.03 | -2.87 |
 | Chicago | 9 | 0 | 0% | +4.57 | +0.51 |
 | Dallas | 12 | 0 | 0% | -53.77 | -4.48 |
 | London | 28 | 0 | 0% | +22.43 | +0.80 |
@@ -144,7 +146,7 @@ _Auto-generated 2026-05-09 15:55 UTC_
 | Paris | 37 | 0 | 0% | -147.01 | -3.97 |
 | Sao Paulo | 26 | 0 | 0% | -84.50 | -3.25 |
 | Seattle | 14 | 0 | 0% | -3.67 | -0.26 |
-| Seoul | 26 | 0 | 0% | -13.33 | -0.51 |
+| Seoul | 27 | 0 | 0% | -19.42 | -0.72 |
 | Shanghai | 34 | 0 | 0% | -13.93 | -0.41 |
 | Singapore | 33 | 0 | 0% | -115.21 | -3.49 |
 | Tel Aviv | 25 | 0 | 0% | -45.38 | -1.82 |
