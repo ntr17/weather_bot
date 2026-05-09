@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-05-09 16:57 UTC_
+_Auto-generated 2026-05-09 17:51 UTC_
 
 ## Summary
 | Metric | Value |
@@ -64,6 +64,7 @@ _Auto-generated 2026-05-09 16:57 UTC_
 | Munich | 2026-05-10 | 25–999°C | NO | $0.900 | ECMWF | D+1 |
 | Munich | 2026-05-10 | 24–24°C | NO | $0.660 | ECMWF | D+1 |
 | Ankara | 2026-05-10 | 23–23°C | NO | $0.850 | ECMWF | D+1 |
+| Seoul | 2026-05-10 | 21–21°C | NO | $0.730 | ECMWF | D+1 |
 | Tokyo | 2026-05-10 | 24–24°C | NO | $0.690 | ECMWF | D+1 |
 | Tokyo | 2026-05-10 | 22–22°C | NO | $0.830 | ECMWF | D+1 |
 | Shanghai | 2026-05-10 | 24–24°C | NO | $0.750 | ECMWF | D+1 |
@@ -83,7 +84,6 @@ _Auto-generated 2026-05-09 16:57 UTC_
 | Buenos Aires | 2026-05-10 | 15–15°C | NO | $0.780 | ECMWF | D+1 |
 | Buenos Aires | 2026-05-10 | 14–14°C | YES | $0.230 | ECMWF | D+1 |
 | Wellington | 2026-05-10 | 17–17°C | NO | $0.660 | ECMWF | D+1 |
-| Seoul | 2026-05-10 | 21–21°C | NO | $0.730 | ECMWF | D+1 |
 | New York City | 2026-05-11 | 62–63°F | NO | $0.810 | ECMWF | D+2 |
 | Chicago | 2026-05-11 | 60–61°F | NO | $0.880 | ECMWF | D+2 |
 | Chicago | 2026-05-11 | 58–59°F | NO | $0.740 | ECMWF | D+2 |
