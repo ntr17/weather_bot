@@ -1,15 +1,15 @@
 # WeatherBot Status
-_Auto-generated 2026-05-09 20:55 UTC_
+_Auto-generated 2026-05-09 21:43 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $2,618.00 |
+| Balance | $2,602.21 |
 | Starting | $5,000.00 |
-| Return | -47.6% |
-| Total trades | 178 |
-| Win rate | 102/178 (57%) |
+| Return | -48.0% |
+| Total trades | 179 |
+| Win rate | 102/179 (57%) |
 | Open positions | 46 |
 | Markets tracked | 241 |
 | Calibration keys | 112 |
@@ -53,7 +53,6 @@ _Auto-generated 2026-05-09 20:55 UTC_
 | London | 2026-05-10 | 16–16°C | NO | $0.770 | ECMWF | D+1 |
 | Paris | 2026-05-10 | 19–19°C | NO | $0.650 | ECMWF | D+1 |
 | Paris | 2026-05-10 | 21–21°C | NO | $0.880 | ECMWF | D+1 |
-| Paris | 2026-05-10 | 16–16°C | YES | $0.057 | ECMWF | D+1 |
 | Munich | 2026-05-10 | 25–999°C | NO | $0.900 | ECMWF | D+1 |
 | Munich | 2026-05-10 | 24–24°C | NO | $0.660 | ECMWF | D+1 |
 | Ankara | 2026-05-10 | 23–23°C | NO | $0.850 | ECMWF | D+1 |
@@ -84,6 +83,7 @@ _Auto-generated 2026-05-09 20:55 UTC_
 | Miami | 2026-05-11 | 90–91°F | NO | $0.660 | ECMWF | D+2 |
 | Miami | 2026-05-11 | 88–89°F | NO | $0.670 | ECMWF | D+2 |
 | London | 2026-05-11 | 12–12°C | NO | $0.790 | ECMWF | D+2 |
+| London | 2026-05-11 | 14–14°C | NO | $0.750 | ECMWF | D+2 |
 | Paris | 2026-05-11 | 14–14°C | YES | $0.210 | ECMWF | D+2 |
 | Paris | 2026-05-11 | 16–16°C | NO | $0.660 | ECMWF | D+2 |
 | Paris | 2026-05-11 | 15–15°C | NO | $0.700 | ECMWF | D+2 |
@@ -111,6 +111,7 @@ _Auto-generated 2026-05-09 20:55 UTC_
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
 |------|------|--------|------|-------|-----|---------|--------|
+| Paris | 2026-05-10 | 16–16°C | YES | $0.057 | -15.79 | None | ECMWF |
 | Toronto | 2026-05-09 | 15–15°C | NO | $0.850 | +4.41 | None | ECMWF |
 | Tokyo | 2026-05-09 | 25–25°C | NO | $0.870 | +3.74 | None | ECMWF |
 | Tokyo | 2026-05-09 | 23–23°C | NO | $0.650 | -25.00 | None | ECMWF |
@@ -130,7 +131,6 @@ _Auto-generated 2026-05-09 20:55 UTC_
 | Paris | 2026-05-09 | 23–23°C | NO | $0.730 | +9.25 | None | ECMWF |
 | Ankara | 2026-05-09 | 20–20°C | NO | $0.710 | +10.21 | None | ECMWF |
 | Ankara | 2026-05-10 | 20–20°C | YES | $0.060 | +0.00 | None | ECMWF |
-| Ankara | 2026-05-09 | 19–19°C | NO | $0.660 | +12.88 | None | ECMWF |
 
 ## City Performance
 | City | Trades | Wins | WR | PnL | Avg PnL |
@@ -145,7 +145,7 @@ _Auto-generated 2026-05-09 20:55 UTC_
 | Miami | 30 | 0 | 0% | -4.38 | -0.15 |
 | Munich | 28 | 0 | 0% | +45.38 | +1.62 |
 | New York City | 38 | 5 | 13% | -22.31 | -0.59 |
-| Paris | 37 | 0 | 0% | -147.01 | -3.97 |
+| Paris | 38 | 0 | 0% | -162.80 | -4.28 |
 | Sao Paulo | 26 | 0 | 0% | -84.50 | -3.25 |
 | Seattle | 14 | 0 | 0% | -3.67 | -0.26 |
 | Seoul | 29 | 0 | 0% | -39.30 | -1.36 |
