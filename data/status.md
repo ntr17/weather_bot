@@ -1,20 +1,20 @@
 # WeatherBot Status
-_Auto-generated 2026-05-10 09:57 UTC_
+_Auto-generated 2026-05-10 11:02 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $2,673.19 |
+| Balance | $2,560.69 |
 | Starting | $5,000.00 |
-| Return | -46.5% |
-| Total trades | 221 |
-| Win rate | 125/221 (57%) |
-| Open positions | 40 |
+| Return | -48.8% |
+| Total trades | 222 |
+| Win rate | 125/222 (56%) |
+| Open positions | 41 |
 | Markets tracked | 261 |
 | Calibration keys | 112 |
 
-## Open Positions (84)
+## Open Positions (88)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
 | New York City | 2026-05-10 | 72–73°F | NO | $0.720 | ECMWF | D+0 |
@@ -86,25 +86,30 @@ _Auto-generated 2026-05-10 09:57 UTC_
 | Toronto | 2026-05-11 | 14–14°C | NO | $0.870 | ECMWF | D+1 |
 | Toronto | 2026-05-11 | 12–12°C | NO | $0.690 | ECMWF | D+1 |
 | Sao Paulo | 2026-05-11 | 18–18°C | NO | $0.880 | ECMWF | D+1 |
+| Sao Paulo | 2026-05-11 | 21–21°C | NO | $0.730 | ECMWF | D+1 |
 | Buenos Aires | 2026-05-11 | 19–19°C | NO | $0.870 | ECMWF | D+1 |
 | Buenos Aires | 2026-05-11 | 18–18°C | NO | $0.690 | ECMWF | D+1 |
 | New York City | 2026-05-12 | 62–63°F | NO | $0.740 | ECMWF | D+2 |
+| Dallas | 2026-05-12 | 80–81°F | NO | $0.850 | ECMWF | D+2 |
+| Paris | 2026-05-12 | 17–17°C | NO | $0.750 | ECMWF | D+2 |
 | Munich | 2026-05-12 | 11–11°C | NO | $0.670 | ECMWF | D+2 |
 | Munich | 2026-05-12 | 12–12°C | NO | $0.860 | ECMWF | D+2 |
+| Ankara | 2026-05-12 | 24–24°C | NO | $0.850 | ECMWF | D+2 |
+| Ankara | 2026-05-12 | 23–23°C | NO | $0.680 | ECMWF | D+2 |
 | Tokyo | 2026-05-12 | 24–24°C | NO | $0.670 | ECMWF | D+2 |
 | Tokyo | 2026-05-12 | 23–23°C | NO | $0.830 | ECMWF | D+2 |
 | Shanghai | 2026-05-12 | 29–29°C | NO | $0.760 | ECMWF | D+2 |
 | Shanghai | 2026-05-12 | 30–30°C | NO | $0.860 | ECMWF | D+2 |
 | Singapore | 2026-05-12 | 33–33°C | NO | $0.830 | ECMWF | D+2 |
+| Singapore | 2026-05-12 | 32–32°C | NO | $0.650 | ECMWF | D+2 |
 | Tel Aviv | 2026-05-12 | 33–33°C | NO | $0.710 | ECMWF | D+2 |
-| Buenos Aires | 2026-05-12 | 18–18°C | YES | $0.120 | ECMWF | D+2 |
+| Tel Aviv | 2026-05-12 | 34–999°C | YES | $0.530 | ECMWF | D+2 |
 | Buenos Aires | 2026-05-12 | 22–22°C | NO | $0.900 | ECMWF | D+2 |
-| Paris | 2026-05-12 | 17–17°C | NO | $0.750 | ECMWF | D+2 |
-| Ankara | 2026-05-12 | 24–24°C | NO | $0.850 | ECMWF | D+2 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
 |------|------|--------|------|-------|-----|---------|--------|
+| Buenos Aires | 2026-05-12 | 18–18°C | YES | $0.120 | -12.50 | None | ECMWF |
 | Ankara | 2026-05-12 | 20–20°C | YES | $0.069 | -6.27 | None | ECMWF |
 | Paris | 2026-05-12 | 14–14°C | YES | $0.080 | -6.25 | None | ECMWF |
 | Ankara | 2026-05-11 | 23–23°C | NO | $0.670 | +2.61 | None | ECMWF |
@@ -124,14 +129,13 @@ _Auto-generated 2026-05-10 09:57 UTC_
 | Sao Paulo | 2026-05-10 | 19–19°C | NO | $0.870 | +3.74 | None | ECMWF |
 | Sao Paulo | 2026-05-10 | 18–18°C | NO | $0.890 | +3.09 | None | ECMWF |
 | Singapore | 2026-05-10 | 32–32°C | NO | $0.650 | +13.46 | None | ECMWF |
-| Shanghai | 2026-05-11 | 26–26°C | NO | $0.720 | +2.78 | None | ECMWF |
 
 ## City Performance
 | City | Trades | Wins | WR | PnL | Avg PnL |
 |------|--------|------|-----|-----|---------|
 | Ankara | 29 | 0 | 0% | -73.16 | -2.52 |
 | Atlanta | 26 | 0 | 0% | -50.11 | -1.93 |
-| Buenos Aires | 33 | 0 | 0% | -85.21 | -2.58 |
+| Buenos Aires | 34 | 0 | 0% | -97.71 | -2.87 |
 | Chicago | 9 | 0 | 0% | +4.57 | +0.51 |
 | Dallas | 12 | 0 | 0% | -53.77 | -4.48 |
 | London | 28 | 0 | 0% | +22.43 | +0.80 |
