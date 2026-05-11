@@ -1,16 +1,16 @@
 # WeatherBot Status
-_Auto-generated 2026-05-11 22:18 UTC_
+_Auto-generated 2026-05-11 23:32 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $2,112.83 |
+| Balance | $2,120.72 |
 | Starting | $5,000.00 |
-| Return | -57.7% |
-| Total trades | 307 |
-| Win rate | 181/307 (59%) |
-| Open positions | 46 |
+| Return | -57.6% |
+| Total trades | 308 |
+| Win rate | 182/308 (59%) |
+| Open positions | 45 |
 | Markets tracked | 281 |
 | Calibration keys | 112 |
 
@@ -28,7 +28,6 @@ _Auto-generated 2026-05-11 22:18 UTC_
 | Dallas | 2026-05-11 | 78–79°F | NO | $0.750 | ECMWF | D+0 |
 | Dallas | 2026-05-11 | 76–77°F | NO | $0.820 | GFS | D+0 |
 | Dallas | 2026-05-11 | 80–81°F | NO | $0.800 | GFS | D+0 |
-| Seattle | 2026-05-11 | 66–67°F | NO | $0.760 | ENSEMBLE | D+0 |
 | London | 2026-05-11 | 12–12°C | NO | $0.790 | ECMWF | D+0 |
 | London | 2026-05-11 | 14–14°C | NO | $0.750 | ECMWF | D+0 |
 | London | 2026-05-11 | 13–13°C | NO | $0.800 | METAR | D+0 |
@@ -90,6 +89,7 @@ _Auto-generated 2026-05-11 22:18 UTC_
 | Seattle | 2026-05-13 | 58–59°F | NO | $0.770 | ECMWF | D+2 |
 | Atlanta | 2026-05-13 | 78–79°F | NO | $0.820 | ECMWF | D+2 |
 | Atlanta | 2026-05-13 | 82–83°F | NO | $0.770 | ECMWF | D+2 |
+| Atlanta | 2026-05-13 | 80–81°F | NO | $0.670 | ECMWF | D+2 |
 | London | 2026-05-13 | 13–13°C | NO | $0.730 | ECMWF | D+2 |
 | London | 2026-05-13 | 14–14°C | NO | $0.690 | ECMWF | D+2 |
 | Paris | 2026-05-13 | 14–14°C | YES | $0.210 | ECMWF | D+2 |
@@ -126,6 +126,7 @@ _Auto-generated 2026-05-11 22:18 UTC_
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
 |------|------|--------|------|-------|-----|---------|--------|
+| Seattle | 2026-05-11 | 66–67°F | NO | $0.760 | +7.89 | None | ENSEMBLE |
 | Munich | 2026-05-13 | 13–13°C | YES | $0.092 | -9.78 | None | ECMWF |
 | Toronto | 2026-05-11 | 11–11°C | NO | $0.740 | +8.78 | None | ECMWF |
 | Lucknow | 2026-05-11 | 37–37°C | NO | $0.750 | +8.33 | None | ECMWF |
@@ -145,7 +146,6 @@ _Auto-generated 2026-05-11 22:18 UTC_
 | Miami | 2026-05-13 | 86–87°F | NO | $0.670 | +3.36 | None | ECMWF |
 | Miami | 2026-05-13 | 82–83°F | YES | $0.058 | -7.76 | None | ECMWF |
 | Seattle | 2026-05-10 | 66–67°F | NO | $0.790 | -25.00 | None | ECMWF |
-| Seattle | 2026-05-10 | 68–69°F | NO | $0.810 | +5.86 | None | ECMWF |
 
 ## City Performance
 | City | Trades | Wins | WR | PnL | Avg PnL |
@@ -162,7 +162,7 @@ _Auto-generated 2026-05-11 22:18 UTC_
 | New York City | 45 | 5 | 11% | -63.46 | -1.41 |
 | Paris | 48 | 0 | 0% | -169.16 | -3.52 |
 | Sao Paulo | 35 | 0 | 0% | -57.51 | -1.64 |
-| Seattle | 17 | 0 | 0% | -17.32 | -1.02 |
+| Seattle | 18 | 0 | 0% | -9.43 | -0.52 |
 | Seoul | 34 | 0 | 0% | -43.39 | -1.28 |
 | Shanghai | 44 | 0 | 0% | -56.46 | -1.28 |
 | Singapore | 44 | 0 | 0% | -149.60 | -3.40 |
@@ -242,19 +242,19 @@ _Tracking NO trades opened after 2026-05-06_
 
 | Metric | Value |
 |--------|-------|
-| Closed trades | 185 |
-| Wins / Losses | 146 / 39 |
-| Win rate | 78.9% |
-| Total PnL | $+54.52 |
-| ROI | +1.2% |
-| Resolved | 147 (108W/39L) |
-| Resolved WR | 73.5% |
-| Resolved PnL | $-69.85 |
-| Avg PnL/trade | $+0.29 |
+| Closed trades | 186 |
+| Wins / Losses | 147 / 39 |
+| Win rate | 79.0% |
+| Total PnL | $+62.41 |
+| ROI | +1.3% |
+| Resolved | 148 (109W/39L) |
+| Resolved WR | 73.6% |
+| Resolved PnL | $-61.96 |
+| Avg PnL/trade | $+0.34 |
 
 ### Close Reasons (v2)
 | Reason | Count | PnL |
 |--------|-------|-----|
-| resolved_win | 108 | $+905.15 |
+| resolved_win | 109 | $+913.04 |
 | take_profit | 38 | $+124.37 |
 | resolved_loss | 39 | $-975.00 |
