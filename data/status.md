@@ -1,20 +1,20 @@
 # WeatherBot Status
-_Auto-generated 2026-05-13 21:28 UTC_
+_Auto-generated 2026-05-13 22:48 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $2,358.01 |
+| Balance | $2,308.01 |
 | Starting | $5,000.00 |
-| Return | -52.8% |
+| Return | -53.8% |
 | Total trades | 422 |
 | Win rate | 262/422 (62%) |
 | Open positions | 41 |
 | Markets tracked | 320 |
 | Calibration keys | 112 |
 
-## Open Positions (95)
+## Open Positions (97)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
 | Chicago | 2026-05-13 | 60–61°F | NO | $0.820 | ECMWF | D+0 |
@@ -104,6 +104,7 @@ _Auto-generated 2026-05-13 21:28 UTC_
 | Tokyo | 2026-05-15 | 23–23°C | NO | $0.830 | ECMWF | D+2 |
 | Shanghai | 2026-05-15 | 26–26°C | NO | $0.820 | ECMWF | D+2 |
 | Shanghai | 2026-05-15 | 24–24°C | NO | $0.790 | ECMWF | D+2 |
+| Shanghai | 2026-05-15 | 25–25°C | NO | $0.710 | ECMWF | D+2 |
 | Singapore | 2026-05-15 | 31–31°C | NO | $0.690 | ECMWF | D+2 |
 | Singapore | 2026-05-15 | 32–32°C | NO | $0.670 | ECMWF | D+2 |
 | Singapore | 2026-05-15 | 33–999°C | NO | $0.790 | ECMWF | D+2 |
@@ -112,6 +113,7 @@ _Auto-generated 2026-05-13 21:28 UTC_
 | Sao Paulo | 2026-05-15 | 24–24°C | NO | $0.900 | ECMWF | D+2 |
 | Sao Paulo | 2026-05-15 | -999–20°C | YES | $0.400 | ECMWF | D+2 |
 | Buenos Aires | 2026-05-15 | 20–20°C | NO | $0.820 | ECMWF | D+2 |
+| Buenos Aires | 2026-05-15 | 19–19°C | NO | $0.700 | ECMWF | D+2 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
