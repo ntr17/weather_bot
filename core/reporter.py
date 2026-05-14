@@ -239,6 +239,40 @@ def generate_status(cfg) -> str:
         lines.append("## Edge Tracker (v2 NO-HOLD strategy)")
         lines.append(f"_No v2 trades yet (cutover: {v2_cutover[:10]})_\n")
 
+    # ── Edge Tracker (v3 convergence strategy) ───────────────────────────────
+    v3_cutover = cfg_dict.get("v3_cutover", "2026-05-14T00:00:00")
+    v3_trades = [t for t in trades
+                 if t.get("side") == "no"
+                 and (t.get("opened_at") or t.get("ts", "")) >= v3_cutover]
+    if v3_trades:
+        v3_n = len(v3_trades)
+        v3_wins = sum(1 for t in v3_trades if (t.get("pnl") or 0) > 0)
+        v3_losses = sum(1 for t in v3_trades if (t.get("pnl") or 0) < 0)
+        v3_pnl = sum(t.get("pnl", 0) for t in v3_trades)
+        v3_cost = sum(t.get("cost", 0) for t in v3_trades)
+        v3_roi = (v3_pnl / v3_cost * 100) if v3_cost else 0
+        v3_wr = v3_wins / v3_n * 100 if v3_n else 0
+
+        from collections import Counter
+        v3_reasons = Counter(t.get("reason", "open") for t in v3_trades)
+        v3_tp = sum(1 for t in v3_trades if t.get("reason") == "take_profit")
+
+        lines.append("## Edge Tracker (v3 CONVERGENCE strategy)")
+        lines.append(f"_D+1/D+2 NO trades opened after {v3_cutover[:10]}_\n")
+        lines.append("| Metric | Value |")
+        lines.append("|--------|-------|")
+        lines.append(f"| Trades | {v3_n} |")
+        lines.append(f"| Wins / Losses | {v3_wins} / {v3_losses} |")
+        lines.append(f"| Win rate | {v3_wr:.1f}% |")
+        lines.append(f"| Total PnL | ${v3_pnl:+.2f} |")
+        lines.append(f"| ROI | {v3_roi:+.1f}% |")
+        lines.append(f"| Take-profit exits | {v3_tp} |")
+        lines.append(f"| Avg PnL/trade | ${v3_pnl/v3_n:+.2f} |")
+        lines.append("")
+    else:
+        lines.append("## Edge Tracker (v3 CONVERGENCE strategy)")
+        lines.append(f"_No v3 trades yet (cutover: {v3_cutover[:10]})_\n")
+
     report = "\n".join(lines)
     STATUS_PATH.parent.mkdir(exist_ok=True)
     STATUS_PATH.write_text(report, encoding="utf-8")

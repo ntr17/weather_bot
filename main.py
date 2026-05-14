@@ -209,8 +209,8 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
                             all_bucket_ids.add(matched.market_id)
 
                 # 2. Try NO on ALL tail buckets (multi-NO strategy)
-                # Cap to max_no_positions per event; respect horizon limit
-                if i > cfg.max_horizon_days:
+                # Cap to max_no_positions per event; respect horizon limits
+                if i < cfg.min_horizon_days or i > cfg.max_horizon_days:
                     save_market(mkt)
                     time.sleep(0.1)
                     continue

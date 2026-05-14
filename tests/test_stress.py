@@ -67,6 +67,7 @@ CFG = Config(
     enable_yes_trading=False,
     min_no_entry=0.65,
     max_no_entry=0.90,
+    min_horizon_days=0,
     no_stop_enabled=False,
     no_forecast_exit=False,
     max_horizon_days=2,

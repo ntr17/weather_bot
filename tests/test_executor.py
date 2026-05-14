@@ -92,6 +92,7 @@ def _cfg(**overrides) -> Config:
         enable_yes_trading=True,
         min_no_entry=0.10,
         max_no_entry=0.97,
+        min_horizon_days=0,
         no_stop_enabled=True,
         no_forecast_exit=True,
         max_horizon_days=6,

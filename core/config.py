@@ -40,6 +40,7 @@ class Config:
     enable_yes_trading: bool     # False = NO-only mode (data shows no YES edge)
     min_no_entry: float          # min NO entry price (avoid cheap volatile NOs)
     max_no_entry: float          # max NO entry price
+    min_horizon_days: int        # min D+N for NO entries (1 = skip D+0, convergence only)
     no_stop_enabled: bool        # False = hold to resolution, no stop-loss on NOs
     no_forecast_exit: bool       # False = never exit NO on forecast change
     max_horizon_days: int        # max D+N horizon to trade (2 = D+0, D+1, D+2)
@@ -86,6 +87,7 @@ def load_config() -> Config:
         enable_yes_trading=raw.get("enable_yes_trading", False),
         min_no_entry=float(raw.get("min_no_entry", 0.65)),
         max_no_entry=float(raw.get("max_no_entry", 0.90)),
+        min_horizon_days=int(raw.get("min_horizon_days", 1)),
         no_stop_enabled=raw.get("no_stop_enabled", False),
         no_forecast_exit=raw.get("no_forecast_exit", False),
         max_horizon_days=int(raw.get("max_horizon_days", 2)),
