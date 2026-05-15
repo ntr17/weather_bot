@@ -1,20 +1,20 @@
 # WeatherBot Status
-_Auto-generated 2026-05-15 22:32 UTC_
+_Auto-generated 2026-05-15 23:33 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $2,548.03 |
+| Balance | $2,498.03 |
 | Starting | $5,000.00 |
-| Return | -49.0% |
+| Return | -50.0% |
 | Total trades | 534 |
 | Win rate | 343/534 (64%) |
 | Open positions | 41 |
 | Markets tracked | 360 |
 | Calibration keys | 112 |
 
-## Open Positions (85)
+## Open Positions (87)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
 | New York City | 2026-05-15 | 64–65°F | NO | $0.720 | ECMWF | D+0 |
@@ -77,6 +77,7 @@ _Auto-generated 2026-05-15 22:32 UTC_
 | Dallas | 2026-05-17 | 90–91°F | NO | $0.770 | ECMWF | D+2 |
 | Dallas | 2026-05-17 | 88–89°F | NO | $0.700 | ECMWF | D+2 |
 | Seattle | 2026-05-17 | 62–63°F | NO | $0.710 | ECMWF | D+2 |
+| Seattle | 2026-05-17 | 60–61°F | NO | $0.720 | ECMWF | D+2 |
 | Atlanta | 2026-05-17 | 86–87°F | NO | $0.710 | ECMWF | D+2 |
 | Atlanta | 2026-05-17 | 88–89°F | NO | $0.730 | ECMWF | D+2 |
 | Atlanta | 2026-05-17 | 90–91°F | NO | $0.860 | ECMWF | D+2 |
@@ -90,6 +91,7 @@ _Auto-generated 2026-05-15 22:32 UTC_
 | Ankara | 2026-05-17 | 20–20°C | NO | $0.710 | ECMWF | D+2 |
 | Seoul | 2026-05-17 | 25–25°C | NO | $0.690 | ECMWF | D+2 |
 | Seoul | 2026-05-17 | 24–24°C | NO | $0.830 | ECMWF | D+2 |
+| Seoul | 2026-05-17 | 26–999°C | NO | $0.660 | ECMWF | D+2 |
 | Tokyo | 2026-05-17 | 29–29°C | NO | $0.700 | ECMWF | D+2 |
 | Tokyo | 2026-05-17 | 28–28°C | NO | $0.810 | ECMWF | D+2 |
 | Tokyo | 2026-05-17 | 30–999°C | NO | $0.720 | ECMWF | D+2 |
