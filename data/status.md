@@ -1,20 +1,20 @@
 # WeatherBot Status
-_Auto-generated 2026-05-16 10:26 UTC_
+_Auto-generated 2026-05-16 11:05 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $2,455.66 |
+| Balance | $2,433.71 |
 | Starting | $5,000.00 |
-| Return | -50.9% |
-| Total trades | 557 |
-| Win rate | 359/557 (64%) |
+| Return | -51.3% |
+| Total trades | 558 |
+| Win rate | 360/558 (65%) |
 | Open positions | 44 |
 | Markets tracked | 380 |
 | Calibration keys | 112 |
 
-## Open Positions (85)
+## Open Positions (86)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
 | New York City | 2026-05-16 | 78–79°F | NO | $0.870 | ECMWF | D+0 |
@@ -81,8 +81,8 @@ _Auto-generated 2026-05-16 10:26 UTC_
 | Singapore | 2026-05-17 | 32–32°C | NO | $0.670 | ECMWF | D+1 |
 | Singapore | 2026-05-17 | 31–31°C | NO | $0.860 | ECMWF | D+1 |
 | Toronto | 2026-05-17 | 24–24°C | NO | $0.860 | ECMWF | D+1 |
-| Toronto | 2026-05-17 | 22–22°C | NO | $0.820 | ECMWF | D+1 |
 | Toronto | 2026-05-17 | 25–25°C | NO | $0.870 | ECMWF | D+1 |
+| Toronto | 2026-05-17 | 23–23°C | NO | $0.770 | ECMWF | D+1 |
 | Sao Paulo | 2026-05-17 | 22–22°C | NO | $0.760 | ECMWF | D+1 |
 | Buenos Aires | 2026-05-17 | 15–15°C | NO | $0.730 | ECMWF | D+1 |
 | New York City | 2026-05-18 | 80–81°F | NO | $0.750 | ECMWF | D+2 |
@@ -90,6 +90,7 @@ _Auto-generated 2026-05-16 10:26 UTC_
 | New York City | 2026-05-18 | 84–85°F | NO | $0.850 | ECMWF | D+2 |
 | Miami | 2026-05-18 | 86–87°F | NO | $0.650 | ECMWF | D+2 |
 | Dallas | 2026-05-18 | 88–89°F | NO | $0.730 | ECMWF | D+2 |
+| Dallas | 2026-05-18 | 90–91°F | NO | $0.700 | ECMWF | D+2 |
 | Atlanta | 2026-05-18 | 86–87°F | NO | $0.650 | ECMWF | D+2 |
 | London | 2026-05-18 | 14–14°C | NO | $0.750 | ECMWF | D+2 |
 | London | 2026-05-18 | 15–15°C | NO | $0.720 | ECMWF | D+2 |
@@ -106,6 +107,7 @@ _Auto-generated 2026-05-16 10:26 UTC_
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
 |------|------|--------|------|-------|-----|---------|--------|
+| Toronto | 2026-05-17 | 22–22°C | NO | $0.820 | +3.05 | None | ECMWF |
 | Singapore | 2026-05-17 | 33–999°C | NO | $0.670 | +2.61 | None | ECMWF |
 | Seoul | 2026-05-17 | 23–23°C | NO | $0.760 | +2.63 | None | ECMWF |
 | Miami | 2026-05-15 | 92–93°F | NO | $0.830 | -25.00 | None | ECMWF |
@@ -125,7 +127,6 @@ _Auto-generated 2026-05-16 10:26 UTC_
 | Paris | 2026-05-15 | 15–15°C | NO | $0.870 | +3.74 | None | ECMWF |
 | London | 2026-05-15 | 14–14°C | NO | $0.710 | -25.00 | None | ECMWF |
 | Chicago | 2026-05-15 | 70–71°F | NO | $0.870 | +3.74 | None | ECMWF |
-| Chicago | 2026-05-15 | 72–73°F | NO | $0.750 | +8.33 | None | ECMWF |
 
 ## City Performance
 | City | Trades | Wins | WR | PnL | Avg PnL |
@@ -148,7 +149,7 @@ _Auto-generated 2026-05-16 10:26 UTC_
 | Singapore | 62 | 0 | 0% | -211.71 | -3.41 |
 | Tel Aviv | 42 | 0 | 0% | -50.11 | -1.19 |
 | Tokyo | 43 | 0 | 0% | -57.86 | -1.35 |
-| Toronto | 54 | 0 | 0% | +57.01 | +1.06 |
+| Toronto | 55 | 0 | 0% | +60.06 | +1.09 |
 | Wellington | 26 | 0 | 0% | -143.20 | -5.51 |
 
 ## City Health (last 20 runs)
@@ -222,10 +223,10 @@ _Tracking NO trades opened after 2026-05-06_
 
 | Metric | Value |
 |--------|-------|
-| Closed trades | 408 |
-| Wins / Losses | 321 / 87 |
+| Closed trades | 409 |
+| Wins / Losses | 322 / 87 |
 | Win rate | 78.7% |
-| Total PnL | $+51.85 |
+| Total PnL | $+54.90 |
 | ROI | +0.5% |
 | Resolved | 330 (243W/87L) |
 | Resolved WR | 73.6% |
@@ -236,7 +237,7 @@ _Tracking NO trades opened after 2026-05-06_
 | Reason | Count | PnL |
 |--------|-------|-----|
 | resolved_win | 243 | $+1966.17 |
-| take_profit | 78 | $+260.68 |
+| take_profit | 79 | $+263.73 |
 | resolved_loss | 87 | $-2175.00 |
 
 ## Edge Tracker (v3 CONVERGENCE strategy)
@@ -244,10 +245,10 @@ _D+1/D+2 NO trades opened after 2026-05-14_
 
 | Metric | Value |
 |--------|-------|
-| Trades | 28 |
-| Wins / Losses | 26 / 2 |
-| Win rate | 92.9% |
-| Total PnL | $+49.76 |
-| ROI | +7.1% |
-| Take-profit exits | 21 |
-| Avg PnL/trade | $+1.78 |
+| Trades | 29 |
+| Wins / Losses | 27 / 2 |
+| Win rate | 93.1% |
+| Total PnL | $+52.81 |
+| ROI | +7.3% |
+| Take-profit exits | 22 |
+| Avg PnL/trade | $+1.82 |
