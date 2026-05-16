@@ -385,47 +385,56 @@ def _bucket_label(t_low: float, t_high: float, unit: str) -> str:
 def _execute_live_order(token_id: str, price: float, shares: float,
                         neg_risk: bool, side: str) -> bool:
     """
-    Place a real CLOB limit order. Returns True on success, False on failure.
-    Uses GTC limit orders (maker = zero fees).
+    Place a FOK (fill-or-kill) market order. Returns True on success.
+
+    Uses FOK instead of GTC to guarantee immediate fill or nothing.
+    This prevents accounting drift: if the order doesn't fill, the
+    position is never recorded. Pays taker fee (~$0.01 on a $7 trade).
     """
     if not token_id:
         print("  [ERROR] No CLOB token ID — cannot place live order")
         return False
 
-    from core.clob import place_limit_buy, place_limit_sell
+    from core.clob import place_market_buy
 
     if side == "BUY":
-        resp = place_limit_buy(token_id, price, shares, neg_risk=neg_risk)
+        amount_usdc = round(price * shares, 2)
+        resp = place_market_buy(token_id, amount_usdc, neg_risk=neg_risk)
     else:
-        resp = place_limit_sell(token_id, price, shares, neg_risk=neg_risk)
-
-    if resp is None:
-        print(f"  [ERROR] CLOB {side} order failed — token={token_id[:20]}...")
+        # Should not happen — sells go through _execute_live_sell
+        print(f"  [ERROR] Unexpected SELL in _execute_live_order")
         return False
 
-    print(f"  [LIVE] CLOB {side} placed: {shares:.2f} shares @ ${price:.3f}")
+    if resp is None:
+        print(f"  [ERROR] FOK BUY failed — token={token_id[:20]}...")
+        return False
+
+    print(f"  [LIVE] FOK BUY filled: ${amount_usdc:.2f} on token={token_id[:20]}...")
     return True
 
 
 def _execute_live_sell(pos: dict, exit_price: float) -> bool:
     """
-    Place a sell order to exit a live position.
+    Place a FOK market sell to exit a live position.
     For resolution exits, tokens auto-redeem — no sell needed.
+
+    Uses FOK to guarantee immediate fill: either we exit NOW
+    or the position stays open for the next cycle to retry.
     """
     token_id = pos.get("clob_token_id", "")
     if not token_id:
         print("  [WARN] No clob_token_id on position — skipping live sell")
         return True  # Don't block state update for legacy positions
 
-    from core.clob import place_limit_sell
+    from core.clob import place_market_sell
 
     shares = pos.get("shares", 0)
     neg_risk = pos.get("neg_risk", True)
-    resp = place_limit_sell(token_id, exit_price, shares, neg_risk=neg_risk)
+    resp = place_market_sell(token_id, shares, neg_risk=neg_risk)
 
     if resp is None:
-        print(f"  [ERROR] Live SELL failed — token={token_id[:20]}...")
+        print(f"  [ERROR] FOK SELL failed — token={token_id[:20]}...")
         return False
 
-    print(f"  [LIVE] SELL placed: {shares:.2f} shares @ ${exit_price:.3f}")
+    print(f"  [LIVE] FOK SELL filled: {shares:.2f} shares")
     return True

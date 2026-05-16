@@ -58,13 +58,16 @@ jobs:
           # Back up fresh data files (bot just produced them)
           cp data/weatherbot.db /tmp/weatherbot.db.bak
           cp data/status.md /tmp/status.md.bak
+          [ -f data/safety.json ] && cp data/safety.json /tmp/safety.json.bak
           # Fast-forward to whatever origin/master is now (handles concurrent pushes)
           git fetch origin master
           git reset --hard origin/master
           # Restore our fresh data on top of latest code
           mv /tmp/weatherbot.db.bak data/weatherbot.db
           mv /tmp/status.md.bak data/status.md
+          [ -f /tmp/safety.json.bak ] && mv /tmp/safety.json.bak data/safety.json
           git add -f data/weatherbot.db data/status.md
+          [ -f data/safety.json ] && git add -f data/safety.json
           # Only commit if there are changes
           git diff --cached --quiet || git commit -m "bot: update state $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           git push
