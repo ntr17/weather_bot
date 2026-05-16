@@ -1,20 +1,20 @@
 # WeatherBot Status
-_Auto-generated 2026-05-16 15:37 UTC_
+_Auto-generated 2026-05-16 17:00 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $2,236.33 |
+| Balance | $2,111.33 |
 | Starting | $5,000.00 |
-| Return | -55.3% |
+| Return | -57.8% |
 | Total trades | 561 |
 | Win rate | 363/561 (65%) |
-| Open positions | 47 |
+| Open positions | 48 |
 | Markets tracked | 380 |
 | Calibration keys | 112 |
 
-## Open Positions (95)
+## Open Positions (100)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
 | New York City | 2026-05-16 | 78–79°F | NO | $0.870 | ECMWF | D+0 |
@@ -65,6 +65,7 @@ _Auto-generated 2026-05-16 15:37 UTC_
 | London | 2026-05-17 | 17–17°C | NO | $0.780 | ECMWF | D+1 |
 | Paris | 2026-05-17 | 17–17°C | NO | $0.820 | ECMWF | D+1 |
 | Paris | 2026-05-17 | 16–16°C | NO | $0.670 | ECMWF | D+1 |
+| Paris | 2026-05-17 | 15–15°C | NO | $0.660 | ECMWF | D+1 |
 | Munich | 2026-05-17 | 16–16°C | NO | $0.670 | ECMWF | D+1 |
 | Munich | 2026-05-17 | 17–17°C | NO | $0.720 | ECMWF | D+1 |
 | Munich | 2026-05-17 | 18–18°C | NO | $0.880 | ECMWF | D+1 |
@@ -90,6 +91,7 @@ _Auto-generated 2026-05-16 15:37 UTC_
 | New York City | 2026-05-18 | 82–83°F | NO | $0.790 | ECMWF | D+2 |
 | New York City | 2026-05-18 | 84–85°F | NO | $0.850 | ECMWF | D+2 |
 | Miami | 2026-05-18 | 86–87°F | NO | $0.650 | ECMWF | D+2 |
+| Miami | 2026-05-18 | 88–89°F | NO | $0.720 | ECMWF | D+2 |
 | Dallas | 2026-05-18 | 88–89°F | NO | $0.730 | ECMWF | D+2 |
 | Dallas | 2026-05-18 | 90–91°F | NO | $0.700 | ECMWF | D+2 |
 | Atlanta | 2026-05-18 | 86–87°F | NO | $0.650 | ECMWF | D+2 |
@@ -99,6 +101,7 @@ _Auto-generated 2026-05-16 15:37 UTC_
 | London | 2026-05-18 | 16–16°C | NO | $0.750 | ECMWF | D+2 |
 | Paris | 2026-05-18 | 16–16°C | NO | $0.670 | ECMWF | D+2 |
 | Paris | 2026-05-18 | 15–15°C | NO | $0.730 | ECMWF | D+2 |
+| Paris | 2026-05-18 | 17–17°C | NO | $0.830 | ECMWF | D+2 |
 | Munich | 2026-05-18 | 19–19°C | NO | $0.680 | ECMWF | D+2 |
 | Seoul | 2026-05-18 | 24–24°C | NO | $0.810 | ECMWF | D+2 |
 | Tokyo | 2026-05-18 | 27–27°C | NO | $0.760 | ECMWF | D+2 |
@@ -109,6 +112,8 @@ _Auto-generated 2026-05-16 15:37 UTC_
 | Toronto | 2026-05-18 | 28–28°C | NO | $0.800 | ECMWF | D+2 |
 | Toronto | 2026-05-18 | 31–31°C | NO | $0.880 | ECMWF | D+2 |
 | Toronto | 2026-05-18 | 30–30°C | NO | $0.820 | ECMWF | D+2 |
+| Sao Paulo | 2026-05-18 | 19–19°C | NO | $0.750 | ECMWF | D+2 |
+| Sao Paulo | 2026-05-18 | 20–20°C | NO | $0.750 | ECMWF | D+2 |
 | Buenos Aires | 2026-05-18 | 18–18°C | NO | $0.840 | ECMWF | D+2 |
 | Wellington | 2026-05-18 | 15–15°C | NO | $0.680 | ECMWF | D+2 |
 | Wellington | 2026-05-18 | 13–13°C | NO | $0.800 | ECMWF | D+2 |
