@@ -15,6 +15,7 @@ from core.notifier import trade_closed, trade_opened
 from core.pricer import bet_size, calc_ev, calc_kelly, bucket_prob
 from core.storage import save_market, save_state, append_trade
 from core.scanner import Outcome, fetch_live_price
+from core.safety import pre_trade_check, record_daily_loss
 
 
 def try_open_position(
@@ -118,6 +119,8 @@ def try_open_position(
         "close_reason":       None,
         "closed_at":          None,
         "pnl":                None,
+        "clob_token_id":      outcome.clob_token_yes,
+        "neg_risk":           outcome.neg_risk,
     }
 
     new_positions = {**mkt.get("positions", {}), outcome.market_id: position}
@@ -129,7 +132,14 @@ def try_open_position(
     }
 
     if not cfg.paper_trading:
-        _execute_live_order(outcome.market_id, real_size, cfg)
+        can_trade, block_reason = pre_trade_check(state["balance"], real_size)
+        if not can_trade:
+            print(f"  [BLOCKED] {block_reason}")
+            return mkt, state, False
+        ok = _execute_live_order(outcome.clob_token_yes, real_ask, real_shares,
+                                 outcome.neg_risk, "BUY")
+        if not ok:
+            return mkt, state, False
 
     save_market(updated_mkt)
     save_state(updated_state)
@@ -242,6 +252,8 @@ def try_open_no_position(
         "close_reason":       None,
         "closed_at":          None,
         "pnl":                None,
+        "clob_token_id":      outcome.clob_token_no,
+        "neg_risk":           outcome.neg_risk,
     }
 
     new_positions = {**mkt.get("positions", {}), outcome.market_id: position}
@@ -253,7 +265,14 @@ def try_open_no_position(
     }
 
     if not cfg.paper_trading:
-        _execute_live_order(outcome.market_id, real_size, cfg)
+        can_trade, block_reason = pre_trade_check(state["balance"], real_size)
+        if not can_trade:
+            print(f"  [BLOCKED] {block_reason}")
+            return mkt, state, False
+        ok = _execute_live_order(outcome.clob_token_no, real_no_ask, real_shares,
+                                 outcome.neg_risk, "BUY")
+        if not ok:
+            return mkt, state, False
 
     save_market(updated_mkt)
     save_state(updated_state)
@@ -268,10 +287,12 @@ def close_position(
     reason: str,
     state: dict[str, Any],
     position_id: str | None = None,
+    cfg: Config | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """
     Close an open position and update balance + market record.
     If position_id is given, close that specific position from positions dict.
+    For live mode: places sell order on CLOB (except for resolution exits which auto-redeem).
     Returns (updated_market, updated_state).
     """
     positions = mkt.get("positions", {})
@@ -306,6 +327,19 @@ def close_position(
         f"entry ${pos['entry_price']:.3f} → ${exit_price:.3f} | "
         f"PnL: {'+'if pnl>=0 else ''}{pnl:.2f}"
     )
+
+    # Live sell: place order on CLOB for non-resolution exits
+    # Resolution exits auto-redeem — no sell needed
+    is_resolution = reason in ("resolved_win", "resolved_loss")
+    if cfg and not cfg.paper_trading and not is_resolution:
+        ok = _execute_live_sell(pos, exit_price)
+        if not ok:
+            print(f"  [ERROR] Live sell failed — position stays open")
+            return mkt, state
+
+    # Track daily losses for kill-switch
+    if pnl < 0 and cfg and not cfg.paper_trading:
+        record_daily_loss(abs(pnl))
 
     updated_pos = {
         **pos,
@@ -348,12 +382,50 @@ def _bucket_label(t_low: float, t_high: float, unit: str) -> str:
     return f"{t_low:.0f}–{t_high:.0f}°{unit}"
 
 
-def _execute_live_order(market_id: str, size: float, cfg: Config) -> None:
+def _execute_live_order(token_id: str, price: float, shares: float,
+                        neg_risk: bool, side: str) -> bool:
     """
-    Live order execution placeholder — Phase 2.
-    Will call polymarket-live-executor skill or CLOB API directly.
+    Place a real CLOB limit order. Returns True on success, False on failure.
+    Uses GTC limit orders (maker = zero fees).
     """
-    raise NotImplementedError(
-        "Live trading not yet implemented. Set PAPER_TRADING=true in .env "
-        "or implement CLOB integration in Phase 2."
-    )
+    if not token_id:
+        print("  [ERROR] No CLOB token ID — cannot place live order")
+        return False
+
+    from core.clob import place_limit_buy, place_limit_sell
+
+    if side == "BUY":
+        resp = place_limit_buy(token_id, price, shares, neg_risk=neg_risk)
+    else:
+        resp = place_limit_sell(token_id, price, shares, neg_risk=neg_risk)
+
+    if resp is None:
+        print(f"  [ERROR] CLOB {side} order failed — token={token_id[:20]}...")
+        return False
+
+    print(f"  [LIVE] CLOB {side} placed: {shares:.2f} shares @ ${price:.3f}")
+    return True
+
+
+def _execute_live_sell(pos: dict, exit_price: float) -> bool:
+    """
+    Place a sell order to exit a live position.
+    For resolution exits, tokens auto-redeem — no sell needed.
+    """
+    token_id = pos.get("clob_token_id", "")
+    if not token_id:
+        print("  [WARN] No clob_token_id on position — skipping live sell")
+        return True  # Don't block state update for legacy positions
+
+    from core.clob import place_limit_sell
+
+    shares = pos.get("shares", 0)
+    neg_risk = pos.get("neg_risk", True)
+    resp = place_limit_sell(token_id, exit_price, shares, neg_risk=neg_risk)
+
+    if resp is None:
+        print(f"  [ERROR] Live SELL failed — token={token_id[:20]}...")
+        return False
+
+    print(f"  [LIVE] SELL placed: {shares:.2f} shares @ ${exit_price:.3f}")
+    return True

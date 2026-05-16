@@ -11,6 +11,7 @@ Bug fixes vs bot_v2:
 from datetime import datetime, timezone
 from typing import Any
 
+from core.config import Config
 from core.executor import close_position
 from core.forecaster import get_actual_temp
 from core.pricer import in_bucket
@@ -24,6 +25,7 @@ def check_stops_and_tp(
     trailing_activation: float = 1.20,
     position_id: str | None = None,
     no_stop_enabled: bool = True,
+    cfg: Config | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any], bool]:
     """
     Check stop-loss, trailing stop, and take-profit on a single open position.
@@ -108,7 +110,7 @@ def check_stops_and_tp(
     else:
         reason = "trailing_stop"
 
-    updated_mkt, updated_state = close_position(mkt, current_bid, reason, state, position_id)
+    updated_mkt, updated_state = close_position(mkt, current_bid, reason, state, position_id, cfg=cfg)
     return updated_mkt, updated_state, True
 
 
@@ -118,6 +120,7 @@ def check_forecast_change(
     new_forecast: float,
     unit: str,
     position_id: str | None = None,
+    cfg: Config | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any], bool]:
     """
     Close position if forecast has invalidated our thesis.
@@ -149,7 +152,7 @@ def check_forecast_change(
             return mkt, state, False
         current_no_bid = round(1.0 - yes_ask, 4)
         updated_mkt, updated_state = close_position(
-            mkt, current_no_bid, "forecast_changed", state, position_id
+            mkt, current_no_bid, "forecast_changed", state, position_id, cfg=cfg
         )
         return updated_mkt, updated_state, True
 
@@ -174,7 +177,7 @@ def check_forecast_change(
     if not forecast_far:
         return mkt, state, False
 
-    updated_mkt, updated_state = close_position(mkt, yes_bid, "forecast_changed", state, position_id)
+    updated_mkt, updated_state = close_position(mkt, yes_bid, "forecast_changed", state, position_id, cfg=cfg)
     return updated_mkt, updated_state, True
 
 
@@ -183,6 +186,7 @@ def check_resolution(
     state: dict[str, Any],
     vc_key: str,
     position_id: str | None = None,
+    cfg: Config | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any], bool]:
     """
     Check if a market has resolved on Polymarket and record the outcome.
@@ -214,7 +218,7 @@ def check_resolution(
     exit_price = 1.0 if won else 0.0
     reason = "resolved_win" if won else "resolved_loss"
 
-    updated_mkt, updated_state = close_position(mkt, exit_price, reason, state, position_id)
+    updated_mkt, updated_state = close_position(mkt, exit_price, reason, state, position_id, cfg=cfg)
 
     # Fetch actual temperature for calibration (non-blocking)
     actual_temp = get_actual_temp(mkt["city"], mkt["date"], vc_key)

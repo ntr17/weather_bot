@@ -73,7 +73,7 @@ def _mkt(
     }
 
 
-def _fake_close(mkt, exit_price, reason, state, position_id=None):
+def _fake_close(mkt, exit_price, reason, state, position_id=None, cfg=None):
     """Minimal close_position stand-in used by monitor tests."""
     pos_id = position_id or "mkt-001"
     pos = mkt["positions"][pos_id]

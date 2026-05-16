@@ -45,7 +45,10 @@ jobs:
       - name: Run bot (single cycle)
         env:
           VC_KEY: ${{ secrets.VC_KEY }}
-          PAPER_TRADING: "true"
+          PK: ${{ secrets.PK }}
+          FUNDER: ${{ secrets.FUNDER }}
+          SIGNATURE_TYPE: ${{ secrets.SIGNATURE_TYPE }}
+          PAPER_TRADING: ${{ secrets.PAPER_TRADING }}
         run: python main.py once
 
       - name: Commit updated state

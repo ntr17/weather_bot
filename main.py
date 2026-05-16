@@ -143,7 +143,7 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
             open_positions = get_open_positions(mkt)
             for pos_id, pos in list(open_positions.items()):
                 # 1. Resolution check
-                mkt, state, did_resolve = check_resolution(mkt, state, cfg.vc_key, pos_id)
+                mkt, state, did_resolve = check_resolution(mkt, state, cfg.vc_key, pos_id, cfg=cfg)
                 if did_resolve:
                     resolved += 1
                     city_resolved += 1
@@ -153,6 +153,7 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
                 mkt, state, did_close = check_stops_and_tp(
                     mkt, state, cfg.trailing_activation, pos_id,
                     no_stop_enabled=cfg.no_stop_enabled,
+                    cfg=cfg,
                 )
                 if did_close:
                     closed += 1
@@ -165,7 +166,7 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
                     skip_fc = (side == "no" and not cfg.no_forecast_exit)
                     if not skip_fc:
                         mkt, state, did_close = check_forecast_change(
-                            mkt, state, forecast_temp, loc.unit, pos_id
+                            mkt, state, forecast_temp, loc.unit, pos_id, cfg=cfg
                         )
                         if did_close:
                             closed += 1
@@ -270,8 +271,9 @@ def monitor_loop(cfg, calibration: dict) -> None:
             mkt, state, _ = check_stops_and_tp(
                 mkt, state, cfg.trailing_activation, pos_id,
                 no_stop_enabled=cfg.no_stop_enabled,
+                cfg=cfg,
             )
-            mkt, state, _ = check_resolution(mkt, state, cfg.vc_key, pos_id)
+            mkt, state, _ = check_resolution(mkt, state, cfg.vc_key, pos_id, cfg=cfg)
     save_state(state)
 
 

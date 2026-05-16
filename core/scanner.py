@@ -26,6 +26,9 @@ class Outcome:
     ask: float
     spread: float
     volume: float
+    clob_token_yes: str = ""   # CLOB token ID for YES outcome
+    clob_token_no: str = ""    # CLOB token ID for NO outcome
+    neg_risk: bool = True      # weather markets are always negRisk
 
 
 def _get_json(url: str, retries: int = 3) -> dict | list:
@@ -134,6 +137,16 @@ def parse_outcomes(event: dict) -> list[Outcome]:
         except Exception:
             continue
 
+        # Extract CLOB token IDs (needed for live order placement)
+        clob_yes, clob_no = "", ""
+        try:
+            token_ids = json.loads(market.get("clobTokenIds", "[]"))
+            if len(token_ids) >= 2:
+                clob_yes = str(token_ids[0])
+                clob_no = str(token_ids[1])
+        except Exception:
+            pass
+
         outcomes.append(Outcome(
             question=question,
             market_id=str(market.get("id", "")),
@@ -143,6 +156,9 @@ def parse_outcomes(event: dict) -> list[Outcome]:
             ask=round(ask, 4),
             spread=round(ask - bid, 4),
             volume=float(market.get("volume", 0)),
+            clob_token_yes=clob_yes,
+            clob_token_no=clob_no,
+            neg_risk=market.get("negRisk", True),
         ))
 
     outcomes.sort(key=lambda o: o.t_low)
