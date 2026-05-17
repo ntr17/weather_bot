@@ -190,8 +190,12 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
                     sigma = round(math.sqrt(sigma ** 2 + (snap.model_spread / 2.0) ** 2), 3)
                 src = forecast_source or "ecmwf"
 
-                # ALL bucket IDs with ANY position (open or closed) — prevent re-entry
-                all_bucket_ids = set(mkt.get("positions", {}).keys())
+                # Bucket IDs with real positions (open or closed) — prevent re-entry
+                # Exclude paper_cancelled: those were bulk-cancelled during paper→live reset
+                all_bucket_ids = {
+                    pid for pid, pos in mkt.get("positions", {}).items()
+                    if pos.get("close_reason") != "paper_cancelled"
+                }
 
                 # 1. Try YES on the bucket that matches the forecast (if enabled)
                 if cfg.enable_yes_trading:
