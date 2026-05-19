@@ -170,6 +170,9 @@ def place_limit_buy(token_id: str, price: float, size_shares: float,
     try:
         from py_clob_client_v2 import OrderArgsV2, OrderType, PartialCreateOrderOptions, Side
 
+        # Round price to 0.01 tick size (weather markets require this minimum)
+        price = round(round(price / 0.01) * 0.01, 2)
+
         order_args = OrderArgsV2(
             token_id=token_id,
             price=price,
@@ -177,7 +180,7 @@ def place_limit_buy(token_id: str, price: float, size_shares: float,
             side=Side.BUY,
         )
         options = PartialCreateOrderOptions(
-            tick_size="0.001",
+            tick_size="0.01",
             neg_risk=neg_risk,
         )
 
@@ -186,7 +189,7 @@ def place_limit_buy(token_id: str, price: float, size_shares: float,
             options=options,
             order_type=OrderType.GTC,
         )
-        logger.info("Limit BUY placed: %s shares @ $%.3f token=%s resp=%s",
+        logger.info("Limit BUY placed: %s shares @ $%.2f token=%s resp=%s",
                      size_shares, price, token_id[:20], resp)
         return resp
 
@@ -207,6 +210,9 @@ def place_limit_sell(token_id: str, price: float, size_shares: float,
     try:
         from py_clob_client_v2 import OrderArgsV2, OrderType, PartialCreateOrderOptions, Side
 
+        # Round price to 0.01 tick size (weather markets require this minimum)
+        price = round(round(price / 0.01) * 0.01, 2)
+
         order_args = OrderArgsV2(
             token_id=token_id,
             price=price,
@@ -214,7 +220,7 @@ def place_limit_sell(token_id: str, price: float, size_shares: float,
             side=Side.SELL,
         )
         options = PartialCreateOrderOptions(
-            tick_size="0.001",
+            tick_size="0.01",
             neg_risk=neg_risk,
         )
 
@@ -223,7 +229,7 @@ def place_limit_sell(token_id: str, price: float, size_shares: float,
             options=options,
             order_type=OrderType.GTC,
         )
-        logger.info("Limit SELL placed: %s shares @ $%.3f token=%s resp=%s",
+        logger.info("Limit SELL placed: %s shares @ $%.2f token=%s resp=%s",
                      size_shares, price, token_id[:20], resp)
         return resp
 
