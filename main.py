@@ -281,6 +281,59 @@ def monitor_loop(cfg, calibration: dict) -> None:
     save_state(state)
 
 
+def check_pending_orders(cfg) -> int:
+    """
+    Check if any GTC orders with status="live" have been filled since last cycle.
+    Updates position records accordingly. Returns number of fills confirmed.
+
+    For live mode only — paper trading doesn't track real orders.
+    """
+    if cfg.paper_trading:
+        return 0
+
+    from core.clob import get_order, cancel_order
+
+    all_mkts = load_all_markets()
+    state = load_state(cfg.balance)
+    fills = 0
+
+    for mkt in all_mkts:
+        positions = mkt.get("positions", {})
+        changed = False
+
+        for pos_id, pos in positions.items():
+            if pos.get("status") != "open":
+                continue
+            if pos.get("order_status") != "live":
+                continue
+
+            order_id = pos.get("live_order_id", "")
+            if not order_id:
+                continue
+
+            # Query CLOB for this order's current state
+            order_info = get_order(order_id)
+            if order_info is None:
+                continue
+
+            size_matched = float(order_info.get("size_matched", "0"))
+            original_size = float(order_info.get("original_size", "0"))
+
+            if size_matched > 0 and original_size > 0:
+                fill_pct = size_matched / original_size
+                if fill_pct >= 0.95:  # Essentially fully filled
+                    pos["order_status"] = "matched"
+                    pos["shares"] = size_matched  # Update to actual fill
+                    changed = True
+                    fills += 1
+                    print(f"  [FILL] Order {order_id[:16]}... filled: {size_matched:.2f} shares")
+
+        if changed:
+            save_market(mkt)
+
+    return fills
+
+
 def run_once() -> None:
     """Single scan + monitor cycle, then exit. For cron / GitHub Actions."""
     cfg = load_config()
@@ -288,6 +341,12 @@ def run_once() -> None:
     calibration = load_calibration()
 
     print(f"\n[once] WEATHERBOT — single cycle ({'PAPER' if cfg.paper_trading else 'LIVE'})")
+
+    # Check if any pending GTC orders got filled since last cycle
+    fills = check_pending_orders(cfg)
+    if fills:
+        print(f"[once] {fills} pending order(s) confirmed filled")
+
     new_pos, closed, res = scan_once(cfg, calibration)
     monitor_loop(cfg, calibration)
 

@@ -151,8 +151,10 @@ def try_open_position(
                                  outcome.neg_risk, "BUY")
         if not ok:
             return mkt, state, False
-        # Store the verified token ID on the position
+        # Store the verified token ID and order details on the position
         position["clob_token_id"] = token_id
+        position["live_order_id"] = ok.get("orderID", ok.get("id", "")) if isinstance(ok, dict) else ""
+        position["order_status"] = ok.get("status", "") if isinstance(ok, dict) else ""
 
     save_market(updated_mkt)
     save_state(updated_state)
@@ -297,8 +299,10 @@ def try_open_no_position(
                                  outcome.neg_risk, "BUY")
         if not ok:
             return mkt, state, False
-        # Store the verified token ID on the position for sell/close later
+        # Store the verified token ID and order details on the position
         position["clob_token_id"] = token_id
+        position["live_order_id"] = ok.get("orderID", ok.get("id", "")) if isinstance(ok, dict) else ""
+        position["order_status"] = ok.get("status", "") if isinstance(ok, dict) else ""
 
     save_market(updated_mkt)
     save_state(updated_state)
@@ -409,103 +413,113 @@ def _bucket_label(t_low: float, t_high: float, unit: str) -> str:
 
 
 def _execute_live_order(token_id: str, price: float, shares: float,
-                        neg_risk: bool, side: str) -> bool:
+                        neg_risk: bool, side: str) -> dict | None:
     """
-    Place a FOK (fill-or-kill) market order on the Polymarket CLOB.
-    Returns True on fill, False on any failure.
+    Place a GTC limit order on the Polymarket CLOB.
+    Returns order response dict on success, None on failure.
 
-    Steps:
-      1. Validate token_id is not empty.
-      2. Check order book exists and has liquidity (avoids 404s).
-      3. Place FOK market buy.
+    Uses GTC (not FOK) because:
+      1. GTC doesn't need an existing order book — it creates one if empty.
+      2. Zero maker fees (FOK pays taker fees).
+      3. If counterparty exists, fills immediately (status="matched").
+      4. If no counterparty, rests on book (status="live") for later fill.
 
-    The library's create_or_derive_api_key() logs a benign 400 on every run
-    (key already exists → falls back to derive). This is normal.
+    The caller must handle both instant fills and pending orders.
     """
     if not token_id:
-        print("  [ERROR] No CLOB token ID — cannot place live order")
-        return False
+        print("  [ERROR] No CLOB token ID — cannot place order")
+        return None
 
     if side != "BUY":
         print(f"  [ERROR] Unexpected side={side} in _execute_live_order")
-        return False
+        return None
 
-    from core.clob import get_order_book_depth, place_market_buy
+    from core.clob import place_limit_buy
 
-    # Pre-flight: verify the CLOB has an active order book for this token
-    book = get_order_book_depth(token_id, size_usdc=price * shares)
-    if book is None:
-        print(f"  [SKIP] No CLOB order book for token {token_id[:20]}... — market may lack liquidity")
-        return False
-
-    if book["book_depth_asks"] == 0:
-        print(f"  [SKIP] Order book has zero asks — no sellers for token {token_id[:20]}...")
-        return False
-
-    # Check slippage from VWAP
-    if book["slippage_pct"] > 3.0:
-        print(f"  [SKIP] CLOB slippage too high ({book['slippage_pct']:.1f}%) for token {token_id[:20]}...")
-        return False
-
-    amount_usdc = round(price * shares, 2)
-    resp = place_market_buy(token_id, amount_usdc, neg_risk=neg_risk)
+    resp = place_limit_buy(token_id, price, shares, neg_risk=neg_risk)
 
     if resp is None:
-        print(f"  [ERROR] FOK BUY failed — token={token_id[:20]}...")
-        return False
+        print(f"  [ERROR] GTC limit BUY failed — token={token_id[:20]}...")
+        return None
 
-    # Check response for success indicators
+    # Parse response status
     if isinstance(resp, dict):
         status = resp.get("status", resp.get("orderStatus", ""))
-        if status in ("matched", "MATCHED"):
-            print(f"  [LIVE] FOK BUY filled: ${amount_usdc:.2f} | token={token_id[:20]}...")
-            return True
-        elif status in ("FAILED", "failed"):
-            err = resp.get("errorMsg", resp.get("error", "unknown"))
-            print(f"  [ERROR] FOK BUY rejected: {err}")
-            return False
-        else:
-            # Some responses don't have a clear status — treat as success if no error
-            print(f"  [LIVE] FOK BUY submitted: ${amount_usdc:.2f} | status={status} | token={token_id[:20]}...")
-            return True
+        order_id = resp.get("orderID", resp.get("id", ""))
+        success = resp.get("success", True)
 
-    print(f"  [LIVE] FOK BUY response: ${amount_usdc:.2f} | token={token_id[:20]}...")
-    return True
+        if not success:
+            err = resp.get("errorMsg", "unknown")
+            print(f"  [ERROR] Order rejected: {err}")
+            return None
+
+        if status == "matched":
+            print(f"  [LIVE] GTC BUY filled immediately: ${price * shares:.2f} @ ${price:.3f} | token={token_id[:20]}...")
+            return resp
+        elif status == "live":
+            print(f"  [LIVE] GTC BUY resting on book: ${price * shares:.2f} @ ${price:.3f} | order={order_id[:16]}...")
+            return resp
+        elif status == "delayed":
+            print(f"  [LIVE] GTC BUY delayed (will match): ${price * shares:.2f} @ ${price:.3f} | order={order_id[:16]}...")
+            return resp
+        else:
+            # Any non-error status is fine
+            print(f"  [LIVE] GTC BUY submitted: ${price * shares:.2f} @ ${price:.3f} | status={status}")
+            return resp
+
+    # Non-dict response — still treat as success if not None
+    print(f"  [LIVE] GTC BUY submitted: ${price * shares:.2f} @ ${price:.3f}")
+    return resp
 
 
 def _execute_live_sell(pos: dict, exit_price: float) -> bool:
     """
-    Place a FOK market sell to exit a live position.
-    For resolution exits, tokens auto-redeem — no sell needed.
+    Exit a live position. Strategy depends on position state:
+      - If order_status == "live" (unfilled GTC): cancel the order, refund balance.
+      - If order was filled (status "matched"): place GTC limit sell to exit.
+      - For resolution exits: tokens auto-redeem onchain, no sell needed.
 
-    Uses FOK to guarantee immediate fill: either we exit NOW
-    or the position stays open for the next cycle to retry.
+    Returns True on success, False on failure (retry next cycle).
     """
+    order_status = pos.get("order_status", "matched")
+    order_id = pos.get("live_order_id", "")
+
+    # Case 1: Order was never filled — just cancel it
+    if order_status == "live" and order_id:
+        from core.clob import cancel_order
+        ok = cancel_order(order_id)
+        if ok:
+            print(f"  [LIVE] Cancelled unfilled order: {order_id[:16]}...")
+            return True
+        else:
+            print(f"  [WARN] Could not cancel order {order_id[:16]}... — may already be filled")
+            # Fall through to try selling
+
+    # Case 2: Order was filled — we own shares, need to sell them
     token_id = pos.get("clob_token_id", "")
     if not token_id:
         print("  [WARN] No clob_token_id on position — skipping live sell")
         return True  # Don't block state update for legacy positions
 
-    from core.clob import get_order_book_depth, place_market_sell
+    from core.clob import place_limit_sell
 
     shares = pos.get("shares", 0)
     neg_risk = pos.get("neg_risk", True)
 
-    # Pre-flight: verify the order book exists before selling
-    book = get_order_book_depth(token_id, size_usdc=shares * exit_price)
-    if book is None:
-        print(f"  [WARN] No CLOB order book for sell — token={token_id[:20]}...")
-        return False
-
-    if book["book_depth_bids"] == 0:
-        print(f"  [WARN] Order book has zero bids — no buyers for token {token_id[:20]}...")
-        return False
-
-    resp = place_market_sell(token_id, shares, neg_risk=neg_risk)
+    # Place GTC limit sell at exit_price
+    resp = place_limit_sell(token_id, exit_price, shares, neg_risk=neg_risk)
 
     if resp is None:
-        print(f"  [ERROR] FOK SELL failed — token={token_id[:20]}...")
+        print(f"  [ERROR] GTC SELL failed — token={token_id[:20]}...")
         return False
 
-    print(f"  [LIVE] FOK SELL filled: {shares:.2f} shares")
+    if isinstance(resp, dict):
+        status = resp.get("status", "")
+        if status == "matched":
+            print(f"  [LIVE] GTC SELL filled: {shares:.2f} shares @ ${exit_price:.3f}")
+        else:
+            print(f"  [LIVE] GTC SELL posted: {shares:.2f} shares @ ${exit_price:.3f} | status={status}")
+    else:
+        print(f"  [LIVE] GTC SELL submitted: {shares:.2f} shares @ ${exit_price:.3f}")
+
     return True

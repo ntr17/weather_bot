@@ -144,7 +144,6 @@ def get_order_book_depth(token_id: str, size_usdc: float = 15.0) -> Optional[dic
             "book_depth_asks": len(asks),
             "book_depth_bids": len(bids),
         }
-        }
 
     except Exception as e:
         logger.error("Order book fetch failed for %s: %s", token_id, e)
@@ -321,6 +320,35 @@ def cancel_all_orders() -> Optional[dict]:
         return resp
     except Exception as e:
         logger.error("Cancel all failed: %s", e)
+        return None
+
+
+def cancel_order(order_id: str) -> bool:
+    """Cancel a specific order by ID. Returns True on success."""
+    client = _get_client()
+    if not client:
+        return False
+
+    try:
+        resp = client.cancel(order_id=order_id)
+        logger.info("Order cancelled: %s resp=%s", order_id[:16], resp)
+        return True
+    except Exception as e:
+        logger.error("Cancel order %s failed: %s", order_id[:16], e)
+        return False
+
+
+def get_order(order_id: str) -> Optional[dict]:
+    """Get a specific order's status by ID."""
+    client = _get_client()
+    if not client:
+        return None
+
+    try:
+        resp = client.get_order(order_id)
+        return resp if isinstance(resp, dict) else None
+    except Exception as e:
+        logger.error("Get order %s failed: %s", order_id[:16], e)
         return None
 
 
