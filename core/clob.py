@@ -47,6 +47,10 @@ def _get_client():
         chain_id = 137
 
         # Step 1: derive API credentials (L1 auth)
+        # Note: create_or_derive_api_key() first tries CREATE (which 400s if
+        # key already exists), then falls back to DERIVE. The library prints
+        # a "[py_clob_client_v2] request error status=400" line — this is
+        # EXPECTED on every run after the first. Not an error.
         temp_client = ClobClient(
             host=host,
             chain_id=chain_id,
@@ -55,7 +59,12 @@ def _get_client():
             funder=funder,
         )
         creds = temp_client.create_or_derive_api_key()
-        logger.info("CLOB API credentials derived successfully (sig_type=%d)", sig_type)
+        if creds is None:
+            logger.error("CLOB auth failed: could not create or derive API key. "
+                         "Check PK, FUNDER, and SIGNATURE_TYPE.")
+            return None
+        logger.info("CLOB API credentials ready (sig_type=%d, funder=%s...%s)",
+                    sig_type, funder[:6], funder[-4:])
 
         # Step 2: create fully authenticated client (L1+L2)
         _client = ClobClient(
@@ -66,7 +75,6 @@ def _get_client():
             signature_type=sig_type,
             funder=funder,
         )
-        logger.info("CLOB client initialized for funder %s (sig_type=%d)", funder, sig_type)
         return _client
 
     except Exception as e:
@@ -100,36 +108,42 @@ def get_order_book_depth(token_id: str, size_usdc: float = 15.0) -> Optional[dic
             bids = book.bids if hasattr(book, "bids") else []
             asks = book.asks if hasattr(book, "asks") else []
 
-        if not asks or not bids:
-            return None
-
-        best_bid = float(bids[0]["price"] if isinstance(bids[0], dict) else bids[0].price)
-        best_ask = float(asks[0]["price"] if isinstance(asks[0], dict) else asks[0].price)
+        # Return structured result even if one side is empty
+        # (lets caller decide what to do with one-sided books)
+        best_bid = 0.0
+        best_ask = 0.0
+        if bids:
+            best_bid = float(bids[0]["price"] if isinstance(bids[0], dict) else bids[0].price)
+        if asks:
+            best_ask = float(asks[0]["price"] if isinstance(asks[0], dict) else asks[0].price)
 
         # VWAP calculation for buying
-        filled = 0.0
-        cost = 0.0
-        for ask_level in asks:
-            p = float(ask_level["price"] if isinstance(ask_level, dict) else ask_level.price)
-            q = float(ask_level["size"] if isinstance(ask_level, dict) else ask_level.size)
-            take = min(q, (size_usdc / p) - filled) if p > 0 else 0
-            cost += take * p
-            filled += take
-            if cost >= size_usdc:
-                break
-
-        vwap_buy = cost / filled if filled > 0 else best_ask
-        slippage = (vwap_buy - best_ask) / best_ask * 100 if best_ask > 0 else 0
+        vwap_buy = best_ask
+        slippage = 0.0
+        if asks and size_usdc > 0:
+            filled = 0.0
+            cost = 0.0
+            for ask_level in asks:
+                p = float(ask_level["price"] if isinstance(ask_level, dict) else ask_level.price)
+                q = float(ask_level["size"] if isinstance(ask_level, dict) else ask_level.size)
+                take = min(q, (size_usdc / p) - filled) if p > 0 else 0
+                cost += take * p
+                filled += take
+                if cost >= size_usdc:
+                    break
+            vwap_buy = cost / filled if filled > 0 else best_ask
+            slippage = (vwap_buy - best_ask) / best_ask * 100 if best_ask > 0 else 0
 
         return {
             "best_bid": best_bid,
             "best_ask": best_ask,
-            "midpoint": (best_bid + best_ask) / 2,
-            "spread": best_ask - best_bid,
+            "midpoint": (best_bid + best_ask) / 2 if (best_bid and best_ask) else 0.0,
+            "spread": best_ask - best_bid if (best_bid and best_ask) else 0.0,
             "vwap_buy": vwap_buy,
             "slippage_pct": slippage,
             "book_depth_asks": len(asks),
             "book_depth_bids": len(bids),
+        }
         }
 
     except Exception as e:

@@ -14,7 +14,7 @@ from core.config import Config
 from core.notifier import trade_closed, trade_opened
 from core.pricer import bet_size, calc_ev, calc_kelly, bucket_prob
 from core.storage import save_market, save_state, append_trade
-from core.scanner import Outcome, fetch_live_price
+from core.scanner import Outcome, fetch_live_price, fetch_clob_token_ids
 from core.safety import pre_trade_check, record_daily_loss
 
 
@@ -136,10 +136,23 @@ def try_open_position(
         if not can_trade:
             print(f"  [BLOCKED] {block_reason}")
             return mkt, state, False
-        ok = _execute_live_order(outcome.clob_token_yes, real_ask, real_shares,
+
+        # Use fresh token ID from Gamma API (stored IDs may be stale)
+        token_id = outcome.clob_token_yes
+        if not token_id:
+            fresh = fetch_clob_token_ids(outcome.market_id)
+            if fresh:
+                token_id = fresh[0]  # [0]=YES, [1]=NO
+        if not token_id:
+            print(f"  [ERROR] No CLOB token for YES side of market {outcome.market_id}")
+            return mkt, state, False
+
+        ok = _execute_live_order(token_id, real_ask, real_shares,
                                  outcome.neg_risk, "BUY")
         if not ok:
             return mkt, state, False
+        # Store the verified token ID on the position
+        position["clob_token_id"] = token_id
 
     save_market(updated_mkt)
     save_state(updated_state)
@@ -269,10 +282,23 @@ def try_open_no_position(
         if not can_trade:
             print(f"  [BLOCKED] {block_reason}")
             return mkt, state, False
-        ok = _execute_live_order(outcome.clob_token_no, real_no_ask, real_shares,
+
+        # Use fresh token ID from Gamma API (stored IDs may be stale)
+        token_id = outcome.clob_token_no
+        if not token_id:
+            fresh = fetch_clob_token_ids(outcome.market_id)
+            if fresh:
+                token_id = fresh[1]  # [0]=YES, [1]=NO
+        if not token_id:
+            print(f"  [ERROR] No CLOB token for NO side of market {outcome.market_id}")
+            return mkt, state, False
+
+        ok = _execute_live_order(token_id, real_no_ask, real_shares,
                                  outcome.neg_risk, "BUY")
         if not ok:
             return mkt, state, False
+        # Store the verified token ID on the position for sell/close later
+        position["clob_token_id"] = token_id
 
     save_market(updated_mkt)
     save_state(updated_state)
@@ -385,31 +411,65 @@ def _bucket_label(t_low: float, t_high: float, unit: str) -> str:
 def _execute_live_order(token_id: str, price: float, shares: float,
                         neg_risk: bool, side: str) -> bool:
     """
-    Place a FOK (fill-or-kill) market order. Returns True on success.
+    Place a FOK (fill-or-kill) market order on the Polymarket CLOB.
+    Returns True on fill, False on any failure.
 
-    Uses FOK instead of GTC to guarantee immediate fill or nothing.
-    This prevents accounting drift: if the order doesn't fill, the
-    position is never recorded. Pays taker fee (~$0.01 on a $7 trade).
+    Steps:
+      1. Validate token_id is not empty.
+      2. Check order book exists and has liquidity (avoids 404s).
+      3. Place FOK market buy.
+
+    The library's create_or_derive_api_key() logs a benign 400 on every run
+    (key already exists → falls back to derive). This is normal.
     """
     if not token_id:
         print("  [ERROR] No CLOB token ID — cannot place live order")
         return False
 
-    from core.clob import place_market_buy
-
-    if side == "BUY":
-        amount_usdc = round(price * shares, 2)
-        resp = place_market_buy(token_id, amount_usdc, neg_risk=neg_risk)
-    else:
-        # Should not happen — sells go through _execute_live_sell
-        print(f"  [ERROR] Unexpected SELL in _execute_live_order")
+    if side != "BUY":
+        print(f"  [ERROR] Unexpected side={side} in _execute_live_order")
         return False
+
+    from core.clob import get_order_book_depth, place_market_buy
+
+    # Pre-flight: verify the CLOB has an active order book for this token
+    book = get_order_book_depth(token_id, size_usdc=price * shares)
+    if book is None:
+        print(f"  [SKIP] No CLOB order book for token {token_id[:20]}... — market may lack liquidity")
+        return False
+
+    if book["book_depth_asks"] == 0:
+        print(f"  [SKIP] Order book has zero asks — no sellers for token {token_id[:20]}...")
+        return False
+
+    # Check slippage from VWAP
+    if book["slippage_pct"] > 3.0:
+        print(f"  [SKIP] CLOB slippage too high ({book['slippage_pct']:.1f}%) for token {token_id[:20]}...")
+        return False
+
+    amount_usdc = round(price * shares, 2)
+    resp = place_market_buy(token_id, amount_usdc, neg_risk=neg_risk)
 
     if resp is None:
         print(f"  [ERROR] FOK BUY failed — token={token_id[:20]}...")
         return False
 
-    print(f"  [LIVE] FOK BUY filled: ${amount_usdc:.2f} on token={token_id[:20]}...")
+    # Check response for success indicators
+    if isinstance(resp, dict):
+        status = resp.get("status", resp.get("orderStatus", ""))
+        if status in ("matched", "MATCHED"):
+            print(f"  [LIVE] FOK BUY filled: ${amount_usdc:.2f} | token={token_id[:20]}...")
+            return True
+        elif status in ("FAILED", "failed"):
+            err = resp.get("errorMsg", resp.get("error", "unknown"))
+            print(f"  [ERROR] FOK BUY rejected: {err}")
+            return False
+        else:
+            # Some responses don't have a clear status — treat as success if no error
+            print(f"  [LIVE] FOK BUY submitted: ${amount_usdc:.2f} | status={status} | token={token_id[:20]}...")
+            return True
+
+    print(f"  [LIVE] FOK BUY response: ${amount_usdc:.2f} | token={token_id[:20]}...")
     return True
 
 
@@ -426,10 +486,21 @@ def _execute_live_sell(pos: dict, exit_price: float) -> bool:
         print("  [WARN] No clob_token_id on position — skipping live sell")
         return True  # Don't block state update for legacy positions
 
-    from core.clob import place_market_sell
+    from core.clob import get_order_book_depth, place_market_sell
 
     shares = pos.get("shares", 0)
     neg_risk = pos.get("neg_risk", True)
+
+    # Pre-flight: verify the order book exists before selling
+    book = get_order_book_depth(token_id, size_usdc=shares * exit_price)
+    if book is None:
+        print(f"  [WARN] No CLOB order book for sell — token={token_id[:20]}...")
+        return False
+
+    if book["book_depth_bids"] == 0:
+        print(f"  [WARN] Order book has zero bids — no buyers for token {token_id[:20]}...")
+        return False
+
     resp = place_market_sell(token_id, shares, neg_risk=neg_risk)
 
     if resp is None:

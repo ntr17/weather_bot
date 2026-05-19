@@ -184,6 +184,23 @@ def fetch_live_price(market_id: str) -> tuple[float, float] | None:
     return None
 
 
+def fetch_clob_token_ids(market_id: str) -> tuple[str, str] | None:
+    """
+    Fetch fresh clobTokenIds from the Gamma API for a specific market.
+    Returns (clob_token_yes, clob_token_no) or None on failure.
+
+    Use this at execution time to ensure token IDs are current.
+    """
+    try:
+        data = _get_json(f"https://gamma-api.polymarket.com/markets/{market_id}", retries=2)
+        token_ids = json.loads(data.get("clobTokenIds", "[]"))
+        if len(token_ids) >= 2:
+            return (str(token_ids[0]), str(token_ids[1]))
+    except Exception:
+        pass
+    return None
+
+
 def check_resolved(market_id: str) -> bool | None:
     """
     Check if a market has resolved.
