@@ -1,28 +1,14 @@
 # WeatherBot Autonomy Report
-Generated: 2026-06-03 16:30 UTC
+Generated: 2026-06-03 16:34 UTC
 
 ## Git
 
-- Local HEAD: `0a02a0d bot: update state 2026-06-03T15:17:09Z`
-- GitHub master: `0a02a0d bot: update state 2026-06-03T15:17:09Z`
+- Local HEAD: `680f797 brain: add autonomous paper strategy supervisor`
+- GitHub master: `fatal: ambiguous argument 'github/master': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'`
 ```text
-## master...github/master
- M .env.example
- M .github/workflows/bot.yml
- M articles/expected_value.txt
- M articles/niche.txt
- M articles/patents.txt
- M articles/polymarket_explained.txt
-?? .github/workflows/brain.yml
-?? OPERATING_AGENDA.md
-?? config.paper.json
-?? scripts/_check_state.py
-?? scripts/apply_paper_strategy.py
-?? scripts/autonomy_report.py
-?? scripts/paper_brain.py
-?? scripts/run_local.ps1
-?? scripts/setup_task.ps1
-?? scripts/strategy_lab.py
+## master...origin/master
 ```
 
 ## Mode
@@ -46,7 +32,7 @@ Generated: 2026-06-03 16:30 UTC
 
 ## Activity
 
-- Last run age: `73.0` minutes
+- Last run age: `77.6` minutes
 - Runs last 1h / 2h / 24h: `0` / `20` / `180`
 - New positions last 24h: `6`
 - Errors last 24h: `0`
