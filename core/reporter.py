@@ -40,6 +40,7 @@ def generate_status(cfg) -> str:
     health = get_city_health(lookback=20)
 
     open_pos = [m for m in all_mkts if has_any_open(m)]
+    total_open_positions = sum(len(get_open_positions(m)) for m in open_pos)
     resolved = [m for m in all_mkts if m.get("status") == "resolved"]
 
     bal = state["balance"]
@@ -64,16 +65,14 @@ def generate_status(cfg) -> str:
     lines.append(f"| Total trades | {total} |")
     if total:
         lines.append(f"| Win rate | {wins}/{total} ({wins/total:.0%}) |")
-    lines.append(f"| Open positions | {len(open_pos)} |")
+    lines.append(f"| Open positions | {total_open_positions} |")
     lines.append(f"| Markets tracked | {len(all_mkts)} |")
     lines.append(f"| Calibration keys | {len(cal)} |")
     lines.append("")
 
     # ── Open Positions ───────────────────────────────────────────────────────
     if open_pos:
-        # Count total open positions across all markets
-        total_open = sum(len(get_open_positions(m)) for m in open_pos)
-        lines.append(f"## Open Positions ({total_open})")
+        lines.append(f"## Open Positions ({total_open_positions})")
         lines.append(f"| City | Date | Bucket | Side | Entry | Source | Horizon |")
         lines.append(f"|------|------|--------|------|-------|--------|---------|")
         for m in sorted(open_pos, key=lambda x: x["date"]):
