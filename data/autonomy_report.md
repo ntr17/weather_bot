@@ -1,25 +1,12 @@
 # WeatherBot Autonomy Report
-Generated: 2026-06-03 16:38 UTC
+Generated: 2026-06-03 16:41 UTC
 
 ## Git
 
-- Local HEAD: `c292cba brain: update paper strategy review 2026-06-03T16:34:45Z`
-- Remote master: `c292cba brain: update paper strategy review 2026-06-03T16:34:45Z`
+- Local HEAD: `5275fdd brain: harden unattended reporting workflow`
+- Remote master: `5275fdd brain: harden unattended reporting workflow`
 ```text
-## master...github/master
- M .env.example
- M .github/workflows/brain.yml
- M articles/expected_value.txt
- M articles/niche.txt
- M articles/patents.txt
- M articles/polymarket_explained.txt
- M data/strategy_lab/latest.json
- M data/strategy_lab/latest.md
- M scripts/autonomy_report.py
- M scripts/paper_brain.py
-?? scripts/_check_state.py
-?? scripts/run_local.ps1
-?? scripts/setup_task.ps1
+## master...origin/master
 ```
 
 ## Mode
@@ -43,7 +30,7 @@ Generated: 2026-06-03 16:38 UTC
 
 ## Activity
 
-- Last run age: `81.1` minutes
+- Last run age: `84.2` minutes
 - Runs last 1h / 2h / 24h: `0` / `20` / `180`
 - New positions last 24h: `6`
 - Errors last 24h: `0`
