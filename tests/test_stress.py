@@ -71,6 +71,8 @@ CFG = Config(
     no_stop_enabled=False,
     no_forecast_exit=False,
     max_horizon_days=2,
+    max_total_open_cost=0.0,
+    max_new_positions_per_run=0,
     max_hours=168.0,
     min_hours=2.0,
     paper_trading=True,
@@ -79,6 +81,7 @@ CFG = Config(
     scan_interval=1800,
     monitor_interval=600,
     calibration_min=30,
+    live_geoblock_check=True,
     polygon_private_key="",
     anthropic_api_key="",
 )

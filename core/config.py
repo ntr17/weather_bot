@@ -44,10 +44,13 @@ class Config:
     no_stop_enabled: bool        # False = hold to resolution, no stop-loss on NOs
     no_forecast_exit: bool       # False = never exit NO on forecast change
     max_horizon_days: int        # max D+N horizon to trade (2 = D+0, D+1, D+2)
+    max_total_open_cost: float   # cap total deployed capital across all open positions
+    max_new_positions_per_run: int  # cap new positions opened in a single run
     # Operational
     scan_interval: int
     monitor_interval: int
     calibration_min: int
+    live_geoblock_check: bool
     # Secrets (from env only)
     vc_key: str
     polygon_private_key: str
@@ -91,9 +94,12 @@ def load_config() -> Config:
         no_stop_enabled=raw.get("no_stop_enabled", False),
         no_forecast_exit=raw.get("no_forecast_exit", False),
         max_horizon_days=int(raw.get("max_horizon_days", 2)),
+        max_total_open_cost=float(raw.get("max_total_open_cost", 0.0)),
+        max_new_positions_per_run=int(raw.get("max_new_positions_per_run", 0)),
         scan_interval=int(raw.get("scan_interval", 3600)),
         monitor_interval=int(raw.get("monitor_interval", 600)),
         calibration_min=int(raw.get("calibration_min", 30)),
+        live_geoblock_check=raw.get("live_geoblock_check", True),
         vc_key=vc_key,
         polygon_private_key=os.environ.get("POLYGON_PRIVATE_KEY", ""),
         anthropic_api_key=os.environ.get("ANTHROPIC_API_KEY", ""),

@@ -220,7 +220,7 @@ def main() -> None:
         )
 
     print("\n=== $50 Live Launch Readiness ===")
-    print("Recommended only after adding global exposure controls.")
+    print("Verify active config before launch; global exposure controls should be enabled.")
     print("Initial live caps: max_bet=$5, max_total_open_cost=$15-$20, max_new_positions_per_run=2.")
     print("Candidate filter: NO only, real D+1/D+2, entry 0.70-0.85, min_ev >= 0.12.")
 

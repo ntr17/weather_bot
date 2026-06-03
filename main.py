@@ -26,6 +26,7 @@ from core.locations import LOCATIONS, MONTHS, TIER1_CITIES
 from core.monitor import check_forecast_change, check_resolution, check_stops_and_tp
 from core.pricer import in_bucket
 from core.reporter import generate_status
+from core.risk import can_open_more, cfg_with_remaining_open_budget, total_open_cost
 from core.scanner import get_event, hours_to_resolution, parse_outcomes
 from core.storage import (
     append_run_log,
@@ -50,6 +51,7 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
     """
     now = datetime.now(timezone.utc)
     state = load_state(cfg.balance)
+    open_cost = total_open_cost(load_all_markets())
     new_pos = closed = resolved = 0
 
     active_cities = TIER1_CITIES   # all 20 cities; add/remove in core/locations.py
@@ -198,20 +200,23 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
                 }
 
                 # 1. Try YES on the bucket that matches the forecast (if enabled)
-                if cfg.enable_yes_trading:
+                can_open, _ = can_open_more(cfg, new_pos, open_cost)
+                if cfg.enable_yes_trading and can_open:
                     matched = next(
                         (o for o in outcomes
                          if in_bucket(forecast_temp, o.t_low, o.t_high)),
                         None,
                     )
                     if matched and matched.market_id not in all_bucket_ids:
+                        trade_cfg = cfg_with_remaining_open_budget(cfg, open_cost)
                         mkt, state, did_open = try_open_position(
-                            mkt, matched, forecast_temp, src, sigma, state, cfg,
+                            mkt, matched, forecast_temp, src, sigma, state, trade_cfg,
                         )
                         if did_open:
                             new_pos += 1
                             city_new += 1
                             all_bucket_ids.add(matched.market_id)
+                            open_cost += mkt["positions"][matched.market_id].get("cost", 0.0)
 
                 # 2. Try NO on ALL tail buckets (multi-NO strategy)
                 # Cap to max_no_positions per event; respect horizon limits
@@ -231,14 +236,19 @@ def scan_once(cfg, calibration: dict, dry_run: bool = False) -> tuple[int, int, 
                 for o in other_outcomes:
                     if current_no_count >= cfg.max_no_positions:
                         break
+                    can_open, _ = can_open_more(cfg, new_pos, open_cost)
+                    if not can_open:
+                        break
+                    trade_cfg = cfg_with_remaining_open_budget(cfg, open_cost)
                     mkt, state, did_open = try_open_no_position(
-                        mkt, o, forecast_temp, src, sigma, state, cfg,
+                        mkt, o, forecast_temp, src, sigma, state, trade_cfg,
                     )
                     if did_open:
                         new_pos += 1
                         city_new += 1
                         all_bucket_ids.add(o.market_id)
                         current_no_count += 1
+                        open_cost += mkt["positions"][o.market_id].get("cost", 0.0)
 
             # Mark as closed by time
             if hours < 0.5 and mkt["status"] == "open":
@@ -334,11 +344,30 @@ def check_pending_orders(cfg) -> int:
     return fills
 
 
+def live_preflight_ok(cfg) -> bool:
+    """Return True if this process is allowed to attempt live CLOB trading."""
+    if cfg.paper_trading:
+        return True
+
+    from core.clob import preflight_live_trading
+
+    ok, reason = preflight_live_trading(check_geoblock=cfg.live_geoblock_check)
+    if not ok:
+        print(f"  [LIVE BLOCKED] {reason}")
+        return False
+    return True
+
+
 def run_once() -> None:
     """Single scan + monitor cycle, then exit. For cron / GitHub Actions."""
     cfg = load_config()
     ensure_dirs()
     calibration = load_calibration()
+
+    if not live_preflight_ok(cfg):
+        generate_status(cfg)
+        print("[once] live preflight failed; no scan attempted")
+        return
 
     print(f"\n[once] WEATHERBOT — single cycle ({'PAPER' if cfg.paper_trading else 'LIVE'})")
 
@@ -377,6 +406,11 @@ def run_loop() -> None:
     cfg = load_config()
     ensure_dirs()
     calibration = load_calibration()
+
+    if not live_preflight_ok(cfg):
+        generate_status(cfg)
+        print("Live preflight failed; no scan attempted")
+        return
 
     print(f"\n{'='*55}")
     print(f"  WEATHERBOT — STARTING")
@@ -431,6 +465,7 @@ def print_status() -> None:
     all_mkts = load_all_markets()
 
     open_pos = [m for m in all_mkts if has_any_open(m)]
+    total_open_positions = sum(len(get_open_positions(m)) for m in open_pos)
     resolved = [m for m in all_mkts if m.get("status") == "resolved"]
 
     bal = state["balance"]
@@ -448,7 +483,7 @@ def print_status() -> None:
         print(f"  Trades:   {total} | W: {wins} | L: {losses} | WR: {wins/total:.0%}")
     else:
         print(f"  Trades:   none yet")
-    print(f"  Open:     {len(open_pos)} | Resolved: {len(resolved)}")
+    print(f"  Open:     {total_open_positions} | Resolved: {len(resolved)}")
 
     if open_pos:
         print(f"\n  Open positions:")

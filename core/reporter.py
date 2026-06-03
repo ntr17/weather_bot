@@ -18,6 +18,7 @@ from core.storage import (
     load_state,
     load_trades,
 )
+from core.risk import total_open_cost
 
 STATUS_PATH = Path(__file__).parent.parent / "data" / "status.md"
 
@@ -41,6 +42,7 @@ def generate_status(cfg) -> str:
 
     open_pos = [m for m in all_mkts if has_any_open(m)]
     total_open_positions = sum(len(get_open_positions(m)) for m in open_pos)
+    open_cost = total_open_cost(all_mkts)
     resolved = [m for m in all_mkts if m.get("status") == "resolved"]
 
     bal = state["balance"]
@@ -66,6 +68,7 @@ def generate_status(cfg) -> str:
     if total:
         lines.append(f"| Win rate | {wins}/{total} ({wins/total:.0%}) |")
     lines.append(f"| Open positions | {total_open_positions} |")
+    lines.append(f"| Open cost | ${open_cost:,.2f} |")
     lines.append(f"| Markets tracked | {len(all_mkts)} |")
     lines.append(f"| Calibration keys | {len(cal)} |")
     lines.append("")
@@ -175,7 +178,8 @@ def generate_status(cfg) -> str:
                   "no_pyes_threshold", "min_hours", "max_hours",
                   "enable_yes_trading", "min_no_entry", "max_no_entry",
                   "no_stop_enabled", "no_forecast_exit", "max_horizon_days",
-                  "max_no_positions"):
+                  "max_no_positions", "max_total_open_cost",
+                  "max_new_positions_per_run", "live_geoblock_check"):
         val = getattr(cfg, field, "?")
         lines.append(f"| {field} | {val} |")
     lines.append("")

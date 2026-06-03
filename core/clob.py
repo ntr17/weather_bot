@@ -11,11 +11,42 @@ import logging
 import os
 from typing import Optional
 
+import requests
+
 logger = logging.getLogger(__name__)
 
 # Lazy import — only load when live trading is enabled
 _client = None
 _initialized = False
+
+
+def preflight_live_trading(check_geoblock: bool = True) -> tuple[bool, str]:
+    """
+    Fail-fast checks before live trading attempts any CLOB order.
+
+    Returns (ok, reason). Secrets are never included in the reason.
+    """
+    if not os.environ.get("PK"):
+        return False, "PK is not set"
+    if not os.environ.get("FUNDER"):
+        return False, "FUNDER is not set"
+
+    if not check_geoblock:
+        return True, ""
+
+    try:
+        resp = requests.get("https://polymarket.com/api/geoblock", timeout=(5, 8))
+        resp.raise_for_status()
+        data = resp.json()
+    except Exception as exc:
+        return False, f"geoblock preflight failed: {exc}"
+
+    if data.get("blocked"):
+        country = data.get("country", "?")
+        region = data.get("region", "?")
+        return False, f"Polymarket geoblock active for this runner: country={country}, region={region}"
+
+    return True, ""
 
 
 def _get_client():
