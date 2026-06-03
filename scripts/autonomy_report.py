@@ -41,6 +41,24 @@ def run_git(args: list[str]) -> str:
     return output or "(no output)"
 
 
+def git_ref_exists(ref: str) -> bool:
+    result = subprocess.run(
+        ["git", "rev-parse", "--verify", "--quiet", ref],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        timeout=10,
+    )
+    return result.returncode == 0
+
+
+def best_remote_ref() -> str | None:
+    for ref in ("github/master", "origin/master"):
+        if git_ref_exists(ref):
+            return ref
+    return None
+
+
 def parse_ts(value: str | None) -> datetime | None:
     if not value:
         return None
@@ -326,7 +344,8 @@ def markdown_report(fetch: bool = False) -> str:
     cfg = read_json(CONFIG_PATH, {})
     git_status = run_git(["status", "--short", "--branch"])
     last_commit = run_git(["log", "--oneline", "-1", "HEAD"])
-    remote_commit = run_git(["log", "--oneline", "-1", "github/master"])
+    remote_ref = best_remote_ref()
+    remote_commit = run_git(["log", "--oneline", "-1", remote_ref]) if remote_ref else "(remote ref unavailable)"
     env_mode = os.environ.get("PAPER_TRADING", "(unset: code defaults to paper)")
 
     conn = connect_db()
@@ -370,7 +389,7 @@ def markdown_report(fetch: bool = False) -> str:
         "## Git",
         "",
         f"- Local HEAD: `{last_commit}`",
-        f"- GitHub master: `{remote_commit}`",
+        f"- Remote master: `{remote_commit}`",
         "```text",
         git_status,
         "```",
@@ -451,4 +470,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

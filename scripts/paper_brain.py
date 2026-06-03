@@ -193,14 +193,19 @@ def append_ledger(lab: dict[str, Any], action_result: str, changed: bool) -> Non
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run the WeatherBot paper brain.")
     parser.add_argument("--apply", action="store_true", help="Allow safe paper overlay changes.")
+    parser.add_argument("--dry-run", action="store_true", help="Render the report without writing files or ledger entries.")
     args = parser.parse_args()
 
     lab = read_json(LAB_JSON, {})
     if not lab:
         raise SystemExit("Missing strategy lab output. Run scripts/strategy_lab.py --write first.")
 
-    action_result, changed = maybe_apply_paper_overlay(lab, apply=args.apply)
+    action_result, changed = maybe_apply_paper_overlay(lab, apply=args.apply and not args.dry_run)
     report = render(lab, action_result, changed)
+    if args.dry_run:
+        print(report)
+        return 0
+
     BRAIN_DIR.mkdir(parents=True, exist_ok=True)
     BRAIN_MD.write_text(report, encoding="utf-8")
     LATEST_MD.write_text(report, encoding="utf-8")
@@ -223,4 +228,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

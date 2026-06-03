@@ -49,7 +49,7 @@ jobs:
         run: |
           python scripts/apply_paper_strategy.py
           python scripts/strategy_lab.py > /tmp/strategy_lab_check.md
-          python scripts/paper_brain.py > /tmp/paper_brain_check.txt
+          python scripts/paper_brain.py --dry-run > /tmp/paper_brain_check.txt
 
       - name: Commit brain artifacts
         run: |
