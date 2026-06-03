@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-06-03 10:45 UTC_
+_Auto-generated 2026-06-03 11:30 UTC_
 
 ## Summary
 | Metric | Value |
@@ -11,6 +11,7 @@ _Auto-generated 2026-06-03 10:45 UTC_
 | Total trades | 569 |
 | Win rate | 369/569 (65%) |
 | Open positions | 6 |
+| Open cost | $35.19 |
 | Markets tracked | 740 |
 | Calibration keys | 148 |
 
@@ -123,8 +124,8 @@ _Auto-generated 2026-06-03 10:45 UTC_
 ## Active Config
 | Param | Value |
 |-------|-------|
-| max_bet | 7.0 |
-| min_ev | 0.08 |
+| max_bet | 5.0 |
+| min_ev | 0.12 |
 | max_price | 0.7 |
 | max_no_price | 0.985 |
 | kelly_fraction | 0.25 |
@@ -135,12 +136,15 @@ _Auto-generated 2026-06-03 10:45 UTC_
 | min_hours | 2.0 |
 | max_hours | 168.0 |
 | enable_yes_trading | False |
-| min_no_entry | 0.65 |
-| max_no_entry | 0.9 |
+| min_no_entry | 0.7 |
+| max_no_entry | 0.85 |
 | no_stop_enabled | False |
 | no_forecast_exit | False |
-| max_horizon_days | 5 |
-| max_no_positions | 3 |
+| max_horizon_days | 2 |
+| max_no_positions | 1 |
+| max_total_open_cost | 20.0 |
+| max_new_positions_per_run | 2 |
+| live_geoblock_check | True |
 
 ## Edge Tracker (v2 NO-HOLD strategy)
 _Tracking NO trades opened after 2026-05-06_
