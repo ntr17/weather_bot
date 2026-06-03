@@ -1,0 +1,64 @@
+name: WeatherBot Brain
+
+on:
+  schedule:
+    # Four times per day, offset from the 30-minute trading schedule.
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: weatherbot-brain
+  cancel-in-progress: false
+
+jobs:
+  brain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Prepare paper config
+        run: |
+          cp config.template.json config.json
+          python scripts/apply_paper_strategy.py
+
+      - name: Generate autonomy report
+        run: python scripts/autonomy_report.py --write
+
+      - name: Run strategy lab
+        run: python scripts/strategy_lab.py --write
+
+      - name: Run paper brain
+        run: python scripts/paper_brain.py --apply
+
+      - name: Verify brain scripts
+        run: |
+          python scripts/apply_paper_strategy.py
+          python scripts/strategy_lab.py > /tmp/strategy_lab_check.md
+          python scripts/paper_brain.py > /tmp/paper_brain_check.txt
+
+      - name: Commit brain artifacts
+        run: |
+          git config user.name "weatherbot-brain[bot]"
+          git config user.email "weatherbot-brain[bot]@users.noreply.github.com"
+          git add config.paper.json BRAIN.md OPERATING_AGENDA.md
+          git add scripts/apply_paper_strategy.py scripts/autonomy_report.py scripts/strategy_lab.py scripts/paper_brain.py
+          git add -f data/autonomy_report.md data/strategy_lab/latest.json data/strategy_lab/latest.md
+          git add -f data/brain/latest.md data/brain/state.json data/brain/ledger.jsonl
+          git diff --cached --quiet || git commit -m "brain: update paper strategy review $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git pull --rebase origin master
+          git push

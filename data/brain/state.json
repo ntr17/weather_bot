@@ -1,0 +1,21 @@
+{
+  "updated_at": "2026-06-03T16:30:28.877909+00:00",
+  "last_action_result": "No paper config change requested.",
+  "paper_config_changed": false,
+  "strategy_recommendation": {
+    "action": "keep",
+    "reason": "A variant ranks higher, but the improvement is too weak for automatic adaptation.",
+    "best_candidate": "d1_only",
+    "current_score": -0.03841,
+    "best_score": 0.1375,
+    "paper_overlay": null
+  },
+  "live_gate": {
+    "ready_for_user_review": false,
+    "reasons_not_ready": [
+      "need >=100 resolved trades, have 22",
+      "need positive bootstrap lower bound, have -9.63%"
+    ]
+  },
+  "autonomy_report_present": true
+}

@@ -1,0 +1,16 @@
+{
+  "_note": "Paper-only strategy overlay used by GitHub Actions. The live runner must not depend on this file.",
+  "enable_yes_trading": false,
+  "max_bet": 5.0,
+  "min_ev": 0.12,
+  "max_slippage": 0.15,
+  "max_no_positions": 1,
+  "min_no_entry": 0.70,
+  "max_no_entry": 0.85,
+  "min_horizon_days": 1,
+  "max_horizon_days": 2,
+  "max_total_open_cost": 20.0,
+  "max_new_positions_per_run": 2,
+  "no_stop_enabled": false,
+  "no_forecast_exit": false
+}
