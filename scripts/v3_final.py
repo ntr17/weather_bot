@@ -144,4 +144,6 @@ if d1_d2:
     print(f"  Trades/day: ~{trades_per_day:.0f}")
     print(f"  At $7/trade, daily turnover: ~${trades_per_day*7:.0f}")
     print(f"  Expected daily PnL: ~${trades_per_day*7*roi_pct/100:.2f}")
-    print(f"  Breakeven WR needed: ~{1/(1 + avg_entry/(1-avg_entry))*100:.0f}%")
+    # A NO token bought at price p wins (1-p) if correct and loses p if wrong.
+    # Break-even therefore requires true win probability >= p.
+    print(f"  Breakeven WR needed: ~{avg_entry*100:.0f}%")
