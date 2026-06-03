@@ -1,10 +1,10 @@
 # WeatherBot Autonomy Report
-Generated: 2026-06-03 16:41 UTC
+Generated: 2026-06-03 21:31 UTC
 
 ## Git
 
-- Local HEAD: `5275fdd brain: harden unattended reporting workflow`
-- Remote master: `5275fdd brain: harden unattended reporting workflow`
+- Local HEAD: `18ef953 bot: update state 2026-06-03T19:07:58Z`
+- Remote master: `18ef953 bot: update state 2026-06-03T19:07:58Z`
 ```text
 ## master...origin/master
 ```
@@ -30,8 +30,8 @@ Generated: 2026-06-03 16:41 UTC
 
 ## Activity
 
-- Last run age: `84.2` minutes
-- Runs last 1h / 2h / 24h: `0` / `20` / `180`
+- Last run age: `144.0` minutes
+- Runs last 1h / 2h / 24h: `0` / `0` / `180`
 - New positions last 24h: `6`
 - Errors last 24h: `0`
 - State balance: `$18.81`
@@ -50,7 +50,7 @@ Generated: 2026-06-03 16:41 UTC
 | Gate | Status | Detail |
 | --- | --- | --- |
 | Actions paper-only | OK | Hosted Actions must not be live. |
-| Recent bot activity | OK | 20 runs in last 2h. |
+| Recent bot activity | BLOCK | 0 runs in last 2h. |
 | New data flow | OK | 6 new positions in last 24h; caps may explain zero. |
 | Live max bet | OK | max_bet=5.00; target <= 5. |
 | Live total exposure cap | OK | max_total_open_cost=20.00; target <= 20. |
@@ -62,6 +62,7 @@ Generated: 2026-06-03 16:41 UTC
 
 ## Agenda
 
+- Fix paper deployment or scheduler before discussing strategy.
 - Do not launch live until open paper exposure is closed or reset.
 - Keep collecting resolved paper data; edge sample is still small.
 - Prepare compliant non-Actions live runner only after geoblock preflight passes.
