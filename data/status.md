@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-06-03 22:12 UTC_
+_Auto-generated 2026-06-04 00:15 UTC_
 
 ## Summary
 | Metric | Value |
@@ -18,12 +18,12 @@ _Auto-generated 2026-06-03 22:12 UTC_
 ## Open Positions (6)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| New York City | 2026-06-04 | 84–85°F | NO | $0.680 | ENSEMBLE | D+1 |
-| New York City | 2026-06-04 | 88–89°F | NO | $0.820 | ENSEMBLE | D+1 |
-| Miami | 2026-06-04 | 82–83°F | NO | $0.670 | ENSEMBLE | D+1 |
-| Dallas | 2026-06-04 | 86–87°F | NO | $0.720 | ENSEMBLE | D+1 |
-| Singapore | 2026-06-04 | 33–33°C | NO | $0.650 | ECMWF | D+1 |
-| Dallas | 2026-06-05 | 86–87°F | NO | $0.750 | ECMWF | D+2 |
+| New York City | 2026-06-04 | 84–85°F | NO | $0.680 | ENSEMBLE | D+0 |
+| New York City | 2026-06-04 | 88–89°F | NO | $0.820 | ENSEMBLE | D+0 |
+| Miami | 2026-06-04 | 82–83°F | NO | $0.670 | ENSEMBLE | D+0 |
+| Dallas | 2026-06-04 | 86–87°F | NO | $0.720 | ENSEMBLE | D+0 |
+| Singapore | 2026-06-04 | 33–33°C | NO | $0.650 | ECMWF | D+0 |
+| Dallas | 2026-06-05 | 86–87°F | NO | $0.750 | ECMWF | D+1 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
