@@ -1,24 +1,26 @@
 # WeatherBot Status
-_Auto-generated 2026-06-05 08:07 UTC_
+_Auto-generated 2026-06-05 11:44 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $45.25 |
+| Balance | $35.25 |
 | Starting | $5,000.00 |
-| Return | -99.1% |
+| Return | -99.3% |
 | Total trades | 574 |
 | Win rate | 372/574 (65%) |
-| Open positions | 1 |
-| Open cost | $5.37 |
+| Open positions | 3 |
+| Open cost | $15.37 |
 | Markets tracked | 760 |
-| Calibration keys | 148 |
+| Calibration keys | 149 |
 
-## Open Positions (1)
+## Open Positions (3)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
 | Dallas | 2026-06-05 | 86–87°F | NO | $0.750 | ECMWF | D+0 |
+| Chicago | 2026-06-06 | 82–83°F | NO | $0.760 | ENSEMBLE | D+1 |
+| Miami | 2026-06-06 | 88–89°F | NO | $0.780 | ECMWF | D+1 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
@@ -92,7 +94,7 @@ _Auto-generated 2026-06-05 08:07 UTC_
 | Toronto | 20 | 0 | 0% | 0 | ok |  |
 | Wellington | 20 | 0 | 0% | 0 | ok |  |
 
-## Calibration (148 keys)
+## Calibration (149 keys)
 | City | ECMWF D+1 σ | GFS D+1 σ | Source | Samples |
 |------|-------------|-----------|--------|---------|
 | Ankara | 2.708 | 2.708 | bootstrap_persistence | 89 |
