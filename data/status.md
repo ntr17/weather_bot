@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-06-04 23:47 UTC_
+_Auto-generated 2026-06-05 03:34 UTC_
 
 ## Summary
 | Metric | Value |
@@ -22,7 +22,7 @@ _Auto-generated 2026-06-04 23:47 UTC_
 | New York City | 2026-06-04 | 88–89°F | NO | $0.820 | ENSEMBLE | D+0 |
 | Miami | 2026-06-04 | 82–83°F | NO | $0.670 | ENSEMBLE | D+0 |
 | Dallas | 2026-06-04 | 86–87°F | NO | $0.720 | ENSEMBLE | D+0 |
-| Dallas | 2026-06-05 | 86–87°F | NO | $0.750 | ECMWF | D+1 |
+| Dallas | 2026-06-05 | 86–87°F | NO | $0.750 | ECMWF | D+0 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
