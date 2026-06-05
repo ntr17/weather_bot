@@ -1,19 +1,19 @@
 # WeatherBot Brain
-Last review: 2026-06-05 04:49 UTC
+Last review: 2026-06-05 10:18 UTC
 
 ## Decision
 
 - Paper action: `keep`
-- Best candidate: `d1_only`
+- Best candidate: `ev15`
 - Paper config changed: `False`
 - Action result: No paper config change requested.
 - Ready for live user review: `False`
 
 ## Evidence
 
-- Closed positions loaded: `46`
-- Current strategy: n=22, ROI after drag=5.13%, bootstrap low=-9.63%
-- Best strategy: n=3, ROI after drag=23.15%, bootstrap low=10.52%
+- Closed positions loaded: `50`
+- Current strategy: n=23, ROI after drag=3.98%, bootstrap low=-10.64%
+- Best strategy: n=19, ROI after drag=8.16%, bootstrap low=-5.33%
 
 ## Thesis
 
@@ -31,8 +31,8 @@ Last review: 2026-06-05 04:49 UTC
 
 ## Live Blockers
 
-- need >=100 resolved trades, have 22
-- need positive bootstrap lower bound, have -9.63%
+- need >=100 resolved trades, have 23
+- need positive bootstrap lower bound, have -10.64%
 
 ## Operating Rule
 
