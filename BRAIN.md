@@ -1,12 +1,12 @@
 # WeatherBot Brain
-Last review: 2026-06-06 08:47 UTC
+Last review: 2026-06-06 14:11 UTC
 
 ## Decision
 
 - Paper action: `adapt_paper`
 - Best candidate: `ev15`
-- Paper config changed: `True`
-- Action result: Updated config.paper.json to paper candidate `ev15`.
+- Paper config changed: `False`
+- Action result: Recommended paper overlay already active.
 - Ready for live user review: `False`
 
 ## Evidence

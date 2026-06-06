@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-06-06T08:47:54.816862+00:00",
-  "last_action_result": "Updated config.paper.json to paper candidate `ev15`.",
-  "paper_config_changed": true,
+  "updated_at": "2026-06-06T14:11:29.975546+00:00",
+  "last_action_result": "Recommended paper overlay already active.",
+  "paper_config_changed": false,
   "strategy_recommendation": {
     "action": "adapt_paper",
     "reason": "Best candidate beats current risk-adjusted score enough for paper testing.",
