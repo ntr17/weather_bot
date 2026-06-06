@@ -1,25 +1,27 @@
 # WeatherBot Status
-_Auto-generated 2026-06-06 07:47 UTC_
+_Auto-generated 2026-06-06 10:04 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $42.41 |
+| Balance | $32.41 |
 | Starting | $5,000.00 |
-| Return | -99.2% |
+| Return | -99.4% |
 | Total trades | 575 |
 | Win rate | 373/575 (65%) |
-| Open positions | 2 |
-| Open cost | $10.00 |
+| Open positions | 4 |
+| Open cost | $20.00 |
 | Markets tracked | 780 |
 | Calibration keys | 149 |
 
-## Open Positions (2)
+## Open Positions (4)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
 | Chicago | 2026-06-06 | 82–83°F | NO | $0.760 | ENSEMBLE | D+0 |
 | Miami | 2026-06-06 | 88–89°F | NO | $0.780 | ECMWF | D+0 |
+| Chicago | 2026-06-07 | 78–79°F | NO | $0.800 | ENSEMBLE | D+1 |
+| Atlanta | 2026-06-07 | 84–85°F | NO | $0.730 | ENSEMBLE | D+1 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
@@ -121,7 +123,7 @@ _Auto-generated 2026-06-06 07:47 UTC_
 | Param | Value |
 |-------|-------|
 | max_bet | 5.0 |
-| min_ev | 0.12 |
+| min_ev | 0.15 |
 | max_price | 0.7 |
 | max_no_price | 0.985 |
 | kelly_fraction | 0.25 |
