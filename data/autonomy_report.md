@@ -1,10 +1,10 @@
 # WeatherBot Autonomy Report
-Generated: 2026-06-06 04:30 UTC
+Generated: 2026-06-06 08:47 UTC
 
 ## Git
 
-- Local HEAD: `6b84d66 bot: update state 2026-06-06T00:07:09Z`
-- Remote master: `6b84d66 bot: update state 2026-06-06T00:07:09Z`
+- Local HEAD: `fb1c654 bot: update state 2026-06-06T07:47:51Z`
+- Remote master: `fb1c654 bot: update state 2026-06-06T07:47:51Z`
 ```text
 ## master...origin/master
 ```
@@ -30,39 +30,38 @@ Generated: 2026-06-06 04:30 UTC
 
 ## Activity
 
-- Last run age: `263.7` minutes
-- Runs last 1h / 2h / 24h: `0` / `0` / `160`
+- Last run age: `60.1` minutes
+- Runs last 1h / 2h / 24h: `0` / `20` / `180`
 - New positions last 24h: `2`
 - Errors last 24h: `0`
-- State balance: `$35.25`
-- Open positions: `3`
-- Open cost: `$15.37`
+- State balance: `$42.41`
+- Open positions: `2`
+- Open cost: `$10.00`
 
 ## V3 Actual Edge
 
-- Trades: `43` (38W / 5L)
-- Avg entry: `0.737`
-- PnL: `$+89.53` on `$979.82` cost
-- ROI: `9.14%`
+- Trades: `44` (39W / 5L)
+- Avg entry: `0.738`
+- PnL: `$+91.32` on `$985.19` cost
+- ROI: `9.27%`
 
 ## Gates
 
 | Gate | Status | Detail |
 | --- | --- | --- |
 | Actions paper-only | OK | Hosted Actions must not be live. |
-| Recent bot activity | BLOCK | 0 runs in last 2h. |
+| Recent bot activity | OK | 20 runs in last 2h. |
 | New data flow | OK | 2 new positions in last 24h; caps may explain zero. |
 | Live max bet | OK | max_bet=5.00; target <= 5. |
 | Live total exposure cap | OK | max_total_open_cost=20.00; target <= 20. |
-| Current open exposure | OK | open_cost=15.37; reset/wait before live if above cap. |
+| Current open exposure | OK | open_cost=10.00; reset/wait before live if above cap. |
 | Per-run position cap | OK | max_new_positions_per_run=2; target <= 2. |
 | NO-only strategy | OK | enable_yes_trading=False. |
 | Entry and EV filters | OK | min_ev=0.12, min_no_entry=0.70, max_no_entry=0.85. |
-| Resolved edge sample | WARN | v3_actual n=43; keep small while sample is limited. |
+| Resolved edge sample | WARN | v3_actual n=44; keep small while sample is limited. |
 
 ## Agenda
 
-- Fix paper deployment or scheduler before discussing strategy.
 - Keep collecting resolved paper data; edge sample is still small.
 - Prepare compliant non-Actions live runner only after geoblock preflight passes.
 - Run fee/spread-aware edge audit before first live order.
