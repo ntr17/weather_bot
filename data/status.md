@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-06-06 23:37 UTC_
+_Auto-generated 2026-06-07 03:39 UTC_
 
 ## Summary
 | Metric | Value |
@@ -12,7 +12,7 @@ _Auto-generated 2026-06-06 23:37 UTC_
 | Win rate | 373/575 (65%) |
 | Open positions | 4 |
 | Open cost | $20.00 |
-| Markets tracked | 791 |
+| Markets tracked | 800 |
 | Calibration keys | 149 |
 
 ## Open Positions (4)
@@ -20,8 +20,8 @@ _Auto-generated 2026-06-06 23:37 UTC_
 |------|------|--------|------|-------|--------|---------|
 | Chicago | 2026-06-06 | 82–83°F | NO | $0.760 | ENSEMBLE | D+0 |
 | Miami | 2026-06-06 | 88–89°F | NO | $0.780 | ECMWF | D+0 |
-| Chicago | 2026-06-07 | 78–79°F | NO | $0.800 | ENSEMBLE | D+1 |
-| Atlanta | 2026-06-07 | 84–85°F | NO | $0.730 | ENSEMBLE | D+1 |
+| Chicago | 2026-06-07 | 78–79°F | NO | $0.800 | ENSEMBLE | D+0 |
+| Atlanta | 2026-06-07 | 84–85°F | NO | $0.730 | ENSEMBLE | D+0 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
