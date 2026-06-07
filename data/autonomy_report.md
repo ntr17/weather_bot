@@ -1,10 +1,10 @@
 # WeatherBot Autonomy Report
-Generated: 2026-06-07 04:58 UTC
+Generated: 2026-06-07 09:42 UTC
 
 ## Git
 
-- Local HEAD: `8296d64 bot: update state 2026-06-07T03:40:00Z`
-- Remote master: `8296d64 bot: update state 2026-06-07T03:40:00Z`
+- Local HEAD: `1d0f1b1 bot: update state 2026-06-07T07:55:28Z`
+- Remote master: `1d0f1b1 bot: update state 2026-06-07T07:55:28Z`
 ```text
 ## master...origin/master
 ```
@@ -30,20 +30,20 @@ Generated: 2026-06-07 04:58 UTC
 
 ## Activity
 
-- Last run age: `78.8` minutes
+- Last run age: `106.6` minutes
 - Runs last 1h / 2h / 24h: `0` / `20` / `240`
 - New positions last 24h: `2`
 - Errors last 24h: `0`
-- State balance: `$32.41`
-- Open positions: `4`
-- Open cost: `$20.00`
+- State balance: `$45.40`
+- Open positions: `2`
+- Open cost: `$10.00`
 
 ## V3 Actual Edge
 
-- Trades: `44` (39W / 5L)
-- Avg entry: `0.738`
-- PnL: `$+91.32` on `$985.19` cost
-- ROI: `9.27%`
+- Trades: `46` (41W / 5L)
+- Avg entry: `0.739`
+- PnL: `$+94.31` on `$995.19` cost
+- ROI: `9.48%`
 
 ## Gates
 
@@ -54,11 +54,11 @@ Generated: 2026-06-07 04:58 UTC
 | New data flow | OK | 2 new positions in last 24h; caps may explain zero. |
 | Live max bet | OK | max_bet=5.00; target <= 5. |
 | Live total exposure cap | OK | max_total_open_cost=20.00; target <= 20. |
-| Current open exposure | OK | open_cost=20.00; reset/wait before live if above cap. |
+| Current open exposure | OK | open_cost=10.00; reset/wait before live if above cap. |
 | Per-run position cap | OK | max_new_positions_per_run=2; target <= 2. |
 | NO-only strategy | OK | enable_yes_trading=False. |
 | Entry and EV filters | OK | min_ev=0.15, min_no_entry=0.70, max_no_entry=0.85. |
-| Resolved edge sample | WARN | v3_actual n=44; keep small while sample is limited. |
+| Resolved edge sample | WARN | v3_actual n=46; keep small while sample is limited. |
 
 ## Agenda
 
