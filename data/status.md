@@ -1,25 +1,27 @@
 # WeatherBot Status
-_Auto-generated 2026-06-07 07:55 UTC_
+_Auto-generated 2026-06-07 10:30 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $45.40 |
+| Balance | $35.40 |
 | Starting | $5,000.00 |
-| Return | -99.1% |
+| Return | -99.3% |
 | Total trades | 577 |
 | Win rate | 375/577 (65%) |
-| Open positions | 2 |
-| Open cost | $10.00 |
+| Open positions | 4 |
+| Open cost | $20.00 |
 | Markets tracked | 811 |
 | Calibration keys | 149 |
 
-## Open Positions (2)
+## Open Positions (4)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
 | Chicago | 2026-06-07 | 78–79°F | NO | $0.800 | ENSEMBLE | D+0 |
 | Atlanta | 2026-06-07 | 84–85°F | NO | $0.730 | ENSEMBLE | D+0 |
+| New York City | 2026-06-08 | 74–75°F | NO | $0.790 | ENSEMBLE | D+1 |
+| Dallas | 2026-06-08 | 94–95°F | NO | $0.740 | ECMWF | D+1 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
