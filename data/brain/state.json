@@ -1,13 +1,13 @@
 {
-  "updated_at": "2026-06-08T05:04:09.972542+00:00",
+  "updated_at": "2026-06-08T11:22:24.114526+00:00",
   "last_action_result": "Recommended paper overlay already active.",
   "paper_config_changed": false,
   "strategy_recommendation": {
     "action": "adapt_paper",
     "reason": "Best candidate beats current risk-adjusted score enough for paper testing.",
     "best_candidate": "ev15",
-    "current_score": -0.03584,
-    "best_score": 0.01222,
+    "current_score": -0.03926,
+    "best_score": 0.00279,
     "paper_overlay": {
       "_note": "Auto-selected paper-only overlay from strategy_lab candidate ev15.",
       "enable_yes_trading": false,
@@ -28,8 +28,8 @@
   "live_gate": {
     "ready_for_user_review": false,
     "reasons_not_ready": [
-      "need >=100 resolved trades, have 26",
-      "need positive bootstrap lower bound, have -9.84%"
+      "need >=100 resolved trades, have 28",
+      "need positive bootstrap lower bound, have -9.79%"
     ]
   },
   "autonomy_report_present": true
