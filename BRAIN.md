@@ -1,19 +1,19 @@
 # WeatherBot Brain
-Last review: 2026-06-09 04:39 UTC
+Last review: 2026-06-09 10:05 UTC
 
 ## Decision
 
-- Paper action: `adapt_paper`
-- Best candidate: `ev15`
+- Paper action: `keep`
+- Best candidate: `d2_ev15`
 - Paper config changed: `False`
-- Action result: Recommended paper overlay already active.
+- Action result: No paper config change requested.
 - Ready for live user review: `False`
 
 ## Evidence
 
-- Closed positions loaded: `55`
-- Current strategy: n=28, ROI after drag=3.90%, bootstrap low=-9.79%
-- Best strategy: n=23, ROI after drag=7.65%, bootstrap low=-5.63%
+- Closed positions loaded: `57`
+- Current strategy: n=30, ROI after drag=2.11%, bootstrap low=-12.11%
+- Best strategy: n=17, ROI after drag=8.05%, bootstrap low=-6.35%
 
 ## Thesis
 
@@ -31,8 +31,9 @@ Last review: 2026-06-09 04:39 UTC
 
 ## Live Blockers
 
-- need >=100 resolved trades, have 28
-- need positive bootstrap lower bound, have -9.79%
+- need >=100 resolved trades, have 30
+- need >=3% ROI after fee/spread drag, have 2.11%
+- need positive bootstrap lower bound, have -12.11%
 
 ## Operating Rule
 
