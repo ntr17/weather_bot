@@ -1,5 +1,5 @@
 {
-  "_note": "Auto-selected paper-only overlay from strategy_lab candidate ev15.",
+  "_note": "Paper-only live-applicable D+2 thesis: NO, min_ev>=0.15, $5 orders, $20 max exposure.",
   "enable_yes_trading": false,
   "max_bet": 5.0,
   "min_ev": 0.15,
@@ -7,7 +7,7 @@
   "max_no_positions": 1,
   "min_no_entry": 0.7,
   "max_no_entry": 0.85,
-  "min_horizon_days": 1,
+  "min_horizon_days": 2,
   "max_horizon_days": 2,
   "max_total_open_cost": 20.0,
   "max_new_positions_per_run": 2,

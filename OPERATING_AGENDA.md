@@ -19,8 +19,8 @@ operational downtime. Until that is true, the bot stays small.
 - GitHub Actions is intentionally forced to `PAPER_TRADING=true`.
 - Hosted GitHub runners are not a live deployment target because live CLOB
   order placement was blocked by geographic restrictions.
-- The live candidate is narrow: NO-only weather positions, real D+1/D+2
-  horizons, entry range around 0.70 to 0.85, with strict exposure caps.
+- The live candidate is narrow: NO-only weather positions, real D+2
+  horizon, entry range around 0.70 to 0.85, with strict exposure caps.
 - Current paper history suggests a possible V3 edge, but the sample is still
   small enough that it must be treated as promising, not proven.
 - The wallet bankroll is about 50 USDC, so fixed costs, fees, spread, and bad
@@ -104,7 +104,7 @@ Interpretation:
 ## Weekly Agenda
 
 1. Re-run `scripts/edge_audit.py` and record the V3 actual-strategy metrics.
-2. Separate D+1 from D+2 results.
+2. Confirm D+2 continues to beat D+1 and the mixed-horizon strategy.
 3. Estimate fee and spread drag using realistic entry prices.
 4. Review every full-cost loss manually.
 5. Decide whether to keep, tighten, or retire the current strategy.
@@ -121,7 +121,7 @@ All gates must be true before live trading:
 - `max_total_open_cost <= 20`.
 - `max_new_positions_per_run <= 2`.
 - `enable_yes_trading=false`.
-- `min_ev >= 0.12`.
+- `min_ev >= 0.15`.
 - `min_no_entry >= 0.70`.
 - `max_no_entry <= 0.85`.
 - No open paper exposure is being mistaken for live exposure.
@@ -171,4 +171,3 @@ bankroll fraction.
 4. Make edge audit explicitly fee/spread-aware.
 5. Add a simple daily report artifact that agents can read before working.
 6. Improve docs so stale historical instructions are clearly marked.
-

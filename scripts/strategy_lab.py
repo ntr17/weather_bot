@@ -21,6 +21,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
 DB_PATH = ROOT / "data" / "weatherbot.db"
+PAPER_CONFIG_PATH = ROOT / "config.paper.json"
 OUT_DIR = ROOT / "data" / "strategy_lab"
 LATEST_JSON = OUT_DIR / "latest.json"
 LATEST_MD = OUT_DIR / "latest.md"
@@ -43,18 +44,38 @@ class Candidate:
 
 
 CANDIDATES = [
-    Candidate("current_safe", 0.12, 0.70, 0.85, 1, 2),
+    Candidate("d2_ev15", 0.15, 0.70, 0.85, 2, 2),
+    Candidate("d2_ev18", 0.18, 0.70, 0.85, 2, 2),
     Candidate("d2_only", 0.12, 0.70, 0.85, 2, 2),
+    Candidate("d2_entry_72_85", 0.12, 0.72, 0.85, 2, 2),
+    Candidate("d2_ecmwf_only", 0.15, 0.70, 0.85, 2, 2, sources=("ecmwf",)),
+    Candidate("d2_ensemble_only", 0.15, 0.70, 0.85, 2, 2, sources=("ensemble",)),
+    Candidate("d2_gfs_only", 0.15, 0.70, 0.85, 2, 2, sources=("gfs",)),
     Candidate("d1_only", 0.12, 0.70, 0.85, 1, 1),
-    Candidate("ev15", 0.15, 0.70, 0.85, 1, 2),
-    Candidate("ev18", 0.18, 0.70, 0.85, 1, 2),
+    Candidate("ev15_mixed", 0.15, 0.70, 0.85, 1, 2),
+    Candidate("ev18_mixed", 0.18, 0.70, 0.85, 1, 2),
     Candidate("entry_70_80", 0.12, 0.70, 0.80, 1, 2),
     Candidate("entry_72_82", 0.12, 0.72, 0.82, 1, 2),
-    Candidate("d2_ev15", 0.15, 0.70, 0.85, 2, 2),
-    Candidate("d2_entry_72_85", 0.12, 0.72, 0.85, 2, 2),
     Candidate("ecmwf_only", 0.12, 0.70, 0.85, 1, 2, sources=("ecmwf",)),
     Candidate("ensemble_only", 0.12, 0.70, 0.85, 1, 2, sources=("ensemble",)),
 ]
+
+
+def load_paper_candidate() -> Candidate:
+    try:
+        raw = json.loads(PAPER_CONFIG_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        return Candidate("current_paper", 0.12, 0.70, 0.85, 1, 2)
+
+    return Candidate(
+        "current_paper",
+        float(raw.get("min_ev", 0.12)),
+        float(raw.get("min_no_entry", 0.70)),
+        float(raw.get("max_no_entry", 0.85)),
+        int(raw.get("min_horizon_days", 1)),
+        int(raw.get("max_horizon_days", 2)),
+        max_spread=float(raw.get("max_slippage", 0.15)),
+    )
 
 
 def parse_ts(value: str | None) -> datetime | None:
@@ -238,11 +259,51 @@ def candidate_to_overlay(cand: Candidate) -> dict[str, Any]:
     }
 
 
+def breakdown(trades: list[dict[str, Any]], key: str) -> list[dict[str, Any]]:
+    groups: dict[str, list[dict[str, Any]]] = {}
+    for trade in trades:
+        groups.setdefault(str(trade.get(key) or "unknown"), []).append(trade)
+    rows = []
+    for value, subset in sorted(groups.items()):
+        rows.append({"value": value, "metrics": metrics(subset)})
+    rows.sort(key=lambda r: (r["metrics"]["roi_after_drag"], r["metrics"]["n"]), reverse=True)
+    return rows
+
+
+def materially_bad_d1(trades: list[dict[str, Any]]) -> bool:
+    d1 = [t for t in trades if t["side"] == "no" and t["real_horizon"] == 1]
+    if len(d1) < 10:
+        return False
+    return metrics(d1)["roi_after_drag"] <= 0
+
+
+def sample_floor(cand: Candidate) -> int:
+    return 15 if cand.min_horizon == 2 and cand.max_horizon == 2 else 20
+
+
+def same_filter(left: Candidate, right: Candidate) -> bool:
+    return (
+        left.min_ev == right.min_ev
+        and left.min_entry == right.min_entry
+        and left.max_entry == right.max_entry
+        and left.min_horizon == right.min_horizon
+        and left.max_horizon == right.max_horizon
+        and left.sources == right.sources
+        and left.max_spread == right.max_spread
+    )
+
+
 def build_report() -> dict[str, Any]:
     closed = load_closed_positions()
+    current_candidate = load_paper_candidate()
     rows = []
     current_row: dict[str, Any] | None = None
-    for cand in CANDIDATES:
+    candidate_names = {c.name for c in CANDIDATES}
+    candidates = [current_candidate] + [c for c in CANDIDATES if c.name not in {current_candidate.name}]
+    if current_candidate.name in candidate_names:
+        candidates = [current_candidate] + CANDIDATES
+
+    for cand in candidates:
         subset = filter_candidate(closed, cand)
         row = {
             "candidate": cand.__dict__,
@@ -250,12 +311,13 @@ def build_report() -> dict[str, Any]:
         }
         row["score"] = score(row)
         rows.append(row)
-        if cand.name == "current_safe":
+        if cand.name == "current_paper":
             current_row = row
 
     rows.sort(key=lambda r: (r["score"], r["metrics"]["n"]), reverse=True)
     best = rows[0] if rows else None
     current = current_row or best
+    d2_ev15_row = next((r for r in rows if r["candidate"]["name"] == "d2_ev15"), None)
 
     action = "observe"
     reason = "Not enough evidence to change paper strategy."
@@ -263,12 +325,25 @@ def build_report() -> dict[str, Any]:
     if best and current:
         best_m = best["metrics"]
         current_m = current["metrics"]
-        best_is_safe_sample = best_m["n"] >= 20 and best_m["roi_after_drag"] > 0
+        best_cand = Candidate(**best["candidate"])
+        current_cand = Candidate(**current["candidate"])
+        best_is_safe_sample = best_m["n"] >= sample_floor(best_cand) and best_m["roi_after_drag"] > 0
         beats_current = best["score"] >= current["score"] + 0.015
         current_bad = current_m["n"] >= 20 and current_m["roi_after_drag"] <= 0
-        if best["candidate"]["name"] == "current_safe":
+        d1_bad = materially_bad_d1(closed)
+        if best["candidate"]["name"] == "current_paper" or same_filter(best_cand, current_cand):
             action = "keep"
-            reason = "Current paper strategy remains the best risk-adjusted candidate."
+            reason = "Current paper strategy remains the best risk-adjusted live-applicable candidate."
+        elif (
+            d2_ev15_row
+            and d1_bad
+            and d2_ev15_row["metrics"]["n"] >= 15
+            and d2_ev15_row["metrics"]["roi_after_drag"] > current_m["roi_after_drag"]
+            and not same_filter(Candidate(**d2_ev15_row["candidate"]), current_cand)
+        ):
+            action = "adapt_paper"
+            reason = "D+1 is negative and D+2 ev15 is the strongest live-applicable thesis for paper testing."
+            overlay = candidate_to_overlay(Candidate(**d2_ev15_row["candidate"]))
         elif best_is_safe_sample and (beats_current or current_bad):
             action = "adapt_paper"
             reason = "Best candidate beats current risk-adjusted score enough for paper testing."
@@ -281,20 +356,29 @@ def build_report() -> dict[str, Any]:
     live_reasons = []
     if current:
         m = current["metrics"]
+        current_cand = Candidate(**current["candidate"])
+        d2_only_live = current_cand.min_horizon == 2 and current_cand.max_horizon == 2
         live_checks = [
             (m["n"] >= 100, f"need >=100 resolved trades, have {m['n']}"),
             (m["roi_after_drag"] >= 0.03, f"need >=3% ROI after fee/spread drag, have {m['roi_after_drag'] * 100:.2f}%"),
             (m["bootstrap_roi_low"] > 0, f"need positive bootstrap lower bound, have {m['bootstrap_roi_low'] * 100:.2f}%"),
             (m["win_rate"] > m["avg_entry"] + 0.03, "need win rate at least 3 points over avg NO breakeven"),
+            (d2_only_live, "current paper strategy must be D+2-only before live review"),
         ]
         live_ready = all(ok for ok, _ in live_checks)
         live_reasons = [msg for ok, msg in live_checks if not ok]
+
+    no_v3 = [t for t in closed if t["side"] == "no" and t["real_horizon"] >= 1]
 
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "source_db": str(DB_PATH.relative_to(ROOT)),
         "closed_positions_loaded": len(closed),
         "rows": rows,
+        "diagnostics": {
+            "by_horizon": breakdown(no_v3, "real_horizon"),
+            "by_source": breakdown(no_v3, "source"),
+        },
         "recommendation": {
             "action": action,
             "reason": reason,
@@ -345,6 +429,40 @@ def markdown(report: dict[str, Any]) -> str:
             f"{m['avg_entry']:.3f} | {row['score']:.4f} |"
         )
 
+    lines.extend(
+        [
+            "",
+            "## Diagnostics By Horizon",
+            "",
+            "| Horizon | N | W/L | ROI after drag | Boot ROI low | Entry |",
+            "| --- | ---: | ---: | ---: | ---: | ---: |",
+        ]
+    )
+    for row in report["diagnostics"]["by_horizon"]:
+        m = row["metrics"]
+        lines.append(
+            f"| D+{row['value']} | {m['n']} | {m['wins']}/{m['losses']} | "
+            f"{m['roi_after_drag'] * 100:.2f}% | {m['bootstrap_roi_low'] * 100:.2f}% | "
+            f"{m['avg_entry']:.3f} |"
+        )
+
+    lines.extend(
+        [
+            "",
+            "## Diagnostics By Source",
+            "",
+            "| Source | N | W/L | ROI after drag | Boot ROI low | Entry |",
+            "| --- | ---: | ---: | ---: | ---: | ---: |",
+        ]
+    )
+    for row in report["diagnostics"]["by_source"]:
+        m = row["metrics"]
+        lines.append(
+            f"| {row['value'].upper()} | {m['n']} | {m['wins']}/{m['losses']} | "
+            f"{m['roi_after_drag'] * 100:.2f}% | {m['bootstrap_roi_low'] * 100:.2f}% | "
+            f"{m['avg_entry']:.3f} |"
+        )
+
     return "\n".join(lines) + "\n"
 
 
@@ -367,4 +485,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

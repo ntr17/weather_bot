@@ -1,12 +1,31 @@
 # WeatherBot Autonomy Report
-Generated: 2026-06-09 15:29 UTC
+Generated: 2026-06-09 18:19 UTC
 
 ## Git
 
-- Local HEAD: `0534b76 bot: update state 2026-06-09T13:46:08Z`
-- Remote master: `0534b76 bot: update state 2026-06-09T13:46:08Z`
+- Local HEAD: `c5c5f8a bot: update state 2026-06-09T16:32:35Z`
+- Remote master: `c5c5f8a bot: update state 2026-06-09T16:32:35Z`
 ```text
-## master...origin/master
+## master...github/master
+ M .env.example
+ M BRAIN.md
+ M OPERATING_AGENDA.md
+ M articles/expected_value.txt
+ M articles/niche.txt
+ M articles/patents.txt
+ M articles/polymarket_explained.txt
+ M config.paper.json
+ M data/brain/latest.md
+ M data/brain/ledger.jsonl
+ M data/brain/state.json
+ M data/strategy_lab/latest.json
+ M data/strategy_lab/latest.md
+ M scripts/edge_audit.py
+ M scripts/paper_brain.py
+ M scripts/strategy_lab.py
+?? scripts/_check_state.py
+?? scripts/run_local.ps1
+?? scripts/setup_task.ps1
 ```
 
 ## Mode
@@ -30,7 +49,7 @@ Generated: 2026-06-09 15:29 UTC
 
 ## Activity
 
-- Last run age: `103.8` minutes
+- Last run age: `107.2` minutes
 - Runs last 1h / 2h / 24h: `0` / `20` / `180`
 - New positions last 24h: `2`
 - Errors last 24h: `0`

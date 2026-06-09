@@ -102,7 +102,7 @@ def best_row(lab: dict[str, Any]) -> dict[str, Any]:
 
 def current_row(lab: dict[str, Any]) -> dict[str, Any]:
     for row in lab.get("rows") or []:
-        if row.get("candidate", {}).get("name") == "current_safe":
+        if row.get("candidate", {}).get("name") == "current_paper":
             return row
     return {}
 
@@ -141,12 +141,13 @@ def render(lab: dict[str, Any], action_result: str, changed: bool) -> str:
         "## Thesis",
         "",
         "- Main thesis: Polymarket exact-temperature weather buckets can overprice unlikely tails when market participants anchor on city-level intuition instead of airport-resolution forecasts.",
-        "- Current exploitable shape: buy NO on non-forecast buckets, D+1/D+2, with entry and EV filters tight enough that one full-cost loss does not erase many weak wins.",
+        "- Current exploitable shape: buy NO on non-forecast D+2 buckets with entry and EV filters tight enough that one full-cost loss does not erase many weak wins.",
         "- The brain is currently optimizing paper filters only. Live mode remains locked behind user approval.",
         "",
         "## What I Am Watching",
         "",
-        "- Whether D+2 continues to dominate D+1 after more resolved trades.",
+        "- Whether D+2 continues to dominate after more resolved trades.",
+        "- Whether D+1 remains negative enough to keep excluded from live-applicable paper testing.",
         "- Whether take-profit exits are hiding unresolved full-loss risk.",
         "- Whether fee and spread drag turn the edge negative at 5 USDC order size.",
         "- Whether any city/source pair contributes repeated full-cost losses.",

@@ -1,21 +1,20 @@
 {
-  "updated_at": "2026-06-09T15:29:56.493237+00:00",
+  "updated_at": "2026-06-09T18:19:14.821011+00:00",
   "last_action_result": "No paper config change requested.",
   "paper_config_changed": false,
   "strategy_recommendation": {
     "action": "keep",
-    "reason": "A variant ranks higher, but the improvement is too weak for automatic adaptation.",
-    "best_candidate": "d2_ev15",
-    "current_score": -0.06128,
+    "reason": "Current paper strategy remains the best risk-adjusted live-applicable candidate.",
+    "best_candidate": "current_paper",
+    "current_score": -0.00772,
     "best_score": -0.00772,
     "paper_overlay": null
   },
   "live_gate": {
     "ready_for_user_review": false,
     "reasons_not_ready": [
-      "need >=100 resolved trades, have 30",
-      "need >=3% ROI after fee/spread drag, have 2.11%",
-      "need positive bootstrap lower bound, have -12.11%"
+      "need >=100 resolved trades, have 17",
+      "need positive bootstrap lower bound, have -6.35%"
     ]
   },
   "autonomy_report_present": true

@@ -1,10 +1,10 @@
 # WeatherBot Brain
-Last review: 2026-06-09 15:29 UTC
+Last review: 2026-06-09 18:19 UTC
 
 ## Decision
 
 - Paper action: `keep`
-- Best candidate: `d2_ev15`
+- Best candidate: `current_paper`
 - Paper config changed: `False`
 - Action result: No paper config change requested.
 - Ready for live user review: `False`
@@ -12,18 +12,19 @@ Last review: 2026-06-09 15:29 UTC
 ## Evidence
 
 - Closed positions loaded: `57`
-- Current strategy: n=30, ROI after drag=2.11%, bootstrap low=-12.11%
+- Current strategy: n=17, ROI after drag=8.05%, bootstrap low=-6.35%
 - Best strategy: n=17, ROI after drag=8.05%, bootstrap low=-6.35%
 
 ## Thesis
 
 - Main thesis: Polymarket exact-temperature weather buckets can overprice unlikely tails when market participants anchor on city-level intuition instead of airport-resolution forecasts.
-- Current exploitable shape: buy NO on non-forecast buckets, D+1/D+2, with entry and EV filters tight enough that one full-cost loss does not erase many weak wins.
+- Current exploitable shape: buy NO on non-forecast D+2 buckets with entry and EV filters tight enough that one full-cost loss does not erase many weak wins.
 - The brain is currently optimizing paper filters only. Live mode remains locked behind user approval.
 
 ## What I Am Watching
 
-- Whether D+2 continues to dominate D+1 after more resolved trades.
+- Whether D+2 continues to dominate after more resolved trades.
+- Whether D+1 remains negative enough to keep excluded from live-applicable paper testing.
 - Whether take-profit exits are hiding unresolved full-loss risk.
 - Whether fee and spread drag turn the edge negative at 5 USDC order size.
 - Whether any city/source pair contributes repeated full-cost losses.
@@ -31,9 +32,8 @@ Last review: 2026-06-09 15:29 UTC
 
 ## Live Blockers
 
-- need >=100 resolved trades, have 30
-- need >=3% ROI after fee/spread drag, have 2.11%
-- need positive bootstrap lower bound, have -12.11%
+- need >=100 resolved trades, have 17
+- need positive bootstrap lower bound, have -6.35%
 
 ## Operating Rule
 
