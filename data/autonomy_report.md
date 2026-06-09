@@ -1,10 +1,10 @@
 # WeatherBot Autonomy Report
-Generated: 2026-06-08 20:36 UTC
+Generated: 2026-06-09 04:38 UTC
 
 ## Git
 
-- Local HEAD: `9df9df5 bot: update state 2026-06-08T18:27:58Z`
-- Remote master: `9df9df5 bot: update state 2026-06-08T18:27:58Z`
+- Local HEAD: `43c5ed1 bot: update state 2026-06-09T02:55:09Z`
+- Remote master: `43c5ed1 bot: update state 2026-06-09T02:55:09Z`
 ```text
 ## master...origin/master
 ```
@@ -30,8 +30,8 @@ Generated: 2026-06-08 20:36 UTC
 
 ## Activity
 
-- Last run age: `128.5` minutes
-- Runs last 1h / 2h / 24h: `0` / `0` / `140`
+- Last run age: `103.9` minutes
+- Runs last 1h / 2h / 24h: `0` / `20` / `160`
 - New positions last 24h: `2`
 - Errors last 24h: `0`
 - State balance: `$31.65`
@@ -50,7 +50,7 @@ Generated: 2026-06-08 20:36 UTC
 | Gate | Status | Detail |
 | --- | --- | --- |
 | Actions paper-only | OK | Hosted Actions must not be live. |
-| Recent bot activity | BLOCK | 0 runs in last 2h. |
+| Recent bot activity | OK | 20 runs in last 2h. |
 | New data flow | OK | 2 new positions in last 24h; caps may explain zero. |
 | Live max bet | OK | max_bet=5.00; target <= 5. |
 | Live total exposure cap | OK | max_total_open_cost=20.00; target <= 20. |
@@ -62,7 +62,6 @@ Generated: 2026-06-08 20:36 UTC
 
 ## Agenda
 
-- Fix paper deployment or scheduler before discussing strategy.
 - Keep collecting resolved paper data; edge sample is still small.
 - Prepare compliant non-Actions live runner only after geoblock preflight passes.
 - Run fee/spread-aware edge audit before first live order.
