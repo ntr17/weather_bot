@@ -1,24 +1,23 @@
 # WeatherBot Status
-_Auto-generated 2026-06-10 03:31 UTC_
+_Auto-generated 2026-06-10 07:56 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $21.65 |
+| Balance | $28.14 |
 | Starting | $5,000.00 |
-| Return | -99.6% |
-| Total trades | 581 |
-| Win rate | 376/581 (65%) |
-| Open positions | 4 |
-| Open cost | $20.00 |
-| Markets tracked | 860 |
+| Return | -99.4% |
+| Total trades | 582 |
+| Win rate | 377/582 (65%) |
+| Open positions | 3 |
+| Open cost | $15.00 |
+| Markets tracked | 871 |
 | Calibration keys | 149 |
 
-## Open Positions (4)
+## Open Positions (3)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| Chicago | 2026-06-09 | 84–85°F | NO | $0.770 | ENSEMBLE | D+0 |
 | Seattle | 2026-06-09 | 62–63°F | NO | $0.750 | GFS | D+0 |
 | New York City | 2026-06-10 | 80–81°F | NO | $0.750 | ENSEMBLE | D+0 |
 | Singapore | 2026-06-11 | 32–32°C | NO | $0.790 | ECMWF | D+1 |
@@ -26,6 +25,7 @@ _Auto-generated 2026-06-10 03:31 UTC_
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
 |------|------|--------|------|-------|-----|---------|--------|
+| Chicago | 2026-06-09 | 84–85°F | NO | $0.770 | +1.49 | None | ENSEMBLE |
 | Dallas | 2026-06-08 | 94–95°F | NO | $0.740 | -5.00 | None | ECMWF |
 | New York City | 2026-06-08 | 74–75°F | NO | $0.790 | -5.00 | None | ENSEMBLE |
 | Atlanta | 2026-06-07 | 84–85°F | NO | $0.730 | -5.00 | None | ENSEMBLE |
@@ -45,7 +45,6 @@ _Auto-generated 2026-06-10 03:31 UTC_
 | Paris | 2026-05-16 | 15–15°C | NO | $0.670 | +12.31 | None | ECMWF |
 | Tokyo | 2026-05-16 | 26–26°C | NO | $0.670 | +12.31 | None | ECMWF |
 | Tokyo | 2026-05-16 | 27–27°C | NO | $0.790 | +6.65 | None | ECMWF |
-| Tokyo | 2026-05-16 | 25–25°C | NO | $0.800 | -25.00 | None | ECMWF |
 
 ## City Performance
 | City | Trades | Wins | WR | PnL | Avg PnL |
@@ -53,7 +52,7 @@ _Auto-generated 2026-06-10 03:31 UTC_
 | Ankara | 51 | 0 | 0% | -105.35 | -2.07 |
 | Atlanta | 41 | 0 | 0% | -55.96 | -1.36 |
 | Buenos Aires | 55 | 0 | 0% | -146.84 | -2.67 |
-| Chicago | 21 | 0 | 0% | +39.72 | +1.89 |
+| Chicago | 22 | 0 | 0% | +41.21 | +1.87 |
 | Dallas | 22 | 0 | 0% | -41.64 | -1.89 |
 | London | 48 | 0 | 0% | +20.34 | +0.42 |
 | Lucknow | 14 | 0 | 0% | +12.78 | +0.91 |
@@ -149,20 +148,20 @@ _Tracking NO trades opened after 2026-05-06_
 
 | Metric | Value |
 |--------|-------|
-| Closed trades | 432 |
-| Wins / Losses | 338 / 94 |
-| Win rate | 78.2% |
-| Total PnL | $+63.94 |
+| Closed trades | 433 |
+| Wins / Losses | 339 / 94 |
+| Win rate | 78.3% |
+| Total PnL | $+65.43 |
 | ROI | +0.6% |
-| Resolved | 351 (257W/94L) |
-| Resolved WR | 73.2% |
-| Resolved PnL | $-206.04 |
+| Resolved | 352 (258W/94L) |
+| Resolved WR | 73.3% |
+| Resolved PnL | $-204.55 |
 | Avg PnL/trade | $+0.15 |
 
 ### Close Reasons (v2)
 | Reason | Count | PnL |
 |--------|-------|-----|
-| resolved_win | 257 | $+2044.97 |
+| resolved_win | 258 | $+2046.46 |
 | take_profit | 81 | $+269.98 |
 | resolved_loss | 94 | $-2251.01 |
 
@@ -171,10 +170,10 @@ _D+1/D+2 NO trades opened after 2026-05-14_
 
 | Metric | Value |
 |--------|-------|
-| Trades | 52 |
-| Wins / Losses | 43 / 9 |
-| Win rate | 82.7% |
-| Total PnL | $+61.85 |
-| ROI | +5.8% |
+| Trades | 53 |
+| Wins / Losses | 44 / 9 |
+| Win rate | 83.0% |
+| Total PnL | $+63.34 |
+| ROI | +5.9% |
 | Take-profit exits | 24 |
-| Avg PnL/trade | $+1.19 |
+| Avg PnL/trade | $+1.20 |
