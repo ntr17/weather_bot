@@ -78,6 +78,15 @@ def load_paper_candidate() -> Candidate:
     )
 
 
+def load_paper_activation() -> str | None:
+    try:
+        raw = json.loads(PAPER_CONFIG_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+    activated = raw.get("_activated_at")
+    return str(activated) if activated else None
+
+
 def parse_ts(value: str | None) -> datetime | None:
     if not value:
         return None
@@ -188,6 +197,18 @@ def filter_candidate(trades: list[dict[str, Any]], cand: Candidate) -> list[dict
     return subset
 
 
+def since(trades: list[dict[str, Any]], activated_at: str | None) -> list[dict[str, Any]]:
+    if not activated_at:
+        return []
+    activated = parse_ts(activated_at)
+    if not activated:
+        return []
+    return [
+        trade for trade in trades
+        if parse_ts(trade.get("opened_at")) and parse_ts(trade.get("opened_at")) >= activated
+    ]
+
+
 def metrics(trades: list[dict[str, Any]]) -> dict[str, Any]:
     n = len(trades)
     wins = sum(1 for t in trades if t["pnl"] > 0)
@@ -296,6 +317,7 @@ def same_filter(left: Candidate, right: Candidate) -> bool:
 def build_report() -> dict[str, Any]:
     closed = load_closed_positions()
     current_candidate = load_paper_candidate()
+    activated_at = load_paper_activation()
     rows = []
     current_row: dict[str, Any] | None = None
     candidate_names = {c.name for c in CANDIDATES}
@@ -354,13 +376,24 @@ def build_report() -> dict[str, Any]:
 
     live_ready = False
     live_reasons = []
+    post_activation_metrics: dict[str, Any] | None = None
     if current:
         m = current["metrics"]
         current_cand = Candidate(**current["candidate"])
         d2_only_live = current_cand.min_horizon == 2 and current_cand.max_horizon == 2
+        post_activation = since(filter_candidate(closed, current_cand), activated_at)
+        post_activation_metrics = metrics(post_activation)
         live_checks = [
             (m["n"] >= 100, f"need >=100 resolved trades, have {m['n']}"),
+            (
+                post_activation_metrics["n"] >= 30,
+                f"need >=30 post-activation resolved trades, have {post_activation_metrics['n']}",
+            ),
             (m["roi_after_drag"] >= 0.03, f"need >=3% ROI after fee/spread drag, have {m['roi_after_drag'] * 100:.2f}%"),
+            (
+                post_activation_metrics["n"] == 0 or post_activation_metrics["roi_after_drag"] >= 0.03,
+                f"need post-activation ROI after drag >=3%, have {post_activation_metrics['roi_after_drag'] * 100:.2f}%",
+            ),
             (m["bootstrap_roi_low"] > 0, f"need positive bootstrap lower bound, have {m['bootstrap_roi_low'] * 100:.2f}%"),
             (m["win_rate"] > m["avg_entry"] + 0.03, "need win rate at least 3 points over avg NO breakeven"),
             (d2_only_live, "current paper strategy must be D+2-only before live review"),
@@ -374,6 +407,10 @@ def build_report() -> dict[str, Any]:
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "source_db": str(DB_PATH.relative_to(ROOT)),
         "closed_positions_loaded": len(closed),
+        "paper_activation": {
+            "activated_at": activated_at,
+            "current_post_activation_metrics": post_activation_metrics or metrics([]),
+        },
         "rows": rows,
         "diagnostics": {
             "by_horizon": breakdown(no_v3, "real_horizon"),
@@ -405,6 +442,7 @@ def markdown(report: dict[str, Any]) -> str:
         f"- Best candidate: `{report['recommendation']['best_candidate']}`",
         f"- Reason: {report['recommendation']['reason']}",
         f"- Ready for live user review: `{report['live_gate']['ready_for_user_review']}`",
+        f"- Paper policy activated at: `{report['paper_activation']['activated_at'] or 'unknown'}`",
     ]
     if report["live_gate"]["reasons_not_ready"]:
         lines.append("- Live blockers:")
@@ -428,6 +466,22 @@ def markdown(report: dict[str, Any]) -> str:
             f"{m['roi_after_drag'] * 100:.2f}% | {m['bootstrap_roi_low'] * 100:.2f}% | "
             f"{m['avg_entry']:.3f} | {row['score']:.4f} |"
         )
+
+    post = report["paper_activation"]["current_post_activation_metrics"]
+    lines.extend(
+        [
+            "",
+            "## Post-Activation Current Paper",
+            "",
+            "| N | W/L | ROI | ROI after drag | Boot ROI low | Entry |",
+            "| ---: | ---: | ---: | ---: | ---: | ---: |",
+            (
+                f"| {post['n']} | {post['wins']}/{post['losses']} | "
+                f"{post['roi'] * 100:.2f}% | {post['roi_after_drag'] * 100:.2f}% | "
+                f"{post['bootstrap_roi_low'] * 100:.2f}% | {post['avg_entry']:.3f} |"
+            ),
+        ]
+    )
 
     lines.extend(
         [

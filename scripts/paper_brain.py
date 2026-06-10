@@ -115,6 +115,8 @@ def render(lab: dict[str, Any], action_result: str, changed: bool) -> str:
     current = current_row(lab)
     best_m = best.get("metrics", {})
     current_m = current.get("metrics", {})
+    activation = lab.get("paper_activation", {})
+    post_m = activation.get("current_post_activation_metrics", {})
 
     lines = [
         "# WeatherBot Brain",
@@ -137,6 +139,10 @@ def render(lab: dict[str, Any], action_result: str, changed: bool) -> str:
         f"- Best strategy: n={best_m.get('n', 0)}, "
         f"ROI after drag={best_m.get('roi_after_drag', 0) * 100:.2f}%, "
         f"bootstrap low={best_m.get('bootstrap_roi_low', 0) * 100:.2f}%",
+        f"- Post-activation current strategy: n={post_m.get('n', 0)}, "
+        f"ROI after drag={post_m.get('roi_after_drag', 0) * 100:.2f}%, "
+        f"bootstrap low={post_m.get('bootstrap_roi_low', 0) * 100:.2f}%",
+        f"- Paper policy activated at: `{activation.get('activated_at') or 'unknown'}`",
         "",
         "## Thesis",
         "",

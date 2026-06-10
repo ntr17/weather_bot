@@ -1,7 +1,32 @@
 {
-  "generated_at": "2026-06-10T10:36:04.779685+00:00",
-  "source_db": "data/weatherbot.db",
+  "generated_at": "2026-06-10T10:39:28.738689+00:00",
+  "source_db": "data\\weatherbot.db",
   "closed_positions_loaded": 58,
+  "paper_activation": {
+    "activated_at": "2026-06-09T18:23:01Z",
+    "current_post_activation_metrics": {
+      "n": 0,
+      "wins": 0,
+      "losses": 0,
+      "win_rate": 0.0,
+      "win_rate_wilson_low": 0.0,
+      "win_rate_wilson_high": 0.0,
+      "avg_entry": 0.0,
+      "avg_ev": 0.0,
+      "avg_spread": 0.0,
+      "pnl": 0,
+      "cost": 0,
+      "roi": 0.0,
+      "fee_est": 0,
+      "spread_est": 0,
+      "pnl_after_drag": 0,
+      "roi_after_drag": 0.0,
+      "bootstrap_roi_low": 0.0,
+      "bootstrap_roi_high": 0.0,
+      "max_loss": 0.0,
+      "reasons": {}
+    }
+  },
   "rows": [
     {
       "candidate": {
@@ -750,6 +775,7 @@
     "ready_for_user_review": false,
     "reasons_not_ready": [
       "need >=100 resolved trades, have 17",
+      "need >=30 post-activation resolved trades, have 0",
       "need positive bootstrap lower bound, have -6.35%"
     ]
   }

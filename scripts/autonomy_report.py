@@ -21,6 +21,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parent.parent
 DB_PATH = ROOT / "data" / "weatherbot.db"
 CONFIG_PATH = ROOT / "config.json"
+PAPER_CONFIG_PATH = ROOT / "config.paper.json"
 WORKFLOW_PATH = ROOT / ".github" / "workflows" / "bot.yml"
 REPORT_PATH = ROOT / "data" / "autonomy_report.md"
 V3_START = "2026-05-14"
@@ -176,6 +177,7 @@ def get_open_positions(conn: sqlite3.Connection) -> dict[str, Any]:
                     "cost": float(pos.get("cost") or 0.0),
                     "source": str(pos.get("forecast_source") or "?").upper(),
                     "horizon": market.get("current_horizon", "?"),
+                    "opened_at": pos.get("opened_at"),
                 }
             )
 
@@ -342,6 +344,9 @@ def markdown_report(fetch: bool = False) -> str:
 
     now = datetime.now(timezone.utc)
     cfg = read_json(CONFIG_PATH, {})
+    paper_cfg = read_json(PAPER_CONFIG_PATH, {})
+    activated_at = paper_cfg.get("_activated_at")
+    activated_ts = parse_ts(str(activated_at)) if activated_at else None
     git_status = run_git(["status", "--short", "--branch"])
     last_commit = run_git(["log", "--oneline", "-1", "HEAD"])
     remote_ref = best_remote_ref()
@@ -364,6 +369,15 @@ def markdown_report(fetch: bool = False) -> str:
         edge = {"n": 0, "wins": 0, "losses": 0, "pnl": 0.0, "cost": 0.0, "roi": 0.0}
 
     gate_rows = build_gate_rows(cfg, activity, open_pos, edge)
+    legacy_open = 0
+    post_activation_open = 0
+    if activated_ts:
+        for pos in open_pos["positions"]:
+            opened = parse_ts(pos.get("opened_at"))
+            if opened and opened >= activated_ts:
+                post_activation_open += 1
+            else:
+                legacy_open += 1
 
     agenda = []
     if "behind" in git_status:
@@ -424,6 +438,9 @@ def markdown_report(fetch: bool = False) -> str:
         f"- State balance: `${float(state.get('balance', 0.0) or 0.0):.2f}`",
         f"- Open positions: `{open_pos['count']}`",
         f"- Open cost: `${open_pos['cost']:.2f}`",
+        f"- Paper policy activated at: `{activated_at or 'unknown'}`",
+        f"- Open positions after activation: `{post_activation_open}`",
+        f"- Legacy open positions: `{legacy_open}`",
         "",
         "## V3 Actual Edge",
         "",

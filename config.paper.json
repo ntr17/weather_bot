@@ -1,5 +1,6 @@
 {
   "_note": "Paper-only live-applicable D+2 thesis: NO, min_ev>=0.15, $5 orders, $20 max exposure.",
+  "_activated_at": "2026-06-09T18:23:01Z",
   "enable_yes_trading": false,
   "max_bet": 5.0,
   "min_ev": 0.15,

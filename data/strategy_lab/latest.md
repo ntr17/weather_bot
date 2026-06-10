@@ -1,5 +1,5 @@
 # Strategy Lab
-Generated: 2026-06-10T10:36:04.779685+00:00
+Generated: 2026-06-10T10:39:28.738689+00:00
 
 ## Recommendation
 
@@ -7,8 +7,10 @@ Generated: 2026-06-10T10:36:04.779685+00:00
 - Best candidate: `current_paper`
 - Reason: Current paper strategy remains the best risk-adjusted live-applicable candidate.
 - Ready for live user review: `False`
+- Paper policy activated at: `2026-06-09T18:23:01Z`
 - Live blockers:
   - need >=100 resolved trades, have 17
+  - need >=30 post-activation resolved trades, have 0
   - need positive bootstrap lower bound, have -6.35%
 
 ## Ranked Candidates
@@ -30,6 +32,12 @@ Generated: 2026-06-10T10:36:04.779685+00:00
 | 13 | ensemble_only | 7 | 4/3 | -11.05% | -12.88% | -66.34% | 0.770 | -0.4470 |
 | 14 | d2_ensemble_only | 0 | 0/0 | 0.00% | 0.00% | 0.00% | 0.000 | -999.0000 |
 | 15 | d2_gfs_only | 0 | 0/0 | 0.00% | 0.00% | 0.00% | 0.000 | -999.0000 |
+
+## Post-Activation Current Paper
+
+| N | W/L | ROI | ROI after drag | Boot ROI low | Entry |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 0 | 0/0 | 0.00% | 0.00% | 0.00% | 0.000 |
 
 ## Diagnostics By Horizon
 

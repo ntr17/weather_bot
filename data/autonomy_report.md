@@ -1,12 +1,24 @@
 # WeatherBot Autonomy Report
-Generated: 2026-06-10 10:36 UTC
+Generated: 2026-06-10 10:39 UTC
 
 ## Git
 
-- Local HEAD: `fa3c00c bot: update state 2026-06-10T07:56:02Z`
-- Remote master: `fa3c00c bot: update state 2026-06-10T07:56:02Z`
+- Local HEAD: `61e3779 brain: update paper strategy review 2026-06-10T10:36:06Z`
+- Remote master: `61e3779 brain: update paper strategy review 2026-06-10T10:36:06Z`
 ```text
-## master...origin/master
+## master...github/master
+M  .env.example
+M  articles/expected_value.txt
+M  articles/niche.txt
+M  articles/patents.txt
+M  articles/polymarket_explained.txt
+M  config.paper.json
+M  scripts/autonomy_report.py
+M  scripts/paper_brain.py
+M  scripts/strategy_lab.py
+?? scripts/_check_state.py
+?? scripts/run_local.ps1
+?? scripts/setup_task.ps1
 ```
 
 ## Mode
@@ -30,13 +42,16 @@ Generated: 2026-06-10 10:36 UTC
 
 ## Activity
 
-- Last run age: `160.0` minutes
+- Last run age: `163.4` minutes
 - Runs last 1h / 2h / 24h: `0` / `0` / `160`
 - New positions last 24h: `0`
 - Errors last 24h: `0`
 - State balance: `$28.14`
 - Open positions: `3`
 - Open cost: `$15.00`
+- Paper policy activated at: `2026-06-09T18:23:01Z`
+- Open positions after activation: `0`
+- Legacy open positions: `3`
 
 ## V3 Actual Edge
 
