@@ -1,31 +1,31 @@
 # WeatherBot Status
-_Auto-generated 2026-06-11 15:06 UTC_
+_Auto-generated 2026-06-11 18:41 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $20.60 |
+| Balance | $32.63 |
 | Starting | $5,000.00 |
-| Return | -99.6% |
-| Total trades | 585 |
-| Win rate | 379/585 (65%) |
-| Open positions | 4 |
-| Open cost | $20.00 |
+| Return | -99.3% |
+| Total trades | 587 |
+| Win rate | 381/587 (65%) |
+| Open positions | 2 |
+| Open cost | $10.00 |
 | Markets tracked | 891 |
-| Calibration keys | 149 |
+| Calibration keys | 158 |
 
-## Open Positions (4)
+## Open Positions (2)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| Singapore | 2026-06-11 | 32–32°C | NO | $0.790 | ECMWF | D+0 |
 | Paris | 2026-06-12 | 25–25°C | NO | $0.700 | ECMWF | D+1 |
-| Paris | 2026-06-13 | 27–27°C | NO | $0.790 | ECMWF | D+2 |
 | Munich | 2026-06-13 | 26–26°C | NO | $0.820 | ECMWF | D+2 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
 |------|------|--------|------|-------|-----|---------|--------|
+| Singapore | 2026-06-11 | 32–32°C | NO | $0.790 | +1.33 | None | ECMWF |
+| Paris | 2026-06-13 | 27–27°C | NO | $0.790 | +0.70 | None | ECMWF |
 | Munich | 2026-06-12 | 17–17°C | NO | $0.760 | +0.79 | None | ECMWF |
 | New York City | 2026-06-10 | 80–81°F | NO | $0.750 | +1.67 | None | ENSEMBLE |
 | Seattle | 2026-06-09 | 62–63°F | NO | $0.750 | -5.00 | None | GFS |
@@ -44,8 +44,6 @@ _Auto-generated 2026-06-11 15:06 UTC_
 | Singapore | 2026-06-04 | 33–33°C | NO | $0.650 | +2.95 | None | ECMWF |
 | Tel Aviv | 2026-05-18 | 28–28°C | NO | $0.800 | +3.75 | None | ECMWF |
 | Sao Paulo | 2026-05-16 | 26–26°C | NO | $0.800 | +6.25 | None | ECMWF |
-| Shanghai | 2026-05-16 | 26–26°C | NO | $0.740 | -25.00 | None | ECMWF |
-| Toronto | 2026-05-18 | 28–28°C | NO | $0.800 | +2.50 | None | ECMWF |
 
 ## City Performance
 | City | Trades | Wins | WR | PnL | Avg PnL |
@@ -60,12 +58,12 @@ _Auto-generated 2026-06-11 15:06 UTC_
 | Miami | 55 | 0 | 0% | -62.37 | -1.13 |
 | Munich | 51 | 0 | 0% | -0.66 | -0.01 |
 | New York City | 66 | 5 | 8% | -77.15 | -1.17 |
-| Paris | 63 | 0 | 0% | -78.68 | -1.25 |
+| Paris | 64 | 0 | 0% | -77.98 | -1.22 |
 | Sao Paulo | 55 | 0 | 0% | -31.05 | -0.56 |
 | Seattle | 25 | 0 | 0% | -32.97 | -1.32 |
 | Seoul | 50 | 0 | 0% | -50.40 | -1.01 |
 | Shanghai | 61 | 0 | 0% | -88.07 | -1.44 |
-| Singapore | 63 | 0 | 0% | -208.76 | -3.31 |
+| Singapore | 64 | 0 | 0% | -207.43 | -3.24 |
 | Tel Aviv | 43 | 0 | 0% | -46.36 | -1.08 |
 | Tokyo | 46 | 0 | 0% | -63.90 | -1.39 |
 | Toronto | 56 | 0 | 0% | +62.56 | +1.12 |
@@ -95,29 +93,29 @@ _Auto-generated 2026-06-11 15:06 UTC_
 | Toronto | 20 | 0 | 0% | 0 | ok |  |
 | Wellington | 20 | 0 | 0% | 0 | ok |  |
 
-## Calibration (149 keys)
+## Calibration (158 keys)
 | City | ECMWF D+1 σ | GFS D+1 σ | Source | Samples |
 |------|-------------|-----------|--------|---------|
-| Ankara | 2.708 | 2.708 | bootstrap_persistence | 89 |
-| Atlanta | 7.985 | 7.985 | bootstrap_persistence | 89 |
-| Buenos Aires | — | — | — | — |
-| Chicago | 11.293 | 11.293 | bootstrap_persistence | 89 |
-| Dallas | 8.026 | 8.026 | bootstrap_persistence | 89 |
-| London | 2.414 | 2.414 | bootstrap_persistence | 89 |
-| Lucknow | 1.676 | 1.676 | bootstrap_persistence | 89 |
-| Miami | 3.859 | 3.859 | bootstrap_persistence | 89 |
-| Munich | — | — | — | — |
-| New York City | 8.746 | 8.746 | bootstrap_persistence | 89 |
+| Ankara | 0.808 | 2.708 | bootstrap_model | 88 |
+| Atlanta | 2.023 | 2.663 | bootstrap_model | 88 |
+| Buenos Aires | 0.853 | — | bootstrap_model | 88 |
+| Chicago | 11.293 | 11.293 | bootstrap_persistence_fallback | 89 |
+| Dallas | 2.05 | 7.013 | bootstrap_model | 88 |
+| London | 0.855 | 2.414 | bootstrap_model | 88 |
+| Lucknow | 0.981 | 1.676 | bootstrap_model | 88 |
+| Miami | 2.663 | 1.909 | bootstrap_model | 88 |
+| Munich | 0.801 | — | bootstrap_model | 88 |
+| New York City | 3.39 | 2.934 | bootstrap_model | 88 |
 | Paris | — | — | — | — |
-| Sao Paulo | — | — | — | — |
-| Seattle | 5.154 | 5.154 | bootstrap_persistence | 89 |
-| Seoul | 3.136 | 3.136 | bootstrap_persistence | 89 |
-| Shanghai | 2.999 | 2.999 | bootstrap_persistence | 89 |
-| Singapore | 0.945 | 0.945 | bootstrap_persistence | 89 |
-| Tel Aviv | 3.101 | 3.101 | bootstrap_persistence | 89 |
-| Tokyo | 3.215 | 3.215 | bootstrap_persistence | 89 |
-| Toronto | 5.878 | 5.878 | bootstrap_persistence | 89 |
-| Wellington | 2.143 | 2.143 | bootstrap_persistence | 89 |
+| Sao Paulo | 0.897 | — | bootstrap_model | 88 |
+| Seattle | 1.936 | 3.048 | bootstrap_model | 88 |
+| Seoul | 2.623 | 3.136 | bootstrap_persistence_fallback | 89 |
+| Shanghai | 1.168 | 2.999 | bootstrap_model | 87 |
+| Singapore | 0.945 | 0.945 | bootstrap_persistence_fallback | 89 |
+| Tel Aviv | 1.235 | 3.101 | bootstrap_model | 88 |
+| Tokyo | 1.242 | 3.215 | bootstrap_model | 87 |
+| Toronto | 1.585 | 5.878 | bootstrap_model | 88 |
+| Wellington | 1.867 | 2.143 | bootstrap_persistence_fallback | 89 |
 
 ## Active Config
 | Param | Value |
@@ -149,21 +147,21 @@ _Tracking NO trades opened after 2026-05-06_
 
 | Metric | Value |
 |--------|-------|
-| Closed trades | 436 |
-| Wins / Losses | 341 / 95 |
-| Win rate | 78.2% |
-| Total PnL | $+62.89 |
+| Closed trades | 438 |
+| Wins / Losses | 343 / 95 |
+| Win rate | 78.3% |
+| Total PnL | $+64.92 |
 | ROI | +0.6% |
-| Resolved | 354 (259W/95L) |
+| Resolved | 355 (260W/95L) |
 | Resolved WR | 73.2% |
-| Resolved PnL | $-207.88 |
-| Avg PnL/trade | $+0.14 |
+| Resolved PnL | $-206.55 |
+| Avg PnL/trade | $+0.15 |
 
 ### Close Reasons (v2)
 | Reason | Count | PnL |
 |--------|-------|-----|
-| resolved_win | 259 | $+2048.13 |
-| take_profit | 82 | $+270.77 |
+| resolved_win | 260 | $+2049.46 |
+| take_profit | 83 | $+271.47 |
 | resolved_loss | 95 | $-2256.01 |
 
 ## Edge Tracker (v3 CONVERGENCE strategy)
@@ -171,10 +169,10 @@ _D+1/D+2 NO trades opened after 2026-05-14_
 
 | Metric | Value |
 |--------|-------|
-| Trades | 56 |
-| Wins / Losses | 46 / 10 |
-| Win rate | 82.1% |
-| Total PnL | $+60.80 |
-| ROI | +5.6% |
-| Take-profit exits | 25 |
-| Avg PnL/trade | $+1.09 |
+| Trades | 58 |
+| Wins / Losses | 48 / 10 |
+| Win rate | 82.8% |
+| Total PnL | $+62.83 |
+| ROI | +5.7% |
+| Take-profit exits | 26 |
+| Avg PnL/trade | $+1.08 |
