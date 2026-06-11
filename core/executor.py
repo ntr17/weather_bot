@@ -111,6 +111,7 @@ def try_open_position(
         "forecast_temp":      forecast_temp,
         "forecast_source":    forecast_source,
         "sigma":              sigma,
+        "horizon":            horizon,
         "stop_price":         round(real_ask * cfg.stop_loss_pct, 4),
         "trailing_activated": False,
         "opened_at":          datetime.now(timezone.utc).isoformat(),
@@ -259,6 +260,7 @@ def try_open_no_position(
         "forecast_temp":      forecast_temp,
         "forecast_source":    forecast_source,
         "sigma":              sigma,
+        "horizon":            horizon,
         "stop_price":         round(real_no_ask * cfg.no_stop_loss_pct, 4),
         "trailing_activated": False,
         "opened_at":          datetime.now(timezone.utc).isoformat(),
@@ -350,6 +352,7 @@ def close_position(
         "forecast_changed": "CLOSE",
         "resolved_win":   "WIN",
         "resolved_loss":  "LOSS",
+        "unfilled_cancelled": "CANCEL",
     }.get(reason, reason.upper())
 
     print(
@@ -387,8 +390,11 @@ def close_position(
         "peak_balance": max(state.get("peak_balance", 0), state["balance"] + pos["cost"] + pnl),
     }
 
-    # Update win/loss counters for ALL close reasons (not just resolution)
-    if pnl >= 0:
+    # Update win/loss counters for ALL close reasons (not just resolution).
+    # Cancelled never-filled orders are not trades — keep them out of the stats.
+    if reason == "unfilled_cancelled":
+        pass
+    elif pnl >= 0:
         updated_state = {**updated_state, "wins": updated_state.get("wins", 0) + 1}
     else:
         updated_state = {**updated_state, "losses": updated_state.get("losses", 0) + 1}

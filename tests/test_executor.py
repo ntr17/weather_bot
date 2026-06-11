@@ -433,3 +433,47 @@ class TestTryOpenNoPosition:
         entry = updated_mkt["positions"]["mkt-no-001"]["entry_price"]
         expected = round(entry * 0.30, 4)
         assert updated_mkt["positions"]["mkt-no-001"]["stop_price"] == expected
+
+
+class TestUnfilledCancelled:
+    """Cancelling a never-filled live order must refund cost exactly and not count as a trade."""
+
+    @patch("core.executor.append_trade")
+    @patch("core.executor.save_state")
+    @patch("core.executor.save_market")
+    def test_refund_and_no_win_loss(self, mock_sm, mock_ss, mock_at):
+        mkt = _mkt(entry_price=0.75, shares=20.0, cost=15.0)
+        state = _state(balance=9_985.0)
+
+        updated_mkt, updated_state = close_position(
+            mkt, 0.75, "unfilled_cancelled", state
+        )
+
+        pos = updated_mkt["positions"]["mkt-001"]
+        assert pos["status"] == "closed"
+        assert pos["pnl"] == 0.0
+        assert updated_state["balance"] == pytest.approx(10_000.0, abs=0.01)
+        assert updated_state["wins"] == 0
+        assert updated_state["losses"] == 0
+
+
+class TestHorizonRecordedAtEntry:
+    @patch("core.executor.trade_opened")
+    @patch("core.executor.fetch_live_price", return_value=(0.25, 0.27))
+    @patch("core.executor.save_state")
+    @patch("core.executor.save_market")
+    def test_no_position_stores_horizon(self, mock_sm, mock_ss, mock_flp, mock_to):
+        cfg = _cfg()
+        mkt = {
+            "city": "nyc", "city_name": "New York City", "date": "2026-06-13",
+            "unit": "F", "positions": {}, "current_horizon": "D+2",
+        }
+        outcome = _outcome(bid=0.25, ask=0.27, t_low=60.0, t_high=61.0)
+        state = _state()
+
+        updated_mkt, _, did_open = try_open_no_position(
+            mkt, outcome, 75.0, "ecmwf", 2.0, state, cfg
+        )
+
+        assert did_open
+        assert updated_mkt["positions"][outcome.market_id]["horizon"] == "D+2"

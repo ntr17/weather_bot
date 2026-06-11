@@ -301,17 +301,20 @@ def check_pending_orders(cfg) -> int:
     if cfg.paper_trading:
         return 0
 
-    from core.clob import get_order, cancel_order
+    from core.clob import cancel_order, get_order
+    from core.executor import close_position
+
+    live_order_ttl_hours = 12.0   # cancel GTC orders that haven't filled by then
 
     all_mkts = load_all_markets()
     state = load_state(cfg.balance)
     fills = 0
+    now = datetime.now(timezone.utc)
 
     for mkt in all_mkts:
-        positions = mkt.get("positions", {})
         changed = False
 
-        for pos_id, pos in positions.items():
+        for pos_id, pos in list(mkt.get("positions", {}).items()):
             if pos.get("status") != "open":
                 continue
             if pos.get("order_status") != "live":
@@ -329,14 +332,43 @@ def check_pending_orders(cfg) -> int:
             size_matched = float(order_info.get("size_matched", "0"))
             original_size = float(order_info.get("original_size", "0"))
 
-            if size_matched > 0 and original_size > 0:
-                fill_pct = size_matched / original_size
-                if fill_pct >= 0.95:  # Essentially fully filled
-                    pos["order_status"] = "matched"
-                    pos["shares"] = size_matched  # Update to actual fill
-                    changed = True
-                    fills += 1
-                    print(f"  [FILL] Order {order_id[:16]}... filled: {size_matched:.2f} shares")
+            if original_size > 0 and size_matched / original_size >= 0.95:
+                pos["order_status"] = "matched"
+                pos["shares"] = size_matched  # Update to actual fill
+                changed = True
+                fills += 1
+                print(f"  [FILL] Order {order_id[:16]}... filled: {size_matched:.2f} shares")
+                continue
+
+            try:
+                opened = datetime.fromisoformat(pos.get("opened_at", ""))
+                age_h = (now - opened).total_seconds() / 3600
+            except ValueError:
+                age_h = 0.0
+            if age_h < live_order_ttl_hours:
+                continue
+
+            if size_matched > 0:
+                # Partial fill, stale: cancel the remainder, keep what we own,
+                # refund the unfilled cost so internal balance matches reality.
+                cancel_order(order_id)
+                old_cost = float(pos.get("cost", 0.0))
+                new_cost = round(size_matched * pos["entry_price"], 2)
+                pos["shares"] = size_matched
+                pos["cost"] = new_cost
+                pos["order_status"] = "matched"
+                state["balance"] = round(state["balance"] + old_cost - new_cost, 2)
+                save_state(state)
+                changed = True
+                print(f"  [PARTIAL] Order {order_id[:16]}... kept {size_matched:.2f} shares, "
+                      f"refunded ${old_cost - new_cost:.2f}")
+            else:
+                # Never filled: cancel and refund full cost (handled by
+                # close_position's unfilled_cancelled path).
+                mkt, state = close_position(
+                    mkt, pos["entry_price"], "unfilled_cancelled", state, pos_id, cfg=cfg
+                )
+                changed = False  # close_position already saved the market
 
         if changed:
             save_market(mkt)

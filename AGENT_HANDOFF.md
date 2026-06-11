@@ -2,6 +2,12 @@
 
 This repo is a Polymarket weather trading bot. It is currently paper-only. Do not enable live trading, change wallet secrets, or raise risk without explicit user approval.
 
+> 2026-06-11: A full CTO audit was performed — read `CTO_AUDIT.md` first. Key changes:
+> sigma bootstrap rewritten (model-based, the persistence version was poisoning all
+> probabilities), read-time sigma clamp, live order accounting fixes (unfilled GTC
+> refunds, 12h TTL, partial fills), horizon now recorded at entry. CI auto-upgrades
+> the calibration on its next run — verify `bootstrap_model` appears in status.md.
+
 ## Current Branch
 
 - Use `master`.

@@ -1,10 +1,17 @@
-﻿# WeatherBot — Polymarket Weather Trading Bot
+# WeatherBot — Polymarket Weather Trading Bot
 
-**Edge**: Polymarket resolves on AIRPORT coordinates. Most traders price on city center.
-That 3–8 °F delta = systematic mispricing on 1–2 °F bucket markets.
+**Thesis (revised 2026-06-11)**: Polymarket resolves on AIRPORT station readings. The
+original "3–8 °F airport-vs-city delta" claim is NOT supported by our own measurements
+(`research/data/airport_offset.json`: mean deltas ~ +/-1 °F). The surviving hypothesis is
+narrower: retail flow overprices unlikely tail buckets; we sell NO on them at D+2 using
+calibrated model forecasts. Statistically unconfirmed (n=17). Read `CTO_AUDIT.md`
+before believing anything else in this file.
 
 ## State
-Phase 1 — Paper trading. All bugs fixed. 106/106 tests green. Ready to deploy.
+Phase 1 — paper trading via GitHub Actions (every 30 min), strategy brain reviews
+4x/day. Live executor is implemented but gated (see `BRAIN.md` live blockers).
+Cumulative paper history is heavily negative — mostly from since-fixed bugs
+(stop-loss churn, poisoned sigma bootstrap). 151/151 tests green.
 
 ---
 

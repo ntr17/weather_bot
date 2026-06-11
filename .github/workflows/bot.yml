@@ -30,16 +30,21 @@ jobs:
           cp config.template.json config.json
           python scripts/apply_paper_strategy.py
 
-      - name: Bootstrap sigma (first run only)
+      - name: Bootstrap sigma (first run, or upgrade persistence-based calibration)
         run: |
-          # Skip if calibration already exists in the DB
+          # Run when calibration is empty OR still contains v1 persistence-based
+          # entries (sigmas inflated up to 17°F). The model-based bootstrap
+          # replaces them with real forecast errors; the old
+          # 'bootstrap_persistence' label disappears, so this runs once.
           python -c "
           from core.storage import load_calibration
           cal = load_calibration()
-          if cal:
-              print(f'Calibration already has {len(cal)} keys — skipping bootstrap')
+          stale = [k for k, v in cal.items() if v.get('source') == 'bootstrap_persistence']
+          if cal and not stale:
+              print(f'Calibration OK ({len(cal)} keys) — skipping bootstrap')
           else:
-              print('No calibration found — running bootstrap...')
+              why = 'empty' if not cal else f'{len(stale)} persistence keys to upgrade'
+              print(f'Running model-based bootstrap ({why})...')
               import subprocess, sys
               sys.exit(subprocess.call([sys.executable, 'research/bootstrap_sigma.py']))
           "

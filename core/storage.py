@@ -337,7 +337,9 @@ def append_trade(mkt: dict[str, Any], pos: dict[str, Any] | None = None) -> None
         "date":            mkt.get("date"),
         "unit":            mkt.get("unit"),
         "station":         mkt.get("station"),
-        "horizon":         mkt.get("current_horizon"),
+        # Horizon at ENTRY (stored on the position). mkt["current_horizon"] is
+        # the horizon at close time — by resolution that is always D+0.
+        "horizon":         pos.get("horizon") or mkt.get("current_horizon"),
         "side":            pos.get("side", "yes"),
         "bucket_low":      pos.get("bucket_low"),
         "bucket_high":     pos.get("bucket_high"),
