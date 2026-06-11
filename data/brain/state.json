@@ -1,21 +1,21 @@
 {
-  "updated_at": "2026-06-11T11:00:06.452219+00:00",
+  "updated_at": "2026-06-11T16:31:47.050061+00:00",
   "last_action_result": "No paper config change requested.",
   "paper_config_changed": false,
   "strategy_recommendation": {
     "action": "keep",
     "reason": "Current paper strategy remains the best risk-adjusted live-applicable candidate.",
     "best_candidate": "current_paper",
-    "current_score": -0.00772,
-    "best_score": -0.00772,
+    "current_score": -0.00401,
+    "best_score": -0.00401,
     "paper_overlay": null
   },
   "live_gate": {
     "ready_for_user_review": false,
     "reasons_not_ready": [
-      "need >=100 resolved trades, have 17",
-      "need >=30 post-activation resolved trades, have 0",
-      "need positive bootstrap lower bound, have -6.35%"
+      "need >=100 resolved trades, have 18",
+      "need >=30 post-activation resolved trades, have 1",
+      "need positive bootstrap lower bound, have -6.06%"
     ]
   },
   "autonomy_report_present": true
