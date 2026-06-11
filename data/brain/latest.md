@@ -1,5 +1,5 @@
 # WeatherBot Brain
-Last review: 2026-06-11 05:01 UTC
+Last review: 2026-06-11 11:00 UTC
 
 ## Decision
 
@@ -11,7 +11,7 @@ Last review: 2026-06-11 05:01 UTC
 
 ## Evidence
 
-- Closed positions loaded: `59`
+- Closed positions loaded: `60`
 - Current strategy: n=17, ROI after drag=8.05%, bootstrap low=-6.35%
 - Best strategy: n=17, ROI after drag=8.05%, bootstrap low=-6.35%
 - Post-activation current strategy: n=0, ROI after drag=0.00%, bootstrap low=0.00%
