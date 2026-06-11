@@ -8,9 +8,31 @@ This directly improves probability estimates and Kelly sizing.
 from datetime import datetime, timezone
 from typing import Any
 
-from core.config import DEFAULT_SIGMA_C, DEFAULT_SIGMA_F
+from core.config import (
+    DEFAULT_SIGMA_C,
+    DEFAULT_SIGMA_F,
+    SIGMA_MAX_C,
+    SIGMA_MAX_F,
+    SIGMA_MIN_C,
+    SIGMA_MIN_F,
+)
 from core.locations import LOCATIONS
 from core.storage import load_calibration, save_calibration
+
+
+def clamp_sigma(sigma: float, city_slug: str) -> float:
+    """Clamp sigma to sane bounds for the city's unit at read time.
+
+    Stored calibration values are kept raw; this guards every consumer against
+    garbage calibration (e.g. persistence-bootstrap sigmas of 8–17°F) without
+    rewriting history.
+    """
+    loc = LOCATIONS.get(city_slug)
+    if loc and loc.unit == "F":
+        lo, hi = SIGMA_MIN_F, SIGMA_MAX_F
+    else:
+        lo, hi = SIGMA_MIN_C, SIGMA_MAX_C
+    return round(min(max(sigma, lo), hi), 3)
 
 
 def get_sigma(
@@ -34,7 +56,7 @@ def get_sigma(
     if horizon:
         key_horizon = f"{city_slug}_{source}_{horizon}"
         if key_horizon in calibration:
-            return calibration[key_horizon]["sigma"]
+            return clamp_sigma(calibration[key_horizon]["sigma"], city_slug)
 
     key_flat = f"{city_slug}_{source}"
     if key_flat in calibration:
@@ -53,7 +75,7 @@ def get_sigma(
         except (ValueError, AttributeError):
             pass
 
-    return base_sigma
+    return clamp_sigma(base_sigma, city_slug)
 
 
 def run_calibration(

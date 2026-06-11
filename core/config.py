@@ -112,3 +112,12 @@ def load_config() -> Config:
 # refined by the live calibrator as resolved trades accumulate.
 DEFAULT_SIGMA_F: float = 2.0   # Fahrenheit markets
 DEFAULT_SIGMA_C: float = 1.2   # Celsius markets
+
+# Sanity bounds applied at read time (calibrator.get_sigma). Persistence-based
+# bootstrap produced sigmas up to 17°F — far above any real NWP forecast error —
+# which inflated p(NO) on near-forecast buckets and drove systematic bad NO
+# entries. Real ECMWF D+1..D+3 daily-max errors are roughly 1.5–4°F.
+SIGMA_MIN_F: float = 1.0
+SIGMA_MAX_F: float = 5.0
+SIGMA_MIN_C: float = 0.6
+SIGMA_MAX_C: float = 3.0

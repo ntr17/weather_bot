@@ -70,3 +70,23 @@ class TestRunCalibration:
              patch("core.calibrator.save_calibration"):
             result = run_calibration(markets, calibration_min=30)
         assert "nyc_ecmwf" not in result
+
+
+class TestSigmaClamp:
+    """Garbage calibration (persistence sigma up to 17°F) must be clamped at read time."""
+
+    def test_clamps_inflated_f_sigma(self) -> None:
+        cal = {"chicago_ecmwf_D+1": {"sigma": 11.293}}
+        assert get_sigma("chicago", "ecmwf", cal, horizon="D+1") == 5.0
+
+    def test_clamps_inflated_c_sigma(self) -> None:
+        cal = {"shanghai_ecmwf_D+2": {"sigma": 9.0}}
+        assert get_sigma("shanghai", "ecmwf", cal, horizon="D+2") == 3.0
+
+    def test_clamps_tiny_sigma_floor(self) -> None:
+        cal = {"singapore_ecmwf_D+1": {"sigma": 0.3}}
+        assert get_sigma("singapore", "ecmwf", cal, horizon="D+1") == 0.6
+
+    def test_reasonable_sigma_passes_through(self) -> None:
+        cal = {"nyc_ecmwf_D+2": {"sigma": 2.7}}
+        assert get_sigma("nyc", "ecmwf", cal, horizon="D+2") == 2.7

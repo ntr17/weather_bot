@@ -213,6 +213,15 @@ def check_resolution(
     if yes_won is None:
         return mkt, state, False
 
+    # Live mode: a GTC order that never filled must not be credited as a
+    # win/loss — we never owned the tokens. Cancel and refund cost instead.
+    # (close_position's live-sell path cancels the resting order.)
+    if cfg and not cfg.paper_trading and pos.get("order_status") == "live":
+        updated_mkt, updated_state = close_position(
+            mkt, pos["entry_price"], "unfilled_cancelled", state, position_id, cfg=cfg
+        )
+        return updated_mkt, updated_state, True
+
     # For NO positions, winning = YES resolved at 0 (NO token pays out)
     won = yes_won if side == "yes" else not yes_won
     exit_price = 1.0 if won else 0.0
