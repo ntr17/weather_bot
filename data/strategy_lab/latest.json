@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-11T20:38:36.727506+00:00",
+  "generated_at": "2026-06-12T05:08:38.020099+00:00",
   "source_db": "data/weatherbot.db",
   "closed_positions_loaded": 63,
   "paper_activation": {
@@ -58,8 +58,8 @@
         "spread_est": 4.2,
         "pnl_after_drag": 35.16,
         "roi_after_drag": 0.0836,
-        "bootstrap_roi_low": -0.0593,
-        "bootstrap_roi_high": 0.2012,
+        "bootstrap_roi_low": -0.058,
+        "bootstrap_roi_high": 0.2006,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 1,
@@ -67,7 +67,7 @@
           "take_profit": 14
         }
       },
-      "score": 0.00284
+      "score": 0.0033
     },
     {
       "candidate": {
@@ -97,8 +97,8 @@
         "spread_est": 4.2,
         "pnl_after_drag": 35.16,
         "roi_after_drag": 0.0836,
-        "bootstrap_roi_low": -0.0593,
-        "bootstrap_roi_high": 0.2012,
+        "bootstrap_roi_low": -0.058,
+        "bootstrap_roi_high": 0.2006,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 1,
@@ -106,7 +106,7 @@
           "take_profit": 14
         }
       },
-      "score": 0.00284
+      "score": 0.0033
     },
     {
       "candidate": {
@@ -138,8 +138,8 @@
         "spread_est": 4.2,
         "pnl_after_drag": 35.16,
         "roi_after_drag": 0.0836,
-        "bootstrap_roi_low": -0.0593,
-        "bootstrap_roi_high": 0.2012,
+        "bootstrap_roi_low": -0.058,
+        "bootstrap_roi_high": 0.2006,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 1,
@@ -147,7 +147,7 @@
           "take_profit": 14
         }
       },
-      "score": 0.00284
+      "score": 0.0033
     },
     {
       "candidate": {
@@ -178,7 +178,7 @@
         "pnl_after_drag": 26.66,
         "roi_after_drag": 0.0516,
         "bootstrap_roi_low": -0.0709,
-        "bootstrap_roi_high": 0.1757,
+        "bootstrap_roi_high": 0.1756,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 6,
@@ -216,8 +216,8 @@
         "spread_est": 3.7,
         "pnl_after_drag": 29.96,
         "roi_after_drag": 0.0809,
-        "bootstrap_roi_low": -0.0805,
-        "bootstrap_roi_high": 0.211,
+        "bootstrap_roi_low": -0.081,
+        "bootstrap_roi_high": 0.2111,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 1,
@@ -225,7 +225,7 @@
           "take_profit": 12
         }
       },
-      "score": -0.01128
+      "score": -0.01145
     },
     {
       "candidate": {
@@ -255,8 +255,8 @@
         "spread_est": 4.06,
         "pnl_after_drag": 13.05,
         "roi_after_drag": 0.0321,
-        "bootstrap_roi_low": -0.1307,
-        "bootstrap_roi_high": 0.1718,
+        "bootstrap_roi_low": -0.1301,
+        "bootstrap_roi_high": 0.1717,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 5,
@@ -264,7 +264,7 @@
           "take_profit": 12
         }
       },
-      "score": -0.06365
+      "score": -0.06343
     },
     {
       "candidate": {
@@ -294,8 +294,8 @@
         "spread_est": 4.95,
         "pnl_after_drag": 15.06,
         "roi_after_drag": 0.0304,
-        "bootstrap_roi_low": -0.1195,
-        "bootstrap_roi_high": 0.1824,
+        "bootstrap_roi_low": -0.1189,
+        "bootstrap_roi_high": 0.1825,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 2,
@@ -303,7 +303,7 @@
           "take_profit": 16
         }
       },
-      "score": -0.06542
+      "score": -0.06521
     },
     {
       "candidate": {
@@ -335,8 +335,8 @@
         "spread_est": 5.3,
         "pnl_after_drag": 13.43,
         "roi_after_drag": 0.0253,
-        "bootstrap_roi_low": -0.1228,
-        "bootstrap_roi_high": 0.1682,
+        "bootstrap_roi_low": -0.1227,
+        "bootstrap_roi_high": 0.1678,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 3,
@@ -344,7 +344,7 @@
           "take_profit": 17
         }
       },
-      "score": -0.06568
+      "score": -0.06564
     },
     {
       "candidate": {
@@ -374,8 +374,8 @@
         "spread_est": 5.71,
         "pnl_after_drag": 5.27,
         "roi_after_drag": 0.0092,
-        "bootstrap_roi_low": -0.1399,
-        "bootstrap_roi_high": 0.1522,
+        "bootstrap_roi_low": -0.14,
+        "bootstrap_roi_high": 0.1525,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 7,
@@ -383,7 +383,7 @@
           "take_profit": 16
         }
       },
-      "score": -0.07176
+      "score": -0.0718
     },
     {
       "candidate": {
@@ -413,8 +413,8 @@
         "spread_est": 4.7,
         "pnl_after_drag": 12.71,
         "roi_after_drag": 0.027,
-        "bootstrap_roi_low": -0.1321,
-        "bootstrap_roi_high": 0.1835,
+        "bootstrap_roi_low": -0.1328,
+        "bootstrap_roi_high": 0.1831,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 2,
@@ -422,7 +422,7 @@
           "take_profit": 15
         }
       },
-      "score": -0.07523
+      "score": -0.07548
     },
     {
       "candidate": {
@@ -638,8 +638,8 @@
           "spread_est": 8.2,
           "pnl_after_drag": 79.47,
           "roi_after_drag": 0.0969,
-          "bootstrap_roi_low": 0.0002,
-          "bootstrap_roi_high": 0.205,
+          "bootstrap_roi_low": 0.0003,
+          "bootstrap_roi_high": 0.2046,
           "max_loss": -25.0,
           "reasons": {
             "resolved_loss": 2,
@@ -726,8 +726,8 @@
           "spread_est": 9.36,
           "pnl_after_drag": 62.56,
           "roi_after_drag": 0.0668,
-          "bootstrap_roi_low": -0.0314,
-          "bootstrap_roi_high": 0.1842,
+          "bootstrap_roi_low": -0.0318,
+          "bootstrap_roi_high": 0.185,
           "max_loss": -25.0,
           "reasons": {
             "resolved_loss": 4,
@@ -770,8 +770,8 @@
     "action": "keep",
     "reason": "Current paper strategy remains the best risk-adjusted live-applicable candidate.",
     "best_candidate": "current_paper",
-    "current_score": 0.00284,
-    "best_score": 0.00284,
+    "current_score": 0.0033,
+    "best_score": 0.0033,
     "paper_overlay": null
   },
   "live_gate": {
@@ -779,7 +779,7 @@
     "reasons_not_ready": [
       "need >=100 resolved trades, have 20",
       "need >=30 post-activation resolved trades, have 2",
-      "need positive bootstrap lower bound, have -5.93%"
+      "need positive bootstrap lower bound, have -5.80%"
     ]
   }
 }
