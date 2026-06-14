@@ -1,10 +1,10 @@
 # WeatherBot Autonomy Report
-Generated: 2026-06-13 19:56 UTC
+Generated: 2026-06-14 05:11 UTC
 
 ## Git
 
-- Local HEAD: `d3e31b2 bot: update state 2026-06-13T19:24:27Z`
-- Remote master: `d3e31b2 bot: update state 2026-06-13T19:24:27Z`
+- Local HEAD: `24b00ef bot: update state 2026-06-14T03:46:43Z`
+- Remote master: `24b00ef bot: update state 2026-06-14T03:46:43Z`
 ```text
 ## master...origin/master
 ```
@@ -30,23 +30,23 @@ Generated: 2026-06-13 19:56 UTC
 
 ## Activity
 
-- Last run age: `31.8` minutes
-- Runs last 1h / 2h / 24h: `20` / `20` / `220`
+- Last run age: `84.8` minutes
+- Runs last 1h / 2h / 24h: `0` / `20` / `220`
 - New positions last 24h: `1`
 - Errors last 24h: `0`
-- State balance: `$24.77`
-- Open positions: `4`
-- Open cost: `$20.00`
+- State balance: `$37.75`
+- Open positions: `1`
+- Open cost: `$5.00`
 - Paper policy activated at: `2026-06-09T18:23:01Z`
-- Open positions after activation: `4`
+- Open positions after activation: `1`
 - Legacy open positions: `0`
 
 ## V3 Actual Edge
 
-- Trades: `57` (48W / 9L)
-- Avg entry: `0.743`
-- PnL: `$+83.68` on `$1050.19` cost
-- ROI: `7.97%`
+- Trades: `60` (50W / 10L)
+- Avg entry: `0.746`
+- PnL: `$+81.66` on `$1065.19` cost
+- ROI: `7.67%`
 
 ## Gates
 
@@ -57,11 +57,11 @@ Generated: 2026-06-13 19:56 UTC
 | New data flow | OK | 1 new positions in last 24h; caps may explain zero. |
 | Live max bet | OK | max_bet=5.00; target <= 5. |
 | Live total exposure cap | OK | max_total_open_cost=20.00; target <= 20. |
-| Current open exposure | OK | open_cost=20.00; reset/wait before live if above cap. |
+| Current open exposure | OK | open_cost=5.00; reset/wait before live if above cap. |
 | Per-run position cap | OK | max_new_positions_per_run=2; target <= 2. |
 | NO-only strategy | OK | enable_yes_trading=False. |
 | Entry and EV filters | OK | min_ev=0.15, min_no_entry=0.70, max_no_entry=0.85. |
-| Resolved edge sample | OK | v3_actual n=57; keep small while sample is limited. |
+| Resolved edge sample | OK | v3_actual n=60; keep small while sample is limited. |
 
 ## Agenda
 
