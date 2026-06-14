@@ -1,5 +1,5 @@
 # WeatherBot Brain
-Last review: 2026-06-14 14:33 UTC
+Last review: 2026-06-14 20:00 UTC
 
 ## Decision
 
@@ -11,10 +11,10 @@ Last review: 2026-06-14 14:33 UTC
 
 ## Evidence
 
-- Closed positions loaded: `67`
-- Current strategy: n=24, ROI after drag=7.92%, bootstrap low=-6.13%
-- Best strategy: n=24, ROI after drag=7.92%, bootstrap low=-6.13%
-- Post-activation current strategy: n=6, ROI after drag=3.48%, bootstrap low=-37.90%
+- Closed positions loaded: `68`
+- Current strategy: n=25, ROI after drag=7.98%, bootstrap low=-6.03%
+- Best strategy: n=25, ROI after drag=7.98%, bootstrap low=-6.03%
+- Post-activation current strategy: n=7, ROI after drag=4.82%, bootstrap low=-30.40%
 - Paper policy activated at: `2026-06-09T18:23:01Z`
 
 ## Thesis
@@ -34,9 +34,9 @@ Last review: 2026-06-14 14:33 UTC
 
 ## Live Blockers
 
-- need >=100 resolved trades, have 24
-- need >=30 post-activation resolved trades, have 6
-- need positive bootstrap lower bound, have -6.13%
+- need >=100 resolved trades, have 25
+- need >=30 post-activation resolved trades, have 7
+- need positive bootstrap lower bound, have -6.03%
 
 ## Operating Rule
 
