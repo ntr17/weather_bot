@@ -1,10 +1,10 @@
 # WeatherBot Autonomy Report
-Generated: 2026-06-15 21:26 UTC
+Generated: 2026-06-16 05:37 UTC
 
 ## Git
 
-- Local HEAD: `2255924 bot: update state 2026-06-15T18:25:56Z`
-- Remote master: `2255924 bot: update state 2026-06-15T18:25:56Z`
+- Local HEAD: `58f48fc bot: update state 2026-06-16T02:09:24Z`
+- Remote master: `58f48fc bot: update state 2026-06-16T02:09:24Z`
 ```text
 ## master...origin/master
 ```
@@ -30,23 +30,23 @@ Generated: 2026-06-15 21:26 UTC
 
 ## Activity
 
-- Last run age: `180.7` minutes
+- Last run age: `208.2` minutes
 - Runs last 1h / 2h / 24h: `0` / `0` / `120`
-- New positions last 24h: `3`
+- New positions last 24h: `4`
 - Errors last 24h: `0`
-- State balance: `$25.62`
-- Open positions: `4`
-- Open cost: `$20.00`
+- State balance: `$32.53`
+- Open positions: `2`
+- Open cost: `$10.00`
 - Paper policy activated at: `2026-06-09T18:23:01Z`
-- Open positions after activation: `4`
+- Open positions after activation: `2`
 - Legacy open positions: `0`
 
 ## V3 Actual Edge
 
-- Trades: `64` (54W / 10L)
-- Avg entry: `0.748`
-- PnL: `$+84.53` on `$1085.19` cost
-- ROI: `7.79%`
+- Trades: `67` (56W / 11L)
+- Avg entry: `0.747`
+- PnL: `$+81.44` on `$1100.19` cost
+- ROI: `7.40%`
 
 ## Gates
 
@@ -54,14 +54,14 @@ Generated: 2026-06-15 21:26 UTC
 | --- | --- | --- |
 | Actions paper-only | OK | Hosted Actions must not be live. |
 | Recent bot activity | BLOCK | 0 runs in last 2h. |
-| New data flow | OK | 3 new positions in last 24h; caps may explain zero. |
+| New data flow | OK | 4 new positions in last 24h; caps may explain zero. |
 | Live max bet | OK | max_bet=5.00; target <= 5. |
 | Live total exposure cap | OK | max_total_open_cost=20.00; target <= 20. |
-| Current open exposure | OK | open_cost=20.00; reset/wait before live if above cap. |
+| Current open exposure | OK | open_cost=10.00; reset/wait before live if above cap. |
 | Per-run position cap | OK | max_new_positions_per_run=2; target <= 2. |
 | NO-only strategy | OK | enable_yes_trading=False. |
 | Entry and EV filters | OK | min_ev=0.15, min_no_entry=0.70, max_no_entry=0.85. |
-| Resolved edge sample | OK | v3_actual n=64; keep small while sample is limited. |
+| Resolved edge sample | OK | v3_actual n=67; keep small while sample is limited. |
 
 ## Agenda
 
