@@ -1,10 +1,10 @@
 # WeatherBot Autonomy Report
-Generated: 2026-06-19 10:58 UTC
+Generated: 2026-06-19 15:44 UTC
 
 ## Git
 
-- Local HEAD: `c8390e9 bot: update state 2026-06-19T07:41:07Z`
-- Remote master: `c8390e9 bot: update state 2026-06-19T07:41:07Z`
+- Local HEAD: `1531b51 bot: update state 2026-06-19T12:06:51Z`
+- Remote master: `1531b51 bot: update state 2026-06-19T12:06:51Z`
 ```text
 ## master...origin/master
 ```
@@ -30,11 +30,11 @@ Generated: 2026-06-19 10:58 UTC
 
 ## Activity
 
-- Last run age: `197.6` minutes
+- Last run age: `217.7` minutes
 - Runs last 1h / 2h / 24h: `0` / `0` / `140`
 - New positions last 24h: `3`
 - Errors last 24h: `0`
-- State balance: `$28.38`
+- State balance: `$28.91`
 - Open positions: `3`
 - Open cost: `$15.00`
 - Paper policy activated at: `2026-06-09T18:23:01Z`
@@ -43,10 +43,10 @@ Generated: 2026-06-19 10:58 UTC
 
 ## V3 Actual Edge
 
-- Trades: `73` (61W / 12L)
+- Trades: `74` (62W / 12L)
 - Avg entry: `0.752`
-- PnL: `$+82.29` on `$1130.19` cost
-- ROI: `7.28%`
+- PnL: `$+82.82` on `$1135.19` cost
+- ROI: `7.30%`
 
 ## Gates
 
@@ -61,7 +61,7 @@ Generated: 2026-06-19 10:58 UTC
 | Per-run position cap | OK | max_new_positions_per_run=2; target <= 2. |
 | NO-only strategy | OK | enable_yes_trading=False. |
 | Entry and EV filters | OK | min_ev=0.15, min_no_entry=0.70, max_no_entry=0.85. |
-| Resolved edge sample | OK | v3_actual n=73; keep small while sample is limited. |
+| Resolved edge sample | OK | v3_actual n=74; keep small while sample is limited. |
 
 ## Agenda
 
