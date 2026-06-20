@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-06-19 22:34 UTC_
+_Auto-generated 2026-06-20 00:10 UTC_
 
 ## Summary
 | Metric | Value |
@@ -18,10 +18,10 @@ _Auto-generated 2026-06-19 22:34 UTC_
 ## Open Positions (4)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| London | 2026-06-20 | 26–26°C | NO | $0.770 | ECMWF | D+1 |
-| Munich | 2026-06-21 | 34–34°C | NO | $0.780 | ECMWF | D+2 |
-| Ankara | 2026-06-21 | 27–27°C | NO | $0.840 | ECMWF | D+2 |
-| Singapore | 2026-06-21 | 32–32°C | NO | $0.840 | ECMWF | D+2 |
+| London | 2026-06-20 | 26–26°C | NO | $0.770 | ECMWF | D+0 |
+| Munich | 2026-06-21 | 34–34°C | NO | $0.780 | ECMWF | D+1 |
+| Ankara | 2026-06-21 | 27–27°C | NO | $0.840 | ECMWF | D+1 |
+| Singapore | 2026-06-21 | 32–32°C | NO | $0.840 | ECMWF | D+1 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
