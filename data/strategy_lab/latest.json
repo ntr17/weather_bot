@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-21T05:20:54.141122+00:00",
+  "generated_at": "2026-06-21T10:07:13.988247+00:00",
   "source_db": "data/weatherbot.db",
   "closed_positions_loaded": 84,
   "paper_activation": {
@@ -21,8 +21,8 @@
       "spread_est": 1.15,
       "pnl_after_drag": -3.16,
       "roi_after_drag": -0.0275,
-      "bootstrap_roi_low": -0.2161,
-      "bootstrap_roi_high": 0.1605,
+      "bootstrap_roi_low": -0.2102,
+      "bootstrap_roi_high": 0.1588,
       "max_loss": -5.0,
       "reasons": {
         "resolved_loss": 4,
@@ -60,8 +60,8 @@
         "spread_est": 5.25,
         "pnl_after_drag": 30.7,
         "roi_after_drag": 0.0584,
-        "bootstrap_roi_low": -0.0551,
-        "bootstrap_roi_high": 0.1698,
+        "bootstrap_roi_low": -0.0556,
+        "bootstrap_roi_high": 0.1699,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 5,
@@ -69,7 +69,7 @@
           "take_profit": 24
         }
       },
-      "score": 0.02111
+      "score": 0.02094
     },
     {
       "candidate": {
@@ -99,8 +99,8 @@
         "spread_est": 5.25,
         "pnl_after_drag": 30.7,
         "roi_after_drag": 0.0584,
-        "bootstrap_roi_low": -0.0551,
-        "bootstrap_roi_high": 0.1698,
+        "bootstrap_roi_low": -0.0556,
+        "bootstrap_roi_high": 0.1699,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 5,
@@ -108,7 +108,7 @@
           "take_profit": 24
         }
       },
-      "score": 0.02111
+      "score": 0.02094
     },
     {
       "candidate": {
@@ -140,8 +140,8 @@
         "spread_est": 5.25,
         "pnl_after_drag": 30.7,
         "roi_after_drag": 0.0584,
-        "bootstrap_roi_low": -0.0551,
-        "bootstrap_roi_high": 0.1698,
+        "bootstrap_roi_low": -0.0556,
+        "bootstrap_roi_high": 0.1699,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 5,
@@ -149,7 +149,7 @@
           "take_profit": 24
         }
       },
-      "score": 0.02111
+      "score": 0.02094
     },
     {
       "candidate": {
@@ -179,8 +179,8 @@
         "spread_est": 6.21,
         "pnl_after_drag": 22.2,
         "roi_after_drag": 0.0357,
-        "bootstrap_roi_low": -0.0721,
-        "bootstrap_roi_high": 0.1507,
+        "bootstrap_roi_low": -0.0725,
+        "bootstrap_roi_high": 0.1519,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 10,
@@ -188,7 +188,7 @@
           "take_profit": 25
         }
       },
-      "score": 0.01047
+      "score": 0.01033
     },
     {
       "candidate": {
@@ -218,8 +218,8 @@
         "spread_est": 4.7,
         "pnl_after_drag": 24.98,
         "roi_after_drag": 0.0531,
-        "bootstrap_roi_low": -0.0827,
-        "bootstrap_roi_high": 0.1753,
+        "bootstrap_roi_low": -0.0809,
+        "bootstrap_roi_high": 0.1758,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 5,
@@ -227,7 +227,7 @@
           "take_profit": 21
         }
       },
-      "score": 0.00016
+      "score": 0.00079
     },
     {
       "candidate": {
@@ -259,8 +259,8 @@
         "spread_est": 6.35,
         "pnl_after_drag": 8.97,
         "roi_after_drag": 0.0141,
-        "bootstrap_roi_low": -0.1056,
-        "bootstrap_roi_high": 0.1448,
+        "bootstrap_roi_low": -0.1078,
+        "bootstrap_roi_high": 0.1437,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 7,
@@ -268,7 +268,7 @@
           "take_profit": 27
         }
       },
-      "score": -0.02886
+      "score": -0.02963
     },
     {
       "candidate": {
@@ -298,8 +298,8 @@
         "spread_est": 6.0,
         "pnl_after_drag": 10.6,
         "roi_after_drag": 0.0176,
-        "bootstrap_roi_low": -0.112,
-        "bootstrap_roi_high": 0.1531,
+        "bootstrap_roi_low": -0.1107,
+        "bootstrap_roi_high": 0.1536,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 6,
@@ -307,7 +307,7 @@
           "take_profit": 26
         }
       },
-      "score": -0.0336
+      "score": -0.03315
     },
     {
       "candidate": {
@@ -337,8 +337,8 @@
         "spread_est": 5.06,
         "pnl_after_drag": 8.07,
         "roi_after_drag": 0.0159,
-        "bootstrap_roi_low": -0.1143,
-        "bootstrap_roi_high": 0.1425,
+        "bootstrap_roi_low": -0.114,
+        "bootstrap_roi_high": 0.1432,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 9,
@@ -346,7 +346,7 @@
           "take_profit": 21
         }
       },
-      "score": -0.0341
+      "score": -0.034
     },
     {
       "candidate": {
@@ -376,8 +376,8 @@
         "spread_est": 6.41,
         "pnl_after_drag": 1.19,
         "roi_after_drag": 0.0019,
-        "bootstrap_roi_low": -0.1316,
-        "bootstrap_roi_high": 0.1365,
+        "bootstrap_roi_low": -0.1279,
+        "bootstrap_roi_high": 0.1373,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 10,
@@ -385,7 +385,7 @@
           "take_profit": 23
         }
       },
-      "score": -0.04816
+      "score": -0.04686
     },
     {
       "candidate": {
@@ -415,8 +415,8 @@
         "spread_est": 5.7,
         "pnl_after_drag": 6.21,
         "roi_after_drag": 0.0109,
-        "bootstrap_roi_low": -0.1241,
-        "bootstrap_roi_high": 0.1505,
+        "bootstrap_roi_low": -0.1265,
+        "bootstrap_roi_high": 0.1502,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 6,
@@ -424,7 +424,7 @@
           "take_profit": 25
         }
       },
-      "score": -0.04854
+      "score": -0.04937
     },
     {
       "candidate": {
@@ -454,8 +454,8 @@
         "spread_est": 6.31,
         "pnl_after_drag": -13.13,
         "roi_after_drag": -0.0208,
-        "bootstrap_roi_low": -0.1501,
-        "bootstrap_roi_high": 0.1161,
+        "bootstrap_roi_low": -0.1508,
+        "bootstrap_roi_high": 0.1148,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 11,
@@ -463,7 +463,7 @@
           "take_profit": 24
         }
       },
-      "score": -0.07333
+      "score": -0.07358
     },
     {
       "candidate": {
@@ -640,8 +640,8 @@
           "spread_est": 9.25,
           "pnl_after_drag": 75.01,
           "roi_after_drag": 0.0811,
-          "bootstrap_roi_low": -0.0053,
-          "bootstrap_roi_high": 0.1848,
+          "bootstrap_roi_low": -0.0062,
+          "bootstrap_roi_high": 0.1851,
           "max_loss": -25.0,
           "reasons": {
             "resolved_loss": 6,
@@ -728,8 +728,8 @@
           "spread_est": 10.41,
           "pnl_after_drag": 58.1,
           "roi_after_drag": 0.0558,
-          "bootstrap_roi_low": -0.0336,
-          "bootstrap_roi_high": 0.1619,
+          "bootstrap_roi_low": -0.0334,
+          "bootstrap_roi_high": 0.1617,
           "max_loss": -25.0,
           "reasons": {
             "resolved_loss": 8,
@@ -772,8 +772,8 @@
     "action": "keep",
     "reason": "Current paper strategy remains the best risk-adjusted live-applicable candidate.",
     "best_candidate": "current_paper",
-    "current_score": 0.02111,
-    "best_score": 0.02111,
+    "current_score": 0.02094,
+    "best_score": 0.02094,
     "paper_overlay": null
   },
   "live_gate": {
@@ -782,7 +782,7 @@
       "need >=100 resolved trades, have 41",
       "need >=30 post-activation resolved trades, have 23",
       "need post-activation ROI after drag >=3%, have -2.75%",
-      "need positive bootstrap lower bound, have -5.51%"
+      "need positive bootstrap lower bound, have -5.56%"
     ]
   }
 }
