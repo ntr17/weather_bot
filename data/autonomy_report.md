@@ -1,10 +1,10 @@
 # WeatherBot Autonomy Report
-Generated: 2026-06-22 21:15 UTC
+Generated: 2026-06-23 04:32 UTC
 
 ## Git
 
-- Local HEAD: `396ce9c bot: update state 2026-06-22T18:46:49Z`
-- Remote master: `396ce9c bot: update state 2026-06-22T18:46:49Z`
+- Local HEAD: `07f9947 bot: update state 2026-06-23T01:32:10Z`
+- Remote master: `07f9947 bot: update state 2026-06-23T01:32:10Z`
 ```text
 ## master...origin/master
 ```
@@ -30,11 +30,11 @@ Generated: 2026-06-22 21:15 UTC
 
 ## Activity
 
-- Last run age: `149.1` minutes
+- Last run age: `180.3` minutes
 - Runs last 1h / 2h / 24h: `0` / `0` / `120`
-- New positions last 24h: `1`
+- New positions last 24h: `2`
 - Errors last 24h: `0`
-- State balance: `$15.11`
+- State balance: `$17.05`
 - Open positions: `3`
 - Open cost: `$15.00`
 - Paper policy activated at: `2026-06-09T18:23:01Z`
@@ -43,10 +43,10 @@ Generated: 2026-06-22 21:15 UTC
 
 ## V3 Actual Edge
 
-- Trades: `79` (64W / 15L)
+- Trades: `80` (65W / 15L)
 - Avg entry: `0.755`
-- PnL: `$+69.02` on `$1160.19` cost
-- ROI: `5.95%`
+- PnL: `$+70.96` on `$1165.19` cost
+- ROI: `6.09%`
 
 ## Gates
 
@@ -54,14 +54,14 @@ Generated: 2026-06-22 21:15 UTC
 | --- | --- | --- |
 | Actions paper-only | OK | Hosted Actions must not be live. |
 | Recent bot activity | BLOCK | 0 runs in last 2h. |
-| New data flow | OK | 1 new positions in last 24h; caps may explain zero. |
+| New data flow | OK | 2 new positions in last 24h; caps may explain zero. |
 | Live max bet | OK | max_bet=5.00; target <= 5. |
 | Live total exposure cap | OK | max_total_open_cost=20.00; target <= 20. |
 | Current open exposure | OK | open_cost=15.00; reset/wait before live if above cap. |
 | Per-run position cap | OK | max_new_positions_per_run=2; target <= 2. |
 | NO-only strategy | OK | enable_yes_trading=False. |
 | Entry and EV filters | OK | min_ev=0.15, min_no_entry=0.70, max_no_entry=0.85. |
-| Resolved edge sample | OK | v3_actual n=79; keep small while sample is limited. |
+| Resolved edge sample | OK | v3_actual n=80; keep small while sample is limited. |
 
 ## Agenda
 
