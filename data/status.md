@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-06-22 23:07 UTC_
+_Auto-generated 2026-06-23 01:32 UTC_
 
 ## Summary
 | Metric | Value |
@@ -18,9 +18,9 @@ _Auto-generated 2026-06-22 23:07 UTC_
 ## Open Positions (3)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| Paris | 2026-06-23 | 39–39°C | NO | $0.710 | ECMWF | D+1 |
-| Paris | 2026-06-24 | 41–41°C | NO | $0.800 | ECMWF | D+2 |
-| Munich | 2026-06-24 | 33–33°C | NO | $0.780 | ECMWF | D+2 |
+| Paris | 2026-06-23 | 39–39°C | NO | $0.710 | ECMWF | D+0 |
+| Paris | 2026-06-24 | 41–41°C | NO | $0.800 | ECMWF | D+1 |
+| Munich | 2026-06-24 | 33–33°C | NO | $0.780 | ECMWF | D+1 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
