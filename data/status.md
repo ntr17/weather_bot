@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-06-24 22:49 UTC_
+_Auto-generated 2026-06-25 00:12 UTC_
 
 ## Summary
 | Metric | Value |
@@ -18,8 +18,8 @@ _Auto-generated 2026-06-24 22:49 UTC_
 ## Open Positions (2)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| Paris | 2026-06-25 | 41–41°C | NO | $0.800 | ECMWF | D+1 |
-| Tokyo | 2026-06-26 | 26–26°C | NO | $0.740 | ECMWF | D+2 |
+| Paris | 2026-06-25 | 41–41°C | NO | $0.800 | ECMWF | D+0 |
+| Tokyo | 2026-06-26 | 26–26°C | NO | $0.740 | ECMWF | D+1 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
