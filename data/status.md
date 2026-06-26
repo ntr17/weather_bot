@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-06-25 23:54 UTC_
+_Auto-generated 2026-06-26 03:29 UTC_
 
 ## Summary
 | Metric | Value |
@@ -12,14 +12,14 @@ _Auto-generated 2026-06-25 23:54 UTC_
 | Win rate | 402/615 (65%) |
 | Open positions | 2 |
 | Open cost | $10.00 |
-| Markets tracked | 1159 |
+| Markets tracked | 1168 |
 | Calibration keys | 158 |
 
 ## Open Positions (2)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| Tokyo | 2026-06-26 | 26–26°C | NO | $0.740 | ECMWF | D+1 |
-| Singapore | 2026-06-27 | 33–33°C | NO | $0.780 | ECMWF | D+2 |
+| Tokyo | 2026-06-26 | 26–26°C | NO | $0.740 | ECMWF | D+0 |
+| Singapore | 2026-06-27 | 33–33°C | NO | $0.780 | ECMWF | D+1 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
