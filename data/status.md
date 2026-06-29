@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-06-28 23:02 UTC_
+_Auto-generated 2026-06-29 00:19 UTC_
 
 ## Summary
 | Metric | Value |
@@ -18,9 +18,9 @@ _Auto-generated 2026-06-28 23:02 UTC_
 ## Open Positions (3)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| London | 2026-06-30 | 23–23°C | NO | $0.770 | ECMWF | D+2 |
-| Munich | 2026-06-30 | 30–30°C | NO | $0.790 | ECMWF | D+2 |
-| Tel Aviv | 2026-06-30 | 31–31°C | NO | $0.750 | ECMWF | D+2 |
+| London | 2026-06-30 | 23–23°C | NO | $0.770 | ECMWF | D+1 |
+| Munich | 2026-06-30 | 30–30°C | NO | $0.790 | ECMWF | D+1 |
+| Tel Aviv | 2026-06-30 | 31–31°C | NO | $0.750 | ECMWF | D+1 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
