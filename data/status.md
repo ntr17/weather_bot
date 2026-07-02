@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-07-01 23:23 UTC_
+_Auto-generated 2026-07-02 01:35 UTC_
 
 ## Summary
 | Metric | Value |
@@ -18,9 +18,9 @@ _Auto-generated 2026-07-01 23:23 UTC_
 ## Open Positions (3)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| Munich | 2026-07-02 | 25–25°C | NO | $0.740 | ECMWF | D+1 |
-| Munich | 2026-07-03 | 24–24°C | NO | $0.710 | ECMWF | D+2 |
-| Shanghai | 2026-07-03 | 31–31°C | NO | $0.830 | ECMWF | D+2 |
+| Munich | 2026-07-02 | 25–25°C | NO | $0.740 | ECMWF | D+0 |
+| Munich | 2026-07-03 | 24–24°C | NO | $0.710 | ECMWF | D+1 |
+| Shanghai | 2026-07-03 | 31–31°C | NO | $0.830 | ECMWF | D+1 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
