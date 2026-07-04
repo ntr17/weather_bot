@@ -1,26 +1,27 @@
 # WeatherBot Status
-_Auto-generated 2026-07-03 23:02 UTC_
+_Auto-generated 2026-07-04 04:14 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $26.02 |
+| Balance | $21.02 |
 | Starting | $5,000.00 |
-| Return | -99.5% |
+| Return | -99.6% |
 | Total trades | 626 |
 | Win rate | 412/626 (66%) |
-| Open positions | 3 |
-| Open cost | $15.00 |
-| Markets tracked | 1319 |
+| Open positions | 4 |
+| Open cost | $20.00 |
+| Markets tracked | 1333 |
 | Calibration keys | 161 |
 
-## Open Positions (3)
+## Open Positions (4)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| Munich | 2026-07-04 | 26–26°C | NO | $0.750 | ECMWF | D+1 |
-| Munich | 2026-07-05 | 24–24°C | NO | $0.700 | ECMWF | D+2 |
-| Lucknow | 2026-07-05 | 37–37°C | NO | $0.850 | ECMWF | D+2 |
+| Munich | 2026-07-04 | 26–26°C | NO | $0.750 | ECMWF | D+0 |
+| Munich | 2026-07-05 | 24–24°C | NO | $0.700 | ECMWF | D+1 |
+| Lucknow | 2026-07-05 | 37–37°C | NO | $0.850 | ECMWF | D+1 |
+| Seoul | 2026-07-06 | 24–24°C | NO | $0.810 | ECMWF | D+2 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
