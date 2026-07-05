@@ -1,26 +1,27 @@
 # WeatherBot Status
-_Auto-generated 2026-07-05 14:42 UTC_
+_Auto-generated 2026-07-05 16:08 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $29.35 |
+| Balance | $24.35 |
 | Starting | $5,000.00 |
-| Return | -99.4% |
+| Return | -99.5% |
 | Total trades | 629 |
 | Win rate | 415/629 (66%) |
-| Open positions | 3 |
-| Open cost | $15.00 |
+| Open positions | 4 |
+| Open cost | $20.00 |
 | Markets tracked | 1359 |
 | Calibration keys | 161 |
 
-## Open Positions (3)
+## Open Positions (4)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
 | Munich | 2026-07-05 | 24–24°C | NO | $0.700 | ECMWF | D+0 |
 | Lucknow | 2026-07-05 | 37–37°C | NO | $0.850 | ECMWF | D+0 |
 | Munich | 2026-07-06 | 26–26°C | NO | $0.730 | ECMWF | D+1 |
+| Munich | 2026-07-07 | 31–31°C | NO | $0.720 | ECMWF | D+2 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
