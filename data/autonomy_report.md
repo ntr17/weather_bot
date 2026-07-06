@@ -1,10 +1,10 @@
 # WeatherBot Autonomy Report
-Generated: 2026-07-05 19:45 UTC
+Generated: 2026-07-06 04:43 UTC
 
 ## Git
 
-- Local HEAD: `1e3c3c9 bot: update state 2026-07-05T19:16:31Z`
-- Remote master: `1e3c3c9 bot: update state 2026-07-05T19:16:31Z`
+- Local HEAD: `1704463 bot: update state 2026-07-06T01:16:55Z`
+- Remote master: `1704463 bot: update state 2026-07-06T01:16:55Z`
 ```text
 ## master...origin/master
 ```
@@ -30,41 +30,42 @@ Generated: 2026-07-05 19:45 UTC
 
 ## Activity
 
-- Last run age: `28.8` minutes
-- Runs last 1h / 2h / 24h: `20` / `20` / `260`
-- New positions last 24h: `2`
+- Last run age: `207.1` minutes
+- Runs last 1h / 2h / 24h: `0` / `0` / `240`
+- New positions last 24h: `3`
 - Errors last 24h: `0`
-- State balance: `$24.35`
-- Open positions: `4`
-- Open cost: `$20.00`
+- State balance: `$32.37`
+- Open positions: `3`
+- Open cost: `$15.00`
 - Paper policy activated at: `2026-06-09T18:23:01Z`
-- Open positions after activation: `4`
+- Open positions after activation: `3`
 - Legacy open positions: `0`
 
 ## V3 Actual Edge
 
-- Trades: `98` (81W / 17L)
+- Trades: `100` (83W / 17L)
 - Avg entry: `0.758`
-- PnL: `$+83.26` on `$1255.19` cost
-- ROI: `6.63%`
+- PnL: `$+86.28` on `$1265.19` cost
+- ROI: `6.82%`
 
 ## Gates
 
 | Gate | Status | Detail |
 | --- | --- | --- |
 | Actions paper-only | OK | Hosted Actions must not be live. |
-| Recent bot activity | OK | 20 runs in last 2h. |
-| New data flow | OK | 2 new positions in last 24h; caps may explain zero. |
+| Recent bot activity | BLOCK | 0 runs in last 2h. |
+| New data flow | OK | 3 new positions in last 24h; caps may explain zero. |
 | Live max bet | OK | max_bet=5.00; target <= 5. |
 | Live total exposure cap | OK | max_total_open_cost=20.00; target <= 20. |
-| Current open exposure | OK | open_cost=20.00; reset/wait before live if above cap. |
+| Current open exposure | OK | open_cost=15.00; reset/wait before live if above cap. |
 | Per-run position cap | OK | max_new_positions_per_run=2; target <= 2. |
 | NO-only strategy | OK | enable_yes_trading=False. |
 | Entry and EV filters | OK | min_ev=0.15, min_no_entry=0.70, max_no_entry=0.85. |
-| Resolved edge sample | OK | v3_actual n=98; keep small while sample is limited. |
+| Resolved edge sample | OK | v3_actual n=100; keep small while sample is limited. |
 
 ## Agenda
 
+- Fix paper deployment or scheduler before discussing strategy.
 - Prepare compliant non-Actions live runner only after geoblock preflight passes.
 - Run fee/spread-aware edge audit before first live order.
 - Keep live launch capped at 5 USDC orders and 20 USDC total exposure.
