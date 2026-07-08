@@ -1,10 +1,10 @@
 # WeatherBot Autonomy Report
-Generated: 2026-07-08 14:43 UTC
+Generated: 2026-07-08 19:57 UTC
 
 ## Git
 
-- Local HEAD: `cfe21bb bot: update state 2026-07-08T14:00:48Z`
-- Remote master: `cfe21bb bot: update state 2026-07-08T14:00:48Z`
+- Local HEAD: `b343dd4 bot: update state 2026-07-08T19:45:07Z`
+- Remote master: `b343dd4 bot: update state 2026-07-08T19:45:07Z`
 ```text
 ## master...origin/master
 ```
@@ -30,11 +30,11 @@ Generated: 2026-07-08 14:43 UTC
 
 ## Activity
 
-- Last run age: `42.3` minutes
-- Runs last 1h / 2h / 24h: `20` / `20` / `220`
+- Last run age: `12.8` minutes
+- Runs last 1h / 2h / 24h: `20` / `40` / `240`
 - New positions last 24h: `3`
 - Errors last 24h: `0`
-- State balance: `$33.49`
+- State balance: `$35.53`
 - Open positions: `4`
 - Open cost: `$20.00`
 - Paper policy activated at: `2026-06-09T18:23:01Z`
@@ -43,17 +43,17 @@ Generated: 2026-07-08 14:43 UTC
 
 ## V3 Actual Edge
 
-- Trades: `105` (88W / 17L)
+- Trades: `106` (89W / 17L)
 - Avg entry: `0.758`
-- PnL: `$+92.40` on `$1290.19` cost
-- ROI: `7.16%`
+- PnL: `$+94.44` on `$1295.19` cost
+- ROI: `7.29%`
 
 ## Gates
 
 | Gate | Status | Detail |
 | --- | --- | --- |
 | Actions paper-only | OK | Hosted Actions must not be live. |
-| Recent bot activity | OK | 20 runs in last 2h. |
+| Recent bot activity | OK | 40 runs in last 2h. |
 | New data flow | OK | 3 new positions in last 24h; caps may explain zero. |
 | Live max bet | OK | max_bet=5.00; target <= 5. |
 | Live total exposure cap | OK | max_total_open_cost=20.00; target <= 20. |
@@ -61,7 +61,7 @@ Generated: 2026-07-08 14:43 UTC
 | Per-run position cap | OK | max_new_positions_per_run=2; target <= 2. |
 | NO-only strategy | OK | enable_yes_trading=False. |
 | Entry and EV filters | OK | min_ev=0.15, min_no_entry=0.70, max_no_entry=0.85. |
-| Resolved edge sample | OK | v3_actual n=105; keep small while sample is limited. |
+| Resolved edge sample | OK | v3_actual n=106; keep small while sample is limited. |
 
 ## Agenda
 
