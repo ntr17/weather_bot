@@ -1,10 +1,10 @@
 # WeatherBot Autonomy Report
-Generated: 2026-07-09 04:16 UTC
+Generated: 2026-07-09 09:59 UTC
 
 ## Git
 
-- Local HEAD: `adec0a2 bot: update state 2026-07-09T00:10:17Z`
-- Remote master: `adec0a2 bot: update state 2026-07-09T00:10:17Z`
+- Local HEAD: `e408c09 bot: update state 2026-07-09T08:05:42Z`
+- Remote master: `e408c09 bot: update state 2026-07-09T08:05:42Z`
 ```text
 ## master...origin/master
 ```
@@ -30,9 +30,9 @@ Generated: 2026-07-09 04:16 UTC
 
 ## Activity
 
-- Last run age: `246.1` minutes
-- Runs last 1h / 2h / 24h: `0` / `0` / `220`
-- New positions last 24h: `3`
+- Last run age: `113.7` minutes
+- Runs last 1h / 2h / 24h: `0` / `20` / `200`
+- New positions last 24h: `1`
 - Errors last 24h: `0`
 - State balance: `$35.53`
 - Open positions: `4`
@@ -53,8 +53,8 @@ Generated: 2026-07-09 04:16 UTC
 | Gate | Status | Detail |
 | --- | --- | --- |
 | Actions paper-only | OK | Hosted Actions must not be live. |
-| Recent bot activity | BLOCK | 0 runs in last 2h. |
-| New data flow | OK | 3 new positions in last 24h; caps may explain zero. |
+| Recent bot activity | OK | 20 runs in last 2h. |
+| New data flow | OK | 1 new positions in last 24h; caps may explain zero. |
 | Live max bet | OK | max_bet=5.00; target <= 5. |
 | Live total exposure cap | OK | max_total_open_cost=20.00; target <= 20. |
 | Current open exposure | OK | open_cost=20.00; reset/wait before live if above cap. |
@@ -65,7 +65,6 @@ Generated: 2026-07-09 04:16 UTC
 
 ## Agenda
 
-- Fix paper deployment or scheduler before discussing strategy.
 - Prepare compliant non-Actions live runner only after geoblock preflight passes.
 - Run fee/spread-aware edge audit before first live order.
 - Keep live launch capped at 5 USDC orders and 20 USDC total exposure.
