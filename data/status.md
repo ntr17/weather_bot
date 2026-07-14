@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-07-13 23:30 UTC_
+_Auto-generated 2026-07-14 00:56 UTC_
 
 ## Summary
 | Metric | Value |
@@ -18,9 +18,9 @@ _Auto-generated 2026-07-13 23:30 UTC_
 ## Open Positions (3)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| Ankara | 2026-07-14 | 28–28°C | NO | $0.810 | ECMWF | D+1 |
-| Munich | 2026-07-15 | 28–28°C | NO | $0.800 | ECMWF | D+2 |
-| Seoul | 2026-07-15 | 29–29°C | NO | $0.740 | ECMWF | D+2 |
+| Ankara | 2026-07-14 | 28–28°C | NO | $0.810 | ECMWF | D+0 |
+| Munich | 2026-07-15 | 28–28°C | NO | $0.800 | ECMWF | D+1 |
+| Seoul | 2026-07-15 | 29–29°C | NO | $0.740 | ECMWF | D+1 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
