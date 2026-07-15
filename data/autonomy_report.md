@@ -1,10 +1,10 @@
 # WeatherBot Autonomy Report
-Generated: 2026-07-14 19:46 UTC
+Generated: 2026-07-15 03:39 UTC
 
 ## Git
 
-- Local HEAD: `ff1573d bot: update state 2026-07-14T18:41:36Z`
-- Remote master: `ff1573d bot: update state 2026-07-14T18:41:36Z`
+- Local HEAD: `02a868d bot: update state 2026-07-15T02:11:35Z`
+- Remote master: `02a868d bot: update state 2026-07-15T02:11:35Z`
 ```text
 ## master...origin/master
 ```
@@ -30,11 +30,11 @@ Generated: 2026-07-14 19:46 UTC
 
 ## Activity
 
-- Last run age: `64.9` minutes
+- Last run age: `88.3` minutes
 - Runs last 1h / 2h / 24h: `0` / `20` / `280`
-- New positions last 24h: `2`
+- New positions last 24h: `4`
 - Errors last 24h: `0`
-- State balance: `$32.77`
+- State balance: `$34.54`
 - Open positions: `4`
 - Open cost: `$20.00`
 - Paper policy activated at: `2026-06-09T18:23:01Z`
@@ -43,10 +43,10 @@ Generated: 2026-07-14 19:46 UTC
 
 ## V3 Actual Edge
 
-- Trades: `119` (99W / 20L)
-- Avg entry: `0.758`
-- PnL: `$+91.68` on `$1360.19` cost
-- ROI: `6.74%`
+- Trades: `121` (101W / 20L)
+- Avg entry: `0.759`
+- PnL: `$+93.45` on `$1370.19` cost
+- ROI: `6.82%`
 
 ## Gates
 
@@ -54,14 +54,14 @@ Generated: 2026-07-14 19:46 UTC
 | --- | --- | --- |
 | Actions paper-only | OK | Hosted Actions must not be live. |
 | Recent bot activity | OK | 20 runs in last 2h. |
-| New data flow | OK | 2 new positions in last 24h; caps may explain zero. |
+| New data flow | OK | 4 new positions in last 24h; caps may explain zero. |
 | Live max bet | OK | max_bet=5.00; target <= 5. |
 | Live total exposure cap | OK | max_total_open_cost=20.00; target <= 20. |
 | Current open exposure | OK | open_cost=20.00; reset/wait before live if above cap. |
 | Per-run position cap | OK | max_new_positions_per_run=2; target <= 2. |
 | NO-only strategy | OK | enable_yes_trading=False. |
 | Entry and EV filters | OK | min_ev=0.15, min_no_entry=0.70, max_no_entry=0.85. |
-| Resolved edge sample | OK | v3_actual n=119; keep small while sample is limited. |
+| Resolved edge sample | OK | v3_actual n=121; keep small while sample is limited. |
 
 ## Agenda
 
