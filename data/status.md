@@ -1,31 +1,31 @@
 # WeatherBot Status
-_Auto-generated 2026-07-17 23:25 UTC_
+_Auto-generated 2026-07-18 00:57 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $34.93 |
+| Balance | $40.95 |
 | Starting | $5,000.00 |
-| Return | -99.3% |
-| Total trades | 656 |
-| Win rate | 438/656 (67%) |
-| Open positions | 4 |
-| Open cost | $20.00 |
+| Return | -99.2% |
+| Total trades | 657 |
+| Win rate | 439/657 (67%) |
+| Open positions | 3 |
+| Open cost | $15.00 |
 | Markets tracked | 1599 |
 | Calibration keys | 161 |
 
-## Open Positions (4)
+## Open Positions (3)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| London | 2026-07-17 | 26–26°C | NO | $0.830 | ECMWF | D+0 |
-| London | 2026-07-18 | 24–24°C | NO | $0.720 | ECMWF | D+1 |
-| Munich | 2026-07-18 | 24–24°C | NO | $0.710 | ECMWF | D+1 |
-| Seoul | 2026-07-18 | 27–27°C | NO | $0.730 | ECMWF | D+1 |
+| London | 2026-07-18 | 24–24°C | NO | $0.720 | ECMWF | D+0 |
+| Munich | 2026-07-18 | 24–24°C | NO | $0.710 | ECMWF | D+0 |
+| Seoul | 2026-07-18 | 27–27°C | NO | $0.730 | ECMWF | D+0 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
 |------|------|--------|------|-------|-----|---------|--------|
+| London | 2026-07-17 | 26–26°C | NO | $0.830 | +1.02 | None | ECMWF |
 | Munich | 2026-07-16 | 30–30°C | NO | $0.770 | +1.49 | None | ECMWF |
 | Tokyo | 2026-07-16 | 33–33°C | NO | $0.720 | -5.00 | None | ECMWF |
 | Seoul | 2026-07-16 | 30–30°C | NO | $0.700 | +2.14 | None | ECMWF |
@@ -45,7 +45,6 @@ _Auto-generated 2026-07-17 23:25 UTC_
 | Paris | 2026-07-10 | 35–35°C | NO | $0.710 | -5.00 | None | ECMWF |
 | Seoul | 2026-07-10 | 28–28°C | NO | $0.740 | -5.00 | None | ECMWF |
 | Munich | 2026-07-09 | 28–28°C | NO | $0.750 | +1.67 | None | ECMWF |
-| Tokyo | 2026-07-08 | 29–29°C | NO | $0.710 | +2.04 | None | ECMWF |
 
 ## City Performance
 | City | Trades | Wins | WR | PnL | Avg PnL |
@@ -55,7 +54,7 @@ _Auto-generated 2026-07-17 23:25 UTC_
 | Buenos Aires | 55 | 0 | 0% | -146.84 | -2.67 |
 | Chicago | 22 | 0 | 0% | +41.21 | +1.87 |
 | Dallas | 22 | 0 | 0% | -41.64 | -1.89 |
-| London | 57 | 0 | 0% | +23.24 | +0.41 |
+| London | 58 | 0 | 0% | +24.26 | +0.42 |
 | Lucknow | 15 | 0 | 0% | +13.66 | +0.91 |
 | Miami | 55 | 0 | 0% | -62.37 | -1.13 |
 | Munich | 72 | 0 | 0% | -3.93 | -0.05 |
@@ -149,20 +148,20 @@ _Tracking NO trades opened after 2026-05-06_
 
 | Metric | Value |
 |--------|-------|
-| Closed trades | 507 |
-| Wins / Losses | 400 / 107 |
+| Closed trades | 508 |
+| Wins / Losses | 401 / 107 |
 | Win rate | 78.9% |
-| Total PnL | $+77.22 |
+| Total PnL | $+78.24 |
 | ROI | +0.7% |
-| Resolved | 403 (296W/107L) |
-| Resolved WR | 73.4% |
-| Resolved PnL | $-210.01 |
+| Resolved | 404 (297W/107L) |
+| Resolved WR | 73.5% |
+| Resolved PnL | $-208.99 |
 | Avg PnL/trade | $+0.15 |
 
 ### Close Reasons (v2)
 | Reason | Count | PnL |
 |--------|-------|-----|
-| resolved_win | 296 | $+2106.00 |
+| resolved_win | 297 | $+2107.02 |
 | take_profit | 104 | $+287.23 |
 | resolved_loss | 107 | $-2316.01 |
 
@@ -171,10 +170,10 @@ _D+1/D+2 NO trades opened after 2026-05-14_
 
 | Metric | Value |
 |--------|-------|
-| Trades | 127 |
-| Wins / Losses | 105 / 22 |
-| Win rate | 82.7% |
-| Total PnL | $+75.13 |
-| ROI | +5.2% |
+| Trades | 128 |
+| Wins / Losses | 106 / 22 |
+| Win rate | 82.8% |
+| Total PnL | $+76.15 |
+| ROI | +5.3% |
 | Take-profit exits | 47 |
 | Avg PnL/trade | $+0.59 |
