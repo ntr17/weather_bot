@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-07-19 23:32 UTC_
+_Auto-generated 2026-07-20 01:09 UTC_
 
 ## Summary
 | Metric | Value |
@@ -12,16 +12,16 @@ _Auto-generated 2026-07-19 23:32 UTC_
 | Win rate | 442/660 (67%) |
 | Open positions | 4 |
 | Open cost | $20.00 |
-| Markets tracked | 1639 |
+| Markets tracked | 1640 |
 | Calibration keys | 161 |
 
 ## Open Positions (4)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| Munich | 2026-07-20 | 24–24°C | NO | $0.810 | ECMWF | D+1 |
-| Seoul | 2026-07-20 | 27–27°C | NO | $0.700 | ECMWF | D+1 |
-| Paris | 2026-07-21 | 27–27°C | NO | $0.760 | ECMWF | D+2 |
-| Seoul | 2026-07-21 | 27–27°C | NO | $0.730 | ECMWF | D+2 |
+| Munich | 2026-07-20 | 24–24°C | NO | $0.810 | ECMWF | D+0 |
+| Seoul | 2026-07-20 | 27–27°C | NO | $0.700 | ECMWF | D+0 |
+| Paris | 2026-07-21 | 27–27°C | NO | $0.760 | ECMWF | D+1 |
+| Seoul | 2026-07-21 | 27–27°C | NO | $0.730 | ECMWF | D+1 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
