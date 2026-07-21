@@ -1,10 +1,10 @@
 # WeatherBot Autonomy Report
-Generated: 2026-07-20 19:58 UTC
+Generated: 2026-07-21 03:50 UTC
 
 ## Git
 
-- Local HEAD: `24355b5 bot: update state 2026-07-20T18:56:03Z`
-- Remote master: `24355b5 bot: update state 2026-07-20T18:56:03Z`
+- Local HEAD: `e03ea67 bot: update state 2026-07-21T02:58:51Z`
+- Remote master: `e03ea67 bot: update state 2026-07-21T02:58:51Z`
 ```text
 ## master...origin/master
 ```
@@ -30,11 +30,11 @@ Generated: 2026-07-20 19:58 UTC
 
 ## Activity
 
-- Last run age: `62.8` minutes
-- Runs last 1h / 2h / 24h: `0` / `20` / `240`
-- New positions last 24h: `1`
+- Last run age: `51.4` minutes
+- Runs last 1h / 2h / 24h: `20` / `20` / `240`
+- New positions last 24h: `2`
 - Errors last 24h: `0`
-- State balance: `$36.78`
+- State balance: `$37.95`
 - Open positions: `4`
 - Open cost: `$20.00`
 - Paper policy activated at: `2026-06-09T18:23:01Z`
@@ -43,10 +43,10 @@ Generated: 2026-07-20 19:58 UTC
 
 ## V3 Actual Edge
 
-- Trades: `130` (108W / 22L)
+- Trades: `131` (109W / 22L)
 - Avg entry: `0.757`
-- PnL: `$+95.69` on `$1415.19` cost
-- ROI: `6.76%`
+- PnL: `$+96.86` on `$1420.19` cost
+- ROI: `6.82%`
 
 ## Gates
 
@@ -54,14 +54,14 @@ Generated: 2026-07-20 19:58 UTC
 | --- | --- | --- |
 | Actions paper-only | OK | Hosted Actions must not be live. |
 | Recent bot activity | OK | 20 runs in last 2h. |
-| New data flow | OK | 1 new positions in last 24h; caps may explain zero. |
+| New data flow | OK | 2 new positions in last 24h; caps may explain zero. |
 | Live max bet | OK | max_bet=5.00; target <= 5. |
 | Live total exposure cap | OK | max_total_open_cost=20.00; target <= 20. |
 | Current open exposure | OK | open_cost=20.00; reset/wait before live if above cap. |
 | Per-run position cap | OK | max_new_positions_per_run=2; target <= 2. |
 | NO-only strategy | OK | enable_yes_trading=False. |
 | Entry and EV filters | OK | min_ev=0.15, min_no_entry=0.70, max_no_entry=0.85. |
-| Resolved edge sample | OK | v3_actual n=130; keep small while sample is limited. |
+| Resolved edge sample | OK | v3_actual n=131; keep small while sample is limited. |
 
 ## Agenda
 
