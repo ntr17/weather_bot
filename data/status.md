@@ -1,24 +1,25 @@
 # WeatherBot Status
-_Auto-generated 2026-07-22 15:41 UTC_
+_Auto-generated 2026-07-22 17:17 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $42.04 |
+| Balance | $37.04 |
 | Starting | $5,000.00 |
-| Return | -99.2% |
+| Return | -99.3% |
 | Total trades | 666 |
 | Win rate | 446/666 (67%) |
-| Open positions | 3 |
-| Open cost | $15.00 |
+| Open positions | 4 |
+| Open cost | $20.00 |
 | Markets tracked | 1699 |
 | Calibration keys | 161 |
 
-## Open Positions (3)
+## Open Positions (4)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
 | London | 2026-07-22 | 24–24°C | NO | $0.840 | ECMWF | D+0 |
+| London | 2026-07-24 | 27–27°C | NO | $0.760 | ECMWF | D+2 |
 | Paris | 2026-07-24 | 29–29°C | NO | $0.740 | ECMWF | D+2 |
 | Munich | 2026-07-24 | 25–25°C | NO | $0.730 | ECMWF | D+2 |
 
