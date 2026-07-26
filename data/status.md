@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-07-26 00:00 UTC_
+_Auto-generated 2026-07-26 03:29 UTC_
 
 ## Summary
 | Metric | Value |
@@ -18,10 +18,10 @@ _Auto-generated 2026-07-26 00:00 UTC_
 ## Open Positions (4)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| London | 2026-07-26 | 24–24°C | NO | $0.800 | ECMWF | D+1 |
-| London | 2026-07-27 | 26–26°C | NO | $0.770 | ECMWF | D+2 |
-| Seoul | 2026-07-27 | 30–30°C | NO | $0.750 | ECMWF | D+2 |
-| Tokyo | 2026-07-27 | 31–31°C | NO | $0.770 | ECMWF | D+2 |
+| London | 2026-07-26 | 24–24°C | NO | $0.800 | ECMWF | D+0 |
+| London | 2026-07-27 | 26–26°C | NO | $0.770 | ECMWF | D+1 |
+| Seoul | 2026-07-27 | 30–30°C | NO | $0.750 | ECMWF | D+1 |
+| Tokyo | 2026-07-27 | 31–31°C | NO | $0.770 | ECMWF | D+1 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
