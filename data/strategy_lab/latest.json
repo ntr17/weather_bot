@@ -1,33 +1,33 @@
 {
-  "generated_at": "2026-07-27T19:58:30.214823+00:00",
+  "generated_at": "2026-07-28T03:40:59.766100+00:00",
   "source_db": "data/weatherbot.db",
-  "closed_positions_loaded": 151,
+  "closed_positions_loaded": 153,
   "paper_activation": {
     "activated_at": "2026-06-09T18:23:01Z",
     "current_post_activation_metrics": {
-      "n": 90,
-      "wins": 75,
+      "n": 92,
+      "wins": 77,
       "losses": 15,
-      "win_rate": 0.8333,
-      "win_rate_wilson_low": 0.7431,
-      "win_rate_wilson_high": 0.8963,
-      "avg_entry": 0.7657,
-      "avg_ev": 0.2613,
-      "avg_spread": 0.0244,
-      "pnl": 21.37,
-      "cost": 450.0,
-      "roi": 0.0475,
-      "fee_est": 3.99,
-      "spread_est": 4.5,
-      "pnl_after_drag": 12.88,
-      "roi_after_drag": 0.0286,
-      "bootstrap_roi_low": -0.053,
-      "bootstrap_roi_high": 0.1422,
+      "win_rate": 0.837,
+      "win_rate_wilson_low": 0.7483,
+      "win_rate_wilson_high": 0.8986,
+      "avg_entry": 0.7655,
+      "avg_ev": 0.2601,
+      "avg_spread": 0.0247,
+      "pnl": 23.59,
+      "cost": 460.0,
+      "roi": 0.0513,
+      "fee_est": 4.09,
+      "spread_est": 4.6,
+      "pnl_after_drag": 14.9,
+      "roi_after_drag": 0.0324,
+      "bootstrap_roi_low": -0.0444,
+      "bootstrap_roi_high": 0.1429,
       "max_loss": -5.0,
       "reasons": {
         "resolved_loss": 15,
-        "resolved_win": 49,
-        "take_profit": 26
+        "resolved_win": 50,
+        "take_profit": 27
       }
     }
   },
@@ -44,32 +44,32 @@
         "max_spread": 0.15
       },
       "metrics": {
-        "n": 108,
-        "wins": 92,
+        "n": 110,
+        "wins": 94,
         "losses": 16,
-        "win_rate": 0.8519,
-        "win_rate_wilson_low": 0.7728,
-        "win_rate_wilson_high": 0.9067,
-        "avg_entry": 0.7644,
-        "avg_ev": 0.2567,
-        "avg_spread": 0.0241,
-        "pnl": 63.08,
-        "cost": 860.37,
-        "roi": 0.0733,
-        "fee_est": 7.75,
-        "spread_est": 8.6,
-        "pnl_after_drag": 46.73,
-        "roi_after_drag": 0.0543,
-        "bootstrap_roi_low": -0.0212,
-        "bootstrap_roi_high": 0.1467,
+        "win_rate": 0.8545,
+        "win_rate_wilson_low": 0.7767,
+        "win_rate_wilson_high": 0.9084,
+        "avg_entry": 0.7643,
+        "avg_ev": 0.2558,
+        "avg_spread": 0.0243,
+        "pnl": 65.3,
+        "cost": 870.37,
+        "roi": 0.075,
+        "fee_est": 7.84,
+        "spread_est": 8.7,
+        "pnl_after_drag": 48.76,
+        "roi_after_drag": 0.056,
+        "bootstrap_roi_low": -0.0151,
+        "bootstrap_roi_high": 0.1477,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 16,
-          "resolved_win": 54,
-          "take_profit": 38
+          "resolved_win": 55,
+          "take_profit": 39
         }
       },
-      "score": 0.04688
+      "score": 0.05072
     },
     {
       "candidate": {
@@ -83,32 +83,32 @@
         "max_spread": 0.15
       },
       "metrics": {
-        "n": 108,
-        "wins": 92,
+        "n": 110,
+        "wins": 94,
         "losses": 16,
-        "win_rate": 0.8519,
-        "win_rate_wilson_low": 0.7728,
-        "win_rate_wilson_high": 0.9067,
-        "avg_entry": 0.7644,
-        "avg_ev": 0.2567,
-        "avg_spread": 0.0241,
-        "pnl": 63.08,
-        "cost": 860.37,
-        "roi": 0.0733,
-        "fee_est": 7.75,
-        "spread_est": 8.6,
-        "pnl_after_drag": 46.73,
-        "roi_after_drag": 0.0543,
-        "bootstrap_roi_low": -0.0212,
-        "bootstrap_roi_high": 0.1467,
+        "win_rate": 0.8545,
+        "win_rate_wilson_low": 0.7767,
+        "win_rate_wilson_high": 0.9084,
+        "avg_entry": 0.7643,
+        "avg_ev": 0.2558,
+        "avg_spread": 0.0243,
+        "pnl": 65.3,
+        "cost": 870.37,
+        "roi": 0.075,
+        "fee_est": 7.84,
+        "spread_est": 8.7,
+        "pnl_after_drag": 48.76,
+        "roi_after_drag": 0.056,
+        "bootstrap_roi_low": -0.0151,
+        "bootstrap_roi_high": 0.1477,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 16,
-          "resolved_win": 54,
-          "take_profit": 38
+          "resolved_win": 55,
+          "take_profit": 39
         }
       },
-      "score": 0.04688
+      "score": 0.05072
     },
     {
       "candidate": {
@@ -124,32 +124,32 @@
         "max_spread": 0.15
       },
       "metrics": {
-        "n": 108,
-        "wins": 92,
+        "n": 110,
+        "wins": 94,
         "losses": 16,
-        "win_rate": 0.8519,
-        "win_rate_wilson_low": 0.7728,
-        "win_rate_wilson_high": 0.9067,
-        "avg_entry": 0.7644,
-        "avg_ev": 0.2567,
-        "avg_spread": 0.0241,
-        "pnl": 63.08,
-        "cost": 860.37,
-        "roi": 0.0733,
-        "fee_est": 7.75,
-        "spread_est": 8.6,
-        "pnl_after_drag": 46.73,
-        "roi_after_drag": 0.0543,
-        "bootstrap_roi_low": -0.0212,
-        "bootstrap_roi_high": 0.1467,
+        "win_rate": 0.8545,
+        "win_rate_wilson_low": 0.7767,
+        "win_rate_wilson_high": 0.9084,
+        "avg_entry": 0.7643,
+        "avg_ev": 0.2558,
+        "avg_spread": 0.0243,
+        "pnl": 65.3,
+        "cost": 870.37,
+        "roi": 0.075,
+        "fee_est": 7.84,
+        "spread_est": 8.7,
+        "pnl_after_drag": 48.76,
+        "roi_after_drag": 0.056,
+        "bootstrap_roi_low": -0.0151,
+        "bootstrap_roi_high": 0.1477,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 16,
-          "resolved_win": 54,
-          "take_profit": 38
+          "resolved_win": 55,
+          "take_profit": 39
         }
       },
-      "score": 0.04688
+      "score": 0.05072
     },
     {
       "candidate": {
@@ -163,32 +163,32 @@
         "max_spread": 0.15
       },
       "metrics": {
-        "n": 98,
-        "wins": 82,
+        "n": 100,
+        "wins": 84,
         "losses": 16,
-        "win_rate": 0.8367,
-        "win_rate_wilson_low": 0.7511,
-        "win_rate_wilson_high": 0.8969,
+        "win_rate": 0.84,
+        "win_rate_wilson_low": 0.7558,
+        "win_rate_wilson_high": 0.899,
         "avg_entry": 0.7595,
-        "avg_ev": 0.2654,
-        "avg_spread": 0.0245,
-        "pnl": 50.04,
-        "cost": 770.37,
-        "roi": 0.065,
-        "fee_est": 7.03,
-        "spread_est": 7.7,
-        "pnl_after_drag": 35.31,
-        "roi_after_drag": 0.0458,
-        "bootstrap_roi_low": -0.0397,
-        "bootstrap_roi_high": 0.1473,
+        "avg_ev": 0.2643,
+        "avg_spread": 0.0247,
+        "pnl": 52.26,
+        "cost": 780.37,
+        "roi": 0.067,
+        "fee_est": 7.12,
+        "spread_est": 7.8,
+        "pnl_after_drag": 37.34,
+        "roi_after_drag": 0.0478,
+        "bootstrap_roi_low": -0.0356,
+        "bootstrap_roi_high": 0.1489,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 16,
-          "resolved_win": 49,
-          "take_profit": 33
+          "resolved_win": 50,
+          "take_profit": 34
         }
       },
-      "score": 0.03191
+      "score": 0.03534
     },
     {
       "candidate": {
@@ -202,32 +202,32 @@
         "max_spread": 0.15
       },
       "metrics": {
-        "n": 119,
-        "wins": 98,
+        "n": 121,
+        "wins": 100,
         "losses": 21,
-        "win_rate": 0.8235,
-        "win_rate_wilson_low": 0.7452,
-        "win_rate_wilson_high": 0.8816,
-        "avg_entry": 0.7632,
-        "avg_ev": 0.2522,
-        "avg_spread": 0.0245,
-        "pnl": 56.46,
-        "cost": 956.32,
-        "roi": 0.059,
-        "fee_est": 8.66,
-        "spread_est": 9.56,
-        "pnl_after_drag": 38.24,
-        "roi_after_drag": 0.04,
-        "bootstrap_roi_low": -0.0307,
-        "bootstrap_roi_high": 0.1351,
+        "win_rate": 0.8264,
+        "win_rate_wilson_low": 0.7492,
+        "win_rate_wilson_high": 0.8836,
+        "avg_entry": 0.7631,
+        "avg_ev": 0.2515,
+        "avg_spread": 0.0247,
+        "pnl": 58.68,
+        "cost": 966.32,
+        "roi": 0.0607,
+        "fee_est": 8.75,
+        "spread_est": 9.66,
+        "pnl_after_drag": 40.26,
+        "roi_after_drag": 0.0417,
+        "bootstrap_roi_low": -0.0273,
+        "bootstrap_roi_high": 0.1358,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 21,
-          "resolved_win": 59,
-          "take_profit": 39
+          "resolved_win": 60,
+          "take_profit": 40
         }
       },
-      "score": 0.02926
+      "score": 0.03214
     },
     {
       "candidate": {
@@ -241,32 +241,32 @@
         "max_spread": 0.15
       },
       "metrics": {
-        "n": 111,
-        "wins": 94,
+        "n": 113,
+        "wins": 96,
         "losses": 17,
-        "win_rate": 0.8468,
-        "win_rate_wilson_low": 0.7684,
-        "win_rate_wilson_high": 0.9021,
-        "avg_entry": 0.7653,
-        "avg_ev": 0.2534,
-        "avg_spread": 0.024,
-        "pnl": 44.33,
-        "cost": 935.37,
-        "roi": 0.0474,
-        "fee_est": 8.35,
-        "spread_est": 9.35,
-        "pnl_after_drag": 26.63,
-        "roi_after_drag": 0.0285,
-        "bootstrap_roi_low": -0.0559,
+        "win_rate": 0.8496,
+        "win_rate_wilson_low": 0.7722,
+        "win_rate_wilson_high": 0.9039,
+        "avg_entry": 0.7652,
+        "avg_ev": 0.2526,
+        "avg_spread": 0.0242,
+        "pnl": 46.55,
+        "cost": 945.37,
+        "roi": 0.0492,
+        "fee_est": 8.44,
+        "spread_est": 9.45,
+        "pnl_after_drag": 28.66,
+        "roi_after_drag": 0.0303,
+        "bootstrap_roi_low": -0.0516,
         "bootstrap_roi_high": 0.1343,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 17,
-          "resolved_win": 54,
-          "take_profit": 40
+          "resolved_win": 55,
+          "take_profit": 41
         }
       },
-      "score": 0.00894
+      "score": 0.01224
     },
     {
       "candidate": {
@@ -282,32 +282,32 @@
         "max_spread": 0.15
       },
       "metrics": {
-        "n": 114,
-        "wins": 96,
+        "n": 116,
+        "wins": 98,
         "losses": 18,
-        "win_rate": 0.8421,
-        "win_rate_wilson_low": 0.7642,
-        "win_rate_wilson_high": 0.8977,
-        "avg_entry": 0.7652,
-        "avg_ev": 0.2516,
-        "avg_spread": 0.0241,
-        "pnl": 43.37,
-        "cost": 970.37,
-        "roi": 0.0447,
-        "fee_est": 8.67,
-        "spread_est": 9.7,
-        "pnl_after_drag": 25.0,
-        "roi_after_drag": 0.0258,
-        "bootstrap_roi_low": -0.0547,
-        "bootstrap_roi_high": 0.1295,
+        "win_rate": 0.8448,
+        "win_rate_wilson_low": 0.768,
+        "win_rate_wilson_high": 0.8995,
+        "avg_entry": 0.7651,
+        "avg_ev": 0.2508,
+        "avg_spread": 0.0243,
+        "pnl": 45.59,
+        "cost": 980.37,
+        "roi": 0.0465,
+        "fee_est": 8.76,
+        "spread_est": 9.8,
+        "pnl_after_drag": 27.03,
+        "roi_after_drag": 0.0276,
+        "bootstrap_roi_low": -0.0501,
+        "bootstrap_roi_high": 0.13,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 18,
-          "resolved_win": 55,
-          "take_profit": 41
+          "resolved_win": 56,
+          "take_profit": 42
         }
       },
-      "score": 0.00666
+      "score": 0.01007
     },
     {
       "candidate": {
@@ -321,32 +321,32 @@
         "max_spread": 0.15
       },
       "metrics": {
-        "n": 98,
-        "wins": 84,
+        "n": 100,
+        "wins": 86,
         "losses": 14,
-        "win_rate": 0.8571,
-        "win_rate_wilson_low": 0.7744,
-        "win_rate_wilson_high": 0.913,
-        "avg_entry": 0.7733,
-        "avg_ev": 0.2432,
-        "avg_spread": 0.0247,
-        "pnl": 39.28,
-        "cost": 850.37,
-        "roi": 0.0462,
-        "fee_est": 7.46,
-        "spread_est": 8.5,
-        "pnl_after_drag": 23.31,
-        "roi_after_drag": 0.0274,
-        "bootstrap_roi_low": -0.0598,
-        "bootstrap_roi_high": 0.1367,
+        "win_rate": 0.86,
+        "win_rate_wilson_low": 0.7786,
+        "win_rate_wilson_high": 0.9147,
+        "avg_entry": 0.773,
+        "avg_ev": 0.2425,
+        "avg_spread": 0.0249,
+        "pnl": 41.5,
+        "cost": 860.37,
+        "roi": 0.0482,
+        "fee_est": 7.55,
+        "spread_est": 8.6,
+        "pnl_after_drag": 25.34,
+        "roi_after_drag": 0.0295,
+        "bootstrap_roi_low": -0.0596,
+        "bootstrap_roi_high": 0.1384,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 14,
-          "resolved_win": 46,
-          "take_profit": 38
+          "resolved_win": 47,
+          "take_profit": 39
         }
       },
-      "score": 0.00647
+      "score": 0.00864
     },
     {
       "candidate": {
@@ -360,32 +360,32 @@
         "max_spread": 0.15
       },
       "metrics": {
-        "n": 105,
-        "wins": 85,
+        "n": 107,
+        "wins": 87,
         "losses": 20,
-        "win_rate": 0.8095,
-        "win_rate_wilson_low": 0.724,
-        "win_rate_wilson_high": 0.8732,
+        "win_rate": 0.8131,
+        "win_rate_wilson_low": 0.7288,
+        "win_rate_wilson_high": 0.8756,
         "avg_entry": 0.7586,
-        "avg_ev": 0.2634,
-        "avg_spread": 0.0249,
-        "pnl": 33.83,
-        "cost": 806.32,
-        "roi": 0.042,
-        "fee_est": 7.37,
-        "spread_est": 8.06,
-        "pnl_after_drag": 18.4,
-        "roi_after_drag": 0.0228,
-        "bootstrap_roi_low": -0.0609,
-        "bootstrap_roi_high": 0.1266,
+        "avg_ev": 0.2624,
+        "avg_spread": 0.025,
+        "pnl": 36.05,
+        "cost": 816.32,
+        "roi": 0.0442,
+        "fee_est": 7.46,
+        "spread_est": 8.16,
+        "pnl_after_drag": 20.43,
+        "roi_after_drag": 0.025,
+        "bootstrap_roi_low": -0.059,
+        "bootstrap_roi_high": 0.1278,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 20,
-          "resolved_win": 52,
-          "take_profit": 33
+          "resolved_win": 53,
+          "take_profit": 34
         }
       },
-      "score": 0.00149
+      "score": 0.00435
     },
     {
       "candidate": {
@@ -399,32 +399,32 @@
         "max_spread": 0.15
       },
       "metrics": {
-        "n": 101,
-        "wins": 81,
+        "n": 103,
+        "wins": 83,
         "losses": 20,
-        "win_rate": 0.802,
-        "win_rate_wilson_low": 0.7138,
-        "win_rate_wilson_high": 0.868,
-        "avg_entry": 0.7508,
-        "avg_ev": 0.2611,
-        "avg_spread": 0.0244,
-        "pnl": 27.41,
-        "cost": 906.32,
-        "roi": 0.0302,
-        "fee_est": 8.37,
-        "spread_est": 9.06,
-        "pnl_after_drag": 9.98,
-        "roi_after_drag": 0.011,
-        "bootstrap_roi_low": -0.0808,
-        "bootstrap_roi_high": 0.1221,
+        "win_rate": 0.8058,
+        "win_rate_wilson_low": 0.719,
+        "win_rate_wilson_high": 0.8706,
+        "avg_entry": 0.751,
+        "avg_ev": 0.26,
+        "avg_spread": 0.0246,
+        "pnl": 29.63,
+        "cost": 916.32,
+        "roi": 0.0323,
+        "fee_est": 8.46,
+        "spread_est": 9.16,
+        "pnl_after_drag": 12.01,
+        "roi_after_drag": 0.0131,
+        "bootstrap_roi_low": -0.0759,
+        "bootstrap_roi_high": 0.1239,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 20,
-          "resolved_win": 47,
-          "take_profit": 34
+          "resolved_win": 48,
+          "take_profit": 35
         }
       },
-      "score": -0.01728
+      "score": -0.01346
     },
     {
       "candidate": {
@@ -438,32 +438,32 @@
         "max_spread": 0.15
       },
       "metrics": {
-        "n": 97,
-        "wins": 79,
+        "n": 99,
+        "wins": 81,
         "losses": 18,
-        "win_rate": 0.8144,
-        "win_rate_wilson_low": 0.7256,
-        "win_rate_wilson_high": 0.8793,
-        "avg_entry": 0.764,
-        "avg_ev": 0.2459,
-        "avg_spread": 0.0259,
-        "pnl": 18.43,
-        "cost": 866.32,
-        "roi": 0.0213,
-        "fee_est": 7.74,
-        "spread_est": 8.66,
-        "pnl_after_drag": 2.02,
-        "roi_after_drag": 0.0023,
-        "bootstrap_roi_low": -0.0884,
-        "bootstrap_roi_high": 0.1175,
+        "win_rate": 0.8182,
+        "win_rate_wilson_low": 0.7308,
+        "win_rate_wilson_high": 0.8818,
+        "avg_entry": 0.7639,
+        "avg_ev": 0.2451,
+        "avg_spread": 0.0261,
+        "pnl": 20.65,
+        "cost": 876.32,
+        "roi": 0.0236,
+        "fee_est": 7.83,
+        "spread_est": 8.76,
+        "pnl_after_drag": 4.05,
+        "roi_after_drag": 0.0046,
+        "bootstrap_roi_low": -0.0823,
+        "bootstrap_roi_high": 0.1176,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 18,
-          "resolved_win": 44,
-          "take_profit": 35
+          "resolved_win": 45,
+          "take_profit": 36
         }
       },
-      "score": -0.02864
+      "score": -0.0242
     },
     {
       "candidate": {
@@ -624,29 +624,29 @@
       {
         "value": "2",
         "metrics": {
-          "n": 124,
-          "wins": 107,
+          "n": 126,
+          "wins": 109,
           "losses": 17,
-          "win_rate": 0.8629,
-          "win_rate_wilson_low": 0.7914,
-          "win_rate_wilson_high": 0.9126,
-          "avg_entry": 0.7577,
-          "avg_ev": 0.2582,
-          "avg_spread": 0.0236,
-          "pnl": 115.4,
-          "cost": 1260.37,
-          "roi": 0.0916,
-          "fee_est": 11.75,
-          "spread_est": 12.6,
-          "pnl_after_drag": 91.04,
-          "roi_after_drag": 0.0722,
-          "bootstrap_roi_low": 0.0092,
-          "bootstrap_roi_high": 0.1618,
+          "win_rate": 0.8651,
+          "win_rate_wilson_low": 0.7945,
+          "win_rate_wilson_high": 0.914,
+          "avg_entry": 0.7578,
+          "avg_ev": 0.2574,
+          "avg_spread": 0.0238,
+          "pnl": 117.62,
+          "cost": 1270.37,
+          "roi": 0.0926,
+          "fee_est": 11.84,
+          "spread_est": 12.7,
+          "pnl_after_drag": 93.07,
+          "roi_after_drag": 0.0733,
+          "bootstrap_roi_low": 0.0124,
+          "bootstrap_roi_high": 0.1598,
           "max_loss": -25.0,
           "reasons": {
             "resolved_loss": 17,
-            "resolved_win": 58,
-            "take_profit": 49
+            "resolved_win": 59,
+            "take_profit": 50
           }
         }
       },
@@ -712,29 +712,29 @@
       {
         "value": "ecmwf",
         "metrics": {
-          "n": 131,
-          "wins": 112,
+          "n": 133,
+          "wins": 114,
           "losses": 19,
-          "win_rate": 0.855,
-          "win_rate_wilson_low": 0.7846,
-          "win_rate_wilson_high": 0.9051,
+          "win_rate": 0.8571,
+          "win_rate_wilson_low": 0.7876,
+          "win_rate_wilson_high": 0.9066,
           "avg_entry": 0.7578,
-          "avg_ev": 0.2564,
-          "avg_spread": 0.0237,
-          "pnl": 100.6,
-          "cost": 1375.85,
-          "roi": 0.0731,
-          "fee_est": 12.71,
-          "spread_est": 13.76,
-          "pnl_after_drag": 74.13,
-          "roi_after_drag": 0.0539,
-          "bootstrap_roi_low": -0.0163,
-          "bootstrap_roi_high": 0.1471,
+          "avg_ev": 0.2556,
+          "avg_spread": 0.0238,
+          "pnl": 102.82,
+          "cost": 1385.85,
+          "roi": 0.0742,
+          "fee_est": 12.8,
+          "spread_est": 13.86,
+          "pnl_after_drag": 76.16,
+          "roi_after_drag": 0.055,
+          "bootstrap_roi_low": -0.0102,
+          "bootstrap_roi_high": 0.1484,
           "max_loss": -25.0,
           "reasons": {
             "resolved_loss": 19,
-            "resolved_win": 62,
-            "take_profit": 50
+            "resolved_win": 63,
+            "take_profit": 51
           }
         }
       },
@@ -772,15 +772,14 @@
     "action": "keep",
     "reason": "Current paper strategy remains the best risk-adjusted live-applicable candidate.",
     "best_candidate": "current_paper",
-    "current_score": 0.04688,
-    "best_score": 0.04688,
+    "current_score": 0.05072,
+    "best_score": 0.05072,
     "paper_overlay": null
   },
   "live_gate": {
     "ready_for_user_review": false,
     "reasons_not_ready": [
-      "need post-activation ROI after drag >=3%, have 2.86%",
-      "need positive bootstrap lower bound, have -2.12%"
+      "need positive bootstrap lower bound, have -1.51%"
     ]
   }
 }
