@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-07-31 23:00 UTC_
+_Auto-generated 2026-08-01 00:05 UTC_
 
 ## Summary
 | Metric | Value |
@@ -18,10 +18,10 @@ _Auto-generated 2026-07-31 23:00 UTC_
 ## Open Positions (4)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| Munich | 2026-08-01 | 30–30°C | NO | $0.740 | ECMWF | D+1 |
-| Seoul | 2026-08-01 | 31–31°C | NO | $0.750 | ECMWF | D+1 |
-| Tokyo | 2026-08-01 | 36–36°C | NO | $0.750 | ECMWF | D+1 |
-| Seoul | 2026-08-02 | 33–33°C | NO | $0.780 | ECMWF | D+2 |
+| Munich | 2026-08-01 | 30–30°C | NO | $0.740 | ECMWF | D+0 |
+| Seoul | 2026-08-01 | 31–31°C | NO | $0.750 | ECMWF | D+0 |
+| Tokyo | 2026-08-01 | 36–36°C | NO | $0.750 | ECMWF | D+0 |
+| Seoul | 2026-08-02 | 33–33°C | NO | $0.780 | ECMWF | D+1 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
