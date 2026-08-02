@@ -1,26 +1,27 @@
 # WeatherBot Status
-_Auto-generated 2026-08-02 01:11 UTC_
+_Auto-generated 2026-08-02 04:55 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $34.32 |
+| Balance | $29.32 |
 | Starting | $5,000.00 |
-| Return | -99.3% |
+| Return | -99.4% |
 | Total trades | 684 |
 | Win rate | 459/684 (67%) |
-| Open positions | 3 |
-| Open cost | $15.00 |
-| Markets tracked | 1906 |
+| Open positions | 4 |
+| Open cost | $20.00 |
+| Markets tracked | 1918 |
 | Calibration keys | 161 |
 
-## Open Positions (3)
+## Open Positions (4)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
 | Seoul | 2026-08-02 | 33–33°C | NO | $0.780 | ECMWF | D+0 |
 | Paris | 2026-08-03 | 36–36°C | NO | $0.740 | ECMWF | D+1 |
 | Ankara | 2026-08-03 | 34–34°C | NO | $0.820 | ECMWF | D+1 |
+| Munich | 2026-08-04 | 35–35°C | NO | $0.730 | ECMWF | D+2 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
