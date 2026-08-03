@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-08-02 23:32 UTC_
+_Auto-generated 2026-08-03 01:11 UTC_
 
 ## Summary
 | Metric | Value |
@@ -12,16 +12,16 @@ _Auto-generated 2026-08-02 23:32 UTC_
 | Win rate | 459/685 (67%) |
 | Open positions | 4 |
 | Open cost | $20.00 |
-| Markets tracked | 1919 |
+| Markets tracked | 1928 |
 | Calibration keys | 161 |
 
 ## Open Positions (4)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| Paris | 2026-08-03 | 36–36°C | NO | $0.740 | ECMWF | D+1 |
-| Ankara | 2026-08-03 | 34–34°C | NO | $0.820 | ECMWF | D+1 |
-| Paris | 2026-08-04 | 33–33°C | NO | $0.840 | ECMWF | D+2 |
-| Munich | 2026-08-04 | 35–35°C | NO | $0.730 | ECMWF | D+2 |
+| Paris | 2026-08-03 | 36–36°C | NO | $0.740 | ECMWF | D+0 |
+| Ankara | 2026-08-03 | 34–34°C | NO | $0.820 | ECMWF | D+0 |
+| Paris | 2026-08-04 | 33–33°C | NO | $0.840 | ECMWF | D+1 |
+| Munich | 2026-08-04 | 35–35°C | NO | $0.730 | ECMWF | D+1 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
