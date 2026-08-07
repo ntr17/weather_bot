@@ -1,21 +1,21 @@
 {
-  "updated_at": "2026-08-07T00:18:23.509997+00:00",
+  "updated_at": "2026-08-07T07:45:37.480178+00:00",
   "last_action_result": "No paper config change requested.",
   "paper_config_changed": false,
   "strategy_recommendation": {
     "action": "keep",
     "reason": "A variant ranks higher, but the improvement is too weak for automatic adaptation.",
     "best_candidate": "d2_ev18",
-    "current_score": 0.00584,
-    "best_score": 0.00739,
+    "current_score": 0.00941,
+    "best_score": 0.01137,
     "paper_overlay": null
   },
   "live_gate": {
     "ready_for_user_review": false,
     "reasons_not_ready": [
-      "need >=3% ROI after fee/spread drag, have 2.33%",
-      "need post-activation ROI after drag >=3%, have -2.29%",
-      "need positive bootstrap lower bound, have -4.99%"
+      "need >=3% ROI after fee/spread drag, have 2.54%",
+      "need post-activation ROI after drag >=3%, have -1.88%",
+      "need positive bootstrap lower bound, have -4.57%"
     ]
   },
   "autonomy_report_present": true
