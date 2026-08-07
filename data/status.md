@@ -1,31 +1,31 @@
 # WeatherBot Status
-_Auto-generated 2026-08-06 14:55 UTC_
+_Auto-generated 2026-08-07 00:25 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $19.03 |
+| Balance | $26.17 |
 | Starting | $5,000.00 |
-| Return | -99.6% |
-| Total trades | 690 |
-| Win rate | 462/690 (67%) |
-| Open positions | 4 |
-| Open cost | $20.00 |
+| Return | -99.5% |
+| Total trades | 691 |
+| Win rate | 463/691 (67%) |
+| Open positions | 3 |
+| Open cost | $15.00 |
 | Markets tracked | 1999 |
 | Calibration keys | 161 |
 
-## Open Positions (4)
+## Open Positions (3)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| Tokyo | 2026-08-06 | 32–32°C | NO | $0.700 | ECMWF | D+0 |
-| Tokyo | 2026-08-07 | 32–32°C | NO | $0.820 | ECMWF | D+1 |
-| Munich | 2026-08-08 | 31–31°C | NO | $0.800 | ECMWF | D+2 |
-| Tokyo | 2026-08-08 | 32–32°C | NO | $0.790 | ECMWF | D+2 |
+| Tokyo | 2026-08-07 | 32–32°C | NO | $0.820 | ECMWF | D+0 |
+| Munich | 2026-08-08 | 31–31°C | NO | $0.800 | ECMWF | D+1 |
+| Tokyo | 2026-08-08 | 32–32°C | NO | $0.790 | ECMWF | D+1 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
 |------|------|--------|------|-------|-----|---------|--------|
+| Tokyo | 2026-08-06 | 32–32°C | NO | $0.700 | +2.14 | None | ECMWF |
 | Tokyo | 2026-08-05 | 31–31°C | NO | $0.740 | +1.76 | None | ECMWF |
 | Munich | 2026-08-04 | 35–35°C | NO | $0.730 | +1.85 | None | ECMWF |
 | Paris | 2026-08-04 | 33–33°C | NO | $0.840 | -5.00 | None | ECMWF |
@@ -45,7 +45,6 @@ _Auto-generated 2026-08-06 14:55 UTC_
 | Seoul | 2026-07-27 | 30–30°C | NO | $0.750 | +1.67 | None | ECMWF |
 | London | 2026-07-26 | 24–24°C | NO | $0.800 | +1.25 | None | ECMWF |
 | Seoul | 2026-07-25 | 29–29°C | NO | $0.720 | +1.94 | None | ECMWF |
-| Munich | 2026-07-24 | 25–25°C | NO | $0.730 | -5.00 | None | ECMWF |
 
 ## City Performance
 | City | Trades | Wins | WR | PnL | Avg PnL |
@@ -67,7 +66,7 @@ _Auto-generated 2026-08-06 14:55 UTC_
 | Shanghai | 64 | 0 | 0% | -84.87 | -1.33 |
 | Singapore | 68 | 0 | 0% | -215.24 | -3.17 |
 | Tel Aviv | 44 | 0 | 0% | -44.69 | -1.02 |
-| Tokyo | 56 | 0 | 0% | -55.44 | -0.99 |
+| Tokyo | 57 | 0 | 0% | -53.30 | -0.94 |
 | Toronto | 56 | 0 | 0% | +62.56 | +1.12 |
 | Wellington | 26 | 0 | 0% | -143.20 | -5.51 |
 
@@ -149,20 +148,20 @@ _Tracking NO trades opened after 2026-05-06_
 
 | Metric | Value |
 |--------|-------|
-| Closed trades | 541 |
-| Wins / Losses | 424 / 117 |
+| Closed trades | 542 |
+| Wins / Losses | 425 / 117 |
 | Win rate | 78.4% |
-| Total PnL | $+61.32 |
+| Total PnL | $+63.46 |
 | ROI | +0.6% |
-| Resolved | 433 (316W/117L) |
+| Resolved | 434 (317W/117L) |
 | Resolved WR | 73.0% |
-| Resolved PnL | $-228.62 |
-| Avg PnL/trade | $+0.11 |
+| Resolved PnL | $-226.48 |
+| Avg PnL/trade | $+0.12 |
 
 ### Close Reasons (v2)
 | Reason | Count | PnL |
 |--------|-------|-----|
-| resolved_win | 316 | $+2137.39 |
+| resolved_win | 317 | $+2139.53 |
 | take_profit | 108 | $+289.94 |
 | resolved_loss | 117 | $-2366.01 |
 
@@ -171,10 +170,10 @@ _D+1/D+2 NO trades opened after 2026-05-14_
 
 | Metric | Value |
 |--------|-------|
-| Trades | 161 |
-| Wins / Losses | 129 / 32 |
-| Win rate | 80.1% |
-| Total PnL | $+59.23 |
-| ROI | +3.7% |
+| Trades | 162 |
+| Wins / Losses | 130 / 32 |
+| Win rate | 80.2% |
+| Total PnL | $+61.37 |
+| ROI | +3.8% |
 | Take-profit exits | 51 |
-| Avg PnL/trade | $+0.37 |
+| Avg PnL/trade | $+0.38 |
