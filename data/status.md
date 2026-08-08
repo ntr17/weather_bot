@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-08-08 13:45 UTC_
+_Auto-generated 2026-08-08 14:31 UTC_
 
 ## Summary
 | Metric | Value |
@@ -18,8 +18,8 @@ _Auto-generated 2026-08-08 13:45 UTC_
 ## Open Positions (4)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| Munich | 2026-08-08 | 31–31°C | NO | $0.800 | ECMWF | D+0 |
 | Tokyo | 2026-08-08 | 32–32°C | NO | $0.790 | ECMWF | D+0 |
+| Munich | 2026-08-08 | 31–31°C | NO | $0.800 | ECMWF | D+0 |
 | London | 2026-08-09 | 32–32°C | NO | $0.840 | ECMWF | D+1 |
 | Munich | 2026-08-09 | 34–34°C | NO | $0.720 | ECMWF | D+1 |
 
