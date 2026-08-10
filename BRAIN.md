@@ -1,20 +1,20 @@
 # WeatherBot Brain
-Last review: 2026-08-09 19:04 UTC
+Last review: 2026-08-10 02:37 UTC
 
 ## Decision
 
 - Paper action: `keep`
-- Best candidate: `d2_ev18`
+- Best candidate: `current_paper`
 - Paper config changed: `False`
 - Action result: No paper config change requested.
 - Ready for live user review: `False`
 
 ## Evidence
 
-- Closed positions loaded: `170`
-- Current strategy: n=127, ROI after drag=2.86%, bootstrap low=-4.28%
-- Best strategy: n=111, ROI after drag=3.28%, bootstrap low=-4.66%
-- Post-activation current strategy: n=109, ROI after drag=-1.21%, bootstrap low=-9.12%
+- Closed positions loaded: `172`
+- Current strategy: n=129, ROI after drag=2.39%, bootstrap low=-4.75%
+- Best strategy: n=129, ROI after drag=2.39%, bootstrap low=-4.75%
+- Post-activation current strategy: n=111, ROI after drag=-1.95%, bootstrap low=-9.86%
 - Paper policy activated at: `2026-06-09T18:23:01Z`
 
 ## Thesis
@@ -34,9 +34,9 @@ Last review: 2026-08-09 19:04 UTC
 
 ## Live Blockers
 
-- need >=3% ROI after fee/spread drag, have 2.86%
-- need post-activation ROI after drag >=3%, have -1.21%
-- need positive bootstrap lower bound, have -4.28%
+- need >=3% ROI after fee/spread drag, have 2.39%
+- need post-activation ROI after drag >=3%, have -1.95%
+- need positive bootstrap lower bound, have -4.75%
 
 ## Operating Rule
 

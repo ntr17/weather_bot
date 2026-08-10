@@ -1,33 +1,33 @@
 # Strategy Lab
-Generated: 2026-08-09T19:04:27.941589+00:00
+Generated: 2026-08-10T02:37:21.758659+00:00
 
 ## Recommendation
 
 - Action: `keep`
-- Best candidate: `d2_ev18`
-- Reason: A variant ranks higher, but the improvement is too weak for automatic adaptation.
+- Best candidate: `current_paper`
+- Reason: Current paper strategy remains the best risk-adjusted live-applicable candidate.
 - Ready for live user review: `False`
 - Paper policy activated at: `2026-06-09T18:23:01Z`
 - Live blockers:
-  - need >=3% ROI after fee/spread drag, have 2.86%
-  - need post-activation ROI after drag >=3%, have -1.21%
-  - need positive bootstrap lower bound, have -4.28%
+  - need >=3% ROI after fee/spread drag, have 2.39%
+  - need post-activation ROI after drag >=3%, have -1.95%
+  - need positive bootstrap lower bound, have -4.75%
 
 ## Ranked Candidates
 
 | Rank | Candidate | N | W/L | ROI | ROI after drag | Boot ROI low | Entry | Score |
 | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| 1 | d2_ev18 | 111 | 91/20 | 5.19% | 3.28% | -4.66% | 0.759 | 0.0165 |
-| 2 | current_paper | 127 | 104/23 | 4.75% | 2.86% | -4.28% | 0.765 | 0.0136 |
-| 3 | d2_ev15 | 127 | 104/23 | 4.75% | 2.86% | -4.28% | 0.765 | 0.0136 |
-| 4 | d2_ecmwf_only | 127 | 104/23 | 4.75% | 2.86% | -4.28% | 0.765 | 0.0136 |
-| 5 | ev15_mixed | 138 | 110/28 | 3.69% | 1.79% | -5.24% | 0.764 | -0.0004 |
-| 6 | ev18_mixed | 118 | 94/24 | 3.12% | 1.20% | -6.83% | 0.758 | -0.0119 |
-| 7 | ecmwf_only | 133 | 108/25 | 2.41% | 0.52% | -6.61% | 0.766 | -0.0179 |
-| 8 | d2_only | 130 | 106/24 | 2.59% | 0.70% | -7.68% | 0.766 | -0.0199 |
-| 9 | d2_entry_72_85 | 116 | 95/21 | 2.07% | 0.19% | -8.32% | 0.773 | -0.0272 |
-| 10 | entry_70_80 | 116 | 91/25 | 1.79% | -0.13% | -8.70% | 0.751 | -0.0318 |
-| 11 | entry_72_82 | 113 | 90/23 | 0.91% | -0.98% | -9.54% | 0.764 | -0.0432 |
+| 1 | current_paper | 129 | 105/24 | 4.29% | 2.39% | -4.75% | 0.765 | 0.0073 |
+| 2 | d2_ev15 | 129 | 105/24 | 4.29% | 2.39% | -4.75% | 0.765 | 0.0073 |
+| 3 | d2_ecmwf_only | 129 | 105/24 | 4.29% | 2.39% | -4.75% | 0.765 | 0.0073 |
+| 4 | d2_ev18 | 112 | 91/21 | 4.56% | 2.65% | -5.65% | 0.759 | 0.0067 |
+| 5 | ev15_mixed | 140 | 111/29 | 3.27% | 1.37% | -5.49% | 0.764 | -0.0055 |
+| 6 | ev18_mixed | 119 | 94/25 | 2.53% | 0.61% | -7.45% | 0.758 | -0.0200 |
+| 7 | d2_only | 132 | 107/25 | 2.17% | 0.28% | -7.72% | 0.766 | -0.0242 |
+| 8 | ecmwf_only | 135 | 109/26 | 2.01% | 0.12% | -7.39% | 0.766 | -0.0247 |
+| 9 | d2_entry_72_85 | 118 | 96/22 | 1.62% | -0.25% | -8.57% | 0.774 | -0.0325 |
+| 10 | entry_70_80 | 117 | 91/26 | 1.27% | -0.65% | -9.34% | 0.751 | -0.0392 |
+| 11 | entry_72_82 | 114 | 90/24 | 0.38% | -1.51% | -9.93% | 0.764 | -0.0498 |
 | 12 | d1_only | 13 | 8/5 | 0.19% | -1.71% | -37.72% | 0.759 | -0.2231 |
 | 13 | ensemble_only | 8 | 5/3 | -7.40% | -9.24% | -55.25% | 0.768 | -0.3698 |
 | 14 | d2_ensemble_only | 0 | 0/0 | 0.00% | 0.00% | 0.00% | 0.000 | -999.0000 |
@@ -37,13 +37,13 @@ Generated: 2026-08-09T19:04:27.941589+00:00
 
 | N | W/L | ROI | ROI after drag | Boot ROI low | Entry |
 | ---: | ---: | ---: | ---: | ---: | ---: |
-| 109 | 87/22 | 0.68% | -1.21% | -9.12% | 0.766 |
+| 111 | 88/23 | -0.06% | -1.95% | -9.86% | 0.767 |
 
 ## Diagnostics By Horizon
 
 | Horizon | N | W/L | ROI after drag | Boot ROI low | Entry |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| D+2 | 143 | 119/24 | 5.28% | -0.69% | 0.759 |
+| D+2 | 145 | 120/25 | 4.93% | -0.61% | 0.760 |
 | D+1 | 20 | 13/7 | -8.09% | -38.58% | 0.753 |
 
 ## Diagnostics By Source
@@ -51,5 +51,5 @@ Generated: 2026-08-09T19:04:27.941589+00:00
 | Source | N | W/L | ROI after drag | Boot ROI low | Entry |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | GFS | 2 | 1/1 | 17.00% | -100.00% | 0.725 |
-| ECMWF | 150 | 124/26 | 3.72% | -2.53% | 0.759 |
+| ECMWF | 152 | 125/27 | 3.41% | -2.86% | 0.760 |
 | ENSEMBLE | 11 | 7/4 | -8.03% | -49.79% | 0.755 |

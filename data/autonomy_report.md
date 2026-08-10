@@ -1,10 +1,10 @@
 # WeatherBot Autonomy Report
-Generated: 2026-08-09 19:04 UTC
+Generated: 2026-08-10 02:37 UTC
 
 ## Git
 
-- Local HEAD: `4e53ade bot: update state 2026-08-09T18:03:57Z`
-- Remote master: `4e53ade bot: update state 2026-08-09T18:03:57Z`
+- Local HEAD: `ebd1902 bot: update state 2026-08-10T02:28:03Z`
+- Remote master: `ebd1902 bot: update state 2026-08-10T02:28:03Z`
 ```text
 ## master...origin/master
 ```
@@ -30,38 +30,38 @@ Generated: 2026-08-09 19:04 UTC
 
 ## Activity
 
-- Last run age: `60.5` minutes
-- Runs last 1h / 2h / 24h: `0` / `40` / `540`
-- New positions last 24h: `1`
+- Last run age: `9.3` minutes
+- Runs last 1h / 2h / 24h: `20` / `20` / `520`
+- New positions last 24h: `0`
 - Errors last 24h: `0`
-- State balance: `$24.85`
-- Open positions: `4`
-- Open cost: `$20.00`
+- State balance: `$30.80`
+- Open positions: `2`
+- Open cost: `$10.00`
 - Paper policy activated at: `2026-06-09T18:23:01Z`
-- Open positions after activation: `4`
+- Open positions after activation: `2`
 - Legacy open positions: `0`
 
 ## V3 Actual Edge
 
-- Trades: `163` (132W / 31L)
+- Trades: `165` (133W / 32L)
 - Avg entry: `0.759`
-- PnL: `$+83.76` on `$1580.19` cost
-- ROI: `5.30%`
+- PnL: `$+79.71` on `$1590.19` cost
+- ROI: `5.01%`
 
 ## Gates
 
 | Gate | Status | Detail |
 | --- | --- | --- |
 | Actions paper-only | OK | Hosted Actions must not be live. |
-| Recent bot activity | OK | 40 runs in last 2h. |
-| New data flow | OK | 1 new positions in last 24h; caps may explain zero. |
+| Recent bot activity | OK | 20 runs in last 2h. |
+| New data flow | WARN | 0 new positions in last 24h; caps may explain zero. |
 | Live max bet | OK | max_bet=5.00; target <= 5. |
 | Live total exposure cap | OK | max_total_open_cost=20.00; target <= 20. |
-| Current open exposure | OK | open_cost=20.00; reset/wait before live if above cap. |
+| Current open exposure | OK | open_cost=10.00; reset/wait before live if above cap. |
 | Per-run position cap | OK | max_new_positions_per_run=2; target <= 2. |
 | NO-only strategy | OK | enable_yes_trading=False. |
 | Entry and EV filters | OK | min_ev=0.15, min_no_entry=0.70, max_no_entry=0.85. |
-| Resolved edge sample | OK | v3_actual n=163; keep small while sample is limited. |
+| Resolved edge sample | OK | v3_actual n=165; keep small while sample is limited. |
 
 ## Agenda
 
