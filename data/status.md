@@ -1,31 +1,31 @@
 # WeatherBot Status
-_Auto-generated 2026-08-12 12:11 UTC_
+_Auto-generated 2026-08-12 13:58 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $29.29 |
+| Balance | $36.33 |
 | Starting | $5,000.00 |
-| Return | -99.4% |
-| Total trades | 704 |
-| Win rate | 475/704 (67%) |
-| Open positions | 4 |
-| Open cost | $20.00 |
+| Return | -99.3% |
+| Total trades | 705 |
+| Win rate | 476/705 (68%) |
+| Open positions | 3 |
+| Open cost | $15.00 |
 | Markets tracked | 2119 |
-| Calibration keys | 161 |
+| Calibration keys | 163 |
 
-## Open Positions (4)
+## Open Positions (3)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
 | Tokyo | 2026-08-12 | 26–26°C | NO | $0.790 | ECMWF | D+0 |
-| Wellington | 2026-08-12 | 15–15°C | NO | $0.710 | ECMWF | D+0 |
 | Munich | 2026-08-13 | 31–31°C | NO | $0.710 | ECMWF | D+1 |
 | Ankara | 2026-08-13 | 30–30°C | NO | $0.760 | ECMWF | D+1 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
 |------|------|--------|------|-------|-----|---------|--------|
+| Wellington | 2026-08-12 | 15–15°C | NO | $0.710 | +2.04 | None | ECMWF |
 | Munich | 2026-08-12 | 31–31°C | NO | $0.730 | +0.55 | None | ECMWF |
 | Shanghai | 2026-08-12 | 30–30°C | NO | $0.730 | +0.62 | None | ECMWF |
 | Paris | 2026-08-10 | 33–33°C | NO | $0.730 | +1.85 | None | ECMWF |
@@ -45,7 +45,6 @@ _Auto-generated 2026-08-12 12:11 UTC_
 | Paris | 2026-08-04 | 33–33°C | NO | $0.840 | -5.00 | None | ECMWF |
 | Paris | 2026-08-03 | 36–36°C | NO | $0.740 | -5.00 | None | ECMWF |
 | Ankara | 2026-08-03 | 34–34°C | NO | $0.820 | +1.10 | None | ECMWF |
-| Seoul | 2026-08-02 | 33–33°C | NO | $0.780 | -5.00 | None | ECMWF |
 
 ## City Performance
 | City | Trades | Wins | WR | PnL | Avg PnL |
@@ -69,7 +68,7 @@ _Auto-generated 2026-08-12 12:11 UTC_
 | Tel Aviv | 44 | 0 | 0% | -44.69 | -1.02 |
 | Tokyo | 61 | 0 | 0% | -49.26 | -0.81 |
 | Toronto | 56 | 0 | 0% | +62.56 | +1.12 |
-| Wellington | 26 | 0 | 0% | -143.20 | -5.51 |
+| Wellington | 27 | 0 | 0% | -141.16 | -5.23 |
 
 ## City Health (last 20 runs)
 | City | OK | Fails | Rate | Streak | Status | Last Error |
@@ -95,7 +94,7 @@ _Auto-generated 2026-08-12 12:11 UTC_
 | Toronto | 20 | 0 | 0% | 0 | ok |  |
 | Wellington | 20 | 0 | 0% | 0 | ok |  |
 
-## Calibration (161 keys)
+## Calibration (163 keys)
 | City | ECMWF D+1 σ | GFS D+1 σ | Source | Samples |
 |------|-------------|-----------|--------|---------|
 | Ankara | 0.808 | 2.708 | bootstrap_model | 88 |
@@ -149,20 +148,20 @@ _Tracking NO trades opened after 2026-05-06_
 
 | Metric | Value |
 |--------|-------|
-| Closed trades | 555 |
-| Wins / Losses | 437 / 118 |
-| Win rate | 78.7% |
-| Total PnL | $+71.58 |
-| ROI | +0.6% |
-| Resolved | 441 (323W/118L) |
-| Resolved WR | 73.2% |
-| Resolved PnL | $-223.15 |
+| Closed trades | 556 |
+| Wins / Losses | 438 / 118 |
+| Win rate | 78.8% |
+| Total PnL | $+73.62 |
+| ROI | +0.7% |
+| Resolved | 442 (324W/118L) |
+| Resolved WR | 73.3% |
+| Resolved PnL | $-221.11 |
 | Avg PnL/trade | $+0.13 |
 
 ### Close Reasons (v2)
 | Reason | Count | PnL |
 |--------|-------|-----|
-| resolved_win | 323 | $+2147.86 |
+| resolved_win | 324 | $+2149.90 |
 | take_profit | 114 | $+294.73 |
 | resolved_loss | 118 | $-2371.01 |
 
@@ -171,10 +170,10 @@ _D+1/D+2 NO trades opened after 2026-05-14_
 
 | Metric | Value |
 |--------|-------|
-| Trades | 175 |
-| Wins / Losses | 142 / 33 |
-| Win rate | 81.1% |
-| Total PnL | $+69.49 |
-| ROI | +4.1% |
+| Trades | 176 |
+| Wins / Losses | 143 / 33 |
+| Win rate | 81.2% |
+| Total PnL | $+71.53 |
+| ROI | +4.2% |
 | Take-profit exits | 57 |
-| Avg PnL/trade | $+0.40 |
+| Avg PnL/trade | $+0.41 |
