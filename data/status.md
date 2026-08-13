@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-08-12 23:12 UTC_
+_Auto-generated 2026-08-13 00:09 UTC_
 
 ## Summary
 | Metric | Value |
@@ -18,10 +18,10 @@ _Auto-generated 2026-08-12 23:12 UTC_
 ## Open Positions (4)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| Munich | 2026-08-13 | 31–31°C | NO | $0.710 | ECMWF | D+1 |
-| Ankara | 2026-08-13 | 30–30°C | NO | $0.760 | ECMWF | D+1 |
-| Munich | 2026-08-14 | 32–32°C | NO | $0.730 | ECMWF | D+2 |
-| Lucknow | 2026-08-14 | 33–33°C | NO | $0.750 | ECMWF | D+2 |
+| Munich | 2026-08-13 | 31–31°C | NO | $0.710 | ECMWF | D+0 |
+| Ankara | 2026-08-13 | 30–30°C | NO | $0.760 | ECMWF | D+0 |
+| Munich | 2026-08-14 | 32–32°C | NO | $0.730 | ECMWF | D+1 |
+| Lucknow | 2026-08-14 | 33–33°C | NO | $0.750 | ECMWF | D+1 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
