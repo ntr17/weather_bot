@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-08-16 23:46 UTC_
+_Auto-generated 2026-08-17 01:07 UTC_
 
 ## Summary
 | Metric | Value |
@@ -18,10 +18,10 @@ _Auto-generated 2026-08-16 23:46 UTC_
 ## Open Positions (4)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| Tokyo | 2026-08-17 | 29–29°C | NO | $0.720 | ECMWF | D+1 |
-| Singapore | 2026-08-17 | 33–33°C | NO | $0.730 | ECMWF | D+1 |
-| London | 2026-08-18 | 26–26°C | NO | $0.840 | ECMWF | D+2 |
-| Munich | 2026-08-18 | 20–20°C | NO | $0.800 | ECMWF | D+2 |
+| Tokyo | 2026-08-17 | 29–29°C | NO | $0.720 | ECMWF | D+0 |
+| Singapore | 2026-08-17 | 33–33°C | NO | $0.730 | ECMWF | D+0 |
+| London | 2026-08-18 | 26–26°C | NO | $0.840 | ECMWF | D+1 |
+| Munich | 2026-08-18 | 20–20°C | NO | $0.800 | ECMWF | D+1 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
