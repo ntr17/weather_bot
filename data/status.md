@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-08-18 22:22 UTC_
+_Auto-generated 2026-08-18 22:52 UTC_
 
 ## Summary
 | Metric | Value |
@@ -8,24 +8,24 @@ _Auto-generated 2026-08-18 22:22 UTC_
 | Balance | $20.52 |
 | Starting | $5,000.00 |
 | Return | -99.6% |
-| Total trades | 717 |
-| Win rate | 484/717 (68%) |
-| Open positions | 4 |
-| Open cost | $20.00 |
+| Total trades | 718 |
+| Win rate | 484/718 (67%) |
+| Open positions | 3 |
+| Open cost | $15.00 |
 | Markets tracked | 2239 |
 | Calibration keys | 163 |
 
-## Open Positions (4)
+## Open Positions (3)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
 | London | 2026-08-18 | 26–26°C | NO | $0.840 | ECMWF | D+0 |
-| Munich | 2026-08-18 | 20–20°C | NO | $0.800 | ECMWF | D+0 |
 | Paris | 2026-08-19 | 26–26°C | NO | $0.850 | ECMWF | D+1 |
 | Tokyo | 2026-08-19 | 32–32°C | NO | $0.830 | ECMWF | D+1 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
 |------|------|--------|------|-------|-----|---------|--------|
+| Munich | 2026-08-18 | 20–20°C | NO | $0.800 | -5.00 | None | ECMWF |
 | Singapore | 2026-08-17 | 33–33°C | NO | $0.730 | -5.00 | None | ECMWF |
 | Tokyo | 2026-08-17 | 29–29°C | NO | $0.720 | -5.00 | None | ECMWF |
 | Munich | 2026-08-16 | 30–30°C | NO | $0.790 | +1.33 | None | ECMWF |
@@ -45,7 +45,6 @@ _Auto-generated 2026-08-18 22:22 UTC_
 | Lucknow | 2026-08-10 | 34–34°C | NO | $0.730 | +1.85 | None | ECMWF |
 | Tokyo | 2026-08-12 | 29–29°C | NO | $0.810 | +0.62 | None | ECMWF |
 | London | 2026-08-12 | 29–29°C | NO | $0.790 | +0.57 | None | ECMWF |
-| London | 2026-08-12 | 34–999°C | NO | $0.775 | +1.44 | None | ECMWF |
 
 ## City Performance
 | City | Trades | Wins | WR | PnL | Avg PnL |
@@ -58,7 +57,7 @@ _Auto-generated 2026-08-18 22:22 UTC_
 | London | 68 | 0 | 0% | +28.97 | +0.43 |
 | Lucknow | 17 | 0 | 0% | +17.18 | +1.01 |
 | Miami | 55 | 0 | 0% | -62.37 | -1.13 |
-| Munich | 84 | 0 | 0% | -13.16 | -0.16 |
+| Munich | 85 | 0 | 0% | -18.16 | -0.21 |
 | New York City | 66 | 5 | 8% | -77.15 | -1.17 |
 | Paris | 86 | 0 | 0% | -80.87 | -0.94 |
 | Sao Paulo | 55 | 0 | 0% | -31.05 | -0.56 |
@@ -149,32 +148,32 @@ _Tracking NO trades opened after 2026-05-06_
 
 | Metric | Value |
 |--------|-------|
-| Closed trades | 568 |
-| Wins / Losses | 446 / 122 |
-| Win rate | 78.5% |
-| Total PnL | $+62.81 |
-| ROI | +0.6% |
-| Resolved | 451 (329W/122L) |
-| Resolved WR | 72.9% |
-| Resolved PnL | $-233.60 |
-| Avg PnL/trade | $+0.11 |
+| Closed trades | 569 |
+| Wins / Losses | 446 / 123 |
+| Win rate | 78.4% |
+| Total PnL | $+57.81 |
+| ROI | +0.5% |
+| Resolved | 452 (329W/123L) |
+| Resolved WR | 72.8% |
+| Resolved PnL | $-238.60 |
+| Avg PnL/trade | $+0.10 |
 
 ### Close Reasons (v2)
 | Reason | Count | PnL |
 |--------|-------|-----|
 | resolved_win | 329 | $+2157.41 |
 | take_profit | 117 | $+296.41 |
-| resolved_loss | 122 | $-2391.01 |
+| resolved_loss | 123 | $-2396.01 |
 
 ## Edge Tracker (v3 CONVERGENCE strategy)
 _D+1/D+2 NO trades opened after 2026-05-14_
 
 | Metric | Value |
 |--------|-------|
-| Trades | 188 |
-| Wins / Losses | 151 / 37 |
-| Win rate | 80.3% |
-| Total PnL | $+60.72 |
-| ROI | +3.5% |
+| Trades | 189 |
+| Wins / Losses | 151 / 38 |
+| Win rate | 79.9% |
+| Total PnL | $+55.72 |
+| ROI | +3.2% |
 | Take-profit exits | 60 |
-| Avg PnL/trade | $+0.32 |
+| Avg PnL/trade | $+0.29 |
