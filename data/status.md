@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-08-18 23:48 UTC_
+_Auto-generated 2026-08-19 01:06 UTC_
 
 ## Summary
 | Metric | Value |
@@ -19,8 +19,8 @@ _Auto-generated 2026-08-18 23:48 UTC_
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
 | London | 2026-08-18 | 26–26°C | NO | $0.840 | ECMWF | D+0 |
-| Paris | 2026-08-19 | 26–26°C | NO | $0.850 | ECMWF | D+1 |
-| Tokyo | 2026-08-19 | 32–32°C | NO | $0.830 | ECMWF | D+1 |
+| Paris | 2026-08-19 | 26–26°C | NO | $0.850 | ECMWF | D+0 |
+| Tokyo | 2026-08-19 | 32–32°C | NO | $0.830 | ECMWF | D+0 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
