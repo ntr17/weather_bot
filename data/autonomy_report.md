@@ -1,10 +1,10 @@
 # WeatherBot Autonomy Report
-Generated: 2026-08-21 13:14 UTC
+Generated: 2026-08-21 18:59 UTC
 
 ## Git
 
-- Local HEAD: `b21fbbc bot: update state 2026-08-21T12:42:43Z`
-- Remote master: `b21fbbc bot: update state 2026-08-21T12:42:43Z`
+- Local HEAD: `c20dae9 bot: update state 2026-08-21T18:35:09Z`
+- Remote master: `c20dae9 bot: update state 2026-08-21T18:35:09Z`
 ```text
 ## master...origin/master
 ```
@@ -30,23 +30,23 @@ Generated: 2026-08-21 13:14 UTC
 
 ## Activity
 
-- Last run age: `31.7` minutes
-- Runs last 1h / 2h / 24h: `20` / `60` / `640`
+- Last run age: `24.8` minutes
+- Runs last 1h / 2h / 24h: `20` / `60` / `660`
 - New positions last 24h: `0`
 - Errors last 24h: `0`
-- State balance: `$17.29`
-- Open positions: `2`
-- Open cost: `$10.00`
+- State balance: `$23.17`
+- Open positions: `0`
+- Open cost: `$0.00`
 - Paper policy activated at: `2026-06-09T18:23:01Z`
-- Open positions after activation: `2`
+- Open positions after activation: `0`
 - Legacy open positions: `0`
 
 ## V3 Actual Edge
 
-- Trades: `191` (152W / 39L)
+- Trades: `193` (153W / 40L)
 - Avg entry: `0.761`
-- PnL: `$+66.20` on `$1720.19` cost
-- ROI: `3.85%`
+- PnL: `$+62.08` on `$1730.19` cost
+- ROI: `3.59%`
 
 ## Gates
 
@@ -57,11 +57,11 @@ Generated: 2026-08-21 13:14 UTC
 | New data flow | WARN | 0 new positions in last 24h; caps may explain zero. |
 | Live max bet | OK | max_bet=5.00; target <= 5. |
 | Live total exposure cap | OK | max_total_open_cost=20.00; target <= 20. |
-| Current open exposure | OK | open_cost=10.00; reset/wait before live if above cap. |
+| Current open exposure | OK | open_cost=0.00; reset/wait before live if above cap. |
 | Per-run position cap | OK | max_new_positions_per_run=2; target <= 2. |
 | NO-only strategy | OK | enable_yes_trading=False. |
 | Entry and EV filters | OK | min_ev=0.15, min_no_entry=0.70, max_no_entry=0.85. |
-| Resolved edge sample | OK | v3_actual n=191; keep small while sample is limited. |
+| Resolved edge sample | OK | v3_actual n=193; keep small while sample is limited. |
 
 ## Agenda
 
