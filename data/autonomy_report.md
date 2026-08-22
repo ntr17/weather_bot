@@ -1,10 +1,10 @@
 # WeatherBot Autonomy Report
-Generated: 2026-08-22 01:53 UTC
+Generated: 2026-08-22 07:02 UTC
 
 ## Git
 
-- Local HEAD: `fa34286 bot: update state 2026-08-22T01:05:57Z`
-- Remote master: `fa34286 bot: update state 2026-08-22T01:05:57Z`
+- Local HEAD: `7fcb26e bot: update state 2026-08-22T06:37:25Z`
+- Remote master: `7fcb26e bot: update state 2026-08-22T06:37:25Z`
 ```text
 ## master...origin/master
 ```
@@ -30,8 +30,8 @@ Generated: 2026-08-22 01:53 UTC
 
 ## Activity
 
-- Last run age: `47.6` minutes
-- Runs last 1h / 2h / 24h: `20` / `20` / `660`
+- Last run age: `25.4` minutes
+- Runs last 1h / 2h / 24h: `20` / `43` / `660`
 - New positions last 24h: `1`
 - Errors last 24h: `0`
 - State balance: `$18.17`
@@ -53,7 +53,7 @@ Generated: 2026-08-22 01:53 UTC
 | Gate | Status | Detail |
 | --- | --- | --- |
 | Actions paper-only | OK | Hosted Actions must not be live. |
-| Recent bot activity | OK | 20 runs in last 2h. |
+| Recent bot activity | OK | 43 runs in last 2h. |
 | New data flow | OK | 1 new positions in last 24h; caps may explain zero. |
 | Live max bet | OK | max_bet=5.00; target <= 5. |
 | Live total exposure cap | OK | max_total_open_cost=20.00; target <= 20. |
