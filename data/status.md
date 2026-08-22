@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-08-21 23:50 UTC_
+_Auto-generated 2026-08-22 01:05 UTC_
 
 ## Summary
 | Metric | Value |
@@ -18,7 +18,7 @@ _Auto-generated 2026-08-21 23:50 UTC_
 ## Open Positions (1)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| Paris | 2026-08-23 | 25–25°C | NO | $0.830 | ECMWF | D+2 |
+| Paris | 2026-08-23 | 25–25°C | NO | $0.830 | ECMWF | D+1 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
