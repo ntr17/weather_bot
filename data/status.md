@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-08-22 23:48 UTC_
+_Auto-generated 2026-08-23 01:10 UTC_
 
 ## Summary
 | Metric | Value |
@@ -12,13 +12,13 @@ _Auto-generated 2026-08-22 23:48 UTC_
 | Win rate | 487/724 (67%) |
 | Open positions | 1 |
 | Open cost | $5.00 |
-| Markets tracked | 2319 |
+| Markets tracked | 2328 |
 | Calibration keys | 163 |
 
 ## Open Positions (1)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| Paris | 2026-08-23 | 25–25°C | NO | $0.830 | ECMWF | D+1 |
+| Paris | 2026-08-23 | 25–25°C | NO | $0.830 | ECMWF | D+0 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
