@@ -1,10 +1,10 @@
 # WeatherBot Autonomy Report
-Generated: 2026-08-24 02:00 UTC
+Generated: 2026-08-24 07:31 UTC
 
 ## Git
 
-- Local HEAD: `0774252 bot: update state 2026-08-24T01:08:07Z`
-- Remote master: `0774252 bot: update state 2026-08-24T01:08:07Z`
+- Local HEAD: `d678183 bot: update state 2026-08-24T06:53:53Z`
+- Remote master: `d678183 bot: update state 2026-08-24T06:53:53Z`
 ```text
 ## master...origin/master
 ```
@@ -30,11 +30,11 @@ Generated: 2026-08-24 02:00 UTC
 
 ## Activity
 
-- Last run age: `52.0` minutes
-- Runs last 1h / 2h / 24h: `20` / `20` / `780`
-- New positions last 24h: `0`
+- Last run age: `37.7` minutes
+- Runs last 1h / 2h / 24h: `20` / `40` / `754`
+- New positions last 24h: `1`
 - Errors last 24h: `0`
-- State balance: `$24.19`
+- State balance: `$24.83`
 - Open positions: `0`
 - Open cost: `$0.00`
 - Paper policy activated at: `2026-06-09T18:23:01Z`
@@ -43,25 +43,25 @@ Generated: 2026-08-24 02:00 UTC
 
 ## V3 Actual Edge
 
-- Trades: `194` (154W / 40L)
+- Trades: `195` (155W / 40L)
 - Avg entry: `0.761`
-- PnL: `$+63.10` on `$1735.19` cost
-- ROI: `3.64%`
+- PnL: `$+63.74` on `$1740.19` cost
+- ROI: `3.66%`
 
 ## Gates
 
 | Gate | Status | Detail |
 | --- | --- | --- |
 | Actions paper-only | OK | Hosted Actions must not be live. |
-| Recent bot activity | OK | 20 runs in last 2h. |
-| New data flow | WARN | 0 new positions in last 24h; caps may explain zero. |
+| Recent bot activity | OK | 40 runs in last 2h. |
+| New data flow | OK | 1 new positions in last 24h; caps may explain zero. |
 | Live max bet | OK | max_bet=5.00; target <= 5. |
 | Live total exposure cap | OK | max_total_open_cost=20.00; target <= 20. |
 | Current open exposure | OK | open_cost=0.00; reset/wait before live if above cap. |
 | Per-run position cap | OK | max_new_positions_per_run=2; target <= 2. |
 | NO-only strategy | OK | enable_yes_trading=False. |
 | Entry and EV filters | OK | min_ev=0.15, min_no_entry=0.70, max_no_entry=0.85. |
-| Resolved edge sample | OK | v3_actual n=194; keep small while sample is limited. |
+| Resolved edge sample | OK | v3_actual n=195; keep small while sample is limited. |
 
 ## Agenda
 
