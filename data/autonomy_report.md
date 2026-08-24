@@ -1,10 +1,10 @@
 # WeatherBot Autonomy Report
-Generated: 2026-08-23 18:51 UTC
+Generated: 2026-08-24 02:00 UTC
 
 ## Git
 
-- Local HEAD: `11a295c bot: update state 2026-08-23T18:26:51Z`
-- Remote master: `11a295c bot: update state 2026-08-23T18:26:51Z`
+- Local HEAD: `0774252 bot: update state 2026-08-24T01:08:07Z`
+- Remote master: `0774252 bot: update state 2026-08-24T01:08:07Z`
 ```text
 ## master...origin/master
 ```
@@ -30,38 +30,38 @@ Generated: 2026-08-23 18:51 UTC
 
 ## Activity
 
-- Last run age: `24.2` minutes
-- Runs last 1h / 2h / 24h: `20` / `77` / `780`
+- Last run age: `52.0` minutes
+- Runs last 1h / 2h / 24h: `20` / `20` / `780`
 - New positions last 24h: `0`
 - Errors last 24h: `0`
-- State balance: `$18.17`
-- Open positions: `1`
-- Open cost: `$5.00`
+- State balance: `$24.19`
+- Open positions: `0`
+- Open cost: `$0.00`
 - Paper policy activated at: `2026-06-09T18:23:01Z`
-- Open positions after activation: `1`
+- Open positions after activation: `0`
 - Legacy open positions: `0`
 
 ## V3 Actual Edge
 
-- Trades: `193` (153W / 40L)
+- Trades: `194` (154W / 40L)
 - Avg entry: `0.761`
-- PnL: `$+62.08` on `$1730.19` cost
-- ROI: `3.59%`
+- PnL: `$+63.10` on `$1735.19` cost
+- ROI: `3.64%`
 
 ## Gates
 
 | Gate | Status | Detail |
 | --- | --- | --- |
 | Actions paper-only | OK | Hosted Actions must not be live. |
-| Recent bot activity | OK | 77 runs in last 2h. |
+| Recent bot activity | OK | 20 runs in last 2h. |
 | New data flow | WARN | 0 new positions in last 24h; caps may explain zero. |
 | Live max bet | OK | max_bet=5.00; target <= 5. |
 | Live total exposure cap | OK | max_total_open_cost=20.00; target <= 20. |
-| Current open exposure | OK | open_cost=5.00; reset/wait before live if above cap. |
+| Current open exposure | OK | open_cost=0.00; reset/wait before live if above cap. |
 | Per-run position cap | OK | max_new_positions_per_run=2; target <= 2. |
 | NO-only strategy | OK | enable_yes_trading=False. |
 | Entry and EV filters | OK | min_ev=0.15, min_no_entry=0.70, max_no_entry=0.85. |
-| Resolved edge sample | OK | v3_actual n=193; keep small while sample is limited. |
+| Resolved edge sample | OK | v3_actual n=194; keep small while sample is limited. |
 
 ## Agenda
 
