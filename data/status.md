@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-08-23 23:47 UTC_
+_Auto-generated 2026-08-24 01:08 UTC_
 
 ## Summary
 | Metric | Value |
@@ -12,7 +12,7 @@ _Auto-generated 2026-08-23 23:47 UTC_
 | Win rate | 488/725 (67%) |
 | Open positions | 0 |
 | Open cost | $0.00 |
-| Markets tracked | 2339 |
+| Markets tracked | 2348 |
 | Calibration keys | 163 |
 
 ## Recent Trades (last 20)
