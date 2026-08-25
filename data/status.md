@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-08-24 23:48 UTC_
+_Auto-generated 2026-08-25 01:08 UTC_
 
 ## Summary
 | Metric | Value |
@@ -12,13 +12,13 @@ _Auto-generated 2026-08-24 23:48 UTC_
 | Win rate | 489/726 (67%) |
 | Open positions | 1 |
 | Open cost | $5.00 |
-| Markets tracked | 2359 |
+| Markets tracked | 2368 |
 | Calibration keys | 163 |
 
 ## Open Positions (1)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| London | 2026-08-26 | 27–27°C | NO | $0.790 | ECMWF | D+2 |
+| London | 2026-08-26 | 27–27°C | NO | $0.790 | ECMWF | D+1 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
