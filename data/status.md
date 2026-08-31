@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-08-30 22:24 UTC_
+_Auto-generated 2026-08-31 00:47 UTC_
 
 ## Summary
 | Metric | Value |
@@ -18,8 +18,8 @@ _Auto-generated 2026-08-30 22:24 UTC_
 ## Open Positions (2)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| Tokyo | 2026-08-31 | 31–31°C | NO | $0.800 | ECMWF | D+1 |
-| Singapore | 2026-09-01 | 34–34°C | NO | $0.820 | ECMWF | D+2 |
+| Tokyo | 2026-08-31 | 31–31°C | NO | $0.800 | ECMWF | D+0 |
+| Singapore | 2026-09-01 | 34–34°C | NO | $0.820 | ECMWF | D+1 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
