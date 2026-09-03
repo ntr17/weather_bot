@@ -1,10 +1,10 @@
 # WeatherBot Autonomy Report
-Generated: 2026-09-03 16:30 UTC
+Generated: 2026-09-03 21:06 UTC
 
 ## Git
 
-- Local HEAD: `4c565e1 bot: update state 2026-09-03T13:48:42Z`
-- Remote master: `4c565e1 bot: update state 2026-09-03T13:48:42Z`
+- Local HEAD: `998af2a bot: update state 2026-09-03T20:08:43Z`
+- Remote master: `998af2a bot: update state 2026-09-03T20:08:43Z`
 ```text
 ## master...origin/master
 ```
@@ -30,42 +30,41 @@ Generated: 2026-09-03 16:30 UTC
 
 ## Activity
 
-- Last run age: `162.0` minutes
-- Runs last 1h / 2h / 24h: `0` / `0` / `140`
+- Last run age: `58.3` minutes
+- Runs last 1h / 2h / 24h: `12` / `20` / `140`
 - New positions last 24h: `0`
 - Errors last 24h: `0`
 - State balance: `$17.87`
-- Open positions: `3`
-- Open cost: `$15.00`
+- Open positions: `2`
+- Open cost: `$10.00`
 - Paper policy activated at: `2026-06-09T18:23:01Z`
-- Open positions after activation: `3`
+- Open positions after activation: `2`
 - Legacy open positions: `0`
 
 ## V3 Actual Edge
 
-- Trades: `201` (161W / 40L)
+- Trades: `202` (161W / 41L)
 - Avg entry: `0.762`
-- PnL: `$+71.78` on `$1770.19` cost
-- ROI: `4.05%`
+- PnL: `$+66.78` on `$1775.19` cost
+- ROI: `3.76%`
 
 ## Gates
 
 | Gate | Status | Detail |
 | --- | --- | --- |
 | Actions paper-only | OK | Hosted Actions must not be live. |
-| Recent bot activity | BLOCK | 0 runs in last 2h. |
+| Recent bot activity | OK | 20 runs in last 2h. |
 | New data flow | WARN | 0 new positions in last 24h; caps may explain zero. |
 | Live max bet | OK | max_bet=5.00; target <= 5. |
 | Live total exposure cap | OK | max_total_open_cost=20.00; target <= 20. |
-| Current open exposure | OK | open_cost=15.00; reset/wait before live if above cap. |
+| Current open exposure | OK | open_cost=10.00; reset/wait before live if above cap. |
 | Per-run position cap | OK | max_new_positions_per_run=2; target <= 2. |
 | NO-only strategy | OK | enable_yes_trading=False. |
 | Entry and EV filters | OK | min_ev=0.15, min_no_entry=0.70, max_no_entry=0.85. |
-| Resolved edge sample | OK | v3_actual n=201; keep small while sample is limited. |
+| Resolved edge sample | OK | v3_actual n=202; keep small while sample is limited. |
 
 ## Agenda
 
-- Fix paper deployment or scheduler before discussing strategy.
 - Prepare compliant non-Actions live runner only after geoblock preflight passes.
 - Run fee/spread-aware edge audit before first live order.
 - Keep live launch capped at 5 USDC orders and 20 USDC total exposure.
