@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-09-03 22:46 UTC_
+_Auto-generated 2026-09-04 00:46 UTC_
 
 ## Summary
 | Metric | Value |
@@ -19,7 +19,7 @@ _Auto-generated 2026-09-03 22:46 UTC_
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
 | Miami | 2026-09-03 | 92–93°F | NO | $0.760 | ECMWF | D+0 |
-| Paris | 2026-09-05 | 26–26°C | NO | $0.810 | ECMWF | D+2 |
+| Paris | 2026-09-05 | 26–26°C | NO | $0.810 | ECMWF | D+1 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
