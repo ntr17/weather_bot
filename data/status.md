@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-09-09 23:51 UTC_
+_Auto-generated 2026-09-10 03:02 UTC_
 
 ## Summary
 | Metric | Value |
@@ -18,7 +18,7 @@ _Auto-generated 2026-09-09 23:51 UTC_
 ## Open Positions (1)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| Sao Paulo | 2026-09-10 | 21–21°C | NO | $0.850 | ECMWF | D+1 |
+| Sao Paulo | 2026-09-10 | 21–21°C | NO | $0.850 | ECMWF | D+0 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
