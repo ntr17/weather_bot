@@ -1,28 +1,24 @@
 # WeatherBot Status
-_Auto-generated 2026-09-11 02:58 UTC_
+_Auto-generated 2026-09-11 07:49 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $17.33 |
+| Balance | $23.21 |
 | Starting | $5,000.00 |
-| Return | -99.7% |
-| Total trades | 739 |
-| Win rate | 499/739 (68%) |
-| Open positions | 1 |
-| Open cost | $5.00 |
-| Markets tracked | 2708 |
+| Return | -99.5% |
+| Total trades | 740 |
+| Win rate | 500/740 (68%) |
+| Open positions | 0 |
+| Open cost | $0.00 |
+| Markets tracked | 2722 |
 | Calibration keys | 163 |
-
-## Open Positions (1)
-| City | Date | Bucket | Side | Entry | Source | Horizon |
-|------|------|--------|------|-------|--------|---------|
-| Sao Paulo | 2026-09-10 | 21–21°C | NO | $0.850 | ECMWF | D+0 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
 |------|------|--------|------|-------|-----|---------|--------|
+| Sao Paulo | 2026-09-10 | 21–21°C | NO | $0.850 | +0.88 | None | ECMWF |
 | London | 2026-09-08 | 19–19°C | NO | $0.740 | -5.00 | None | ECMWF |
 | Paris | 2026-09-08 | 24–24°C | NO | $0.760 | +1.58 | None | ECMWF |
 | Munich | 2026-09-08 | 32–32°C | NO | $0.740 | +0.61 | None | ECMWF |
@@ -42,7 +38,6 @@ _Auto-generated 2026-09-11 02:58 UTC_
 | Tokyo | 2026-08-21 | 32–32°C | NO | $0.760 | -5.00 | None | ECMWF |
 | Paris | 2026-08-19 | 26–26°C | NO | $0.850 | +0.88 | None | ECMWF |
 | Tokyo | 2026-08-19 | 32–32°C | NO | $0.830 | -5.00 | None | ECMWF |
-| London | 2026-08-18 | 26–26°C | NO | $0.840 | -5.00 | None | ECMWF |
 
 ## City Performance
 | City | Trades | Wins | WR | PnL | Avg PnL |
@@ -58,7 +53,7 @@ _Auto-generated 2026-09-11 02:58 UTC_
 | Munich | 86 | 0 | 0% | -17.55 | -0.20 |
 | New York City | 66 | 5 | 8% | -77.15 | -1.17 |
 | Paris | 91 | 0 | 0% | -75.12 | -0.83 |
-| Sao Paulo | 55 | 0 | 0% | -31.05 | -0.56 |
+| Sao Paulo | 56 | 0 | 0% | -30.17 | -0.54 |
 | Seattle | 25 | 0 | 0% | -32.97 | -1.32 |
 | Seoul | 66 | 0 | 0% | -58.17 | -0.88 |
 | Shanghai | 68 | 0 | 0% | -81.53 | -1.20 |
@@ -146,20 +141,20 @@ _Tracking NO trades opened after 2026-05-06_
 
 | Metric | Value |
 |--------|-------|
-| Closed trades | 590 |
-| Wins / Losses | 461 / 129 |
-| Win rate | 78.1% |
-| Total PnL | $+44.62 |
+| Closed trades | 591 |
+| Wins / Losses | 462 / 129 |
+| Win rate | 78.2% |
+| Total PnL | $+45.50 |
 | ROI | +0.4% |
-| Resolved | 469 (340W/129L) |
-| Resolved WR | 72.5% |
-| Resolved PnL | $-255.13 |
+| Resolved | 470 (341W/129L) |
+| Resolved WR | 72.6% |
+| Resolved PnL | $-254.25 |
 | Avg PnL/trade | $+0.08 |
 
 ### Close Reasons (v2)
 | Reason | Count | PnL |
 |--------|-------|-----|
-| resolved_win | 340 | $+2170.88 |
+| resolved_win | 341 | $+2171.76 |
 | take_profit | 121 | $+299.75 |
 | resolved_loss | 129 | $-2426.01 |
 
@@ -168,10 +163,10 @@ _D+1/D+2 NO trades opened after 2026-05-14_
 
 | Metric | Value |
 |--------|-------|
-| Trades | 210 |
-| Wins / Losses | 166 / 44 |
-| Win rate | 79.0% |
-| Total PnL | $+42.53 |
+| Trades | 211 |
+| Wins / Losses | 167 / 44 |
+| Win rate | 79.1% |
+| Total PnL | $+43.41 |
 | ROI | +2.3% |
 | Take-profit exits | 64 |
-| Avg PnL/trade | $+0.20 |
+| Avg PnL/trade | $+0.21 |
