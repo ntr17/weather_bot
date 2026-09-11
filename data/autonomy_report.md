@@ -1,10 +1,10 @@
 # WeatherBot Autonomy Report
-Generated: 2026-09-11 11:29 UTC
+Generated: 2026-09-11 16:34 UTC
 
 ## Git
 
-- Local HEAD: `51490a5 bot: update state 2026-09-11T07:49:48Z`
-- Remote master: `51490a5 bot: update state 2026-09-11T07:49:48Z`
+- Local HEAD: `894b7dd bot: update state 2026-09-11T12:38:13Z`
+- Remote master: `894b7dd bot: update state 2026-09-11T12:38:13Z`
 ```text
 ## master...origin/master
 ```
@@ -30,15 +30,15 @@ Generated: 2026-09-11 11:29 UTC
 
 ## Activity
 
-- Last run age: `220.0` minutes
+- Last run age: `236.3` minutes
 - Runs last 1h / 2h / 24h: `0` / `0` / `140`
-- New positions last 24h: `0`
+- New positions last 24h: `1`
 - Errors last 24h: `0`
-- State balance: `$23.21`
-- Open positions: `0`
-- Open cost: `$0.00`
+- State balance: `$18.21`
+- Open positions: `1`
+- Open cost: `$5.00`
 - Paper policy activated at: `2026-06-09T18:23:01Z`
-- Open positions after activation: `0`
+- Open positions after activation: `1`
 - Legacy open positions: `0`
 
 ## V3 Actual Edge
@@ -54,10 +54,10 @@ Generated: 2026-09-11 11:29 UTC
 | --- | --- | --- |
 | Actions paper-only | OK | Hosted Actions must not be live. |
 | Recent bot activity | BLOCK | 0 runs in last 2h. |
-| New data flow | WARN | 0 new positions in last 24h; caps may explain zero. |
+| New data flow | OK | 1 new positions in last 24h; caps may explain zero. |
 | Live max bet | OK | max_bet=5.00; target <= 5. |
 | Live total exposure cap | OK | max_total_open_cost=20.00; target <= 20. |
-| Current open exposure | OK | open_cost=0.00; reset/wait before live if above cap. |
+| Current open exposure | OK | open_cost=5.00; reset/wait before live if above cap. |
 | Per-run position cap | OK | max_new_positions_per_run=2; target <= 2. |
 | NO-only strategy | OK | enable_yes_trading=False. |
 | Entry and EV filters | OK | min_ev=0.15, min_no_entry=0.70, max_no_entry=0.85. |
