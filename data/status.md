@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-09-12 22:52 UTC_
+_Auto-generated 2026-09-13 00:38 UTC_
 
 ## Summary
 | Metric | Value |
@@ -18,8 +18,8 @@ _Auto-generated 2026-09-12 22:52 UTC_
 ## Open Positions (2)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| London | 2026-09-14 | 25–25°C | NO | $0.720 | ECMWF | D+2 |
-| Paris | 2026-09-14 | 28–28°C | NO | $0.810 | ECMWF | D+2 |
+| London | 2026-09-14 | 25–25°C | NO | $0.720 | ECMWF | D+1 |
+| Paris | 2026-09-14 | 28–28°C | NO | $0.810 | ECMWF | D+1 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
