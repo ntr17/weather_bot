@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-13T20:55:04.955693+00:00",
+  "generated_at": "2026-09-14T05:03:58.422955+00:00",
   "source_db": "data/weatherbot.db",
   "closed_positions_loaded": 219,
   "paper_activation": {
@@ -22,7 +22,7 @@
       "pnl_after_drag": -29.42,
       "roi_after_drag": -0.0372,
       "bootstrap_roi_low": -0.1012,
-      "bootstrap_roi_high": 0.0603,
+      "bootstrap_roi_high": 0.0602,
       "max_loss": -5.0,
       "reasons": {
         "resolved_loss": 34,
@@ -60,7 +60,7 @@
         "spread_est": 10.35,
         "pnl_after_drag": 8.85,
         "roi_after_drag": 0.0086,
-        "bootstrap_roi_low": -0.0584,
+        "bootstrap_roi_low": -0.0585,
         "bootstrap_roi_high": 0.1021,
         "max_loss": -25.0,
         "reasons": {
@@ -69,7 +69,7 @@
           "take_profit": 48
         }
       },
-      "score": -0.01184
+      "score": -0.01188
     },
     {
       "candidate": {
@@ -99,8 +99,8 @@
         "spread_est": 12.0,
         "pnl_after_drag": 4.43,
         "roi_after_drag": 0.0037,
-        "bootstrap_roi_low": -0.0561,
-        "bootstrap_roi_high": 0.0891,
+        "bootstrap_roi_low": -0.0558,
+        "bootstrap_roi_high": 0.0893,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 35,
@@ -108,7 +108,7 @@
           "take_profit": 55
         }
       },
-      "score": -0.01593
+      "score": -0.01583
     },
     {
       "candidate": {
@@ -138,8 +138,8 @@
         "spread_est": 12.0,
         "pnl_after_drag": 4.43,
         "roi_after_drag": 0.0037,
-        "bootstrap_roi_low": -0.0561,
-        "bootstrap_roi_high": 0.0891,
+        "bootstrap_roi_low": -0.0558,
+        "bootstrap_roi_high": 0.0893,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 35,
@@ -147,7 +147,7 @@
           "take_profit": 55
         }
       },
-      "score": -0.01593
+      "score": -0.01583
     },
     {
       "candidate": {
@@ -179,8 +179,8 @@
         "spread_est": 12.0,
         "pnl_after_drag": 4.43,
         "roi_after_drag": 0.0037,
-        "bootstrap_roi_low": -0.0561,
-        "bootstrap_roi_high": 0.0891,
+        "bootstrap_roi_low": -0.0558,
+        "bootstrap_roi_high": 0.0893,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 35,
@@ -188,7 +188,7 @@
           "take_profit": 55
         }
       },
-      "score": -0.01593
+      "score": -0.01583
     },
     {
       "candidate": {
@@ -218,8 +218,8 @@
         "spread_est": 12.96,
         "pnl_after_drag": -4.06,
         "roi_after_drag": -0.0031,
-        "bootstrap_roi_low": -0.0615,
-        "bootstrap_roi_high": 0.0823,
+        "bootstrap_roi_low": -0.0617,
+        "bootstrap_roi_high": 0.0824,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 40,
@@ -227,7 +227,7 @@
           "take_profit": 56
         }
       },
-      "score": -0.02462
+      "score": -0.02469
     },
     {
       "candidate": {
@@ -258,7 +258,7 @@
         "pnl_after_drag": -8.06,
         "roi_after_drag": -0.0075,
         "bootstrap_roi_low": -0.0734,
-        "bootstrap_roi_high": 0.0889,
+        "bootstrap_roi_high": 0.0892,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 34,
@@ -298,8 +298,8 @@
         "spread_est": 13.1,
         "pnl_after_drag": -17.3,
         "roi_after_drag": -0.0132,
-        "bootstrap_roi_low": -0.0747,
-        "bootstrap_roi_high": 0.0795,
+        "bootstrap_roi_low": -0.075,
+        "bootstrap_roi_high": 0.0794,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 37,
@@ -307,7 +307,7 @@
           "take_profit": 58
         }
       },
-      "score": -0.03934
+      "score": -0.03945
     },
     {
       "candidate": {
@@ -337,7 +337,7 @@
         "spread_est": 12.75,
         "pnl_after_drag": -15.67,
         "roi_after_drag": -0.0123,
-        "bootstrap_roi_low": -0.0791,
+        "bootstrap_roi_low": -0.079,
         "bootstrap_roi_high": 0.079,
         "max_loss": -25.0,
         "reasons": {
@@ -346,7 +346,7 @@
           "take_profit": 57
         }
       },
-      "score": -0.03998
+      "score": -0.03995
     },
     {
       "candidate": {
@@ -415,8 +415,8 @@
         "spread_est": 11.31,
         "pnl_after_drag": -24.83,
         "roi_after_drag": -0.0219,
-        "bootstrap_roi_low": -0.0951,
-        "bootstrap_roi_high": 0.0765,
+        "bootstrap_roi_low": -0.0953,
+        "bootstrap_roi_high": 0.0766,
         "max_loss": -25.0,
         "reasons": {
           "resolved_loss": 32,
@@ -424,7 +424,7 @@
           "take_profit": 49
         }
       },
-      "score": -0.05518
+      "score": -0.05525
     },
     {
       "candidate": {
@@ -640,8 +640,8 @@
           "spread_est": 16.0,
           "pnl_after_drag": 48.75,
           "roi_after_drag": 0.0305,
-          "bootstrap_roi_low": -0.0249,
-          "bootstrap_roi_high": 0.1147,
+          "bootstrap_roi_low": -0.0251,
+          "bootstrap_roi_high": 0.1148,
           "max_loss": -25.0,
           "reasons": {
             "resolved_loss": 36,
@@ -729,7 +729,7 @@
           "pnl_after_drag": 31.83,
           "roi_after_drag": 0.0186,
           "bootstrap_roi_low": -0.0373,
-          "bootstrap_roi_high": 0.1052,
+          "bootstrap_roi_high": 0.1049,
           "max_loss": -25.0,
           "reasons": {
             "resolved_loss": 38,
@@ -772,8 +772,8 @@
     "action": "keep",
     "reason": "A variant ranks higher, but the improvement is too weak for automatic adaptation.",
     "best_candidate": "d2_ev18",
-    "current_score": -0.01593,
-    "best_score": -0.01184,
+    "current_score": -0.01583,
+    "best_score": -0.01188,
     "paper_overlay": null
   },
   "live_gate": {
@@ -781,7 +781,7 @@
     "reasons_not_ready": [
       "need >=3% ROI after fee/spread drag, have 0.37%",
       "need post-activation ROI after drag >=3%, have -3.72%",
-      "need positive bootstrap lower bound, have -5.61%"
+      "need positive bootstrap lower bound, have -5.58%"
     ]
   }
 }
