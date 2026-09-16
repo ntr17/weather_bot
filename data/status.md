@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-09-15 22:45 UTC_
+_Auto-generated 2026-09-16 01:06 UTC_
 
 ## Summary
 | Metric | Value |
@@ -18,7 +18,7 @@ _Auto-generated 2026-09-15 22:45 UTC_
 ## Open Positions (1)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| Ankara | 2026-09-17 | 21–21°C | NO | $0.760 | ECMWF | D+2 |
+| Ankara | 2026-09-17 | 21–21°C | NO | $0.760 | ECMWF | D+1 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
