@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-09-18 23:29 UTC_
+_Auto-generated 2026-09-19 01:31 UTC_
 
 ## Summary
 | Metric | Value |
@@ -18,7 +18,7 @@ _Auto-generated 2026-09-18 23:29 UTC_
 ## Open Positions (1)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| Buenos Aires | 2026-09-19 | 25–25°C | NO | $0.770 | ECMWF | D+1 |
+| Buenos Aires | 2026-09-19 | 25–25°C | NO | $0.770 | ECMWF | D+0 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
