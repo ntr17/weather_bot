@@ -1,21 +1,37 @@
 {
-  "updated_at": "2026-09-20T04:59:32.264730+00:00",
-  "last_action_result": "No paper config change requested.",
-  "paper_config_changed": false,
+  "updated_at": "2026-09-20T11:32:51.637856+00:00",
+  "last_action_result": "Updated config.paper.json to paper candidate `d2_ev18`.",
+  "paper_config_changed": true,
   "strategy_recommendation": {
-    "action": "keep",
-    "reason": "A variant ranks higher, but the improvement is too weak for automatic adaptation.",
+    "action": "adapt_paper",
+    "reason": "Best candidate beats current risk-adjusted score enough for paper testing.",
     "best_candidate": "d2_ev18",
-    "current_score": -0.01844,
-    "best_score": -0.0151,
-    "paper_overlay": null
+    "current_score": -0.02433,
+    "best_score": -0.02032,
+    "paper_overlay": {
+      "_note": "Auto-selected paper-only overlay from strategy_lab candidate d2_ev18.",
+      "enable_yes_trading": false,
+      "max_bet": 5.0,
+      "min_ev": 0.18,
+      "max_slippage": 0.15,
+      "max_no_positions": 1,
+      "min_no_entry": 0.7,
+      "max_no_entry": 0.85,
+      "min_horizon_days": 2,
+      "max_horizon_days": 2,
+      "max_total_open_cost": 20.0,
+      "max_new_positions_per_run": 2,
+      "no_stop_enabled": false,
+      "no_forecast_exit": false
+    }
   },
   "live_gate": {
     "ready_for_user_review": false,
     "reasons_not_ready": [
-      "need >=3% ROI after fee/spread drag, have 0.21%",
-      "need post-activation ROI after drag >=3%, have -3.86%",
-      "need positive bootstrap lower bound, have -5.87%"
+      "need >=3% ROI after fee/spread drag, have -0.20%",
+      "need post-activation ROI after drag >=3%, have -4.46%",
+      "need positive bootstrap lower bound, have -6.38%",
+      "need win rate at least 3 points over avg NO breakeven"
     ]
   },
   "autonomy_report_present": true

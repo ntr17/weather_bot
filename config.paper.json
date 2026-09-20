@@ -1,9 +1,8 @@
 {
-  "_note": "Paper-only live-applicable D+2 thesis: NO, min_ev>=0.15, $5 orders, $20 max exposure.",
-  "_activated_at": "2026-06-09T18:23:01Z",
+  "_note": "Auto-selected paper-only overlay from strategy_lab candidate d2_ev18.",
   "enable_yes_trading": false,
   "max_bet": 5.0,
-  "min_ev": 0.15,
+  "min_ev": 0.18,
   "max_slippage": 0.15,
   "max_no_positions": 1,
   "min_no_entry": 0.7,
