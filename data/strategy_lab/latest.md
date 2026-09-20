@@ -1,25 +1,24 @@
 # Strategy Lab
-Generated: 2026-09-20T11:32:50.641748+00:00
+Generated: 2026-09-20T16:13:33.501092+00:00
 
 ## Recommendation
 
-- Action: `adapt_paper`
-- Best candidate: `d2_ev18`
-- Reason: Best candidate beats current risk-adjusted score enough for paper testing.
+- Action: `keep`
+- Best candidate: `current_paper`
+- Reason: Current paper strategy remains the best risk-adjusted live-applicable candidate.
 - Ready for live user review: `False`
-- Paper policy activated at: `2026-06-09T18:23:01Z`
+- Paper policy activated at: `unknown`
 - Live blockers:
-  - need >=3% ROI after fee/spread drag, have -0.20%
-  - need post-activation ROI after drag >=3%, have -4.46%
-  - need positive bootstrap lower bound, have -6.38%
-  - need win rate at least 3 points over avg NO breakeven
+  - need >=30 post-activation resolved trades, have 0
+  - need >=3% ROI after fee/spread drag, have 0.18%
+  - need positive bootstrap lower bound, have -6.32%
 
 ## Ranked Candidates
 
 | Rank | Candidate | N | W/L | ROI | ROI after drag | Boot ROI low | Entry | Score |
 | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| 1 | d2_ev18 | 156 | 124/32 | 2.09% | 0.18% | -6.32% | 0.761 | -0.0203 |
-| 2 | current_paper | 181 | 144/37 | 1.69% | -0.20% | -6.38% | 0.769 | -0.0243 |
+| 1 | current_paper | 156 | 124/32 | 2.09% | 0.18% | -6.32% | 0.761 | -0.0203 |
+| 2 | d2_ev18 | 156 | 124/32 | 2.09% | 0.18% | -6.32% | 0.761 | -0.0203 |
 | 3 | d2_ev15 | 181 | 144/37 | 1.69% | -0.20% | -6.38% | 0.769 | -0.0243 |
 | 4 | d2_ecmwf_only | 181 | 144/37 | 1.69% | -0.20% | -6.38% | 0.769 | -0.0243 |
 | 5 | ev15_mixed | 192 | 150/42 | 1.06% | -0.83% | -6.71% | 0.768 | -0.0318 |
@@ -38,7 +37,7 @@ Generated: 2026-09-20T11:32:50.641748+00:00
 
 | N | W/L | ROI | ROI after drag | Boot ROI low | Entry |
 | ---: | ---: | ---: | ---: | ---: | ---: |
-| 163 | 127/36 | -2.58% | -4.46% | -10.82% | 0.770 |
+| 0 | 0/0 | 0.00% | 0.00% | 0.00% | 0.000 |
 
 ## Diagnostics By Horizon
 

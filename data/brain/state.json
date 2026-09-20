@@ -1,37 +1,21 @@
 {
-  "updated_at": "2026-09-20T11:32:51.637856+00:00",
-  "last_action_result": "Updated config.paper.json to paper candidate `d2_ev18`.",
-  "paper_config_changed": true,
+  "updated_at": "2026-09-20T16:13:34.487124+00:00",
+  "last_action_result": "No paper config change requested.",
+  "paper_config_changed": false,
   "strategy_recommendation": {
-    "action": "adapt_paper",
-    "reason": "Best candidate beats current risk-adjusted score enough for paper testing.",
-    "best_candidate": "d2_ev18",
-    "current_score": -0.02433,
+    "action": "keep",
+    "reason": "Current paper strategy remains the best risk-adjusted live-applicable candidate.",
+    "best_candidate": "current_paper",
+    "current_score": -0.02032,
     "best_score": -0.02032,
-    "paper_overlay": {
-      "_note": "Auto-selected paper-only overlay from strategy_lab candidate d2_ev18.",
-      "enable_yes_trading": false,
-      "max_bet": 5.0,
-      "min_ev": 0.18,
-      "max_slippage": 0.15,
-      "max_no_positions": 1,
-      "min_no_entry": 0.7,
-      "max_no_entry": 0.85,
-      "min_horizon_days": 2,
-      "max_horizon_days": 2,
-      "max_total_open_cost": 20.0,
-      "max_new_positions_per_run": 2,
-      "no_stop_enabled": false,
-      "no_forecast_exit": false
-    }
+    "paper_overlay": null
   },
   "live_gate": {
     "ready_for_user_review": false,
     "reasons_not_ready": [
-      "need >=3% ROI after fee/spread drag, have -0.20%",
-      "need post-activation ROI after drag >=3%, have -4.46%",
-      "need positive bootstrap lower bound, have -6.38%",
-      "need win rate at least 3 points over avg NO breakeven"
+      "need >=30 post-activation resolved trades, have 0",
+      "need >=3% ROI after fee/spread drag, have 0.18%",
+      "need positive bootstrap lower bound, have -6.32%"
     ]
   },
   "autonomy_report_present": true

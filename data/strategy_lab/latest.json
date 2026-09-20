@@ -1,40 +1,36 @@
 {
-  "generated_at": "2026-09-20T11:32:50.641748+00:00",
+  "generated_at": "2026-09-20T16:13:33.501092+00:00",
   "source_db": "data/weatherbot.db",
   "closed_positions_loaded": 224,
   "paper_activation": {
-    "activated_at": "2026-06-09T18:23:01Z",
+    "activated_at": null,
     "current_post_activation_metrics": {
-      "n": 163,
-      "wins": 127,
-      "losses": 36,
-      "win_rate": 0.7791,
-      "win_rate_wilson_low": 0.7094,
-      "win_rate_wilson_high": 0.836,
-      "avg_entry": 0.77,
-      "avg_ev": 0.2535,
-      "avg_spread": 0.025,
-      "pnl": -21.04,
-      "cost": 815.0,
-      "roi": -0.0258,
-      "fee_est": 7.14,
-      "spread_est": 8.15,
-      "pnl_after_drag": -36.33,
-      "roi_after_drag": -0.0446,
-      "bootstrap_roi_low": -0.1082,
-      "bootstrap_roi_high": 0.0528,
-      "max_loss": -5.0,
-      "reasons": {
-        "resolved_loss": 36,
-        "resolved_win": 83,
-        "take_profit": 44
-      }
+      "n": 0,
+      "wins": 0,
+      "losses": 0,
+      "win_rate": 0.0,
+      "win_rate_wilson_low": 0.0,
+      "win_rate_wilson_high": 0.0,
+      "avg_entry": 0.0,
+      "avg_ev": 0.0,
+      "avg_spread": 0.0,
+      "pnl": 0,
+      "cost": 0,
+      "roi": 0.0,
+      "fee_est": 0,
+      "spread_est": 0,
+      "pnl_after_drag": 0,
+      "roi_after_drag": 0.0,
+      "bootstrap_roi_low": 0.0,
+      "bootstrap_roi_high": 0.0,
+      "max_loss": 0.0,
+      "reasons": {}
     }
   },
   "rows": [
     {
       "candidate": {
-        "name": "d2_ev18",
+        "name": "current_paper",
         "min_ev": 0.18,
         "min_entry": 0.7,
         "max_entry": 0.85,
@@ -73,8 +69,8 @@
     },
     {
       "candidate": {
-        "name": "current_paper",
-        "min_ev": 0.15,
+        "name": "d2_ev18",
+        "min_ev": 0.18,
         "min_entry": 0.7,
         "max_entry": 0.85,
         "min_horizon": 2,
@@ -83,32 +79,32 @@
         "max_spread": 0.15
       },
       "metrics": {
-        "n": 181,
-        "wins": 144,
-        "losses": 37,
-        "win_rate": 0.7956,
-        "win_rate_wilson_low": 0.731,
-        "win_rate_wilson_high": 0.8479,
-        "avg_entry": 0.7688,
-        "avg_ev": 0.2516,
-        "avg_spread": 0.0248,
-        "pnl": 20.67,
-        "cost": 1225.37,
-        "roi": 0.0169,
-        "fee_est": 10.89,
-        "spread_est": 12.25,
-        "pnl_after_drag": -2.48,
-        "roi_after_drag": -0.002,
-        "bootstrap_roi_low": -0.0638,
-        "bootstrap_roi_high": 0.0831,
+        "n": 156,
+        "wins": 124,
+        "losses": 32,
+        "win_rate": 0.7949,
+        "win_rate_wilson_low": 0.7248,
+        "win_rate_wilson_high": 0.8508,
+        "avg_entry": 0.7611,
+        "avg_ev": 0.2648,
+        "avg_spread": 0.025,
+        "pnl": 22.17,
+        "cost": 1060.37,
+        "roi": 0.0209,
+        "fee_est": 9.62,
+        "spread_est": 10.6,
+        "pnl_after_drag": 1.94,
+        "roi_after_drag": 0.0018,
+        "bootstrap_roi_low": -0.0632,
+        "bootstrap_roi_high": 0.0944,
         "max_loss": -25.0,
         "reasons": {
-          "resolved_loss": 37,
-          "resolved_win": 88,
-          "take_profit": 56
+          "resolved_loss": 32,
+          "resolved_win": 75,
+          "take_profit": 49
         }
       },
-      "score": -0.02433
+      "score": -0.02032
     },
     {
       "candidate": {
@@ -769,35 +765,19 @@
     ]
   },
   "recommendation": {
-    "action": "adapt_paper",
-    "reason": "Best candidate beats current risk-adjusted score enough for paper testing.",
-    "best_candidate": "d2_ev18",
-    "current_score": -0.02433,
+    "action": "keep",
+    "reason": "Current paper strategy remains the best risk-adjusted live-applicable candidate.",
+    "best_candidate": "current_paper",
+    "current_score": -0.02032,
     "best_score": -0.02032,
-    "paper_overlay": {
-      "_note": "Auto-selected paper-only overlay from strategy_lab candidate d2_ev18.",
-      "enable_yes_trading": false,
-      "max_bet": 5.0,
-      "min_ev": 0.18,
-      "max_slippage": 0.15,
-      "max_no_positions": 1,
-      "min_no_entry": 0.7,
-      "max_no_entry": 0.85,
-      "min_horizon_days": 2,
-      "max_horizon_days": 2,
-      "max_total_open_cost": 20.0,
-      "max_new_positions_per_run": 2,
-      "no_stop_enabled": false,
-      "no_forecast_exit": false
-    }
+    "paper_overlay": null
   },
   "live_gate": {
     "ready_for_user_review": false,
     "reasons_not_ready": [
-      "need >=3% ROI after fee/spread drag, have -0.20%",
-      "need post-activation ROI after drag >=3%, have -4.46%",
-      "need positive bootstrap lower bound, have -6.38%",
-      "need win rate at least 3 points over avg NO breakeven"
+      "need >=30 post-activation resolved trades, have 0",
+      "need >=3% ROI after fee/spread drag, have 0.18%",
+      "need positive bootstrap lower bound, have -6.32%"
     ]
   }
 }
