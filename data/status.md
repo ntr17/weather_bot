@@ -1,24 +1,25 @@
 # WeatherBot Status
-_Auto-generated 2026-09-20 00:18 UTC_
+_Auto-generated 2026-09-20 05:12 UTC_
 
 ## Summary
 | Metric | Value |
 |--------|-------|
 | Mode | PAPER |
-| Balance | $20.10 |
+| Balance | $15.10 |
 | Starting | $5,000.00 |
-| Return | -99.6% |
+| Return | -99.7% |
 | Total trades | 747 |
 | Win rate | 506/747 (68%) |
-| Open positions | 1 |
-| Open cost | $5.00 |
-| Markets tracked | 2888 |
+| Open positions | 2 |
+| Open cost | $10.00 |
+| Markets tracked | 2899 |
 | Calibration keys | 163 |
 
-## Open Positions (1)
+## Open Positions (2)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
 | Buenos Aires | 2026-09-19 | 25–25°C | NO | $0.770 | ECMWF | D+0 |
+| Ankara | 2026-09-22 | 27–27°C | NO | $0.810 | ECMWF | D+2 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
