@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-09-20 22:13 UTC_
+_Auto-generated 2026-09-21 00:27 UTC_
 
 ## Summary
 | Metric | Value |
@@ -18,7 +18,7 @@ _Auto-generated 2026-09-20 22:13 UTC_
 ## Open Positions (1)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| Munich | 2026-09-22 | 18–18°C | NO | $0.800 | ECMWF | D+2 |
+| Munich | 2026-09-22 | 18–18°C | NO | $0.800 | ECMWF | D+1 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
