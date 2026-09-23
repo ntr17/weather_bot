@@ -1,5 +1,5 @@
 # WeatherBot Status
-_Auto-generated 2026-09-22 23:31 UTC_
+_Auto-generated 2026-09-23 01:44 UTC_
 
 ## Summary
 | Metric | Value |
@@ -18,7 +18,7 @@ _Auto-generated 2026-09-22 23:31 UTC_
 ## Open Positions (1)
 | City | Date | Bucket | Side | Entry | Source | Horizon |
 |------|------|--------|------|-------|--------|---------|
-| Singapore | 2026-09-24 | 33–33°C | NO | $0.800 | ECMWF | D+2 |
+| Singapore | 2026-09-24 | 33–33°C | NO | $0.800 | ECMWF | D+1 |
 
 ## Recent Trades (last 20)
 | City | Date | Bucket | Side | Entry | PnL | Outcome | Source |
