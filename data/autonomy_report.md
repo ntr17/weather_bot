@@ -1,10 +1,10 @@
 # WeatherBot Autonomy Report
-Generated: 2026-11-18 07:39 UTC
+Generated: 2026-11-18 20:39 UTC
 
 ## Git
 
-- Local HEAD: `a15370ae bot: update state 2026-11-18T01:46:14Z`
-- Remote master: `a15370ae bot: update state 2026-11-18T01:46:14Z`
+- Local HEAD: `38dc06a9 bot: update state 2026-11-18T18:40:42Z`
+- Remote master: `38dc06a9 bot: update state 2026-11-18T18:40:42Z`
 ```text
 ## master...origin/master
 ```
@@ -30,8 +30,8 @@ Generated: 2026-11-18 07:39 UTC
 
 ## Activity
 
-- Last run age: `353.7` minutes
-- Runs last 1h / 2h / 24h: `0` / `0` / `60`
+- Last run age: `119.2` minutes
+- Runs last 1h / 2h / 24h: `0` / `3` / `60`
 - New positions last 24h: `0`
 - Errors last 24h: `0`
 - State balance: `$18.71`
@@ -53,7 +53,7 @@ Generated: 2026-11-18 07:39 UTC
 | Gate | Status | Detail |
 | --- | --- | --- |
 | Actions paper-only | OK | Hosted Actions must not be live. |
-| Recent bot activity | BLOCK | 0 runs in last 2h. |
+| Recent bot activity | OK | 3 runs in last 2h. |
 | New data flow | WARN | 0 new positions in last 24h; caps may explain zero. |
 | Live max bet | OK | max_bet=5.00; target <= 5. |
 | Live total exposure cap | OK | max_total_open_cost=20.00; target <= 20. |
@@ -65,7 +65,6 @@ Generated: 2026-11-18 07:39 UTC
 
 ## Agenda
 
-- Fix paper deployment or scheduler before discussing strategy.
 - Prepare compliant non-Actions live runner only after geoblock preflight passes.
 - Run fee/spread-aware edge audit before first live order.
 - Keep live launch capped at 5 USDC orders and 20 USDC total exposure.
