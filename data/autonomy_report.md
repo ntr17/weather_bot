@@ -1,10 +1,10 @@
 # WeatherBot Autonomy Report
-Generated: 2026-11-19 20:45 UTC
+Generated: 2026-11-20 07:27 UTC
 
 ## Git
 
-- Local HEAD: `583e42bd bot: update state 2026-11-19T17:35:19Z`
-- Remote master: `583e42bd bot: update state 2026-11-19T17:35:19Z`
+- Local HEAD: `147ddabe bot: update state 2026-11-20T00:17:00Z`
+- Remote master: `147ddabe bot: update state 2026-11-20T00:17:00Z`
 ```text
 ## master...origin/master
 ```
@@ -30,7 +30,7 @@ Generated: 2026-11-19 20:45 UTC
 
 ## Activity
 
-- Last run age: `190.0` minutes
+- Last run age: `430.3` minutes
 - Runs last 1h / 2h / 24h: `0` / `0` / `60`
 - New positions last 24h: `0`
 - Errors last 24h: `0`
